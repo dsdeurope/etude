@@ -1779,6 +1779,7 @@ ${contextualEnrichment}
                 <button className={`btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>🤖 Gemini Gratuit</button>
                 <button className="btn-versets-prog" onClick={generateVerseByVerseProgressive} title="Analyse progressive enrichie - traitement uniforme des versets">⚡ Versets Prog</button>
                 <button className="btn-generate" onClick={generate28Points} disabled={isLoading}>Générer</button>
+                <ApiControlPanel backendUrl={BACKEND_URL} />
               </div>
             </div>
 
