@@ -23,8 +23,8 @@ const getBackendUrl = () => {
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
   // (optionnel) si tu utilises encore preview.emergentagent.com
   if (hostname.includes("preview.emergentagent.com")) return `https://${hostname}`;
-  // fallback prod → Railway
-  return "https://etude8-bible-api-production.up.railway.app";
+  // fallback prod → utiliser l'origine actuelle
+  return window.location.origin;
 };
 
 const BACKEND_URL = getBackendUrl();
@@ -1209,13 +1209,9 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       // 🔹 UTILISER VOTRE BACKEND avec votre clé Gemini GRATUITE
       console.log("[VERSETS PROG] Utilisation de votre backend avec clé Gemini gratuite");
       
-      // CORRECTION: Utiliser le bon endpoint selon l'environnement
-      const isLocal = window.location.hostname === 'localhost';
-      const versetAPIUrl = isLocal 
-        ? "http://localhost:8001/api/generate-verse-by-verse"  // Local avec votre Gemini
-        : "https://faithai-tools.preview.emergentagent.com/api/generate-verse-by-verse";  // Preview avec votre Gemini
-      console.log("[VERSETS PROG] URL backend utilisée:", versetAPIUrl);
-      const apiUrl = versetAPIUrl;
+      // CORRECTION: Utiliser le backend URL configuré
+      const apiUrl = `${API_BASE}/generate-verse-by-verse`;
+      console.log("[VERSETS PROG] URL backend utilisée:", apiUrl);
       
       const response = await fetch(apiUrl, {
         method: 'POST',
