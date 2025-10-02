@@ -7,6 +7,7 @@ import BibleConcordancePage from "./BibleConcordancePage";
 import VersetParVersetPage from "./VersetParVersetPage";
 import NotesPage from "./NotesPage";
 import RubriquePage from "./RubriquePage";
+import ApiControlPanel from "./ApiControlPanel";
 
 /* =========================
    Configuration et Helpers
