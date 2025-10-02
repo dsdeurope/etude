@@ -1,0 +1,438 @@
+# 📦 BUNDLE COMPLET - BIBLE STUDY APP
+# Copiez ce fichier et utilisez un script pour extraire tous les fichiers
+
+# ================================
+# BACKEND FILES
+# ================================
+
+## FILE: backend/server.py
+```python
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+import os
+import re
+from datetime import datetime
+from dotenv import load_dotenv
+import google.generativeai as genai
+from cache_fallback_system import cache_fallback
+
+# Charger les variables d'environnement
+load_dotenv()
+
+# Configuration
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+    print("✅ Gemini configured with personal key (GRATUIT)")
+    GEMINI_AVAILABLE = True
+else:
+    print("❌ No personal Gemini key available")
+    GEMINI_AVAILABLE = False
+
+app = FastAPI(title="Bible Study API", version="1.0.0")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Modèles
+class VerseByVerseRequest(BaseModel):
+    passage: str = Field(..., description="Ex: 'Genèse 1' ou 'Genèse 1:1'")
+    version: str = Field("LSG", description="Version biblique")
+    tokens: int = Field(500, description="Longueur cible")
+    use_gemini: bool = Field(True, description="Utiliser Gemini")
+    enriched: bool = Field(True, description="Contenu enrichi")
+    rubric_type: str = Field("verse_by_verse", description="Type de rubrique")
+
+class StudyRequest(BaseModel):
+    passage: str = Field(..., description="Ex: 'Genèse 1' ou 'Jean 3:16'")
+    version: str = Field("LSG", description="Version biblique")  
+    tokens: int = Field(1000, description="Longueur cible par rubrique")
+    selected_rubriques: list = Field(None, description="Liste des rubriques à générer (optionnel)")
+    use_gemini: bool = Field(True, description="Utiliser Gemini")
+
+# Fonction Gemini avec gestion d'erreur améliorée
+async def generate_with_gemini_raw(prompt: str) -> str:
+    """Fonction Gemini brute pour utilisation interne"""
+    if not GEMINI_AVAILABLE:
+        raise Exception("Gemini non disponible - clé API manquante")
+    
+    try:
+        model = genai.GenerativeModel('gemini-2.0-flash-exp')
+        response = model.generate_content(prompt)
+        
+        if response and response.text:
+            print(f"✅ Content generated with personal Gemini (GRATUIT): {len(response.text)} chars")
+            return response.text.strip()
+        else:
+            raise Exception("Gemini n'a pas retourné de contenu")
+            
+    except Exception as e:
+        # Log l'erreur complète pour debugging
+        error_msg = str(e)
+        print(f"❌ Erreur Gemini: {error_msg}")
+        
+        # Vérifier si c'est une erreur de quota
+        if "429" in error_msg or "quota" in error_msg.lower() or "exceeded" in error_msg.lower():
+            raise Exception(f"QUOTA_EXCEEDED: {error_msg}")
+        else:
+            raise Exception(f"GEMINI_ERROR: {error_msg}")
+
+# Nouvelle fonction principale avec cache et fallback
+async def generate_with_smart_fallback(passage: str, tokens: int, use_gemini: bool, prompt: str) -> tuple:
+    """
+    Génération intelligente avec cache et fallback
+    Retourne: (content, source, from_cache, error_message)
+    """
+    
+    async def gemini_generator():
+        return await generate_with_gemini_raw(prompt)
+    
+    try:
+        content, source, from_cache = await cache_fallback.get_cached_or_generate(
+            passage=passage,
+            tokens=tokens,
+            use_gemini=use_gemini,
+            gemini_generator_func=gemini_generator
+        )
+        
+        return content, source, from_cache, None
+        
+    except Exception as e:
+        error_msg = f"Erreur système: {str(e)}"
+        print(f"💥 Erreur dans generate_with_smart_fallback: {error_msg}")
+        
+        # En dernier recours, générer du contenu de fallback local
+        fallback_content = await cache_fallback.generate_fallback_content(passage, tokens)
+        return fallback_content, "Fallback d'urgence", False, error_msg
+
+# Routes
+@app.get("/")
+async def root():
+    return {"message": "Bible Study API avec clé Gemini personnelle GRATUITE"}
+
+@app.get("/api/health")
+async def health_check():
+    try:
+        # Vérifier le système de rotation Gemini
+        quota_ok, quota_message = cache_fallback._check_gemini_quota()
+        
+        return {
+            "status": "ok",
+            "rotation_system": "Système de rotation activé",
+            "gemini_keys": [
+                f"{key['name']}: {'✅ Disponible' if not key.get('failed', False) else '❌ Quota dépassé'}" 
+                for key in cache_fallback.gemini_keys
+            ],
+            "current_key": cache_fallback.gemini_keys[cache_fallback.quota_tracker.get("current_key_index", 0)]["name"],
+            "bible_api_configured": True,
+            "cache_entries": len(cache_fallback.cache),
+            "message": "Études garanties sans interruption grâce à la rotation automatique",
+            "features": [
+                "🔑 Rotation automatique Gemini Keys",
+                "📖 Bible API fallback",
+                "📋 Cache intelligent (24h)",
+                "♻️ Reset quotidien automatique"
+            ]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur système: {str(e)}")
+
+@app.get("/api/api-status")
+async def get_api_status():
+    """
+    Endpoint pour obtenir le statut en temps réel de toutes les API
+    Utilisé par le panneau de contrôle frontend
+    """
+    try:
+        status = cache_fallback.get_api_status()
+        return status
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur récupération statut: {str(e)}")
+
+@app.post("/api/generate-verse-by-verse")
+async def generate_verse_by_verse(request: VerseByVerseRequest):
+    try:
+        # Prompt adapté selon le type de rubrique
+        if request.rubric_type == "verse_by_verse":
+            prompt = f"""
+Tu es un expert biblique. L'utilisateur a sélectionné "{request.passage}" version {request.version}.
+
+GÉNÈRE MAINTENANT une étude verset par verset pour cette sélection utilisateur.
+
+INSTRUCTIONS PRÉCISES :
+- Si c'est un chapitre (ex: "Genèse 1") : génère EXACTEMENT LES 5 PREMIERS VERSETS de ce chapitre
+- Si c'est un verset spécifique (ex: "Jean 3:16") : génère ce verset précis ET les 4 versets suivants (total 5)
+
+PASSAGE SÉLECTIONNÉ : {request.passage}
+VERSION : {request.version}
+
+FORMAT EXACT OBLIGATOIRE (respecter précisément) :
+
+**VERSET [numéro]**
+
+**TEXTE BIBLIQUE :**
+[texte exact du verset en version {request.version}]
+
+**EXPLICATION THÉOLOGIQUE :**
+[analyse théologique approfondie de 120-180 mots]
+
+RÈGLES STRICTES :
+- GÉNÈRE EXACTEMENT 5 VERSETS (ni plus, ni moins)
+- GÉNÈRE DIRECTEMENT le contenu (pas de questions à l'utilisateur)
+- Format EXACT : "**VERSET [numéro]**", "**TEXTE BIBLIQUE :**", "**EXPLICATION THÉOLOGIQUE :**"
+- Texte biblique précis en version {request.version}
+- Explications théologiques substantielles et pertinentes
+- Commence IMMÉDIATEMENT par le contenu demandé
+
+COMMENCE MAINTENANT LA GÉNÉRATION pour "{request.passage}" - GÉNÈRE EXACTEMENT 5 VERSETS :
+"""
+        else:
+            # Prompt pour enrichissement de rubriques (1-28)
+            prompt = f"""
+Génère un contenu théologique enrichi pour la rubrique "{request.rubric_type}" sur le passage {request.passage}.
+
+Instructions :
+- Fournis une analyse théologique approfondie
+- Longueur cible : {request.tokens} caractères environ
+- Contenu spécifique à cette rubrique et ce passage
+- Style académique mais accessible
+- Inclus des références bibliques pertinentes
+
+Rubrique : {request.rubric_type}
+Passage : {request.passage}
+"""
+        
+        # Générer avec système intelligent (cache + fallback)
+        content, source, from_cache, error_msg = await generate_with_smart_fallback(
+            passage=request.passage,
+            tokens=request.tokens,
+            use_gemini=request.use_gemini and GEMINI_AVAILABLE,
+            prompt=prompt
+        )
+        
+        return {
+            "content": content,
+            "passage": request.passage,
+            "version": request.version,
+            "tokens": len(content),
+            "source": source,
+            "from_cache": from_cache
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur génération: {str(e)}")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001)
+```
+
+## FILE: backend/.env
+```env
+# Configuration API Bible
+BIBLE_API_KEY=0cff5d83f6852c3044a180cc4cdeb0fe
+BIBLE_ID=a93a92589195411f-01
+PREFERRED_BIBLE_ID=a93a92589195411f-01
+
+# Configuration Multiple Gemini API Keys (rotation automatique)
+GEMINI_API_KEY=AIzaSyDro7GV39MHavUDnn3mms9Y1Ih3ZaGMbAg
+GEMINI_API_KEY_2=AIzaSyAvkPZNJX4QCH5V1Lked4jHOYadyOeeWHY
+GEMINI_API_KEY_3=AIzaSyAtBuW22JZCTD9PZFgVVeuNs5m-_DMVVCE
+GEMINI_API_KEY_4=AIzaSyBPbG2Wqz5dHwIpWIMqM5a72NnbBCnU9YY
+
+# Configuration serveur
+PORT=8000
+
+# CORS Origins
+ALLOWED_ORIGINS=https://etude8-bible.vercel.app,http://localhost:3000,http://localhost:5173
+
+# Configuration MongoDB (si nécessaire)
+MONGO_URL=mongodb://localhost:27017/bible_study
+DB_NAME=bible_study
+```
+
+## FILE: backend/requirements.txt
+```txt
+fastapi==0.104.1
+uvicorn==0.24.0
+python-dotenv==1.0.0
+google-generativeai==0.3.2
+pydantic==2.5.0
+requests==2.31.0
+python-multipart==0.0.6
+```
+
+# ================================
+# FRONTEND FILES
+# ================================
+
+## FILE: frontend/.env
+```env
+# Backend URL - Configuration pour production Vercel
+REACT_APP_BACKEND_URL=https://bible-.vercel.app
+DISABLE_ESLINT_PLUGIN=true
+```
+
+## FILE: frontend/package.json
+```json
+{
+  "name": "bible-study-frontend",
+  "version": "3.0.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+```
+
+# ================================
+# ROOT FILES
+# ================================
+
+## FILE: vercel.json
+```json
+{
+  "version": 2,
+  "name": "bible-study-app",
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "backend/server.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ],
+  "env": {
+    "REACT_APP_BACKEND_URL": "https://bible-.vercel.app"
+  },
+  "functions": {
+    "backend/server.py": {
+      "maxDuration": 30
+    }
+  }
+}
+```
+
+## FILE: package.json
+```json
+{
+  "name": "bible-study-app",
+  "version": "3.0.0",
+  "description": "Application d'étude biblique avec IA - 70+ personnages, modal API, 4 clés Gemini",
+  "main": "backend/server.py",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "backend": "cd backend && python server.py",
+    "install-all": "cd frontend && npm install && cd ../backend && pip install -r requirements.txt"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  },
+  "keywords": [
+    "bible",
+    "étude",
+    "biblique",
+    "ai",
+    "gemini",
+    "concordance",
+    "personnages",
+    "théologie"
+  ],
+  "author": "Bible Study Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsdeurope/bible-.git"
+  }
+}
+```
+
+# ================================
+# INSTRUCTIONS D'UTILISATION
+# ================================
+
+## ÉTAPES POUR DÉPLOYER :
+
+1. **Créer la structure sur GitHub :**
+   - Créer les répertoires : backend/, frontend/, frontend/src/
+   
+2. **Copier les fichiers depuis ce bundle :**
+   - backend/server.py
+   - backend/.env  
+   - backend/requirements.txt
+   - frontend/.env
+   - frontend/package.json
+   - vercel.json
+   - package.json
+
+3. **Ajouter les fichiers frontend critiques manquants :**
+   - frontend/src/App.js (107KB - trop volumineux pour ce bundle)
+   - frontend/src/App.css (70KB)
+   - frontend/src/BibleConcordancePage.js (47KB)
+
+4. **Connecter à Vercel :**
+   - Repository: https://github.com/dsdeurope/bible-.git
+   - Vercel détectera automatiquement la configuration
+   - Ajouter les variables d'environnement Gemini
+
+## STATUS : BACKEND COMPLET + STRUCTURE VERCEL PRÊTE
+## MANQUE : Fichiers frontend/src/ (trop volumineux pour ce bundle)
+
+🎯 PRIORITÉ : Créer ces 8 fichiers en premier, puis demander les fichiers frontend/src/
