@@ -1707,6 +1707,18 @@ ${contextualEnrichment}
             const content = generatedRubriques[contentKey] || '';
             navigateToRubrique(newRubriqueNumber, content);
           }}
+          // Props supplémentaires pour les boutons fonctionnels
+          selectedBook={selectedBook}
+          selectedChapter={selectedChapter}
+          selectedVerse={selectedVerse}
+          selectedLength={selectedLength}
+          setCurrentPage={setCurrentPage}
+          API_BASE={API_BASE}
+          setContent={setContent}
+          setRubriquesStatus={setRubriquesStatus}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+          BASE_RUBRIQUES={BASE_RUBRIQUES}
         />
       ) : (
         <>
