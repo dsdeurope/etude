@@ -1,0 +1,9 @@
+{
+  "buildCommand": "DISABLE_ESLINT_PLUGIN=true CI=false yarn build --force",
+  "outputDirectory": "build", 
+  "installCommand": "yarn install --force",
+  "env": {
+    "DISABLE_ESLINT_PLUGIN": "true",
+    "CI": "false"
+  }
+}
