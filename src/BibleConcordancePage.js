@@ -937,12 +937,21 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                       <div dangerouslySetInnerHTML={{
                         __html: characterHistory
                           .replace(/\n/g, '<br>')
-                          .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 16px 0; font-size: 24px; font-weight: 700; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px;">$1</h2>')
-                          .replace(/###\s(.+)/g, '<h3 style="color: #334155; margin: 20px 0 12px 0; font-size: 18px; font-weight: 600;">$1</h3>')
+                          // Titre principal sur une ligne
+                          .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 20px 0; font-size: 20px; font-weight: 700; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$1</h2>')
+                          // Supprimer les ### et numérotation pour un style narratif
+                          .replace(/###\s?\d*\.?\s*(.+)/g, '<p style="color: #1e293b; margin: 16px 0 12px 0; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">$1</p>')
+                          // Gras pour les passages importants
                           .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700;">$1</strong>')
+                          // Italique pour les mots étrangers et citations
                           .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic;">$1</em>')
+                          // Versets cliquables
                           .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
                             '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
+                          // Créer des paragraphes narratifs
+                          .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/$/, '</p>')
                       }} />
                     </div>
                   )}
