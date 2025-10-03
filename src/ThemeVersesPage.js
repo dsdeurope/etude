@@ -1,5 +1,39 @@
 import React, { useState, useEffect } from 'react';
 
+// Fonction pour générer l'URL YouVersion
+const generateYouVersionUrl = (book, chapter, verse) => {
+  // Mapping des noms de livres français vers les codes YouVersion
+  const bookCodes = {
+    // Ancien Testament
+    'Genèse': 'GEN', 'Exode': 'EXO', 'Lévitique': 'LEV', 'Nombres': 'NUM', 'Deutéronome': 'DEU',
+    'Josué': 'JOS', 'Juges': 'JDG', 'Ruth': 'RUT', '1 Samuel': '1SA', '2 Samuel': '2SA',
+    '1 Rois': '1KI', '2 Rois': '2KI', '1 Chroniques': '1CH', '2 Chroniques': '2CH',
+    'Esdras': 'EZR', 'Néhémie': 'NEH', 'Esther': 'EST', 'Job': 'JOB', 'Psaume': 'PSA', 'Psaumes': 'PSA',
+    'Proverbes': 'PRO', 'Ecclésiaste': 'ECC', 'Cantique': 'SNG', 'Ésaïe': 'ISA', 'Jérémie': 'JER',
+    'Lamentations': 'LAM', 'Ézéchiel': 'EZK', 'Daniel': 'DAN', 'Osée': 'HOS', 'Joël': 'JOL',
+    'Amos': 'AMO', 'Abdias': 'OBA', 'Jonas': 'JON', 'Michée': 'MIC', 'Nahum': 'NAM',
+    'Habacuc': 'HAB', 'Sophonie': 'ZEP', 'Aggée': 'HAG', 'Zacharie': 'ZEC', 'Malachie': 'MAL',
+    
+    // Nouveau Testament
+    'Matthieu': 'MAT', 'Marc': 'MRK', 'Luc': 'LUK', 'Jean': 'JHN', 'Actes': 'ACT',
+    'Romains': 'ROM', '1 Corinthiens': '1CO', '2 Corinthiens': '2CO', 'Galates': 'GAL',
+    'Éphésiens': 'EPH', 'Philippiens': 'PHP', 'Philippe': 'PHP', 'Colossiens': 'COL',
+    '1 Thessaloniciens': '1TH', '2 Thessaloniciens': '2TH', '1 Timothée': '1TI', '2 Timothée': '2TI',
+    'Tite': 'TIT', 'Philémon': 'PHM', 'Hébreux': 'HEB', 'Jacques': 'JAS', '1 Pierre': '1PE',
+    '2 Pierre': '2PE', '1 Jean': '1JN', '2 Jean': '2JN', '3 Jean': '3JN', 'Jude': 'JUD',
+    'Apocalypse': 'REV'
+  };
+  
+  const bookCode = bookCodes[book];
+  if (!bookCode) {
+    console.warn(`Code YouVersion non trouvé pour: ${book}`);
+    return `https://www.bible.com/search/bible?q=${encodeURIComponent(book + ' ' + chapter + ':' + verse)}`;
+  }
+  
+  // URL YouVersion avec version Louis Segond (LSG = 93)
+  return `https://www.bible.com/bible/93/${bookCode}.${chapter}.${verse}.LSG`;
+};
+
 const ThemeVersesPage = ({ theme, onGoBack }) => {
   const [verses, setVerses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
