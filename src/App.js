@@ -270,10 +270,6 @@ function App() {
   const [generatedRubriques, setGeneratedRubriques] = useState({}); // Stockage du contenu généré
   const [rubriquesStatus, setRubriquesStatus] = useState({});
   const [currentTheme, setCurrentTheme] = useState(0);
-  
-  // Couleurs dynamiques basées sur le thème actuel (après currentTheme)
-  const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
-  
   const [lastStudy, setLastStudy] = useState(null);
   const [progressPercent, setProgressPercent] = useState(0);
   const [searchQuery, setSearchQuery] = useState(""); // ← unique déclaration
