@@ -55,30 +55,32 @@ const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
 })
 
 // Fonction pour générer les couleurs des boutons basées sur le thème actuel
+// TOUS LES BOUTONS ont la même couleur basée sur le thème sélectionné
 const getThemeButtonColors = (theme) => {
-  const baseColors = [
-    { start: '#4facfe', end: '#00f2fe', shadow: 'rgba(79, 172, 254, 0.25)' },
-    { start: '#a855f7', end: '#e879f9', shadow: 'rgba(168, 85, 247, 0.25)' },
-    { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
-    { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
-    { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
-    { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' },
-    { start: '#06b6d4', end: '#22d3ee', shadow: 'rgba(6, 182, 212, 0.25)' }
-  ];
+  // Couleur unique basée sur le thème actuel
+  const themeColor = {
+    start: theme.primary,
+    end: theme.secondary, 
+    shadow: `rgba(${hexToRgb(theme.primary)}, 0.25)`
+  };
   
-  // Si le thème a des couleurs personnalisées, les utiliser, sinon garder les couleurs de base
-  if (theme && theme.buttonColors) {
-    return theme.buttonColors;
+  // Fonction helper pour convertir hex en rgb
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
   }
   
+  // Tous les boutons utilisent la même couleur thématique
   return {
-    reset: baseColors[0],
-    mystique: baseColors[1], 
-    genese: baseColors[2],
-    gemini: baseColors[3],
-    versets: baseColors[4],
-    generate: baseColors[5],
-    concordance: baseColors[6]
+    reset: themeColor,
+    mystique: themeColor, 
+    genese: themeColor,
+    gemini: themeColor,
+    versets: themeColor,
+    generate: themeColor,
+    concordance: themeColor
   };
 }
 
