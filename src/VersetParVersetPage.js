@@ -29,8 +29,10 @@ const VersetParVersetPage = ({ onGoBack, content, bookInfo }) => {
     try {
       console.log(`[GEMINI ENRICHISSEMENT] Enrichissement verset ${versetNumber} batch ${currentBatch}`);
       
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || window.location.origin;
-      const apiUrl = `${backendUrl.replace(/\/+$/g, '')}/api/generate-verse-by-verse`;
+      const isLocal = window.location.hostname === 'localhost';
+      const apiUrl = isLocal 
+        ? "http://localhost:8001/api/generate-verse-by-verse"
+        : "https://scripture-tool.preview.emergentagent.com/api/generate-verse-by-verse";
       
       const prompt = `ENRICHISSEMENT THÉOLOGIQUE APPROFONDI
 
@@ -117,8 +119,10 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       console.log(`[PAGINATION] Chargement batch ${nextBatch}: ${requestPassage}`);
       
       // Appeler l'API pour les versets suivants
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || window.location.origin;
-      const apiUrl = `${backendUrl.replace(/\/+$/g, '')}/api/generate-verse-by-verse`;
+      const isLocal = window.location.hostname === 'localhost';
+      const apiUrl = isLocal 
+        ? "http://localhost:8001/api/generate-verse-by-verse"
+        : "https://scripture-tool.preview.emergentagent.com/api/generate-verse-by-verse";
       
       const response = await fetch(apiUrl, {
         method: 'POST',
