@@ -32,7 +32,7 @@ const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 // Variables d'environnement configurées
 // BACKEND_URL et API_BASE sont prêts à utiliser
 
-// Palette de couleurs harmonieuse pour les 7 boutons (taille réduite)
+// Style unifié pour tous les boutons de contrôle (même typographie que btn-validate)
 const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -41,17 +41,22 @@ const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   padding: '12px 8px',
   borderRadius: '14px',
   minHeight: '75px',
-  fontSize: '10px',
-  fontWeight: '700',
+  fontSize: '12px',                    // Adapté de btn-validate (16px → 12px pour boutons plus petits)
+  fontWeight: '700',                   // Identique à btn-validate
+  fontFamily: "'Montserrat', sans-serif", // Identique à btn-validate
   color: 'white',
   border: 'none',
   cursor: 'pointer',
   background: `linear-gradient(135deg, ${gradientColors.start} 0%, ${gradientColors.end} 100%)`,
   boxShadow: isHovered 
     ? `0 10px 35px ${shadowColor.replace('0.25', '0.35')}, 0 3px 18px rgba(0, 0, 0, 0.15)`
-    : `0 6px 28px ${shadowColor}, 0 2px 14px rgba(0, 0, 0, 0.1)`,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    : `0 6px 20px ${shadowColor}, 0 2px 14px rgba(0, 0, 0, 0.1)`, // Adapté de btn-validate
+  transition: 'all 0.3s ease',         // Identique à btn-validate
   transform: isHovered ? 'translateY(-2px) scale(1.02)' : 'translateY(0)',
+  textTransform: 'uppercase',          // Identique à btn-validate
+  letterSpacing: '0.8px',              // Adapté de btn-validate (1px → 0.8px)
+  position: 'relative',                // Identique à btn-validate
+  overflow: 'hidden'                   // Identique à btn-validate
 })
 
 // Fonction pour générer les couleurs des boutons basées sur le thème actuel
