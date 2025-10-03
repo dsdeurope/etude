@@ -2,6 +2,7 @@
   "version": 2,
   "buildCommand": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true yarn build",
   "outputDirectory": "build",
+  "devCommand": "yarn start",
   "installCommand": "yarn install",
   "framework": "create-react-app",
   "env": {
