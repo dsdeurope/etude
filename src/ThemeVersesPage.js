@@ -203,7 +203,7 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
             color: '#667eea',
             fontSize: '16px'
           }}>
-            {verses.length} versets trouvés
+            {verses.length} versets trouvés • 📖 Cliquez sur les références pour lire sur YouVersion
           </p>
         </div>
       </div>
