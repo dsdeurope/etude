@@ -1909,8 +1909,8 @@ ${contextualEnrichment}
               <div className="balanced-controls-container">
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(6, 1fr)',
-                  gap: '14px',
+                  gridTemplateColumns: 'repeat(7, 1fr)',
+                  gap: '12px',
                   marginBottom: '24px',
                   padding: '0 10px',
                   width: '100%',
