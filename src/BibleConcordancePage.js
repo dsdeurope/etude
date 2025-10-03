@@ -581,42 +581,114 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                 </div>
               </form>
 
-              {/* Suggestions de recherche */}
-              <div style={{
-                textAlign: 'center',
-                marginBottom: '20px'
-              }}>
-                <p style={{
-                  fontSize: '14px',
-                  color: '#666',
-                  marginBottom: '10px'
+              {/* Section des 30 thèmes de la sainte doctrine */}
+              <div style={{ marginBottom: '40px' }}>
+                <h3 style={{
+                  textAlign: 'center',
+                  color: '#475569',
+                  fontSize: '1.3rem',
+                  fontWeight: '700',
+                  marginBottom: '24px',
+                  background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
                 }}>
-                  Suggestions populaires :
-                </p>
+                  ✨ Suggestions populaires : les 30 thèmes de la sainte doctrine
+                </h3>
+                
                 <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '8px',
-                  justifyContent: 'center'
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: '12px',
+                  maxWidth: '1200px',
+                  margin: '0 auto'
                 }}>
-                  {['amour', 'paix', 'foi', 'joie', 'espoir'].map(term => (
+                  {[
+                    'Salut', 'Grâce', 'Foi', 'Amour', 'Paix', 'Joie', 
+                    'Espérance', 'Pardon', 'Rédemption', 'Justification',
+                    'Sanctification', 'Résurrection', 'Vie éternelle', 'Royaume de Dieu',
+                    'Repentance', 'Baptême', 'Saint-Esprit', 'Prière',
+                    'Louange', 'Adoration', 'Obéissance', 'Humilité',
+                    'Compassion', 'Miséricorde', 'Vérité', 'Sagesse',
+                    'Justice', 'Sainteté', 'Providence', 'Gloire'
+                  ].map((theme) => (
                     <button
-                      key={term}
-                      onClick={() => handleSuggestionClick(term)}
+                      key={theme}
+                      onClick={() => {
+                        setSearchTerm(theme);
+                        searchBibleConcordance(theme);
+                      }}
                       style={{
-                        background: 'rgba(139, 92, 246, 0.1)',
-                        border: '1px solid rgba(139, 92, 246, 0.3)',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))',
+                        border: '2px solid rgba(139, 92, 246, 0.2)',
                         color: '#7c3aed',
-                        padding: '6px 12px',
-                        borderRadius: '15px',
+                        padding: '12px 16px',
+                        borderRadius: '12px',
                         cursor: 'pointer',
-                        fontSize: '12px'
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                        textAlign: 'center'
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, #8b5cf6, #7c3aed)';
+                        e.target.style.color = 'white';
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = '0 4px 16px rgba(139, 92, 246, 0.3)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))';
+                        e.target.style.color = '#7c3aed';
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
                       }}
                     >
-                      {term}
+                      {theme}
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Suggestions rapides classiques */}
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '12px',
+                justifyContent: 'center',
+                marginBottom: '30px'
+              }}>
+                <p style={{
+                  width: '100%',
+                  textAlign: 'center',
+                  color: '#64748b',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  margin: '0 0 16px 0'
+                }}>
+                  Recherches rapides :
+                </p>
+                {['miracle', 'prophétie', 'temple', 'alliance', 'bénédiction', 'péché', 'création', 'jugement'].map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    onClick={() => setSearchTerm(suggestion)}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      border: '2px solid rgba(139, 92, 246, 0.3)',
+                      color: '#7c3aed',
+                      padding: '8px 16px',
+                      borderRadius: '20px',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      transition: 'all 0.3s ease',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                    }}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
               </div>
 
               {/* Bouton YouVersion */}
