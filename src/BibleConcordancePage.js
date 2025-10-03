@@ -17,6 +17,16 @@ const BibleConcordancePage = ({ onGoBack }) => {
   // Nouvel état pour la page des versets thématiques
   const [selectedTheme, setSelectedTheme] = useState(null);
 
+  // Fonction pour ouvrir la page des versets thématiques
+  const handleThemeClick = (theme) => {
+    setSelectedTheme(theme);
+  };
+
+  // Fonction pour revenir de la page thématique
+  const handleBackFromTheme = () => {
+    setSelectedTheme(null);
+  };
+
   // Liste des personnages bibliques principaux
   const biblicalCharacters = [
     // Ancien Testament
