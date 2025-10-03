@@ -13,6 +13,9 @@ const BibleConcordancePage = ({ onGoBack }) => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterHistory, setCharacterHistory] = useState("");
   const [activeTab, setActiveTab] = useState("concordance"); // "concordance" ou "characters"
+  
+  // Nouvel état pour la page des versets thématiques
+  const [selectedTheme, setSelectedTheme] = useState(null);
 
   // Liste des personnages bibliques principaux
   const biblicalCharacters = [
