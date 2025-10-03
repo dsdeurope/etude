@@ -924,17 +924,25 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                     </div>
                   ) : (
                     <div style={{
-                      background: '#f9f9f9',
-                      border: '1px solid #eee',
-                      borderRadius: '8px',
-                      padding: '20px',
-                      maxHeight: '600px',
+                      background: 'linear-gradient(135deg, #f8fafc, #f1f5f9)',
+                      border: '1px solid rgba(139, 92, 246, 0.2)',
+                      borderRadius: '12px',
+                      padding: '30px',
+                      maxHeight: '700px',
                       overflowY: 'auto',
-                      fontSize: '14px',
-                      lineHeight: '1.6'
+                      fontSize: '15px',
+                      lineHeight: '1.7',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
                     }}>
                       <div dangerouslySetInnerHTML={{
-                        __html: characterHistory.replace(/\n/g, '<br>').replace(/##\s(.+)/g, '<h2 style="color: #333; margin: 20px 0 10px 0;">$1</h2>').replace(/###\s(.+)/g, '<h3 style="color: #555; margin: 15px 0 8px 0;">$1</h3>')
+                        __html: characterHistory
+                          .replace(/\n/g, '<br>')
+                          .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 16px 0; font-size: 24px; font-weight: 700; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px;">$1</h2>')
+                          .replace(/###\s(.+)/g, '<h3 style="color: #334155; margin: 20px 0 12px 0; font-size: 18px; font-weight: 600;">$1</h3>')
+                          .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700;">$1</strong>')
+                          .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic;">$1</em>')
+                          .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
+                            '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
                       }} />
                     </div>
                   )}
