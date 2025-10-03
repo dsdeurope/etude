@@ -1919,21 +1919,7 @@ ${contextualEnrichment}
                     <span className="control-label">Reset</span>
                   </button>
                   
-                  <button className="btn-control" style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '16px 8px',
-                    borderRadius: '14px',
-                    minHeight: '85px',
-                    fontSize: '11px',
-                    fontWeight: '700',
-                    color: 'white',
-                    border: 'none',
-                    cursor: 'pointer',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  }} onClick={changePalette}>
+                  <button className="btn-control" style={getButtonStyle(buttonColors.mystique, buttonColors.mystique.shadow)} onClick={changePalette}>
                     <span className="control-icon">🎨</span>
                     <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
