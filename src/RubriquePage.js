@@ -1,4 +1,5 @@
 import React from 'react';
+import ApiControlPanel from './ApiControlPanel';
 
 const RubriquePage = ({ 
   onGoBack, 
