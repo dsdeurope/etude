@@ -1,22 +1,60 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "functions": {
+    "api/health.py": {
+      "runtime": "python3.9"
+    },
+    "api/enrich-concordance.py": {
+      "runtime": "python3.9"
+    },
+    "api/generate-character-history.py": {
+      "runtime": "python3.9"
+    }
+  },
   "buildCommand": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true yarn build",
   "outputDirectory": "build",
   "devCommand": "yarn start",
-  "installCommand": "yarn install",
+  "installCommand": "yarn install --frozen-lockfile",
   "framework": "create-react-app",
   "env": {
     "SKIP_PREFLIGHT_CHECK": "true",
-    "NODE_OPTIONS": "--openssl-legacy-provider"
+    "NODE_OPTIONS": "--openssl-legacy-provider",
+    "BIBLE_ID": "@bible_id",
+    "BIBLE_API_KEY": "@bible_api_key", 
+    "GEMINI_API_KEY_1": "@gemini_api_key_1",
+    "GEMINI_API_KEY_2": "@gemini_api_key_2",
+    "GEMINI_API_KEY_3": "@gemini_api_key_3",
+    "GEMINI_API_KEY_4": "@gemini_api_key_4"
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "source": "/api/health",
+      "destination": "/api/health.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/api/enrich-concordance",
+      "destination": "/api/enrich-concordance.py"
+    },
+    {
+      "source": "/api/generate-character-history", 
+      "destination": "/api/generate-character-history.py"
+    },
+    {
+      "source": "/static/(.*)",
+      "destination": "/static/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
