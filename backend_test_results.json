@@ -1,30 +1,32 @@
 {
-  "timestamp": "2025-10-03T18:30:04.238507",
+  "timestamp": "2025-10-03T18:33:45.472822",
   "backend_url": "https://faithflow-app.preview.emergentagent.com",
   "total_tests": 5,
-  "passed_tests": 4,
-  "failed_tests": 1,
+  "passed_tests": 5,
+  "failed_tests": 0,
   "results": [
     {
       "test": "Health Check",
       "success": true,
-      "timestamp": "2025-10-03T18:29:15.389907",
+      "timestamp": "2025-10-03T18:32:43.504588",
       "details": "All checks passed - Status: healthy, Keys: 4, Bible API: True",
       "response_data": {
         "status": "healthy",
-        "timestamp": "2025-10-03T18:29:15.387444",
-        "current_key": "gemini_4",
+        "timestamp": "2025-10-03T18:32:43.502100",
+        "current_key": "gemini_3",
         "bible_api_configured": true,
         "gemini_keys_count": 4
       }
     },
     {
       "test": "Key Rotation",
-      "success": false,
-      "timestamp": "2025-10-03T18:29:18.443265",
-      "details": "Key rotation not working - Only observed 1 keys: ['gemini_4']",
+      "success": true,
+      "timestamp": "2025-10-03T18:32:58.669663",
+      "details": "Key rotation working - Observed 3 different keys: ['gemini_1', 'gemini_2', 'gemini_4']",
       "response_data": {
         "keys_observed": [
+          "gemini_1",
+          "gemini_2",
           "gemini_4"
         ]
       }
@@ -32,34 +34,34 @@
     {
       "test": "Enrich Concordance",
       "success": true,
-      "timestamp": "2025-10-03T18:29:25.743518",
-      "details": "Success - Search term: amour, Source: bible_api_with_gemini, Content length: 2974 chars",
+      "timestamp": "2025-10-03T18:33:05.280847",
+      "details": "Success - Search term: amour, Source: bible_api_with_gemini, Content length: 3052 chars",
       "response_data": {
         "status": "success",
         "source": "bible_api_with_gemini",
-        "content_length": 2974
+        "content_length": 3052
       }
     },
     {
       "test": "Generate Character History",
       "success": true,
-      "timestamp": "2025-10-03T18:29:53.505478",
-      "details": "Success - Character: Abraham, Word count: 1999, Enriched: True",
+      "timestamp": "2025-10-03T18:33:34.108105",
+      "details": "Success - Character: Abraham, Word count: 2008, Enriched: True",
       "response_data": {
         "status": "success",
         "character": "Abraham",
-        "word_count": 1999
+        "word_count": 2008
       }
     },
     {
       "test": "Generate Verse-by-Verse",
       "success": true,
-      "timestamp": "2025-10-03T18:30:04.238356",
-      "details": "Success - Passage: Jean 3:16, Content length: 5443 chars, Tokens: 1500",
+      "timestamp": "2025-10-03T18:33:45.472679",
+      "details": "Success - Passage: Jean 3:16, Content length: 5410 chars, Tokens: 1500",
       "response_data": {
         "status": "success",
         "passage": "Jean 3:16",
-        "content_length": 5443
+        "content_length": 5410
       }
     }
   ]
