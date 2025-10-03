@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
+// Configuration du backend - utilise la variable d'environnement
+const getBackendUrl = () => {
+  if (process.env.REACT_APP_BACKEND_URL) {
+    return process.env.REACT_APP_BACKEND_URL;
+  }
+  const hostname = window.location.hostname;
+  if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
+  return "https://bible-study-ai-3.preview.emergentagent.com";
+};
+
+const BACKEND_URL = getBackendUrl();
+const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
+
 const VersetParVersetPage = ({ onGoBack, content, bookInfo }) => {
   const [currentBatch, setCurrentBatch] = useState(1); // Batch actuel (1, 2, 3...)
   const [isLoadingMore, setIsLoadingMore] = useState(false);
