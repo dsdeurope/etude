@@ -1914,7 +1914,7 @@ ${contextualEnrichment}
                 
                 {/* API Control Panel centré en bas */}
                 <div className="api-centered">
-                  <ApiControlPanel backendUrl="https://bible-study-ai-3.preview.emergentagent.com" />
+                  <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://bible-study-ai-3.preview.emergentagent.com"} />
                 </div>
               </div>
             </div>
