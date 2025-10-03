@@ -32,6 +32,35 @@ const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 // Variables d'environnement configurées
 // BACKEND_URL et API_BASE sont prêts à utiliser
 
+// Palette de couleurs harmonieuse pour les 6 boutons
+const getButtonStyle = (gradientColors, shadowColor) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '16px 12px',
+  borderRadius: '16px',
+  minHeight: '90px',
+  fontSize: '11px',
+  fontWeight: '700',
+  color: 'white',
+  border: 'none',
+  cursor: 'pointer',
+  background: `linear-gradient(135deg, ${gradientColors.start} 0%, ${gradientColors.end} 100%)`,
+  boxShadow: `0 8px 32px ${shadowColor}, 0 2px 16px rgba(0, 0, 0, 0.1)`,
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transform: 'translateY(0)',
+})
+
+const buttonColors = {
+  reset: { start: '#4facfe', end: '#00f2fe', shadow: 'rgba(79, 172, 254, 0.25)' },
+  mystique: { start: '#a855f7', end: '#e879f9', shadow: 'rgba(168, 85, 247, 0.25)' },
+  genese: { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
+  gemini: { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
+  versets: { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
+  generate: { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' }
+}
+
 function asString(x) {
   if (x === undefined || x === null) return "";
   if (typeof x === "string") return x;
