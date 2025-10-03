@@ -247,7 +247,9 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
         setResults(enrichedResults);
         console.log(`[GEMINI CONCORDANCE] Enrichissement terminé: ${enrichedResults.length} résultats`);
       } else {
-        throw new Error(`Erreur API: ${response.status}`);
+        const errorText = await response.text();
+        console.error(`[GEMINI DEBUG] Erreur détaillée:`, errorText);
+        throw new Error(`Erreur API: ${response.status} - ${errorText}`);
       }
     } catch (error) {
       console.error("Erreur Gemini concordance:", error);
@@ -293,7 +295,9 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
           throw new Error('Pas de contenu reçu du serveur');
         }
       } else {
-        throw new Error(`Erreur API: ${response.status}`);
+        const errorText = await response.text();
+        console.error(`[GEMINI DEBUG] Erreur détaillée:`, errorText);
+        throw new Error(`Erreur API: ${response.status} - ${errorText}`);
       }
     } catch (error) {
       console.error("Erreur Gemini personnage:", error);
