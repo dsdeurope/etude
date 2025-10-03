@@ -3646,3 +3646,65 @@ strong {
     padding: 10px 8px;
   }
 }
+
+/* Boutons pour les autres actions (LIRE LA BIBLE, CHATGPT, etc.) */
+.btn-read, .btn-chat, .btn-notes, .btn-concordance {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-read:hover, .btn-chat:hover, .btn-notes:hover, .btn-concordance:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-read {
+  background: linear-gradient(135deg, #00d4aa, #00a085);
+}
+
+.btn-chat {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
+
+.btn-notes {
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+}
+
+.btn-concordance {
+  background: linear-gradient(135deg, #ff8c42, #ff6b35);
+}
+
+.btn-validate {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-validate:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
