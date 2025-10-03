@@ -43,9 +43,17 @@ const ApiControlPanel = ({ backendUrl }) => {
     try {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
-        const history = await response.json();
-        setApiHistory(history);
-        console.log('[API HISTORY] Historique récupéré:', history);
+        const healthData = await response.json();
+        
+        // Adapter pour l'historique
+        const adaptedHistory = {
+          timestamp: new Date().toISOString(),
+          total_calls: 0,
+          history: []
+        };
+        
+        setApiHistory(adaptedHistory);
+        console.log('[API HISTORY] Historique récupéré:', adaptedHistory);
       }
     } catch (error) {
       console.error('[API HISTORY] Erreur:', error);
