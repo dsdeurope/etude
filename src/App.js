@@ -231,7 +231,34 @@ async function smartPost(pathList, payload) {
 ========================= */
 
 function App() {
+  // Thèmes (définis en premier pour éviter erreur d'initialisation)
+  const colorThemes = [
+    { name: "Violet Mystique", primary: "#667eea", secondary: "#764ba2", accent: "#667eea",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      headerBg: "linear-gradient(90deg, #3b4371 0%, #f093fb 50%, #f5576c 100%)" },
+    { name: "Océan Profond", primary: "#0891b2", secondary: "#0284c7", accent: "#0891b2",
+      background: "linear-gradient(135deg, #0891b2 0%, #0284c7 100%)",
+      headerBg: "linear-gradient(90deg, #075985 0%, #0ea5e9 50%, #38bdf8 100%)" },
+    { name: "Émeraude Vert", primary: "#10b981", secondary: "#059669", accent: "#10b981",
+      background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+      headerBg: "linear-gradient(90deg, #064e3b 0%, #34d399 50%, #6ee7b7 100%)" },
+    { name: "Rose Passion", primary: "#ec4899", secondary: "#db2777", accent: "#ec4899",
+      background: "linear-gradient(135deg, #ec4899 0%, #db2777 100%)",
+      headerBg: "linear-gradient(90deg, #831843 0%, #f472b6 50%, #f9a8d4 100%)" },
+    { name: "Orange Sunset", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
+      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+      headerBg: "linear-gradient(90deg, #92400e 0%, #fbbf24 50%, #fcd34d 100%)" },
+    { name: "Indigo Royal", primary: "#6366f1", secondary: "#4f46e5", accent: "#6366f1",
+      background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
+      headerBg: "linear-gradient(90deg, #312e81 0%, #818cf8 50%, #a5b4fc 100%)" }
+  ];
+
   // États principaux
+  const [currentTheme, setCurrentTheme] = useState(0);
+  
+  // Couleurs dynamiques basées sur le thème actuel (après colorThemes et currentTheme)
+  const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
+  
   const [selectedBook, setSelectedBook] = useState("Genèse");
   const [selectedChapter, setSelectedChapter] = useState("1");
   const [selectedVerse, setSelectedVerse] = useState("--");
