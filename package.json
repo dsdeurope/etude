@@ -23,6 +23,14 @@
       "react-app/jest"
     ]
   },
+  "resolutions": {
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2"
+  },
+  "overrides": {
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
