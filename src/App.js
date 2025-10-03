@@ -3,10 +3,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./rubriques.css";
 import RubriquesInline from "./RubriquesInline";
-import BibleConcordancePage from "./BibleConcordancePage";
-import VersetParVersetPage from "./VersetParVersetPage";
-import NotesPage from "./NotesPage";
-import RubriquePage from "./RubriquePage";
 
 /* =========================
    Configuration et Helpers
