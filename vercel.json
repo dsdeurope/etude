@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "build",
   "devCommand": "npm start",
-  "installCommand": "npm install --legacy-peer-deps --force",
+  "installCommand": "yarn install --ignore-engines",
   "framework": "create-react-app",
   "env": {
     "SKIP_PREFLIGHT_CHECK": "true",
