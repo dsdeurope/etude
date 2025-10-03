@@ -7,7 +7,7 @@ const getBackendUrl = () => {
   }
   const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
-  return "https://bible-study-ai-3.preview.emergentagent.com";
+  return "https://faithflow-app.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();

@@ -5,7 +5,7 @@ Application d'étude biblique avec génération de contenu IA.
 ## Déploiement
 
 - **Production:** https://etude-eight.vercel.app
-- **Backend:** https://bible-study-ai-3.preview.emergentagent.com
+- **Backend:** https://faithflow-app.preview.emergentagent.com
 
 ## Développement Local
 
