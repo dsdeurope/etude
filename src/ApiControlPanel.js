@@ -23,10 +23,10 @@ const ApiControlPanel = ({ backendUrl }) => {
     }
   };
 
-  // Fonction pour récupérer l'historique des API
+  // Fonction pour récupérer l'historique des API  
   const fetchApiHistory = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/api-history`);
+      const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
         const history = await response.json();
         setApiHistory(history);
