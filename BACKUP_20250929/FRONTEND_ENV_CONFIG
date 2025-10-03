@@ -1,3 +1,0 @@
-# Backend URL - Configuration pour production Vercel
-REACT_APP_BACKEND_URL=https://bible-study-ai-3.preview.emergentagent.com
-DISABLE_ESLINT_PLUGIN=true

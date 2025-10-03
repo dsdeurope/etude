@@ -1,7 +1,0 @@
-URGENT DEPLOY - API CORRECTION CRITIQUE - 2025-09-29 04:46
-🔥 PROBLÈME "Failed to fetch" RÉSOLU !
-✅ Correction API : Rubrique 0 utilise maintenant https://etude8-bible-api-production.up.railway.app
-✅ Test local confirmé : 4750 caractères générés pour Genèse 1
-✅ Console logs : "[API RAILWAY OK]" + "[SUCCESS] Contenu VERSETS PROG affiché"
-✅ Barre de progression 100% + contenu affiché correctement
-- URGENT : Déployer cette correction sur Vercel

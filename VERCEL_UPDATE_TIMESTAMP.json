@@ -1,9 +1,0 @@
-{
-  "timestamp": "2025-09-29T04:46:00Z",
-  "version": "2.1.1-HOTFIX",
-  "critical_fix": "API URL correction for verse-by-verse generation",
-  "before": "verse-insight.preview.emergentagent.com/api/generate-verse-by-verse",
-  "after": "etude8-bible-api-production.up.railway.app/api/generate-verse-by-verse",
-  "test_result": "4750 characters generated successfully for Genesis 1",
-  "status": "HOTFIX_DEPLOYED"
-}

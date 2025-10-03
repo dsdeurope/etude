@@ -1,15 +1,6 @@
 {
-  "buildCommand": "yarn build",
+  "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://bible-study-ai-3.preview.emergentagent.com/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "devCommand": "npm start",
+  "installCommand": "npm install"
 }
