@@ -1928,28 +1928,7 @@ ${contextualEnrichment}
                     border: 'none',
                     cursor: 'pointer',
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  }} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '16px 12px',
-                    borderRadius: '16px',
-                    minHeight: '90px',
-                    fontSize: '11px',
-                    fontWeight: '700',
-                    color: 'white',
-                    border: 'none',
-                    cursor: 'pointer',
-                    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                    boxShadow: '0 8px 32px rgba(79, 172, 254, 0.25), 0 2px 16px rgba(0, 0, 0, 0.1)',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    transform: 'translateY(0)',
-                    ':hover': {
-                      transform: 'translateY(-2px)',
-                      boxShadow: '0 12px 40px rgba(79, 172, 254, 0.35)'
-                    }
-                  }} onClick={handleReset}>
+                  }} style={getButtonStyle(buttonColors.reset, buttonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
                   </button>
