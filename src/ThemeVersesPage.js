@@ -257,14 +257,45 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
                       "{verse.text}"
                     </p>
                     <div style={{
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      color: '#667eea',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
-                      fontFamily: "'Montserrat', sans-serif"
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px'
                     }}>
-                      {verse.book} {verse.chapter}:{verse.verse}
+                      <a 
+                        href={generateYouVersionUrl(verse.book, verse.chapter, verse.verse)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '14px',
+                          fontWeight: '700',
+                          color: '#667eea',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
+                          fontFamily: "'Montserrat', sans-serif",
+                          textDecoration: 'none',
+                          padding: '6px 12px',
+                          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))',
+                          borderRadius: '8px',
+                          border: '1px solid rgba(102, 126, 234, 0.2)',
+                          transition: 'all 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2))';
+                          e.target.style.transform = 'translateY(-1px)';
+                          e.target.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.3)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))';
+                          e.target.style.transform = 'translateY(0)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      >
+                        📖 {verse.book} {verse.chapter}:{verse.verse}
+                        <span style={{ fontSize: '10px', opacity: 0.7 }}>YouVersion</span>
+                      </a>
                     </div>
                   </div>
                   <div style={{
