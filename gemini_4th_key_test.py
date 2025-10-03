@@ -20,7 +20,7 @@ import sys
 from datetime import datetime
 
 # Configuration - Use the REACT_APP_BACKEND_URL from frontend/.env
-BACKEND_URL = "https://scripture-tool.preview.emergentagent.com"
+BACKEND_URL = "https://bible-study-ai-3.preview.emergentagent.com"
 TIMEOUT = 120
 
 def log_test(test_name, status, details=""):

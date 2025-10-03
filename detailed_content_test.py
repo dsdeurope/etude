@@ -7,7 +7,7 @@ import requests
 import json
 
 # Configuration
-BACKEND_URL = "https://scripture-tool.preview.emergentagent.com"
+BACKEND_URL = "https://bible-study-ai-3.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 def test_detailed_content():

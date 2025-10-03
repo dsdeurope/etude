@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://scripture-tool.preview.emergentagent.com/api/$1"
+      "destination": "https://bible-study-ai-3.preview.emergentagent.com/api/$1"
     },
     {
       "source": "/(.*)",

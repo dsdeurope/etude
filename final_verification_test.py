@@ -7,14 +7,14 @@ import requests
 import json
 import re
 
-BACKEND_URL = "https://scripture-tool.preview.emergentagent.com"
+BACKEND_URL = "https://bible-study-ai-3.preview.emergentagent.com"
 
 def main():
     print("=" * 80)
     print("FINAL VERIFICATION TEST - REVIEW REQUEST CLAIMS")
     print("=" * 80)
     print("Testing the exact scenario from the review request:")
-    print("URL: https://scripture-tool.preview.emergentagent.com/api/generate-verse-by-verse")
+    print("URL: https://bible-study-ai-3.preview.emergentagent.com/api/generate-verse-by-verse")
     print("Method: POST")
     print("Headers: Content-Type: application/json")
     print('Body: {"passage": "Genèse 1:1 LSG", "version": "LSG"}')
