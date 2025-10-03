@@ -1207,13 +1207,9 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       // 🔹 UTILISER VOTRE BACKEND avec votre clé Gemini GRATUITE
       console.log("[VERSETS PROG] Utilisation de votre backend avec clé Gemini gratuite");
       
-      // CORRECTION: Utiliser le bon endpoint selon l'environnement
-      const isLocal = window.location.hostname === 'localhost';
-      const versetAPIUrl = isLocal 
-        ? "http://localhost:8001/api/generate-verse-by-verse"  // Local avec votre Gemini
-        : "https://bible-study-ai-3.preview.emergentagent.com/api/generate-verse-by-verse";  // Preview avec votre Gemini
-      console.log("[VERSETS PROG] URL backend utilisée:", versetAPIUrl);
-      const apiUrl = versetAPIUrl;
+      // CORRECTION: Utiliser la variable d'environnement pour l'endpoint
+      const apiUrl = `${API_BASE}/generate-verse-by-verse`;
+      console.log("[VERSETS PROG] URL backend utilisée:", apiUrl);
       
       const response = await fetch(apiUrl, {
         method: 'POST',
