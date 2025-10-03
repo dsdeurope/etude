@@ -1184,7 +1184,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     const theme = colorThemes[nextTheme];
 
     const app = document.querySelector('.App');
-    if (app) app.style.background = theme.background;
+    if (app) app.style.background = 'transparent'; // Garder arrière-plan transparent
 
     const header = document.querySelector('.header-banner');
     if (header) header.style.background = theme.headerBg;
