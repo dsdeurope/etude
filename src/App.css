@@ -3703,8 +3703,8 @@ strong {
 /* Responsive équilibré */
 @media (max-width: 1200px) {
   .balanced-buttons-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
   }
 }
 
