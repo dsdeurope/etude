@@ -373,38 +373,8 @@ const RubriquePage = ({
                 📖 Bible
               </button>
 
-              {/* Bouton API */}
-              <button
-                onClick={handleApiAction}
-                className="control-btn api-btn"
-                title="Accéder au panneau de contrôle des API"
-                style={{
-                  background: 'linear-gradient(135deg, #3742fa, #2f3542)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '10px 16px',
-                  borderRadius: '10px',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 4px 12px rgba(55,66,250,0.25)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
-                  backdropFilter: 'blur(10px)',
-                  minWidth: '70px'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.transform = 'translateY(-2px) scale(1.02)';
-                  e.target.style.boxShadow = '0 6px 20px rgba(55,66,250,0.4)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = '0 4px 12px rgba(55,66,250,0.25)';
-                }}
-              >
-                🔧 API
-              </button>
+              {/* Composant API complet avec LEDs */}
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
             </div>
           </div>
 
