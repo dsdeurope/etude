@@ -329,25 +329,44 @@ class BibleStudyAPITester:
     def test_key_rotation(self):
         """Test 5: Verify Gemini Key Rotation"""
         try:
-            print("Testing Gemini key rotation by making multiple health check calls...")
+            print("Testing Gemini key rotation by making actual API calls that use Gemini...")
             
             keys_seen = set()
-            for i in range(6):  # Make 6 calls to see rotation through 4 keys
-                response = self.session.get(f"{API_BASE}/health")
+            
+            # Record initial key
+            initial_response = self.session.get(f"{API_BASE}/health")
+            if initial_response.status_code == 200:
+                initial_key = initial_response.json().get("current_key", "")
+                print(f"   Initial key: {initial_key}")
+            
+            # Make actual Gemini API calls to trigger rotation
+            for i in range(3):
+                # Use a simple concordance call to trigger Gemini API
+                response = self.session.post(
+                    f"{API_BASE}/enrich-concordance",
+                    json={"search_term": f"test{i}", "enrich": True},
+                    headers={"Content-Type": "application/json"}
+                )
+                
                 if response.status_code == 200:
-                    data = response.json()
-                    current_key = data.get("current_key", "")
-                    keys_seen.add(current_key)
-                    print(f"   Call {i+1}: {current_key}")
-                time.sleep(0.5)  # Small delay between calls
+                    # Check key after API call
+                    health_response = self.session.get(f"{API_BASE}/health")
+                    if health_response.status_code == 200:
+                        data = health_response.json()
+                        current_key = data.get("current_key", "")
+                        keys_seen.add(current_key)
+                        print(f"   After API call {i+1}: {current_key}")
+                    time.sleep(0.5)
+                else:
+                    print(f"   API call {i+1} failed: {response.status_code}")
                 
             # We should see at least 2 different keys in rotation
             if len(keys_seen) >= 2:
                 self.log_result(
                     "Key Rotation", 
                     True, 
-                    f"Key rotation working - Observed {len(keys_seen)} different keys: {list(keys_seen)}",
-                    {"keys_observed": list(keys_seen)}
+                    f"Key rotation working - Observed {len(keys_seen)} different keys: {sorted(list(keys_seen))}",
+                    {"keys_observed": sorted(list(keys_seen))}
                 )
                 return True
             else:
