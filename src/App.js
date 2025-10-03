@@ -1935,7 +1935,7 @@ ${contextualEnrichment}
                   width: '100%',
                   boxSizing: 'border-box'
                 }}>
-                  <button className="btn-control" style={getButtonStyle(buttonColors.reset, buttonColors.reset.shadow)} onClick={handleReset}>
+                  <button className="btn-control" style={getButtonStyle(getThemeButtonColors(colorThemes[currentTheme]).reset, getThemeButtonColors(colorThemes[currentTheme]).reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
                   </button>
