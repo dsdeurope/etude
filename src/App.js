@@ -269,7 +269,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [generatedRubriques, setGeneratedRubriques] = useState({}); // Stockage du contenu généré
   const [rubriquesStatus, setRubriquesStatus] = useState({});
-  const [currentTheme, setCurrentTheme] = useState(0);
   const [lastStudy, setLastStudy] = useState(null);
   const [progressPercent, setProgressPercent] = useState(0);
   const [searchQuery, setSearchQuery] = useState(""); // ← unique déclaration
