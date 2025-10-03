@@ -1953,7 +1953,7 @@ ${contextualEnrichment}
                     <span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Genèse 1"}</span>
                   </button>
                   
-                  <button className={`btn-control ${isLoading ? "loading" : ""}`} style={getButtonStyle(buttonColors.gemini, buttonColors.gemini.shadow)} onClick={generateWithGemini} disabled={isLoading}>
+                  <button className={`btn-control ${isLoading ? "loading" : ""}`} style={getButtonStyle(currentButtonColors.gemini, currentButtonColors.gemini.shadow)} onClick={generateWithGemini} disabled={isLoading}>
                     <span className="control-icon">🤖</span>
                     <span className="control-label">Gemini Gratuit</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
