@@ -15,17 +15,15 @@ import ApiControlPanel from "./ApiControlPanel";
 
 // Backend: 1) REACT_APP_BACKEND_URL si défini (nettoyé), 2) localhost en dev, 3) Railway en prod
 const getBackendUrl = () => {
-  const raw = (process.env.REACT_APP_BACKEND_URL || "").trim();
-  // retire guillemets accidentels & slash final
-  const cleaned = raw.replace(/^["']|["']$/g, "").replace(/\/+$/g, "");
-  if (cleaned) return cleaned;
-
-  const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+  // Utiliser la variable d'environnement en priorité
+  if (process.env.REACT_APP_BACKEND_URL) {
+    return process.env.REACT_APP_BACKEND_URL;
+  }
+  
+  const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
-  // (optionnel) si tu utilises encore preview.emergentagent.com
-  if (hostname.includes("preview.emergentagent.com")) return `https://${hostname}`;
-  // fallback prod → Railway
-  return "https://etude8-bible-api-production.up.railway.app";
+  // fallback pour les environnements non configurés
+  return "https://bible-study-ai-3.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();
