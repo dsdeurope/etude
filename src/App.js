@@ -297,45 +297,7 @@ function App() {
   const [currentRubriqueNumber, setCurrentRubriqueNumber] = useState(1);
   const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
 
-  // Thèmes
-  const colorThemes = [
-    { name: "Violet Mystique", primary: "#667eea", secondary: "#764ba2", accent: "#667eea",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      headerBg: "linear-gradient(90deg, #3b4371 0%, #f093fb 50%, #f5576c 100%)" },
-    { name: "Océan Profond", primary: "#0891b2", secondary: "#0284c7", accent: "#0891b2",
-      background: "linear-gradient(135deg, #0891b2 0%, #0284c7 100%)",
-      headerBg: "linear-gradient(90deg, #075985 0%, #0ea5e9 50%, #38bdf8 100%)" },
-    { name: "Émeraude Vert", primary: "#10b981", secondary: "#059669", accent: "#10b981",
-      background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-      headerBg: "linear-gradient(90deg, #064e3b 0%, #34d399 50%, #6ee7b7 100%)" },
-    { name: "Rose Passion", primary: "#ec4899", secondary: "#db2777", accent: "#ec4899",
-      background: "linear-gradient(135deg, #ec4899 0%, #db2777 100%)",
-      headerBg: "linear-gradient(90deg, #831843 0%, #f472b6 50%, #f9a8d4 100%)" },
-    { name: "Orange Sunset", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
-      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      headerBg: "linear-gradient(90deg, #92400e 0%, #fbbf24 50%, #fcd34d 100%)" },
-    { name: "Indigo Royal", primary: "#6366f1", secondary: "#4f46e5", accent: "#6366f1",
-      background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
-      headerBg: "linear-gradient(90deg, #312e81 0%, #8b5cf6 50%, #c4b5fd 100%)" },
-    { name: "Teal Tropical", primary: "#14b8a6", secondary: "#0f766e", accent: "#14b8a6",
-      background: "linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)",
-      headerBg: "linear-gradient(90deg, #134e4a 0%, #5eead4 50%, #99f6e4 100%)" },
-    { name: "Crimson Fire", primary: "#dc2626", secondary: "#b91c1c", accent: "#dc2626",
-      background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)",
-      headerBg: "linear-gradient(90deg, #7f1d1d 0%, #f87171 50%, #fecaca 100%)" },
-    { name: "Amber Gold", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
-      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      headerBg: "linear-gradient(90deg, #78350f 0%, #fbbf24 50%, #fef3c7 100%)" },
-    { name: "Slate Modern", primary: "#64748b", secondary: "#475569", accent: "#64748b",
-      background: "linear-gradient(135deg, #64748b 0%, #475569 100%)",
-      headerBg: "linear-gradient(90deg, #1e293b 0%, #94a3b8 50%, #e2e8f0 100%)" },
-    { name: "Lime Electric", primary: "#65a30d", secondary: "#4d7c0f", accent: "#65a30d",
-      background: "linear-gradient(135deg, #65a30d 0%, #4d7c0f 100%)",
-      headerBg: "linear-gradient(90deg, #365314 0%, #84cc16 50%, #d9f99d 100%)" },
-    { name: "Fuchsia Magic", primary: "#c026d3", secondary: "#a21caf", accent: "#c026d3",
-      background: "linear-gradient(135deg, #c026d3 0%, #a21caf 100%)",
-      headerBg: "linear-gradient(90deg, #701a75 0%, #e879f9 50%, #f5d0fe 100%)" },
-  ];
+  // Thèmes déplacés en début de fonction
 
   // Options de chapitres
   const availableChapters = useMemo(() => {
