@@ -1882,46 +1882,130 @@ ${contextualEnrichment}
                 <button className="btn-concordance" onClick={navigateToConcordance}>📖 BIBLE DE CONCORDANCE</button>
               </div>
 
-              {/* Boutons d'action - Design moderne en grille */}
-              <div className="modern-action-grid">
-                {/* Boutons utilitaires */}
-                <div className="utility-buttons">
-                  <button className="btn-modern btn-reset" onClick={handleReset}>
-                    <span className="btn-icon">🔄</span>
-                    <span className="btn-text">Reset</span>
-                  </button>
-                  <button className="btn-modern btn-palette" onClick={changePalette}>
-                    <span className="btn-icon">🎨</span>
-                    <span className="btn-text">{colorThemes[currentTheme].name}</span>
-                  </button>
-                  <button className="btn-modern btn-last-study" onClick={restoreLastStudy} disabled={!lastStudy}
-                    title={lastStudy ? `Restaurer: ${lastStudy.book} ${lastStudy.chapter}${lastStudy.verse !== "--" ? ":" + lastStudy.verse : ""}` : "Aucune étude sauvegardée"}>
-                    <span className="btn-icon">📖</span>
-                    <span className="btn-text">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Dernière étude"}</span>
-                  </button>
+              {/* Section d'actions - Design professionnel harmonieux */}
+              <div className="premium-actions-container">
+                
+                {/* Section navigation et outils */}
+                <div className="navigation-tools-section">
+                  <h3 className="section-title">🧭 Navigation & Outils</h3>
+                  <div className="tools-grid">
+                    <button className="btn-premium btn-concordance" onClick={navigateToConcordance}>
+                      <span className="btn-icon">📚</span>
+                      <span className="btn-label">
+                        <span className="btn-title">Concordance</span>
+                        <span className="btn-subtitle">70+ personnages • 30 thèmes</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-notes" onClick={navigateToNotes}>
+                      <span className="btn-icon">📝</span>
+                      <span className="btn-label">
+                        <span className="btn-title">Notes</span>
+                        <span className="btn-subtitle">Prise de notes intégrée</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-bible-read" onClick={() => {
+                      if (selectedBook === "--") {
+                        alert("Veuillez d'abord sélectionner un livre de la Bible");
+                        return;
+                      }
+                      const bookCodes = {
+                        "Genèse":"GEN","Exode":"EXO","Lévitique":"LEV","Nombres":"NUM","Deutéronome":"DEU",
+                        "Josué":"JOS","Juges":"JDG","Ruth":"RUT","1 Samuel":"1SA","2 Samuel":"2SA",
+                        "1 Rois":"1KI","2 Rois":"2KI","1 Chroniques":"1CH","2 Chroniques":"2CH",
+                        "Esdras":"EZR","Néhémie":"NEH","Esther":"EST","Job":"JOB","Psaumes":"PSA",
+                        "Proverbes":"PRO","Ecclésiaste":"ECC","Cantique des cantiques":"SNG",
+                        "Ésaïe":"ISA","Jérémie":"JER","Lamentations":"LAM","Ézéchiel":"EZK","Daniel":"DAN",
+                        "Osée":"HOS","Joël":"JOL","Amos":"AMO","Abdias":"OBA","Jonas":"JON","Michée":"MIC",
+                        "Nahum":"NAM","Habacuc":"HAB","Sophonie":"ZEP","Aggée":"HAG","Zacharie":"ZEC","Malachie":"MAL",
+                        "Matthieu":"MAT","Marc":"MRK","Luc":"LUK","Jean":"JHN","Actes":"ACT",
+                        "Romains":"ROM","1 Corinthiens":"1CO","2 Corinthiens":"2CO","Galates":"GAL",
+                        "Éphésiens":"EPH","Philippiens":"PHP","Colossiens":"COL","1 Thessaloniciens":"1TH",
+                        "2 Thessaloniciens":"2TH","1 Timothée":"1TI","2 Timothée":"2TI","Tite":"TIT",
+                        "Philémon":"PHM","Hébreux":"HEB","Jacques":"JAS","1 Pierre":"1PE","2 Pierre":"2PE",
+                        "1 Jean":"1JN","2 Jean":"2JN","3 Jean":"3JN","Jude":"JUD","Apocalypse":"REV"
+                      };
+                      const code = bookCodes[selectedBook];
+                      if (code) {
+                        const url = `https://www.bible.com/bible/93/${code}.${selectedChapter}.LSG`;
+                        window.open(url, '_blank');
+                      }
+                    }}>
+                      <span className="btn-icon">🔗</span>
+                      <span className="btn-label">
+                        <span className="btn-title">YouVersion</span>
+                        <span className="btn-subtitle">Lire la Bible en ligne</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-chatgpt" onClick={() => window.open('https://chatgpt.com/', '_blank')}>
+                      <span className="btn-icon">💬</span>
+                      <span className="btn-label">
+                        <span className="btn-title">ChatGPT</span>
+                        <span className="btn-subtitle">Assistant IA avancé</span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
 
-                {/* Boutons d'action principaux */}
-                <div className="primary-action-buttons">
-                  <button className={`btn-modern btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>
-                    <span className="btn-icon">🤖</span>
-                    <span className="btn-text">Gemini Gratuit</span>
-                    {isLoading && <div className="btn-loader"></div>}
-                  </button>
-                  <button className="btn-modern btn-versets-prog" onClick={generateVerseByVerseProgressive} title="Analyse progressive enrichie - traitement uniforme des versets">
-                    <span className="btn-icon">⚡</span>
-                    <span className="btn-text">Versets Prog</span>
-                  </button>
-                  <button className="btn-modern btn-generate" onClick={generate28Points} disabled={isLoading}>
-                    <span className="btn-icon">✨</span>
-                    <span className="btn-text">Générer</span>
-                    {isLoading && <div className="btn-loader"></div>}
-                  </button>
+                {/* Section génération intelligente */}
+                <div className="generation-section">
+                  <h3 className="section-title">✨ Génération Intelligente</h3>
+                  <div className="generation-grid">
+                    <button className={`btn-premium btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>
+                      <span className="btn-icon">🤖</span>
+                      <span className="btn-label">
+                        <span className="btn-title">Gemini Gratuit</span>
+                        <span className="btn-subtitle">IA enrichie instantanée</span>
+                      </span>
+                      {isLoading && <div className="btn-loader"></div>}
+                    </button>
+                    <button className="btn-premium btn-versets-prog" onClick={generateVerseByVerseProgressive} title="Analyse progressive enrichie - traitement uniforme des versets">
+                      <span className="btn-icon">⚡</span>
+                      <span className="btn-label">
+                        <span className="btn-title">Versets Progressifs</span>
+                        <span className="btn-subtitle">Analyse verset par verset</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-generate-master" onClick={generate28Points} disabled={isLoading}>
+                      <span className="btn-icon">🎯</span>
+                      <span className="btn-label">
+                        <span className="btn-title">GÉNÉRER COMPLET</span>
+                        <span className="btn-subtitle">28 rubriques d'étude</span>
+                      </span>
+                      {isLoading && <div className="btn-loader"></div>}
+                    </button>
+                  </div>
                 </div>
 
-                {/* API Control Panel */}
-                <div className="api-control-section">
-                  <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
+                {/* Section utilitaires et personnalisation */}
+                <div className="utilities-section">
+                  <h3 className="section-title">⚙️ Utilitaires & Personnalisation</h3>
+                  <div className="utilities-grid">
+                    <button className="btn-premium btn-reset" onClick={handleReset}>
+                      <span className="btn-icon">🔄</span>
+                      <span className="btn-label">
+                        <span className="btn-title">Reset</span>
+                        <span className="btn-subtitle">Réinitialiser</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-palette" onClick={changePalette}>
+                      <span className="btn-icon">🎨</span>
+                      <span className="btn-label">
+                        <span className="btn-title">{colorThemes[currentTheme].name}</span>
+                        <span className="btn-subtitle">Changer le thème</span>
+                      </span>
+                    </button>
+                    <button className="btn-premium btn-last-study" onClick={restoreLastStudy} disabled={!lastStudy}
+                      title={lastStudy ? `Restaurer: ${lastStudy.book} ${lastStudy.chapter}${lastStudy.verse !== "--" ? ":" + lastStudy.verse : ""}` : "Aucune étude sauvegardée"}>
+                      <span className="btn-icon">📚</span>
+                      <span className="btn-label">
+                        <span className="btn-title">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Dernière étude"}</span>
+                        <span className="btn-subtitle">Restaurer la session</span>
+                      </span>
+                    </button>
+                    <div className="api-control-premium">
+                      <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
