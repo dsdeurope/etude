@@ -232,6 +232,9 @@ async function smartPost(pathList, payload) {
 
 function App() {
   // États principaux
+  
+  // Couleurs dynamiques basées sur le thème actuel
+  const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
   const [selectedBook, setSelectedBook] = useState("Genèse");
   const [selectedChapter, setSelectedChapter] = useState("1");
   const [selectedVerse, setSelectedVerse] = useState("--");
