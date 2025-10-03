@@ -60,7 +60,8 @@ const buttonColors = {
   genese: { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
   gemini: { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
   versets: { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
-  generate: { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' }
+  generate: { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' },
+  concordance: { start: '#06b6d4', end: '#22d3ee', shadow: 'rgba(6, 182, 212, 0.25)' }
 }
 
 function asString(x) {
