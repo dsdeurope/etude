@@ -134,74 +134,27 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
         Abraham demeure le prototype du croyant qui obéit à Dieu par la foi, modèle éternel pour tous les âges.
       `,
       "Aaron": `
-        ## ⚡ AARON - Le Grand Prêtre d'Israël (vers 1393-1273 av. J.-C.)
+        ## AARON - Le Grand Prêtre d'Israël (vers 1393-1273 av. J.-C.)
 
-        ### 1. IDENTITÉ ET GÉNÉALOGIE
-        Aaron (אַהֲרֹן), fils d'Amram et de Jokébed, de la tribu de Lévi. Frère aîné de Moïse de 3 ans et de Miriam. Son nom signifie "montagnard" ou "éclairé". Marié à Élischéba, fille d'Amminadab, dont il eut quatre fils : Nadab, Abihu, Éléazar et Ithamar.
+        Aaron, dont le nom hébreu signifie "montagnard" ou "éclairé", naît vers 1396 av. J.-C. en Égypte sous l'oppression pharaonique. Fils d'Amram et de Jokébed de la tribu de Lévi, il grandit aux côtés de son frère cadet Moïse et de sa sœur Miriam dans une famille pieuse qui préserve la foi d'Abraham malgré l'esclavage. Son mariage avec Élischéba, fille d'Amminadab, lui donne quatre fils : Nadab, Abihu, Éléazar et Ithamar, qui marqueront l'histoire du sacerdoce d'Israël.
 
-        ### 2. JEUNESSE EN ÉGYPTE
-        Né en Égypte sous l'oppression pharaonique, vers 1396 av. J.-C. Grandit dans une famille lévitique pieuse qui préserva la foi d'Abraham. Témoin des souffrances du peuple hébreu en esclavage. Formation dans la tradition orale des patriarches.
+        L'appel divin transforme Aaron en porte-parole de Moïse. Selon **Exode 4:14-16**, l'Éternel déclare : "N'y a-t-il pas ton frère Aaron, le Lévite ? Je sais qu'il parlera facilement." Cette élection divine scelle le destin d'Aaron comme médiateur entre Dieu et son peuple. Leur première rencontre prophétique à la montagne de Dieu après quarante ans de séparation inaugure un ministère commun extraordinaire.
 
-        ### 3. APPEL DIVIN ET MISSION AVEC MOÏSE
-        **Exode 4:14-16** : "L'Éternel s'irrita contre Moïse, et il dit: N'y a-t-il pas ton frère Aaron, le Lévite? Je sais qu'il parlera facilement." Choisi par Dieu pour être la bouche de Moïse devant Pharaon.
+        Devant Pharaon, Aaron démontre la puissance divine en transformant son bâton en serpent qui dévore ceux des magiciens égyptiens. Il exécute plusieurs des dix plaies : l'eau changée en sang, les grenouilles et les moustiques, attestant ainsi la supériorité du Dieu d'Israël sur les divinités égyptiennes. Cette démonstration de force prépare la libération d'Israël de l'esclavage.
 
-        **Première rencontre prophétique** (Exode 4:27) : "L'Éternel dit à Aaron: Va dans le désert, au-devant de Moïse." Retrouvailles à la montagne de Dieu après 40 ans de séparation.
+        Pendant l'Exode, Aaron guide avec Moïse plus de 600 000 hommes hors d'Égypte, participant aux grands miracles : le passage de la mer Rouge, l'eau jaillissant du rocher et la manne tombant du ciel. Lors de la bataille contre Amalek, Aaron soutient avec Hur les mains levées de Moïse, assurant ainsi la victoire d'Israël par la prière et l'intercession.
 
-        ### 4. LES DIX PLAIES D'ÉGYPTE
-        **Collaborateur essentiel de Moïse** : Aaron transforme son bâton en serpent devant Pharaon (Exode 7:10). Exécute plusieurs plaies : eau changée en sang, grenouilles, moustiques.
+        L'institution divine de la prêtrise marque l'apogée de la vie d'Aaron. Selon **Exode 28:1**, Dieu ordonne : "Fais approcher de toi Aaron, ton frère, et ses fils avec lui, du milieu des enfants d'Israël, pour qu'ils soient à mon service dans le sacerdoce." Aaron revêt alors les vêtements sacrés : l'éphod, le pectoral orné de douze pierres précieuses représentant les tribus d'Israël, et la tiare portant l'inscription "Sainteté à l'Éternel". Sept jours de consécration, l'onction d'huile sainte et des sacrifices d'expiation établissent le sacerdoce aaronique pour l'éternité.
 
-        **Démonstration de puissance divine** : Son serpent dévore ceux des magiciens égyptiens, attestant la supériorité du Dieu d'Israël sur les divinités égyptiennes.
+        Comme Grand Prêtre, Aaron assume des responsabilités uniques. Seul autorisé à pénétrer dans le Saint des Saints lors du Jour des Expiations, il offre l'expiation pour les péchés d'Israël. Ses journées se remplissent d'holocaustes perpétuels matin et soir, d'intercession constante pour le peuple. La bénédiction sacerdotale de **Nombres 6:24-26** résonne de sa bouche : "Que l'Éternel te bénisse, et qu'il te garde ! Que l'Éternel fasse luire sa face sur toi, et qu'il t'accorde sa grâce !"
 
-        ### 5. L'EXODE ET LE DÉSERT
-        **Guide du peuple** : Avec Moïse, conduit 600 000 hommes hors d'Égypte. Participe aux miracles : passage de la mer Rouge, eau jaillissant du rocher, manne du ciel.
+        Cependant, Aaron n'échappe pas aux épreuves humaines. En l'absence de Moïse au Sinaï, il cède à la pression populaire et façonne le veau d'or, proclamant : "Voici ton dieu, Israël, qui t'a fait sortir d'Égypte !" Ce grave péché d'idolâtrie révèle sa vulnérabilité, mais l'intercession de Moïse lui obtient le pardon divin. Plus tard, la mort foudroyante de ses fils Nadab et Abihu, qui offrent un "feu étranger" devant l'Éternel, le plonge dans un silence douloureux mais soumis au jugement de Dieu.
 
-        **Soutien dans la bataille** (Exode 17:12) : Avec Hur, soutient les mains de Moïse levées vers le ciel pendant la bataille contre Amalek, assurant la victoire d'Israël.
+        Sa rébellion avec Miriam contre Moïse concernant sa femme éthiopienne révèle également ses luttes fraternelles. Quand Miriam est frappée de lèpre, Aaron intercède pour sa sœur, manifestant son cœur compatissant. La révolte de Koré contre son autorité sacerdotale trouve sa réponse divine dans le miracle de la verge : seule celle d'Aaron fleurit et produit des amandes, confirmant son élection. Cette verge miraculeuse est conservée dans l'arche comme témoignage perpétuel.
 
-        ### 6. INSTITUTION DE LA PRÊTRISE
-        **Consécration divine** (Exode 28:1) : "Fais approcher de toi Aaron, ton frère, et ses fils avec lui, du milieu des enfants d'Israël, pour qu'ils soient à mon service dans le sacerdoce."
+        À 123 ans, Aaron gravit le mont Hor avec Moïse et son fils Éléazar. Dieu lui annonce sa mort imminente en châtiment de sa rébellion aux eaux de Meriba. Dans un geste solennel, Aaron transmet ses vêtements sacerdotaux à Éléazar qui lui succède, puis rend paisiblement son dernier souffle. "Toute la maison d'Israël pleura Aaron pendant trente jours," témoignage de l'amour du peuple pour son Grand Prêtre.
 
-        **Vêtements sacrés** : Ephod, pectoral avec 12 pierres précieuses, robe, tunique, tiare sainte avec la plaque d'or "Sainteté à l'Éternel" (Exode 28).
-
-        **Cérémonie d'ordination** (Lévitique 8) : Sept jours de consécration, onction d'huile sainte, sacrifices d'expiation. Établissement du sacerdoce aaronique éternel.
-
-        ### 7. MINISTÈRE SACERDOTAL
-        **Jour des Expiations** (Lévitique 16) : Aaron, seul autorisé à entrer dans le Saint des Saints une fois par an pour faire l'expiation des péchés d'Israël.
-
-        **Sacrifices quotidiens** : Direction du culte, holocaustes perpétuels matin et soir, intercession constante pour le peuple.
-
-        **Bénédiction sacerdotale** (Nombres 6:24-26) : "Que l'Éternel te bénisse, et qu'il te garde! Que l'Éternel fasse luire sa face sur toi, et qu'il t'accorde sa grâce!"
-
-        ### 8. ÉPREUVES ET ERREURS
-        **Le veau d'or** (Exode 32) : En l'absence de Moïse, cède à la pression du peuple et façonne un veau d'or. "Voici ton dieu, Israël, qui t'a fait sortir d'Égypte!" Grave péché d'idolâtrie pardonné par intercession de Moïse.
-
-        **Mort de Nadab et Abihu** (Lévitique 10:1-2) : Ses deux fils aînés offrent un "feu étranger" et meurent foudroyés. Aaron garde le silence devant ce jugement divin : "Aaron se tut."
-
-        **Rébellion avec Miriam** (Nombres 12) : S'associe à sa sœur pour critiquer Moïse concernant sa femme éthiopienne. Miriam frappée de lèpre, Aaron intercède pour elle.
-
-        ### 9. CONFIRMATION DE SON AUTORITÉ
-        **Révolte de Koré** (Nombres 16) : Rébellion contre l'autorité sacerdotale d'Aaron. Dieu confirme son choix par le miracle de la verge : seule celle d'Aaron fleurit, produit des amandes (Nombres 17).
-
-        **Verge conservée** : Placée dans l'arche comme témoignage perpétuel de l'élection divine d'Aaron et de sa descendance pour le sacerdoce.
-
-        ### 10. MORT ET SUCCESSION
-        **Mont Hor** (Nombres 20:22-29) : À 123 ans, Aaron monte sur la montagne avec Moïse et Éléazar son fils. Dieu lui annonce sa mort imminente pour sa rébellion aux eaux de Meriba.
-
-        **Passation des pouvoirs** : Aaron transmet ses vêtements sacerdotaux à Éléazar qui lui succède. "Toute la maison d'Israël pleura Aaron pendant trente jours."
-
-        ### 11. HÉRITAGE SPIRITUEL
-        **Sacerdoce éternel** : Sa lignée assure le sacerdoce jusqu'à l'époque de Jésus. Modèle du médiateur entre Dieu et les hommes.
-
-        **Type du Christ** : Préfigure Jésus, notre Grand Souverain Sacrificateur (Hébreux 4:14-16). Aaron offrait des sacrifices répétés, Christ s'est offert une fois pour toutes.
-
-        **Intercession** : Exemple de celui qui se tient entre Dieu et le peuple pour faire l'expiation (Nombres 16:47-48).
-
-        ### 12. VERSETS-CLÉS À RETENIR
-        - **Hébreux 5:4** : "Nul ne s'attribue cette dignité; il faut y être appelé de Dieu, comme le fut Aaron."
-        - **Exode 28:36** : "Tu feras une lame d'or pur, et tu y graveras, comme on grave un cachet: Sainteté à l'Éternel."
-        - **Nombres 17:8** : "La verge d'Aaron, pour la maison de Lévi, avait fleuri, elle avait poussé des boutons, produit des fleurs, et mûri des amandes."
-        - **Psaume 133:2** : "C'est comme l'huile précieuse qui, répandue sur la tête, descend sur la barbe, sur la barbe d'Aaron."
-
-        Aaron reste le modèle du prêtre consacré, intercédant fidèlement malgré ses faiblesses humaines, préfigurant le parfait sacerdoce du Christ.
+        L'héritage spirituel d'Aaron traverse les siècles. Sa lignée assure le sacerdoce jusqu'à l'époque de Jésus, préfigurant le Christ, notre Grand Souverain Sacrificateur selon **Hébreux 4:14-16**. Tandis qu'Aaron offrait des sacrifices répétés, Christ s'est offert une fois pour toutes. Aaron demeure le modèle du médiateur fidèle, intercédant malgré ses faiblesses humaines, annonçant le parfait sacerdoce du Messie qui réconcilie définitivement Dieu et les hommes.
       `
     };
 
