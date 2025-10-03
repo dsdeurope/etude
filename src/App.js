@@ -1948,7 +1948,7 @@ ${contextualEnrichment}
                     <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.genese, buttonColors.genese.shadow)} onClick={restoreLastStudy} disabled={!lastStudy}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.genese, currentButtonColors.genese.shadow)} onClick={restoreLastStudy} disabled={!lastStudy}>
                     <span className="control-icon">📚</span>
                     <span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Genèse 1"}</span>
                   </button>
