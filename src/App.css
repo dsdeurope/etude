@@ -3502,162 +3502,147 @@ strong {
 }
 
 /* =========================
-   Design Épuré et Ordonné - Interface Professionnelle
+   Design Équilibré et Soigné - Boutons de Contrôle
 ========================= */
 
-.clean-actions-container {
-  display: grid;
-  gap: 20px;
+.balanced-controls-container {
   margin: 30px 0;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
 }
 
-.main-actions-grid,
-.generation-actions-grid,
-.utility-actions-grid {
+.balanced-buttons-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.btn-clean {
+.btn-control {
   background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
   border: none;
   border-radius: 12px;
   color: white;
-  padding: 14px 18px;
+  padding: 14px 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
   position: relative;
-  overflow: hidden;
+  min-height: 80px;
 }
 
-.btn-clean:hover {
+.btn-control:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
 }
 
-.btn-clean:active {
+.btn-control:active {
   transform: translateY(0);
 }
 
-.btn-clean:disabled {
+.btn-control:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-.btn-clean .btn-icon {
-  font-size: 18px;
+.btn-control.btn-primary {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  font-weight: 700;
 }
 
-.btn-clean .btn-text {
-  font-weight: 700;
+.btn-control.loading {
+  background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+}
+
+.control-icon {
+  font-size: 20px;
+  display: block;
+}
+
+.control-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.btn-loader {
-  width: 16px;
-  height: 16px;
+.btn-mini-loader {
+  width: 12px;
+  height: 12px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top: 2px solid white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-left: 8px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
-/* Couleurs spécifiques */
-.btn-concordance {
-  background: linear-gradient(135deg, #ff8c42, #ff6b35);
-}
-
-.btn-notes {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.btn-bible-read {
-  background: linear-gradient(135deg, #16a085, #1abc9c);
-}
-
-.btn-chatgpt {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.btn-gemini {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-}
-
-.btn-versets-prog {
-  background: linear-gradient(135deg, #f39c12, #d35400);
-}
-
-.btn-generate-main {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-  font-size: 14px;
-  padding: 16px 20px;
-}
-
-.btn-reset {
-  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-}
-
-.btn-palette {
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
-}
-
-.btn-last-study {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.api-section {
+.api-centered {
   display: flex;
   justify-content: center;
   padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive équilibré */
+@media (max-width: 1200px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
 @media (max-width: 768px) {
-  .clean-actions-container {
+  .balanced-controls-container {
     padding: 20px;
-    gap: 16px;
   }
   
-  .main-actions-grid,
-  .generation-actions-grid,
-  .utility-actions-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   
-  .btn-clean {
-    padding: 12px 16px;
-    font-size: 12px;
+  .btn-control {
+    padding: 12px 10px;
+    min-height: 70px;
   }
   
-  .btn-clean .btn-icon {
-    font-size: 16px;
+  .control-icon {
+    font-size: 18px;
+  }
+  
+  .control-label {
+    font-size: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .main-actions-grid,
-  .generation-actions-grid,
-  .utility-actions-grid {
-    grid-template-columns: 1fr;
+  .balanced-buttons-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .btn-control {
+    min-height: 65px;
+    padding: 10px 8px;
   }
 }
