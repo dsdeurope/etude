@@ -1970,7 +1970,7 @@ ${contextualEnrichment}
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.concordance, buttonColors.concordance.shadow)} onClick={navigateToConcordance}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.concordance, currentButtonColors.concordance.shadow)} onClick={navigateToConcordance}>
                     <span className="control-icon">📖</span>
                     <span className="control-label">Bible Concordance</span>
                   </button>
