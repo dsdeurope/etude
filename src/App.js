@@ -1959,7 +1959,7 @@ ${contextualEnrichment}
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.versets, buttonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.versets, currentButtonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
                     <span className="control-icon">⚡</span>
                     <span className="control-label">Versets Prog</span>
                   </button>
