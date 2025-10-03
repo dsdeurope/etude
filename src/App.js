@@ -1882,18 +1882,47 @@ ${contextualEnrichment}
                 <button className="btn-concordance" onClick={navigateToConcordance}>📖 BIBLE DE CONCORDANCE</button>
               </div>
 
-              {/* Boutons d'action */}
-              <div className="action-buttons">
-                <button className="btn-reset" onClick={handleReset}>🔄 Reset</button>
-                <button className="btn-palette" onClick={changePalette}>🎨 {colorThemes[currentTheme].name}</button>
-                <button className="btn-last-study" onClick={restoreLastStudy} disabled={!lastStudy}
-                  title={lastStudy ? `Restaurer: ${lastStudy.book} ${lastStudy.chapter}${lastStudy.verse !== "--" ? ":" + lastStudy.verse : ""}` : "Aucune étude sauvegardée"}>
-                  {lastStudy ? `📖 ${lastStudy.book} ${lastStudy.chapter}${lastStudy.verse !== "--" ? ":" + lastStudy.verse : ""}` : "📖 Dernière étude"}
-                </button>
-                <button className={`btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>🤖 Gemini Gratuit</button>
-                <button className="btn-versets-prog" onClick={generateVerseByVerseProgressive} title="Analyse progressive enrichie - traitement uniforme des versets">⚡ Versets Prog</button>
-                <button className="btn-generate" onClick={generate28Points} disabled={isLoading}>Générer</button>
-                <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
+              {/* Boutons d'action - Design moderne en grille */}
+              <div className="modern-action-grid">
+                {/* Boutons utilitaires */}
+                <div className="utility-buttons">
+                  <button className="btn-modern btn-reset" onClick={handleReset}>
+                    <span className="btn-icon">🔄</span>
+                    <span className="btn-text">Reset</span>
+                  </button>
+                  <button className="btn-modern btn-palette" onClick={changePalette}>
+                    <span className="btn-icon">🎨</span>
+                    <span className="btn-text">{colorThemes[currentTheme].name}</span>
+                  </button>
+                  <button className="btn-modern btn-last-study" onClick={restoreLastStudy} disabled={!lastStudy}
+                    title={lastStudy ? `Restaurer: ${lastStudy.book} ${lastStudy.chapter}${lastStudy.verse !== "--" ? ":" + lastStudy.verse : ""}` : "Aucune étude sauvegardée"}>
+                    <span className="btn-icon">📖</span>
+                    <span className="btn-text">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Dernière étude"}</span>
+                  </button>
+                </div>
+
+                {/* Boutons d'action principaux */}
+                <div className="primary-action-buttons">
+                  <button className={`btn-modern btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>
+                    <span className="btn-icon">🤖</span>
+                    <span className="btn-text">Gemini Gratuit</span>
+                    {isLoading && <div className="btn-loader"></div>}
+                  </button>
+                  <button className="btn-modern btn-versets-prog" onClick={generateVerseByVerseProgressive} title="Analyse progressive enrichie - traitement uniforme des versets">
+                    <span className="btn-icon">⚡</span>
+                    <span className="btn-text">Versets Prog</span>
+                  </button>
+                  <button className="btn-modern btn-generate" onClick={generate28Points} disabled={isLoading}>
+                    <span className="btn-icon">✨</span>
+                    <span className="btn-text">Générer</span>
+                    {isLoading && <div className="btn-loader"></div>}
+                  </button>
+                </div>
+
+                {/* API Control Panel */}
+                <div className="api-control-section">
+                  <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
+                </div>
               </div>
             </div>
 
