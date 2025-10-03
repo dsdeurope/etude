@@ -29,10 +29,8 @@ const getBackendUrl = () => {
 const BACKEND_URL = getBackendUrl();
 const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 
-if (typeof window !== "undefined") {
-  console.log("[App] BACKEND_URL =", BACKEND_URL);
-  console.log("[App] API_BASE     =", API_BASE);
-}
+// Variables d'environnement configurées
+// BACKEND_URL et API_BASE sont prêts à utiliser
 
 function asString(x) {
   if (x === undefined || x === null) return "";
