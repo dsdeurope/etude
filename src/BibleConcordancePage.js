@@ -196,21 +196,55 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
     
     setIsLoading(true);
     try {
-      // Simuler appel API Gemini pour enrichir la concordance
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Générer plus de versets avec Gemini (simulé)
-      const enrichedResults = [
-        ...results,
-        // Ajouter des versets enrichis par Gemini
-        { book: "Proverbes", chapter: 8, verse: 17, text: `Les versets enrichis par Gemini pour "${searchTerm}" incluent des références croisées et des contextes approfondis...` },
-        { book: "Psaume", chapter: 119, verse: 105, text: `Analyse théologique approfondie du terme "${searchTerm}" selon les commentaires bibliques et la tradition...` }
-      ];
-      
-      setResults(enrichedResults);
       console.log(`[GEMINI CONCORDANCE] Enrichissement pour "${searchTerm}"`);
+      
+      // Appel réel vers le backend Gemini
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/enrich-concordance`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          search_term: searchTerm,
+          enrich: true
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('[GEMINI CONCORDANCE] Réponse reçue:', data);
+        
+        // Traiter les versets de l'API Bible si disponibles
+        let enrichedResults = [...results];
+        if (data.bible_verses && data.bible_verses.length > 0) {
+          const newVerses = data.bible_verses.map(verse => ({
+            book: verse.book || verse.reference.split(' ')[0] || 'Bible',
+            chapter: verse.chapter || 1,
+            verse: verse.verse || 1,
+            text: verse.text
+          }));
+          enrichedResults = [...results, ...newVerses];
+        }
+        
+        // Ajouter l'analyse Gemini comme "verset" spécial si disponible
+        if (data.enriched_analysis) {
+          enrichedResults.push({
+            book: "📖 Analyse Gemini",
+            chapter: "",
+            verse: "",
+            text: data.enriched_analysis
+          });
+        }
+        
+        setResults(enrichedResults);
+        console.log(`[GEMINI CONCORDANCE] Enrichissement terminé: ${enrichedResults.length} résultats`);
+      } else {
+        throw new Error(`Erreur API: ${response.status}`);
+      }
     } catch (error) {
       console.error("Erreur Gemini concordance:", error);
+      alert(`Erreur lors de l'enrichissement Gemini: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
