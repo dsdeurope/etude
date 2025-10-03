@@ -54,14 +54,32 @@ const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   transform: isHovered ? 'translateY(-2px) scale(1.02)' : 'translateY(0)',
 })
 
-const buttonColors = {
-  reset: { start: '#4facfe', end: '#00f2fe', shadow: 'rgba(79, 172, 254, 0.25)' },
-  mystique: { start: '#a855f7', end: '#e879f9', shadow: 'rgba(168, 85, 247, 0.25)' },
-  genese: { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
-  gemini: { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
-  versets: { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
-  generate: { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' },
-  concordance: { start: '#06b6d4', end: '#22d3ee', shadow: 'rgba(6, 182, 212, 0.25)' }
+// Fonction pour générer les couleurs des boutons basées sur le thème actuel
+const getThemeButtonColors = (theme) => {
+  const baseColors = [
+    { start: '#4facfe', end: '#00f2fe', shadow: 'rgba(79, 172, 254, 0.25)' },
+    { start: '#a855f7', end: '#e879f9', shadow: 'rgba(168, 85, 247, 0.25)' },
+    { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
+    { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
+    { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
+    { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' },
+    { start: '#06b6d4', end: '#22d3ee', shadow: 'rgba(6, 182, 212, 0.25)' }
+  ];
+  
+  // Si le thème a des couleurs personnalisées, les utiliser, sinon garder les couleurs de base
+  if (theme && theme.buttonColors) {
+    return theme.buttonColors;
+  }
+  
+  return {
+    reset: baseColors[0],
+    mystique: baseColors[1], 
+    genese: baseColors[2],
+    gemini: baseColors[3],
+    versets: baseColors[4],
+    generate: baseColors[5],
+    concordance: baseColors[6]
+  };
 }
 
 function asString(x) {
