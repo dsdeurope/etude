@@ -1899,17 +1899,59 @@ ${contextualEnrichment}
                     border: 'none',
                     cursor: 'pointer',
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }} style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px 8px',
+                    borderRadius: '14px',
+                    minHeight: '85px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                   }} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
                   </button>
                   
-                  <button className="btn-control" onClick={changePalette}>
+                  <button className="btn-control" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px 8px',
+                    borderRadius: '14px',
+                    minHeight: '85px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }} onClick={changePalette}>
                     <span className="control-icon">🎨</span>
                     <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
                   
-                  <button className="btn-control" onClick={restoreLastStudy} disabled={!lastStudy}>
+                  <button className="btn-control" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px 8px',
+                    borderRadius: '14px',
+                    minHeight: '85px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }} onClick={restoreLastStudy} disabled={!lastStudy}>
                     <span className="control-icon">📚</span>
                     <span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Genèse 1"}</span>
                   </button>
@@ -1920,7 +1962,21 @@ ${contextualEnrichment}
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                   
-                  <button className="btn-control" onClick={generateVerseByVerseProgressive}>
+                  <button className="btn-control" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px 8px',
+                    borderRadius: '14px',
+                    minHeight: '85px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }} onClick={generateVerseByVerseProgressive}>
                     <span className="control-icon">⚡</span>
                     <span className="control-label">Versets Prog</span>
                   </button>
