@@ -1909,7 +1909,6 @@ ${contextualEnrichment}
                 <button className="btn-read" onClick={openYouVersion}>Lire la Bible</button>
                 <button className="btn-chat" onClick={() => window.open('https://chatgpt.com/', '_blank')}>ChatGPT</button>
                 <button className="btn-notes" onClick={handleNotesClick}>📝 Prise de Note</button>
-                <button className="btn-concordance" onClick={navigateToConcordance}>📖 BIBLE DE CONCORDANCE</button>
               </div>
 
               {/* Boutons d'action - Design équilibré et soigné */}
