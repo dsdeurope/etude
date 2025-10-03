@@ -1948,6 +1948,11 @@ ${contextualEnrichment}
                     <span className="control-label">Générer</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
+                  
+                  <button className="btn-control" style={getButtonStyle(buttonColors.concordance, buttonColors.concordance.shadow)} onClick={navigateToConcordance}>
+                    <span className="control-icon">📖</span>
+                    <span className="control-label">Bible Concordance</span>
+                  </button>
                 </div>
                 
                 {/* API Control Panel centré en bas */}
