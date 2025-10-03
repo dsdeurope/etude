@@ -272,17 +272,24 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
       
       // Appel réel vers le backend Gemini
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      console.log(`[GEMINI DEBUG] URL utilisée: ${backendUrl}/api/generate-character-history`);
+      
+      const requestData = {
+        character_name: selectedCharacter,
+        enrich: true
+      };
+      console.log(`[GEMINI DEBUG] Données envoyées:`, requestData);
+      
       const response = await fetch(`${backendUrl}/api/generate-character-history`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          character_name: selectedCharacter,
-          enrich: true
-        })
+        body: JSON.stringify(requestData)
       });
 
+      console.log(`[GEMINI DEBUG] Status de la réponse: ${response.status} ${response.statusText}`);
+      
       if (response.ok) {
         const data = await response.json();
         console.log('[GEMINI PERSONNAGE] Réponse reçue:', data);
