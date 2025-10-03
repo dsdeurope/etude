@@ -1,44 +1,21 @@
 {
   "version": 2,
   "buildCommand": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true yarn build",
-  "outputDirectory": "build", 
+  "outputDirectory": "build",
   "installCommand": "yarn install",
   "framework": "create-react-app",
-  "functions": {
-    "api/health.py": {
-      "runtime": "@vercel/python"
-    },
-    "api/enrich-concordance.py": {
-      "runtime": "@vercel/python"
-    },
-    "api/generate-character-history.py": {
-      "runtime": "@vercel/python"
-    }
-  },
   "env": {
     "SKIP_PREFLIGHT_CHECK": "true",
     "NODE_OPTIONS": "--openssl-legacy-provider"
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/health",
-      "destination": "/api/health.py"
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
-      "source": "/api/enrich-concordance", 
-      "destination": "/api/enrich-concordance.py"
-    },
-    {
-      "source": "/api/generate-character-history",
-      "destination": "/api/generate-character-history.py"
-    },
-    {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
