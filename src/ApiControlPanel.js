@@ -11,7 +11,7 @@ const ApiControlPanel = ({ backendUrl }) => {
   // Fonction pour récupérer le statut des API
   const fetchApiStatus = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/api-status`);
+      const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
         const status = await response.json();
         setApiStatus(status);
