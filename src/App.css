@@ -3502,319 +3502,162 @@ strong {
 }
 
 /* =========================
-   Design Premium des Actions - Interface Professionnelle
+   Design Épuré et Ordonné - Interface Professionnelle
 ========================= */
 
-.premium-actions-container {
+.clean-actions-container {
   display: grid;
-  gap: 32px;
-  margin: 40px 0;
-  padding: 40px;
+  gap: 20px;
+  margin: 30px 0;
+  padding: 30px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.95);
-  margin: 0 0 20px 0;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.tools-grid,
-.generation-grid,
-.utilities-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.btn-premium {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.15) 0%, 
-    rgba(255, 255, 255, 0.08) 100%);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.main-actions-grid,
+.generation-actions-grid,
+.utility-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.btn-clean {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  border: none;
+  border-radius: 12px;
   color: white;
-  padding: 20px;
+  padding: 14px 18px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 16px;
-  text-align: left;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
 }
 
-.btn-premium::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.1), 
-    transparent);
-  transition: left 0.6s;
+.btn-clean:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-.btn-premium:hover::before {
-  left: 100%;
+.btn-clean:active {
+  transform: translateY(0);
 }
 
-.btn-premium:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.25) 0%, 
-    rgba(255, 255, 255, 0.15) 100%);
-}
-
-.btn-premium:active {
-  transform: translateY(-2px) scale(0.98);
-}
-
-.btn-premium:disabled {
-  opacity: 0.5;
+.btn-clean:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-.btn-premium .btn-icon {
-  font-size: 28px;
-  min-width: 40px;
-  text-align: center;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+.btn-clean .btn-icon {
+  font-size: 18px;
 }
 
-.btn-premium .btn-label {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.btn-premium .btn-title {
-  font-size: 16px;
+.btn-clean .btn-text {
   font-weight: 700;
-  line-height: 1.2;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.btn-premium .btn-subtitle {
-  font-size: 12px;
-  font-weight: 500;
-  opacity: 0.8;
-  line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn-loader {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top: 2px solid white;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-left: auto;
+  margin-left: 8px;
 }
 
-/* Couleurs spécifiques pour chaque type de bouton */
+/* Couleurs spécifiques */
 .btn-concordance {
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.3) 0%, 
-    rgba(37, 99, 235, 0.2) 100%);
-  border-color: rgba(59, 130, 246, 0.4);
-}
-
-.btn-concordance:hover {
-  background: linear-gradient(135deg, 
-    rgba(59, 130, 246, 0.4) 0%, 
-    rgba(37, 99, 235, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #ff8c42, #ff6b35);
 }
 
 .btn-notes {
-  background: linear-gradient(135deg, 
-    rgba(139, 92, 246, 0.3) 0%, 
-    rgba(124, 58, 237, 0.2) 100%);
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-.btn-notes:hover {
-  background: linear-gradient(135deg, 
-    rgba(139, 92, 246, 0.4) 0%, 
-    rgba(124, 58, 237, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, #f39c12, #e67e22);
 }
 
 .btn-bible-read {
-  background: linear-gradient(135deg, 
-    rgba(16, 185, 129, 0.3) 0%, 
-    rgba(5, 150, 105, 0.2) 100%);
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-.btn-bible-read:hover {
-  background: linear-gradient(135deg, 
-    rgba(16, 185, 129, 0.4) 0%, 
-    rgba(5, 150, 105, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);
+  background: linear-gradient(135deg, #16a085, #1abc9c);
 }
 
 .btn-chatgpt {
-  background: linear-gradient(135deg, 
-    rgba(239, 68, 68, 0.3) 0%, 
-    rgba(220, 38, 38, 0.2) 100%);
-  border-color: rgba(239, 68, 68, 0.4);
-}
-
-.btn-chatgpt:hover {
-  background: linear-gradient(135deg, 
-    rgba(239, 68, 68, 0.4) 0%, 
-    rgba(220, 38, 38, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.3);
+  background: linear-gradient(135deg, #3498db, #2980b9);
 }
 
 .btn-gemini {
-  background: linear-gradient(135deg, 
-    rgba(34, 197, 94, 0.3) 0%, 
-    rgba(22, 163, 74, 0.2) 100%);
-  border-color: rgba(34, 197, 94, 0.4);
-}
-
-.btn-gemini:hover {
-  background: linear-gradient(135deg, 
-    rgba(34, 197, 94, 0.4) 0%, 
-    rgba(22, 163, 74, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(34, 197, 94, 0.3);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
 }
 
 .btn-versets-prog {
-  background: linear-gradient(135deg, 
-    rgba(245, 158, 11, 0.3) 0%, 
-    rgba(217, 119, 6, 0.2) 100%);
-  border-color: rgba(245, 158, 11, 0.4);
+  background: linear-gradient(135deg, #f39c12, #d35400);
 }
 
-.btn-versets-prog:hover {
-  background: linear-gradient(135deg, 
-    rgba(245, 158, 11, 0.4) 0%, 
-    rgba(217, 119, 6, 0.3) 100%);
-  box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
-}
-
-.btn-generate-master {
-  background: linear-gradient(135deg, 
-    rgba(220, 38, 38, 0.4) 0%, 
-    rgba(185, 28, 28, 0.3) 100%);
-  border-color: rgba(220, 38, 38, 0.5);
-  grid-column: 1 / -1;
-}
-
-.btn-generate-master:hover {
-  background: linear-gradient(135deg, 
-    rgba(220, 38, 38, 0.5) 0%, 
-    rgba(185, 28, 28, 0.4) 100%);
-  box-shadow: 0 20px 50px rgba(220, 38, 38, 0.4);
-}
-
-.btn-generate-master .btn-icon {
-  font-size: 32px;
-}
-
-.btn-generate-master .btn-title {
-  font-size: 18px;
+.btn-generate-main {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  font-size: 14px;
+  padding: 16px 20px;
 }
 
 .btn-reset {
-  background: linear-gradient(135deg, 
-    rgba(100, 116, 139, 0.3) 0%, 
-    rgba(71, 85, 105, 0.2) 100%);
-  border-color: rgba(100, 116, 139, 0.4);
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
 }
 
 .btn-palette {
-  background: linear-gradient(135deg, 
-    rgba(168, 85, 247, 0.3) 0%, 
-    rgba(147, 51, 234, 0.2) 100%);
-  border-color: rgba(168, 85, 247, 0.4);
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
 }
 
 .btn-last-study {
-  background: linear-gradient(135deg, 
-    rgba(14, 165, 233, 0.3) 0%, 
-    rgba(2, 132, 199, 0.2) 100%);
-  border-color: rgba(14, 165, 233, 0.4);
+  background: linear-gradient(135deg, #3498db, #2980b9);
 }
 
-.api-control-premium {
-  grid-column: 1 / -1;
+.api-section {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive pour design premium */
-@media (max-width: 1200px) {
-  .tools-grid,
-  .generation-grid,
-  .utilities-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* Responsive */
+@media (max-width: 768px) {
+  .clean-actions-container {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .main-actions-grid,
+  .generation-actions-grid,
+  .utility-actions-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .btn-clean {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+  
+  .btn-clean .btn-icon {
+    font-size: 16px;
   }
 }
 
-@media (max-width: 768px) {
-  .premium-actions-container {
-    padding: 24px;
-    gap: 24px;
-  }
-  
-  .tools-grid,
-  .generation-grid,
-  .utilities-grid {
+@media (max-width: 480px) {
+  .main-actions-grid,
+  .generation-actions-grid,
+  .utility-actions-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .btn-premium {
-    padding: 16px;
-    gap: 12px;
-  }
-  
-  .btn-premium .btn-icon {
-    font-size: 24px;
-    min-width: 32px;
-  }
-  
-  .btn-premium .btn-title {
-    font-size: 14px;
-  }
-  
-  .btn-premium .btn-subtitle {
-    font-size: 11px;
-  }
-  
-  .btn-generate-master .btn-icon {
-    font-size: 28px;
-  }
-  
-  .btn-generate-master .btn-title {
-    font-size: 16px;
   }
 }
