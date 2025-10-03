@@ -1940,7 +1940,7 @@ ${contextualEnrichment}
                     <span className="control-label">Versets Prog</span>
                   </button>
                   
-                  <button className={`btn-control btn-primary ${isLoading ? "loading" : ""}`} onClick={generate28Points} disabled={isLoading}>
+                  <button className={`btn-control btn-primary ${isLoading ? "loading" : ""}`} style={getButtonStyle(buttonColors.generate, buttonColors.generate.shadow)} onClick={generate28Points} disabled={isLoading}>
                     <span className="control-icon">✨</span>
                     <span className="control-label">Générer</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
