@@ -32,26 +32,26 @@ const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 // Variables d'environnement configurées
 // BACKEND_URL et API_BASE sont prêts à utiliser
 
-// Palette de couleurs harmonieuse pour les 6 boutons
+// Palette de couleurs harmonieuse pour les 7 boutons (taille réduite)
 const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '16px 12px',
-  borderRadius: '16px',
-  minHeight: '90px',
-  fontSize: '11px',
+  padding: '12px 8px',
+  borderRadius: '14px',
+  minHeight: '75px',
+  fontSize: '10px',
   fontWeight: '700',
   color: 'white',
   border: 'none',
   cursor: 'pointer',
   background: `linear-gradient(135deg, ${gradientColors.start} 0%, ${gradientColors.end} 100%)`,
   boxShadow: isHovered 
-    ? `0 12px 40px ${shadowColor.replace('0.25', '0.35')}, 0 4px 20px rgba(0, 0, 0, 0.15)`
-    : `0 8px 32px ${shadowColor}, 0 2px 16px rgba(0, 0, 0, 0.1)`,
+    ? `0 10px 35px ${shadowColor.replace('0.25', '0.35')}, 0 3px 18px rgba(0, 0, 0, 0.15)`
+    : `0 6px 28px ${shadowColor}, 0 2px 14px rgba(0, 0, 0, 0.1)`,
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  transform: isHovered ? 'translateY(-3px) scale(1.02)' : 'translateY(0)',
+  transform: isHovered ? 'translateY(-2px) scale(1.02)' : 'translateY(0)',
 })
 
 const buttonColors = {
