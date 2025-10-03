@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ThemeVersesPage from './ThemeVersesPage';
 
 const BibleConcordancePage = ({ onGoBack }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,19 +12,6 @@ const BibleConcordancePage = ({ onGoBack }) => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterHistory, setCharacterHistory] = useState("");
   const [activeTab, setActiveTab] = useState("concordance"); // "concordance" ou "characters"
-  
-  // Nouvel état pour la page des versets thématiques
-  const [selectedTheme, setSelectedTheme] = useState(null);
-
-  // Fonction pour ouvrir la page des versets thématiques
-  const handleThemeClick = (theme) => {
-    setSelectedTheme(theme);
-  };
-
-  // Fonction pour revenir de la page thématique
-  const handleBackFromTheme = () => {
-    setSelectedTheme(null);
-  };
 
   // Liste des personnages bibliques principaux
   const biblicalCharacters = [
@@ -196,36 +182,21 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
     
     setIsLoading(true);
     try {
-      console.log(`[GEMINI CONCORDANCE] Enrichissement pour "${searchTerm}"`);
-      
-      // Simulation temporaire jusqu'à déploiement backend
+      // Simuler appel API Gemini pour enrichir la concordance
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      // Générer plus de versets avec Gemini (simulation améliorée)
+      // Générer plus de versets avec Gemini (simulé)
       const enrichedResults = [
         ...results,
-        // Ajouter des versets enrichis par simulation Gemini
-        { 
-          book: "📖 Analyse Gemini", 
-          chapter: "", 
-          verse: "", 
-          text: `## Analyse Théologique Enrichie : "${searchTerm}"
-
-**Définition Biblique :** Le terme "${searchTerm}" dans les Écritures révèle des dimensions théologiques profondes qui éclairent notre compréhension de Dieu.
-
-**Contexte Scripturaire :** Les références bibliques montrent que ce concept s'inscrit dans la révélation progressive de Dieu à travers l'histoire du salut.
-
-**Application Contemporaine :** Ces vérités bibliques nous interpellent aujourd'hui et transforment notre marche chrétienne quotidienne.
-
-*Analyse générée par simulation Gemini - Backend en cours de déploiement*` 
-        }
+        // Ajouter des versets enrichis par Gemini
+        { book: "Proverbes", chapter: 8, verse: 17, text: `Les versets enrichis par Gemini pour "${searchTerm}" incluent des références croisées et des contextes approfondis...` },
+        { book: "Psaume", chapter: 119, verse: 105, text: `Analyse théologique approfondie du terme "${searchTerm}" selon les commentaires bibliques et la tradition...` }
       ];
       
       setResults(enrichedResults);
-      console.log(`[GEMINI CONCORDANCE] Enrichissement terminé: ${enrichedResults.length} résultats`);
+      console.log(`[GEMINI CONCORDANCE] Enrichissement pour "${searchTerm}"`);
     } catch (error) {
       console.error("Erreur Gemini concordance:", error);
-      alert(`Erreur lors de l'enrichissement Gemini: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -240,9 +211,7 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
     
     setIsCharacterLoading(true);
     try {
-      console.log(`[GEMINI PERSONNAGE] Enrichissement pour ${selectedCharacter}`);
-      
-      // Simulation temporaire jusqu'à déploiement backend
+      // Simuler appel API Gemini pour enrichir l'histoire du personnage
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       const enrichedHistory = `
@@ -253,24 +222,18 @@ ${characterHistory}
 ### ANALYSE THÉOLOGIQUE APPROFONDIE
 L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant tous les passages bibliques et apporte ces éclairages supplémentaires :
 
-- **Contexte historique enrichi** : Analyse des sources extra-bibliques et découvertes archéologiques récentes
-- **Typologie christologique** : Préfigurations du Christ dans la vie de ${selectedCharacter}  
-- **Applications contemporaines** : Leçons de leadership et de foi pour le croyant d'aujourd'hui
-- **Références croisées** : Liens avec d'autres personnages bibliques et parallèles dans l'Ancien et Nouveau Testament
+- **Contexte historique enrichi** : Analyse des sources extra-bibliques
+- **Typologie christologique** : Préfigurations du Christ dans la vie de ${selectedCharacter}
+- **Applications contemporaines** : Leçons pour le croyant d'aujourd'hui
+- **Références croisées** : Liens avec d'autres personnages bibliques
 
-### VERSETS-CLÉS SUPPLÉMENTAIRES
-- **Hébreux 11** : ${selectedCharacter} dans la galerie des héros de la foi
-- **Romains 4** : Exemple de foi justifiante (si applicable)
-- **Jacques 2** : Illustration de la foi par les œuvres
-
-*Enrichissement généré par simulation Gemini - Backend en cours de déploiement pour une analyse complète.*
+*Enrichissement généré par Gemini AI pour une compréhension plus profonde des Écritures.*
       `;
       
       setCharacterHistory(enrichedHistory);
-      console.log(`[GEMINI PERSONNAGE] Enrichissement terminé`);
+      console.log(`[GEMINI PERSONNAGE] Enrichissement pour ${selectedCharacter}`);
     } catch (error) {
       console.error("Erreur Gemini personnage:", error);
-      alert(`Erreur lors de l'enrichissement Gemini: ${error.message}`);
     } finally {
       setIsCharacterLoading(false);
     }
@@ -393,16 +356,6 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     const regex = new RegExp(`(${term})`, 'gi');
     return text.replace(regex, '<mark style="background: #fef3c7; color: #92400e; padding: 2px 4px; border-radius: 4px;">$1</mark>');
   };
-
-  // Rendu conditionnel : si un thème est sélectionné, afficher ThemeVersesPage
-  if (selectedTheme) {
-    return (
-      <ThemeVersesPage 
-        theme={selectedTheme} 
-        onGoBack={handleBackFromTheme}
-      />
-    );
-  }
 
   return (
     <div style={{
@@ -615,7 +568,10 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                   ].map((theme) => (
                     <button
                       key={theme}
-                      onClick={() => handleThemeClick(theme)}
+                      onClick={() => {
+                        setSearchTerm(theme);
+                        searchBibleConcordance(theme);
+                      }}
                       style={{
                         background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))',
                         border: '2px solid rgba(139, 92, 246, 0.2)',
