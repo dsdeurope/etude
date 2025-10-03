@@ -1885,7 +1885,21 @@ ${contextualEnrichment}
                   width: '100%',
                   boxSizing: 'border-box'
                 }}>
-                  <button className="btn-control" onClick={handleReset}>
+                  <button className="btn-control" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px 8px',
+                    borderRadius: '14px',
+                    minHeight: '85px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    color: 'white',
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
                   </button>
