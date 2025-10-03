@@ -1029,19 +1029,8 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
               </p>
             </div>
           ) : (
-            <div style={{
-              background: 'white',
-              borderRadius: '12px',
-              padding: '40px',
-              textAlign: 'center'
-            }}>
-              <h2 style={{ color: '#1f2937', marginBottom: '15px' }}>
-                🙏 Bienvenue dans la Concordance
-              </h2>
-              <p style={{ color: '#6b7280' }}>
-                Recherchez des mots ou concepts dans les Écritures Saintes
-              </p>
-            </div>
+            /* Message de bienvenue supprimé pour plus de clarté */
+            null
           )}
         </div>
       )}
