@@ -1935,21 +1935,7 @@ ${contextualEnrichment}
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                   
-                  <button className="btn-control" style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '16px 8px',
-                    borderRadius: '14px',
-                    minHeight: '85px',
-                    fontSize: '11px',
-                    fontWeight: '700',
-                    color: 'white',
-                    border: 'none',
-                    cursor: 'pointer',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                  }} onClick={generateVerseByVerseProgressive}>
+                  <button className="btn-control" style={getButtonStyle(buttonColors.versets, buttonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
                     <span className="control-icon">⚡</span>
                     <span className="control-label">Versets Prog</span>
                   </button>
