@@ -371,6 +371,16 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     return text.replace(regex, '<mark style="background: #fef3c7; color: #92400e; padding: 2px 4px; border-radius: 4px;">$1</mark>');
   };
 
+  // Rendu conditionnel : si un thème est sélectionné, afficher ThemeVersesPage
+  if (selectedTheme) {
+    return (
+      <ThemeVersesPage 
+        theme={selectedTheme} 
+        onGoBack={handleBackFromTheme}
+      />
+    );
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
