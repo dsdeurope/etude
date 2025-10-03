@@ -42,10 +42,7 @@ const VersetParVersetPage = ({ onGoBack, content, bookInfo }) => {
     try {
       console.log(`[GEMINI ENRICHISSEMENT] Enrichissement verset ${versetNumber} batch ${currentBatch}`);
       
-      const isLocal = window.location.hostname === 'localhost';
-      const apiUrl = isLocal 
-        ? "http://localhost:8001/api/generate-verse-by-verse"
-        : "https://bible-study-ai-3.preview.emergentagent.com/api/generate-verse-by-verse";
+      const apiUrl = `${API_BASE}/generate-verse-by-verse`;
       
       const prompt = `ENRICHISSEMENT THÉOLOGIQUE APPROFONDI
 
