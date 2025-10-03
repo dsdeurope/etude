@@ -1882,97 +1882,44 @@ ${contextualEnrichment}
                 <button className="btn-concordance" onClick={navigateToConcordance}>📖 BIBLE DE CONCORDANCE</button>
               </div>
 
-              {/* Boutons d'action - Design épuré et ordonné */}
-              <div className="clean-actions-container">
-                {/* Boutons principaux en grid propre */}
-                <div className="main-actions-grid">
-                  <button className="btn-clean btn-concordance" onClick={navigateToConcordance}>
-                    <span className="btn-icon">📚</span>
-                    <span className="btn-text">BIBLE DE CONCORDANCE</span>
+              {/* Boutons d'action - Design équilibré et soigné */}
+              <div className="balanced-controls-container">
+                <div className="balanced-buttons-grid">
+                  <button className="btn-control" onClick={handleReset}>
+                    <span className="control-icon">🔄</span>
+                    <span className="control-label">Reset</span>
                   </button>
                   
-                  <button className="btn-clean btn-notes" onClick={navigateToNotes}>
-                    <span className="btn-icon">📝</span>
-                    <span className="btn-text">PRISE DE NOTE</span>
+                  <button className="btn-control" onClick={changePalette}>
+                    <span className="control-icon">🎨</span>
+                    <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
                   
-                  <button className="btn-clean btn-bible-read" onClick={() => {
-                    if (selectedBook === "--") {
-                      alert("Veuillez d'abord sélectionner un livre de la Bible");
-                      return;
-                    }
-                    const bookCodes = {
-                      "Genèse":"GEN","Exode":"EXO","Lévitique":"LEV","Nombres":"NUM","Deutéronome":"DEU",
-                      "Josué":"JOS","Juges":"JDG","Ruth":"RUT","1 Samuel":"1SA","2 Samuel":"2SA",
-                      "1 Rois":"1KI","2 Rois":"2KI","1 Chroniques":"1CH","2 Chroniques":"2CH",
-                      "Esdras":"EZR","Néhémie":"NEH","Esther":"EST","Job":"JOB","Psaumes":"PSA",
-                      "Proverbes":"PRO","Ecclésiaste":"ECC","Cantique des cantiques":"SNG",
-                      "Ésaïe":"ISA","Jérémie":"JER","Lamentations":"LAM","Ézéchiel":"EZK","Daniel":"DAN",
-                      "Osée":"HOS","Joël":"JOL","Amos":"AMO","Abdias":"OBA","Jonas":"JON","Michée":"MIC",
-                      "Nahum":"NAM","Habacuc":"HAB","Sophonie":"ZEP","Aggée":"HAG","Zacharie":"ZEC","Malachie":"MAL",
-                      "Matthieu":"MAT","Marc":"MRK","Luc":"LUK","Jean":"JHN","Actes":"ACT",
-                      "Romains":"ROM","1 Corinthiens":"1CO","2 Corinthiens":"2CO","Galates":"GAL",
-                      "Éphésiens":"EPH","Philippiens":"PHP","Colossiens":"COL","1 Thessaloniciens":"1TH",
-                      "2 Thessaloniciens":"2TH","1 Timothée":"1TI","2 Timothée":"2TI","Tite":"TIT",
-                      "Philémon":"PHM","Hébreux":"HEB","Jacques":"JAS","1 Pierre":"1PE","2 Pierre":"2PE",
-                      "1 Jean":"1JN","2 Jean":"2JN","3 Jean":"3JN","Jude":"JUD","Apocalypse":"REV"
-                    };
-                    const code = bookCodes[selectedBook];
-                    if (code) {
-                      const url = `https://www.bible.com/bible/93/${code}.${selectedChapter}.LSG`;
-                      window.open(url, '_blank');
-                    }
-                  }}>
-                    <span className="btn-icon">📖</span>
-                    <span className="btn-text">LIRE LA BIBLE</span>
+                  <button className="btn-control" onClick={restoreLastStudy} disabled={!lastStudy}>
+                    <span className="control-icon">📚</span>
+                    <span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Genèse 1"}</span>
                   </button>
                   
-                  <button className="btn-clean btn-chatgpt" onClick={() => window.open('https://chatgpt.com/', '_blank')}>
-                    <span className="btn-icon">💬</span>
-                    <span className="btn-text">CHATGPT</span>
+                  <button className={`btn-control ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>
+                    <span className="control-icon">🤖</span>
+                    <span className="control-label">Gemini Gratuit</span>
+                    {isLoading && <div className="btn-mini-loader"></div>}
+                  </button>
+                  
+                  <button className="btn-control" onClick={generateVerseByVerseProgressive}>
+                    <span className="control-icon">⚡</span>
+                    <span className="control-label">Versets Prog</span>
+                  </button>
+                  
+                  <button className={`btn-control btn-primary ${isLoading ? "loading" : ""}`} onClick={generate28Points} disabled={isLoading}>
+                    <span className="control-icon">✨</span>
+                    <span className="control-label">Générer</span>
+                    {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                 </div>
-
-                {/* Boutons de génération */}
-                <div className="generation-actions-grid">
-                  <button className={`btn-clean btn-gemini ${isLoading ? "loading" : ""}`} onClick={generateWithGemini} disabled={isLoading}>
-                    <span className="btn-icon">🤖</span>
-                    <span className="btn-text">GEMINI GRATUIT</span>
-                    {isLoading && <div className="btn-loader"></div>}
-                  </button>
-                  
-                  <button className="btn-clean btn-versets-prog" onClick={generateVerseByVerseProgressive}>
-                    <span className="btn-icon">⚡</span>
-                    <span className="btn-text">VERSETS PROG</span>
-                  </button>
-                  
-                  <button className="btn-clean btn-generate-main" onClick={generate28Points} disabled={isLoading}>
-                    <span className="btn-icon">✨</span>
-                    <span className="btn-text">GÉNÉRER</span>
-                    {isLoading && <div className="btn-loader"></div>}
-                  </button>
-                </div>
-
-                {/* Boutons utilitaires */}
-                <div className="utility-actions-grid">
-                  <button className="btn-clean btn-reset" onClick={handleReset}>
-                    <span className="btn-icon">🔄</span>
-                    <span className="btn-text">RESET</span>
-                  </button>
-                  
-                  <button className="btn-clean btn-palette" onClick={changePalette}>
-                    <span className="btn-icon">🎨</span>
-                    <span className="btn-text">{colorThemes[currentTheme].name}</span>
-                  </button>
-                  
-                  <button className="btn-clean btn-last-study" onClick={restoreLastStudy} disabled={!lastStudy}>
-                    <span className="btn-icon">📚</span>
-                    <span className="btn-text">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "GENÈSE 1"}</span>
-                  </button>
-                </div>
-
-                {/* API Control Panel séparé */}
-                <div className="api-section">
+                
+                {/* API Control Panel centré en bas */}
+                <div className="api-centered">
                   <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
                 </div>
               </div>
