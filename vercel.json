@@ -1,40 +1,21 @@
 {
+  "version": 2,
   "buildCommand": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true yarn build",
   "outputDirectory": "build",
-  "devCommand": "yarn start",
-  "installCommand": "yarn install --frozen-lockfile",
+  "installCommand": "yarn install",
   "framework": "create-react-app",
-  "functions": {
-    "api/health.py": {
-      "runtime": "python3.9"
-    },
-    "api/enrich-concordance.py": {
-      "runtime": "python3.9"
-    },
-    "api/generate-character-history.py": {
-      "runtime": "python3.9"
-    }
+  "env": {
+    "SKIP_PREFLIGHT_CHECK": "true",
+    "NODE_OPTIONS": "--openssl-legacy-provider"
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/health",
-      "destination": "/api/health.py"
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
-      "source": "/api/enrich-concordance",
-      "destination": "/api/enrich-concordance.py"
-    },
-    {
-      "source": "/api/generate-character-history", 
-      "destination": "/api/generate-character-history.py"
-    },
-    {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
