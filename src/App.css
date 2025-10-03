@@ -3796,3 +3796,55 @@ strong {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
 }
+
+/* =========================
+   Styles Harmonisés pour tous les boutons d'action
+========================= */
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.action-buttons button {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Couleurs spécifiques pour les boutons d'action */
+.btn-read {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+}
+
+.btn-chat {
+  background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+}
+
+.btn-notes {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+}
+
+.btn-concordance {
+  background: linear-gradient(135deg, #f97316, #ea580c) !important;
+}
