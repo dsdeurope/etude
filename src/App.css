@@ -3352,3 +3352,179 @@ strong {
     margin: 0 auto;
   }
 }
+
+/* =========================
+   Design Moderne des Boutons d'Action - Page Principale
+========================= */
+
+.modern-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 30px 0;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.utility-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.primary-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.api-control-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-modern {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  border: none;
+  border-radius: 16px;
+  color: white;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-modern:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-modern:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.btn-modern:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-modern:hover::before {
+  left: 100%;
+}
+
+.btn-icon {
+  font-size: 18px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.btn-text {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.btn-loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+/* Couleurs spécifiques des boutons modernes */
+.btn-modern.btn-reset {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+.btn-modern.btn-palette {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.btn-modern.btn-last-study {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+}
+
+.btn-modern.btn-gemini {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.btn-modern.btn-gemini.loading {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
+.btn-modern.btn-versets-prog {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.btn-modern.btn-generate {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  font-size: 16px;
+  padding: 20px 32px;
+  box-shadow: 0 6px 25px rgba(220, 38, 38, 0.3);
+}
+
+.btn-modern.btn-generate:hover {
+  box-shadow: 0 10px 40px rgba(220, 38, 38, 0.4);
+}
+
+.btn-modern.btn-generate.loading {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
+/* Responsive pour boutons modernes */
+@media (max-width: 768px) {
+  .modern-action-grid {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .utility-buttons,
+  .primary-action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn-modern {
+    width: 100%;
+    justify-content: center;
+    min-width: auto;
+  }
+  
+  .api-control-section {
+    order: -1;
+    border-top: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0;
+    padding-bottom: 20px;
+  }
+}
