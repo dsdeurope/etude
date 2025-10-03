@@ -1876,7 +1876,15 @@ ${contextualEnrichment}
 
               {/* Boutons d'action - Design équilibré et soigné */}
               <div className="balanced-controls-container">
-                <div className="balanced-buttons-grid">
+                <div className="balanced-buttons-grid" style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(6, 1fr)',
+                  gap: '14px',
+                  marginBottom: '24px',
+                  padding: '0 10px',
+                  width: '100%',
+                  boxSizing: 'border-box'
+                }}>
                   <button className="btn-control" onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
