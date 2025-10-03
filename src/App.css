@@ -3714,8 +3714,8 @@ strong {
   }
   
   .balanced-buttons-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
   }
   
   .btn-control {
