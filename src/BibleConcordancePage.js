@@ -200,17 +200,24 @@ Croise tous les passages bibliques disponibles. Sois narratif, détaillé et his
       
       // Appel réel vers le backend Gemini
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      console.log(`[GEMINI DEBUG] URL utilisée: ${backendUrl}/api/enrich-concordance`);
+      
+      const requestData = {
+        search_term: searchTerm,
+        enrich: true
+      };
+      console.log(`[GEMINI DEBUG] Données envoyées:`, requestData);
+      
       const response = await fetch(`${backendUrl}/api/enrich-concordance`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          search_term: searchTerm,
-          enrich: true
-        })
+        body: JSON.stringify(requestData)
       });
 
+      console.log(`[GEMINI DEBUG] Status de la réponse: ${response.status} ${response.statusText}`);
+      
       if (response.ok) {
         const data = await response.json();
         console.log('[GEMINI CONCORDANCE] Réponse reçue:', data);
