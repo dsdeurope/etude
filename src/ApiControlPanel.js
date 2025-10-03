@@ -13,10 +13,25 @@ const ApiControlPanel = ({ backendUrl }) => {
     try {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
-        const status = await response.json();
-        setApiStatus(status);
+        const healthData = await response.json();
+        
+        // Adapter la réponse au format attendu par l'UI
+        const adaptedStatus = {
+          timestamp: new Date().toISOString(),
+          apis: {
+            gemini_1: { color: 'green', name: 'Gemini Key 1', status: 'active' },
+            gemini_2: { color: 'green', name: 'Gemini Key 2', status: 'active' },
+            gemini_3: { color: 'green', name: 'Gemini Key 3', status: 'active' },
+            gemini_4: { color: 'green', name: 'Gemini Key 4', status: 'active' },
+            bible_api: { color: healthData.bible_api_configured ? 'green' : 'red', name: 'Bible API', status: healthData.bible_api_configured ? 'active' : 'inactive' }
+          },
+          call_history: [],
+          active_api: healthData.current_key || 'gemini_1'
+        };
+        
+        setApiStatus(adaptedStatus);
         setLastUpdate(new Date().toLocaleTimeString());
-        console.log('[API STATUS] Mise à jour:', status);
+        console.log('[API STATUS] Mise à jour:', adaptedStatus);
       }
     } catch (error) {
       console.error('[API STATUS] Erreur:', error);
