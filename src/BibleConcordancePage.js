@@ -582,10 +582,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                   ].map((theme) => (
                     <button
                       key={theme}
-                      onClick={() => {
-                        setSearchTerm(theme);
-                        searchBibleConcordance(theme);
-                      }}
+                      onClick={() => handleThemeClick(theme)}
                       style={{
                         background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))',
                         border: '2px solid rgba(139, 92, 246, 0.2)',
