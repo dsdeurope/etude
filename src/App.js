@@ -33,7 +33,7 @@ const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 // BACKEND_URL et API_BASE sont prêts à utiliser
 
 // Palette de couleurs harmonieuse pour les 6 boutons
-const getButtonStyle = (gradientColors, shadowColor) => ({
+const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -47,9 +47,11 @@ const getButtonStyle = (gradientColors, shadowColor) => ({
   border: 'none',
   cursor: 'pointer',
   background: `linear-gradient(135deg, ${gradientColors.start} 0%, ${gradientColors.end} 100%)`,
-  boxShadow: `0 8px 32px ${shadowColor}, 0 2px 16px rgba(0, 0, 0, 0.1)`,
+  boxShadow: isHovered 
+    ? `0 12px 40px ${shadowColor.replace('0.25', '0.35')}, 0 4px 20px rgba(0, 0, 0, 0.15)`
+    : `0 8px 32px ${shadowColor}, 0 2px 16px rgba(0, 0, 0, 0.1)`,
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  transform: 'translateY(0)',
+  transform: isHovered ? 'translateY(-3px) scale(1.02)' : 'translateY(0)',
 })
 
 const buttonColors = {
