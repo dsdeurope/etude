@@ -22,4 +22,7 @@ yarn-error.log*
 *.log
 
 # Cache
-.cache/
+.cache/-e 
+# Environment files
+*.env
+*.env.*
