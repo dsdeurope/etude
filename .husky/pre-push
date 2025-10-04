@@ -17,17 +17,17 @@ if git diff --name-only "$RANGE" | grep -qE "$PATTERN"; then
   echo "[pre-push] CRA changes on main -> lint & build"
   cd NOUVEAU_DEPLOIEMENT_VERCEL || exit 1
 
-  # Prettier doit être clean
+  # Prettier doit être clean (utilise le script du sous-projet)
   yarn -s format:check
 
-  # ESLint si dispo
+  # ESLint si dispo localement (n'installe rien)
   if npx --no-install eslint -v >/dev/null 2>&1; then
     npx eslint --max-warnings=0 "src/**/*.{js,jsx}"
   else
     echo "[pre-push] eslint CLI not found -> skip ESLint check"
   fi
 
-  # Build
+  # Build CRA en prod (silencieux)
   yarn -s build
 else
   echo "[pre-push] No CRA changes -> skip build"
