@@ -1,3 +1,6 @@
+cd ~/Documents/etude/NOUVEAU_DEPLOIEMENT_VERCEL
+
+cat << "JSON" > package.json
 {
   "name": "etude-bible",
   "version": "1.0.0",
@@ -24,9 +27,15 @@
     "cross-env": "^10.1.0"
   },
   "resolutions": {
+    "react-scripts/webpack": "4.44.2",
+    "webpack": "4.44.2",
     "webpack-dev-server": "3.11.2",
     "schema-utils": "2.7.1",
     "ajv": "6.12.6",
-    "ajv-keywords": "3.5.2"
+    "ajv-keywords": "3.5.2",
+    "workbox-webpack-plugin": "5.1.4",
+    "workbox-build": "5.1.4",
+    "terser-webpack-plugin": "4.2.3"
   }
 }
+JSON
