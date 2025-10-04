@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ThemeVersesPage from './ThemeVersesPage';
 
 const BibleConcordancePage = ({ onGoBack }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +13,19 @@ const BibleConcordancePage = ({ onGoBack }) => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterHistory, setCharacterHistory] = useState("");
   const [activeTab, setActiveTab] = useState("concordance"); // "concordance" ou "characters"
+  
+  // Nouvel état pour la page des versets thématiques
+  const [selectedTheme, setSelectedTheme] = useState(null);
+
+  // Fonction pour ouvrir la page des versets thématiques
+  const handleThemeClick = (theme) => {
+    setSelectedTheme(theme);
+  };
+
+  // Fonction pour revenir de la page thématique
+  const handleBackFromTheme = () => {
+    setSelectedTheme(null);
+  };
 
   // Liste des personnages bibliques principaux
   const biblicalCharacters = [
@@ -357,6 +371,16 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     return text.replace(regex, '<mark style="background: #fef3c7; color: #92400e; padding: 2px 4px; border-radius: 4px;">$1</mark>');
   };
 
+  // Rendu conditionnel : si un thème est sélectionné, afficher ThemeVersesPage
+  if (selectedTheme) {
+    return (
+      <ThemeVersesPage 
+        theme={selectedTheme} 
+        onGoBack={handleBackFromTheme}
+      />
+    );
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -568,10 +592,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                   ].map((theme) => (
                     <button
                       key={theme}
-                      onClick={() => {
-                        setSearchTerm(theme);
-                        searchBibleConcordance(theme);
-                      }}
+                      onClick={() => handleThemeClick(theme)}
                       style={{
                         background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9))',
                         border: '2px solid rgba(139, 92, 246, 0.2)',

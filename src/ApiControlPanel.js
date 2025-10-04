@@ -192,7 +192,7 @@ const ApiControlPanel = ({ backendUrl }) => {
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          margin: '0 auto',
+          marginLeft: '10px',
           minWidth: '140px',
           textAlign: 'center',
           backdropFilter: 'blur(10px)',
