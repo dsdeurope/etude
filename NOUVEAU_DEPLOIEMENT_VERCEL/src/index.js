@@ -10,7 +10,9 @@ try {
   root.render(
     <ErrorBoundary>
       <ErrorBoundary>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </ErrorBoundary>
     </ErrorBoundary>,
   );
