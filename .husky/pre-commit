@@ -1,1 +1,5 @@
-npm test
+# Aller dans le sous-projet CRA
+cd NOUVEAU_DEPLOIEMENT_VERCEL || exit 1
+
+# Formater uniquement les fichiers stagés
+npx lint-staged
