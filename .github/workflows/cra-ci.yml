@@ -1,7 +1,6 @@
 name: CRA Lint & Build
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -12,6 +11,7 @@ on:
     paths:
       - 'NOUVEAU_DEPLOIEMENT_VERCEL/**'
       - '.github/workflows/cra-ci.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,12 +23,9 @@ concurrency:
 jobs:
   lint-build:
     runs-on: ubuntu-latest
-  workflow_dispatch:
-
     defaults:
       run:
         working-directory: NOUVEAU_DEPLOIEMENT_VERCEL
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,7 +34,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
-  workflow_dispatch:
           cache: yarn
           cache-dependency-path: NOUVEAU_DEPLOIEMENT_VERCEL/yarn.lock
 
@@ -52,13 +48,8 @@ jobs:
       - name: Prettier check
         run: yarn format:check
 
-      - name: ESLint (fail on warnings)
-        run: |
-          if npx --no-install eslint -v >/dev/null 2>&1; then
-            npx eslint --max-warnings=0 "src/**/*.{js,jsx}"
-          else
-            echo "eslint CLI not found -> skip ESLint check"
-          fi
+      - name: ESLint (CRA rules)
+        run: yarn lint
 
       - name: Build (production)
         run: yarn build

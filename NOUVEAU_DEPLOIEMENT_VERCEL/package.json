@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "eslint --max-warnings=0 \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
