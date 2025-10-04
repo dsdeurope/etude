@@ -9,7 +9,11 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+
+    "ajv": "^8.17.1",
+    "ajv-formats": "^2.1.1",
+    "ajv-keywords": "^5.1.0"
   },
   "scripts": {
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts start",
@@ -18,18 +22,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app","react-app/jest"]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [">0.2%","not dead","not op_mini all"],
-    "development": ["last 1 chrome version","last 1 firefox version","last 1 safari version"]
-  },
-  "overrides": {
-    "schema-utils": "^4.2.0",
-    "webpack-dev-server": "^4.15.2",
-    "ajv": "^8.17.1",
-    "ajv-formats": "^2.1.1",
-    "ajv-keywords": "^5.1.0"
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "devDependencies": {
     "cross-env": "^10.1.0"
