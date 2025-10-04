@@ -108,7 +108,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend API Testing Complete"
+    - "Bible Concordance Functionality Testing Complete"
   stuck_tasks:
     - "CSS Button Alignment Fix"
   test_all: false
