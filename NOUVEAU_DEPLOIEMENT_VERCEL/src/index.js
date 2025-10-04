@@ -2,11 +2,18 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.js';
+import ErrorBoundary from './ErrorBoundary';
 
 // Protection globale contre les erreurs
 try {
   const root = createRoot(document.getElementById('root'));
-  root.render(<App />);
+  root.render(
+    <ErrorBoundary>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </ErrorBoundary>,
+  );
 } catch (error) {
   console.error('Erreur de rendu React:', error);
   // Fallback d'affichage en cas d'erreur

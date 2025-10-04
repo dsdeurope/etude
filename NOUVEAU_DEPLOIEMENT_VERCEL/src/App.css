@@ -4153,3 +4153,11 @@ strong {
 .progress-container {
   margin-top: 28px; /* espace sous le header */
 }
+
+/* DEBUG VISUEL — à enlever après */
+.debug-visual {
+  outline: 2px dashed red;
+}
+.debug-visual * {
+  color: #111 !important;
+}
