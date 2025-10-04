@@ -1,6 +1,7 @@
 name: CRA Lint & Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -22,6 +23,7 @@ concurrency:
 jobs:
   lint-build:
     runs-on: ubuntu-latest
+  workflow_dispatch:
 
     defaults:
       run:
@@ -35,6 +37,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+  workflow_dispatch:
           cache: yarn
           cache-dependency-path: NOUVEAU_DEPLOIEMENT_VERCEL/yarn.lock
 
