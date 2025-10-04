@@ -80,7 +80,11 @@ const getThemeButtonColors = (theme) => {
 function asString(x) {
   if (x === undefined || x === null) return '';
   if (typeof x === 'string') return x;
-  try { return JSON.stringify(x, null, 2); } catch { return String(x); }
+  try {
+    return JSON.stringify(x, null, 2);
+  } catch {
+    return String(x);
+  }
 }
 
 function postProcessMarkdown(t) {
@@ -99,24 +103,108 @@ function postProcessMarkdown(t) {
 ========================= */
 
 const BOOKS = [
-  'Genèse','Exode','Lévitique','Nombres','Deutéronome','Josué','Juges','Ruth','1 Samuel','2 Samuel',
-  '1 Rois','2 Rois','1 Chroniques','2 Chroniques','Esdras','Néhémie','Esther','Job','Psaumes','Proverbes',
-  'Ecclésiaste','Cantique des cantiques','Ésaïe','Jérémie','Lamentations','Ézéchiel','Daniel','Osée','Joël',
-  'Amos','Abdias','Jonas','Michée','Nahum','Habacuc','Sophonie','Aggée','Zacharie','Malachie','Matthieu',
-  'Marc','Luc','Jean','Actes','Romains','1 Corinthiens','2 Corinthiens','Galates','Éphésiens','Philippiens',
-  'Colossiens','1 Thessaloniciens','2 Thessaloniciens','1 Timothée','2 Timothée','Tite','Philémon','Hébreux',
-  'Jacques','1 Pierre','2 Pierre','1 Jean','2 Jean','3 Jean','Jude','Apocalypse',
+  'Genèse',
+  'Exode',
+  'Lévitique',
+  'Nombres',
+  'Deutéronome',
+  'Josué',
+  'Juges',
+  'Ruth',
+  '1 Samuel',
+  '2 Samuel',
+  '1 Rois',
+  '2 Rois',
+  '1 Chroniques',
+  '2 Chroniques',
+  'Esdras',
+  'Néhémie',
+  'Esther',
+  'Job',
+  'Psaumes',
+  'Proverbes',
+  'Ecclésiaste',
+  'Cantique des cantiques',
+  'Ésaïe',
+  'Jérémie',
+  'Lamentations',
+  'Ézéchiel',
+  'Daniel',
+  'Osée',
+  'Joël',
+  'Amos',
+  'Abdias',
+  'Jonas',
+  'Michée',
+  'Nahum',
+  'Habacuc',
+  'Sophonie',
+  'Aggée',
+  'Zacharie',
+  'Malachie',
+  'Matthieu',
+  'Marc',
+  'Luc',
+  'Jean',
+  'Actes',
+  'Romains',
+  '1 Corinthiens',
+  '2 Corinthiens',
+  'Galates',
+  'Éphésiens',
+  'Philippiens',
+  'Colossiens',
+  '1 Thessaloniciens',
+  '2 Thessaloniciens',
+  '1 Timothée',
+  '2 Timothée',
+  'Tite',
+  'Philémon',
+  'Hébreux',
+  'Jacques',
+  '1 Pierre',
+  '2 Pierre',
+  '1 Jean',
+  '2 Jean',
+  '3 Jean',
+  'Jude',
+  'Apocalypse',
 ];
 
-const BOOK_CHAPTERS = { /* … (inchangé, tel que dans ton fichier) … */ };
+const BOOK_CHAPTERS = {
+  /* … (inchangé, tel que dans ton fichier) … */
+};
 
 const BASE_RUBRIQUES = [
-  'Étude verset par verset',"Prière d'ouverture",'Structure littéraire','Questions du chapitre précédent',
-  'Thème doctrinal','Fondements théologiques','Contexte historique','Contexte culturel','Contexte géographique',
-  'Analyse lexicale','Parallèles bibliques','Prophétie et accomplissement','Personnages','Structure rhétorique',
-  'Théologie trinitaire','Christ au centre',"Évangile et grâce",'Application personnelle','Application communautaire',
-  'Prière de réponse',"Questions d'étude",'Points de vigilance','Objections et réponses','Perspective missionnelle',
-  'Éthique chrétienne','Louange / liturgie','Méditation guidée','Mémoire / versets clés',"Plan d'action",
+  'Étude verset par verset',
+  "Prière d'ouverture",
+  'Structure littéraire',
+  'Questions du chapitre précédent',
+  'Thème doctrinal',
+  'Fondements théologiques',
+  'Contexte historique',
+  'Contexte culturel',
+  'Contexte géographique',
+  'Analyse lexicale',
+  'Parallèles bibliques',
+  'Prophétie et accomplissement',
+  'Personnages',
+  'Structure rhétorique',
+  'Théologie trinitaire',
+  'Christ au centre',
+  'Évangile et grâce',
+  'Application personnelle',
+  'Application communautaire',
+  'Prière de réponse',
+  "Questions d'étude",
+  'Points de vigilance',
+  'Objections et réponses',
+  'Perspective missionnelle',
+  'Éthique chrétienne',
+  'Louange / liturgie',
+  'Méditation guidée',
+  'Mémoire / versets clés',
+  "Plan d'action",
 ];
 
 /* =========================
@@ -127,11 +215,17 @@ const ENDPOINTS = {
   verseProgressive: ['/generate-verse-by-verse-progressive', '/g_verse_progressive'],
   verse: ['/generate-verse-by-verse', '/g_te-verse-by-verse'],
   study: ['/generate-study', '/g_study_28'],
-  verseGemini: ['/generate-verse-by-verse-gemini','/generate-verse-by-verse','/g_te-verse-by-verse'],
-  studyGemini: ['/generate-study-gemini','/generate-study','/g_study_28'],
+  verseGemini: [
+    '/generate-verse-by-verse-gemini',
+    '/generate-verse-by-verse',
+    '/g_te-verse-by-verse',
+  ],
+  studyGemini: ['/generate-study-gemini', '/generate-study', '/g_study_28'],
 };
 
-async function smartPost(pathList, payload) { /* … inchangé … */ }
+async function smartPost(pathList, payload) {
+  /* … inchangé … */
+}
 
 /* =========================
    Composant Principal App
@@ -139,7 +233,9 @@ async function smartPost(pathList, payload) { /* … inchangé … */ }
 
 function App() {
   // Thèmes
-  const colorThemes = [ /* … inchangé … */ ];
+  const colorThemes = [
+    /* … inchangé … */
+  ];
   // États
   const [currentTheme, setCurrentTheme] = useState(0);
   const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
@@ -171,28 +267,51 @@ function App() {
   const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
 
   // availableChapters …
-  const availableChapters = useMemo(() => { /* … inchangé … */ }, [selectedBook]);
+  const availableChapters = useMemo(() => {
+    /* … inchangé … */
+  }, [selectedBook]);
 
   // useEffect init / thème / sauvegarde …
-  useEffect(() => { /* … inchangé … */ }, [currentTheme]);
-  useEffect(() => { setTimeout(() => { changePalette(); setCurrentTheme(0); }, 100); }, []);
-  useEffect(() => { if (selectedBook !== '--' && selectedChapter !== '--') saveCurrentStudy(); }, [selectedBook, selectedChapter]);
+  useEffect(() => {
+    /* … inchangé … */
+  }, [currentTheme]);
+  useEffect(() => {
+    setTimeout(() => {
+      changePalette();
+      setCurrentTheme(0);
+    }, 100);
+  }, []);
+  useEffect(() => {
+    if (selectedBook !== '--' && selectedChapter !== '--') saveCurrentStudy();
+  }, [selectedBook, selectedChapter]);
 
-  const saveCurrentStudy = () => { /* … inchangé … */ };
-  const restoreLastStudy = () => { /* … inchangé … */ };
+  const saveCurrentStudy = () => {
+    /* … inchangé … */
+  };
+  const restoreLastStudy = () => {
+    /* … inchangé … */
+  };
 
   const rubriquesItems = BASE_RUBRIQUES.map((title, index) => ({ id: index, title }));
 
   /* =========================
      Gestionnaires
   ========================= */
-  const handleBookChange = (e) => { /* … */ };
-  const handleChapterChange = (e) => { /* … */ };
+  const handleBookChange = (e) => {
+    /* … */
+  };
+  const handleChapterChange = (e) => {
+    /* … */
+  };
   const handleVerseChange = (e) => setSelectedVerse(e.target.value);
   const handleVersionChange = (e) => setSelectedVersion(e.target.value);
   const handleLengthChange = (e) => setSelectedLength(Number(e.target.value));
-  const parseSearchQuery = (q) => { /* … inchangé … */ };
-  const handleSearchChange = (e) => { /* … */ };
+  const parseSearchQuery = (q) => {
+    /* … inchangé … */
+  };
+  const handleSearchChange = (e) => {
+    /* … */
+  };
 
   // transformBibleReferences, wait, parseRubriquesContent, getRubriqueLength,
   // generateRubriqueContent (+ toutes tes fonctions generate* …),
@@ -214,7 +333,11 @@ function App() {
       {currentPage === 'concordance' ? (
         <BibleConcordancePage onGoBack={navigateToMain} />
       ) : currentPage === 'versets' ? (
-        <VersetParVersetPage onGoBack={navigateToMain} content={versetPageContent} bookInfo={currentBookInfo} />
+        <VersetParVersetPage
+          onGoBack={navigateToMain}
+          content={versetPageContent}
+          bookInfo={currentBookInfo}
+        />
       ) : currentPage === 'notes' ? (
         <NotesPage onGoBack={navigateToMain} />
       ) : currentPage === 'rubrique' ? (
@@ -257,7 +380,8 @@ function App() {
               {progressPercent}%
               {isProgressiveLoading && progressiveStats && (
                 <span className="progressive-indicator">
-                  ⚡ {progressiveStats.speed} - {progressiveStats.current_batch} ({progressiveStats.processed}/{progressiveStats.total})
+                  ⚡ {progressiveStats.speed} - {progressiveStats.current_batch} (
+                  {progressiveStats.processed}/{progressiveStats.total})
                 </span>
               )}
             </div>
@@ -291,15 +415,51 @@ function App() {
               </div>
 
               <div className="controls-row">
-                <SelectPill label="Livre" value={selectedBook} options={['--', ...BOOKS]} onChange={handleBookChange} />
-                <SelectPill label="Chapitre" value={selectedChapter} options={availableChapters} onChange={handleChapterChange} />
-                <SelectPill label="Verset" value={selectedVerse} options={['--', ...Array.from({ length: 50 }, (_, i) => i + 1)]} onChange={handleVerseChange} />
-                <SelectPill label="Version" value={selectedVersion} options={['LSG', 'Darby', 'NEG']} onChange={handleVersionChange} />
-                <button className="btn-validate" disabled={isLoading}>Valider</button>
-                <SelectPill label="Longueur" value={selectedLength} options={[300, 500, 1000, 2000]} onChange={handleLengthChange} />
-                <button className="btn-read" onClick={openYouVersion}>Lire la Bible</button>
-                <button className="btn-chat" onClick={() => window.open('https://chatgpt.com/', '_blank')}>ChatGPT</button>
-                <button className="btn-notes" onClick={handleNotesClick}>📝 Prise de Note</button>
+                <SelectPill
+                  label="Livre"
+                  value={selectedBook}
+                  options={['--', ...BOOKS]}
+                  onChange={handleBookChange}
+                />
+                <SelectPill
+                  label="Chapitre"
+                  value={selectedChapter}
+                  options={availableChapters}
+                  onChange={handleChapterChange}
+                />
+                <SelectPill
+                  label="Verset"
+                  value={selectedVerse}
+                  options={['--', ...Array.from({ length: 50 }, (_, i) => i + 1)]}
+                  onChange={handleVerseChange}
+                />
+                <SelectPill
+                  label="Version"
+                  value={selectedVersion}
+                  options={['LSG', 'Darby', 'NEG']}
+                  onChange={handleVersionChange}
+                />
+                <button className="btn-validate" disabled={isLoading}>
+                  Valider
+                </button>
+                <SelectPill
+                  label="Longueur"
+                  value={selectedLength}
+                  options={[300, 500, 1000, 2000]}
+                  onChange={handleLengthChange}
+                />
+                <button className="btn-read" onClick={openYouVersion}>
+                  Lire la Bible
+                </button>
+                <button
+                  className="btn-chat"
+                  onClick={() => window.open('https://chatgpt.com/', '_blank')}
+                >
+                  ChatGPT
+                </button>
+                <button className="btn-notes" onClick={handleNotesClick}>
+                  📝 Prise de Note
+                </button>
               </div>
 
               {/* Boutons d'action */}
@@ -316,28 +476,89 @@ function App() {
                     boxSizing: 'border-box',
                   }}
                 >
-                  <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
-                    <span className="control-icon">🔄</span><span className="control-label">Reset</span>
+                  <button
+                    className="btn-control"
+                    style={getButtonStyle(
+                      currentButtonColors.reset,
+                      currentButtonColors.reset.shadow,
+                    )}
+                    onClick={handleReset}
+                  >
+                    <span className="control-icon">🔄</span>
+                    <span className="control-label">Reset</span>
                   </button>
-                  <button className="btn-control" style={getButtonStyle(currentButtonColors.mystique, currentButtonColors.mystique.shadow)} onClick={changePalette}>
-                    <span className="control-icon">🎨</span><span className="control-label">{colorThemes[currentTheme].name}</span>
+                  <button
+                    className="btn-control"
+                    style={getButtonStyle(
+                      currentButtonColors.mystique,
+                      currentButtonColors.mystique.shadow,
+                    )}
+                    onClick={changePalette}
+                  >
+                    <span className="control-icon">🎨</span>
+                    <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
-                  <button className="btn-control" style={getButtonStyle(currentButtonColors.genese, currentButtonColors.genese.shadow)} onClick={restoreLastStudy} disabled={!lastStudy}>
-                    <span className="control-icon">📚</span><span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : 'Genèse 1'}</span>
+                  <button
+                    className="btn-control"
+                    style={getButtonStyle(
+                      currentButtonColors.genese,
+                      currentButtonColors.genese.shadow,
+                    )}
+                    onClick={restoreLastStudy}
+                    disabled={!lastStudy}
+                  >
+                    <span className="control-icon">📚</span>
+                    <span className="control-label">
+                      {lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : 'Genèse 1'}
+                    </span>
                   </button>
-                  <button className={`btn-control ${isLoading ? 'loading' : ''}`} style={getButtonStyle(currentButtonColors.gemini, currentButtonColors.gemini.shadow)} onClick={generateWithGemini} disabled={isLoading}>
-                    <span className="control-icon">🤖</span><span className="control-label">Gemini Gratuit</span>
+                  <button
+                    className={`btn-control ${isLoading ? 'loading' : ''}`}
+                    style={getButtonStyle(
+                      currentButtonColors.gemini,
+                      currentButtonColors.gemini.shadow,
+                    )}
+                    onClick={generateWithGemini}
+                    disabled={isLoading}
+                  >
+                    <span className="control-icon">🤖</span>
+                    <span className="control-label">Gemini Gratuit</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
-                  <button className="btn-control" style={getButtonStyle(currentButtonColors.versets, currentButtonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
-                    <span className="control-icon">⚡</span><span className="control-label">Versets Prog</span>
+                  <button
+                    className="btn-control"
+                    style={getButtonStyle(
+                      currentButtonColors.versets,
+                      currentButtonColors.versets.shadow,
+                    )}
+                    onClick={generateVerseByVerseProgressive}
+                  >
+                    <span className="control-icon">⚡</span>
+                    <span className="control-label">Versets Prog</span>
                   </button>
-                  <button className={`btn-control btn-primary ${isLoading ? 'loading' : ''}`} style={getButtonStyle(currentButtonColors.generate, currentButtonColors.generate.shadow)} onClick={generate28Points} disabled={isLoading}>
-                    <span className="control-icon">✨</span><span className="control-label">Générer</span>
+                  <button
+                    className={`btn-control btn-primary ${isLoading ? 'loading' : ''}`}
+                    style={getButtonStyle(
+                      currentButtonColors.generate,
+                      currentButtonColors.generate.shadow,
+                    )}
+                    onClick={generate28Points}
+                    disabled={isLoading}
+                  >
+                    <span className="control-icon">✨</span>
+                    <span className="control-label">Générer</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
-                  <button className="btn-control" style={getButtonStyle(currentButtonColors.concordance, currentButtonColors.concordance.shadow)} onClick={navigateToConcordance}>
-                    <span className="control-icon">📖</span><span className="control-label">Bible Concordance</span>
+                  <button
+                    className="btn-control"
+                    style={getButtonStyle(
+                      currentButtonColors.concordance,
+                      currentButtonColors.concordance.shadow,
+                    )}
+                    onClick={navigateToConcordance}
+                  >
+                    <span className="control-icon">📖</span>
+                    <span className="control-label">Bible Concordance</span>
                   </button>
                 </div>
 
@@ -363,8 +584,22 @@ function App() {
                 <div className="content-header">
                   <h2>{`${activeRubrique}. ${getRubTitle(activeRubrique)}`}</h2>
                   <div className="nav-buttons">
-                    <button onClick={() => handleRubriqueSelect(Math.max(0, activeRubrique - 1))} disabled={activeRubrique === 0}>◀ Précédent</button>
-                    <button onClick={() => handleRubriqueSelect(Math.min(BASE_RUBRIQUES.length - 1, activeRubrique + 1))} disabled={activeRubrique === BASE_RUBRIQUES.length - 1}>Suivant ▶</button>
+                    <button
+                      onClick={() => handleRubriqueSelect(Math.max(0, activeRubrique - 1))}
+                      disabled={activeRubrique === 0}
+                    >
+                      ◀ Précédent
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleRubriqueSelect(
+                          Math.min(BASE_RUBRIQUES.length - 1, activeRubrique + 1),
+                        )
+                      }
+                      disabled={activeRubrique === BASE_RUBRIQUES.length - 1}
+                    >
+                      Suivant ▶
+                    </button>
                   </div>
                 </div>
 
@@ -375,7 +610,10 @@ function App() {
                       <p>Génération en cours...</p>
                       {progressiveStats && (
                         <div className="progressive-stats">
-                          <p>📊 Versets traités: {progressiveStats.processed}/{progressiveStats.total}</p>
+                          <p>
+                            📊 Versets traités: {progressiveStats.processed}/
+                            {progressiveStats.total}
+                          </p>
                           <p>🎯 Batch actuel: {progressiveStats.current_batch}</p>
                           <p>⚡ Mode: {progressiveStats.speed}</p>
                         </div>
@@ -392,21 +630,24 @@ function App() {
                           ),
                         }}
                       />
-                      {(isVersetsProgContent || content.includes('VERSET')) && canContinueVerses && (
-                        <div className="continue-verses-section">
-                          <button
-                            className="btn-continue-verses"
-                            onClick={continueVerses}
-                            disabled={isLoading}
-                            title={`Générer les versets ${currentVerseCount + 1} à ${currentVerseCount + 5}`}
-                          >
-                            📖 Continuer les versets ({currentVerseCount + 1}-{currentVerseCount + 5})
-                          </button>
-                          <p className="continue-verses-info">
-                            Versets actuels : 1-{currentVerseCount} • Cliquez pour continuer la lecture
-                          </p>
-                        </div>
-                      )}
+                      {(isVersetsProgContent || content.includes('VERSET')) &&
+                        canContinueVerses && (
+                          <div className="continue-verses-section">
+                            <button
+                              className="btn-continue-verses"
+                              onClick={continueVerses}
+                              disabled={isLoading}
+                              title={`Générer les versets ${currentVerseCount + 1} à ${currentVerseCount + 5}`}
+                            >
+                              📖 Continuer les versets ({currentVerseCount + 1}-
+                              {currentVerseCount + 5})
+                            </button>
+                            <p className="continue-verses-info">
+                              Versets actuels : 1-{currentVerseCount} • Cliquez pour continuer la
+                              lecture
+                            </p>
+                          </div>
+                        )}
                     </div>
                   ) : (
                     <div className="empty-content-message">
@@ -429,7 +670,9 @@ function App() {
    Composants auxiliaires
 ========================= */
 
-function getRubTitle(index) { return BASE_RUBRIQUES[index] || `Rubrique ${index}`; }
+function getRubTitle(index) {
+  return BASE_RUBRIQUES[index] || `Rubrique ${index}`;
+}
 
 function SelectPill({ label, value, options, onChange }) {
   return (
@@ -437,7 +680,9 @@ function SelectPill({ label, value, options, onChange }) {
       <label>{label}</label>
       <select value={value} onChange={onChange}>
         {options.map((o) => (
-          <option key={o} value={o}>{o}</option>
+          <option key={o} value={o}>
+            {o}
+          </option>
         ))}
       </select>
     </div>
@@ -451,7 +696,9 @@ function NotesModal({ isOpen, notes, onNotesChange, onSave, onClose }) {
       <div className="notes-modal" onClick={(e) => e.stopPropagation()}>
         <div className="notes-modal-header">
           <h3>📝 Mes Notes d'Étude Biblique</h3>
-          <button className="notes-close-btn" onClick={onClose}>×</button>
+          <button className="notes-close-btn" onClick={onClose}>
+            ×
+          </button>
         </div>
         <div className="notes-modal-content">
           <textarea
@@ -463,8 +710,12 @@ function NotesModal({ isOpen, notes, onNotesChange, onSave, onClose }) {
           />
         </div>
         <div className="notes-modal-footer">
-          <button className="notes-save-btn" onClick={onSave}>💾 Sauvegarder</button>
-          <button className="notes-cancel-btn" onClick={onClose}>Annuler</button>
+          <button className="notes-save-btn" onClick={onSave}>
+            💾 Sauvegarder
+          </button>
+          <button className="notes-cancel-btn" onClick={onClose}>
+            Annuler
+          </button>
         </div>
       </div>
     </div>
