@@ -55,6 +55,10 @@ const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
 
 // Couleurs par thème
 const getThemeButtonColors = (theme) => {
+  theme =
+    theme && theme.primary
+      ? theme
+      : { primary: '#6366f1', secondary: '#4f46e5', accent: '#6366f1' };
   const themeColor = {
     start: theme.primary,
     end: theme.secondary,
@@ -238,7 +242,15 @@ function App() {
   ];
   // États
   const [currentTheme, setCurrentTheme] = useState(0);
-  const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
+  const safeTheme = (Array.isArray(colorThemes) && colorThemes[currentTheme]) || {
+    name: 'Fallback',
+    primary: '#6366f1',
+    secondary: '#4f46e5',
+    accent: '#6366f1',
+    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    headerBg: 'linear-gradient(90deg, #312e81 0%, #818cf8 50%, #a5b4fc 100%)',
+  };
+  const currentButtonColors = getThemeButtonColors(safeTheme);
   const [selectedBook, setSelectedBook] = useState('Genèse');
   const [selectedChapter, setSelectedChapter] = useState('1');
   const [selectedVerse, setSelectedVerse] = useState('--');
@@ -329,7 +341,7 @@ function App() {
   ========================= */
 
   return (
-    <div className="App">
+    <div className="App debug-visual">
       {currentPage === 'concordance' ? (
         <BibleConcordancePage onGoBack={navigateToMain} />
       ) : currentPage === 'versets' ? (
