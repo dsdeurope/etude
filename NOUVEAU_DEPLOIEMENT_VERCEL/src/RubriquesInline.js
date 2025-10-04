@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function RubriquesInline({ items, activeId, onSelect, rubriquesStatus }) {
   if (!items || items.length === 0) {
@@ -26,9 +26,9 @@ function RubriquesInline({ items, activeId, onSelect, rubriquesStatus }) {
         >
           <span className="rubrique-number">{item.id}</span>
           <span className="rubrique-title">{item.title}</span>
-          
+
           {/* LED physique avec 3 états */}
-          <div 
+          <div
             className="rubrique-led"
             style={{
               width: '10px',
@@ -38,13 +38,18 @@ function RubriquesInline({ items, activeId, onSelect, rubriquesStatus }) {
               border: '2px solid #fff',
               boxShadow: `0 0 4px ${getLEDColor(item.id)}`,
               marginLeft: 'auto',
-              flexShrink: 0
+              flexShrink: 0,
             }}
             title={
-              rubriquesStatus[item.id] === 'completed' ? 'Terminé' :
-              rubriquesStatus[item.id] === 'in-progress' ? 'En cours' :
-              rubriquesStatus[item.id] === 'inactive' ? 'Désactivé' :
-              rubriquesStatus[item.id] === 'error' ? 'Erreur' : 'Non commencé'
+              rubriquesStatus[item.id] === 'completed'
+                ? 'Terminé'
+                : rubriquesStatus[item.id] === 'in-progress'
+                  ? 'En cours'
+                  : rubriquesStatus[item.id] === 'inactive'
+                    ? 'Désactivé'
+                    : rubriquesStatus[item.id] === 'error'
+                      ? 'Erreur'
+                      : 'Non commencé'
             }
           />
         </div>

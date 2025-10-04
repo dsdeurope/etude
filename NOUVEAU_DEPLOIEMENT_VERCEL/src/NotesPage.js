@@ -12,9 +12,9 @@ const NotesPage = ({ onGoBack }) => {
   // Clés de sauvegarde multiples pour sécurité maximale
   const STORAGE_KEYS = {
     primary: 'bible-study-notes',
-    backup1: 'bible-study-notes-backup-1', 
+    backup1: 'bible-study-notes-backup-1',
     backup2: 'bible-study-notes-backup-2',
-    metadata: 'bible-study-notes-meta'
+    metadata: 'bible-study-notes-meta',
   };
 
   // Fonction de sauvegarde ultra-robuste avec multiples backups
@@ -24,27 +24,29 @@ const NotesPage = ({ onGoBack }) => {
       const metadata = {
         lastSaved: timestamp,
         saveCount: saveCount + 1,
-        contentLength: notesContent.length
+        contentLength: notesContent.length,
       };
 
       // Sauvegarde primaire
       localStorage.setItem(STORAGE_KEYS.primary, JSON.stringify(notesContent));
-      
+
       // Sauvegarde backup 1
       localStorage.setItem(STORAGE_KEYS.backup1, JSON.stringify(notesContent));
-      
+
       // Sauvegarde backup 2 (rotation toutes les 5 sauvegardes)
       if (saveCount % 5 === 0) {
         localStorage.setItem(STORAGE_KEYS.backup2, JSON.stringify(notesContent));
       }
-      
+
       // Métadonnées
       localStorage.setItem(STORAGE_KEYS.metadata, JSON.stringify(metadata));
-      
+
       setLastSaved(timestamp);
-      setSaveCount(prev => prev + 1);
-      
-      console.log(`[NOTES] Sauvegarde réussie - Count: ${saveCount + 1}, Taille: ${notesContent.length} chars`);
+      setSaveCount((prev) => prev + 1);
+
+      console.log(
+        `[NOTES] Sauvegarde réussie - Count: ${saveCount + 1}, Taille: ${notesContent.length} chars`,
+      );
       return true;
     } catch (error) {
       console.error('[NOTES] Erreur sauvegarde:', error);
@@ -93,7 +95,7 @@ const NotesPage = ({ onGoBack }) => {
   };
 
   // Chargement initial des notes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadedNotes = loadNotesFromStorage();
     setNotes(loadedNotes);
@@ -112,7 +114,7 @@ const NotesPage = ({ onGoBack }) => {
   }, []);
 
   // Auto-sauvegarde toutes les 3 secondes lors de la saisie
-// eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (autoSaveIntervalRef.current) {
       clearInterval(autoSaveIntervalRef.current);
@@ -138,7 +140,7 @@ const NotesPage = ({ onGoBack }) => {
     setIsSaving(true);
     const success = saveNotesToStorage(notes);
     setTimeout(() => setIsSaving(false), 1000);
-    
+
     if (success) {
       // Feedback visuel
       if (textareaRef.current) {
@@ -153,7 +155,7 @@ const NotesPage = ({ onGoBack }) => {
   };
 
   // Sauvegarde avant fermeture de page
-// eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (notes.trim().length > 0) {
@@ -178,57 +180,68 @@ const NotesPage = ({ onGoBack }) => {
 
   const formatLastSaved = () => {
     if (!lastSaved) return 'Jamais sauvegardé';
-    
+
     const date = new Date(lastSaved);
     const now = new Date();
     const diffMs = now - date;
     const diffMinutes = Math.floor(diffMs / 60000);
-    
-    if (diffMinutes < 1) return 'Sauvegardé à l\'instant';
+
+    if (diffMinutes < 1) return "Sauvegardé à l'instant";
     if (diffMinutes === 1) return 'Sauvegardé il y a 1 minute';
     if (diffMinutes < 60) return `Sauvegardé il y a ${diffMinutes} minutes`;
-    
+
     const diffHours = Math.floor(diffMinutes / 60);
     if (diffHours === 1) return 'Sauvegardé il y a 1 heure';
     if (diffHours < 24) return `Sauvegardé il y a ${diffHours} heures`;
-    
+
     return `Sauvegardé le ${date.toLocaleDateString()} à ${date.toLocaleTimeString()}`;
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.95) 50%, rgba(248, 250, 252, 0.98) 100%)',
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        background:
+          'linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.95) 50%, rgba(248, 250, 252, 0.98) 100%)',
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+      }}
+    >
       {/* En-tête moderne */}
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.98) 100%)',
-        color: 'white',
-        padding: '30px 20px',
-        boxShadow: '0 8px 32px rgba(16, 185, 129, 0.25)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        overflow: 'hidden'
-      }}>
-        <div style={{
-          position: 'absolute',
+      <div
+        style={{
+          background:
+            'linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.98) 100%)',
+          color: 'white',
+          padding: '30px 20px',
+          boxShadow: '0 8px 32px rgba(16, 185, 129, 0.25)',
+          position: 'sticky',
           top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%)',
-          pointerEvents: 'none'
-        }}></div>
-        
-        <div style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 10
-        }}>
-          <button 
+          zIndex: 100,
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              'linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%)',
+            pointerEvents: 'none',
+          }}
+        ></div>
+
+        <div
+          style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            position: 'relative',
+            zIndex: 10,
+          }}
+        >
+          <button
             onClick={onGoBack}
             style={{
               background: 'rgba(255, 255, 255, 0.2)',
@@ -241,7 +254,7 @@ const NotesPage = ({ onGoBack }) => {
               fontWeight: '600',
               marginBottom: '20px',
               backdropFilter: 'blur(10px)',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
             }}
             onMouseOver={(e) => {
               e.target.style.background = 'rgba(255, 255, 255, 0.3)';
@@ -254,44 +267,52 @@ const NotesPage = ({ onGoBack }) => {
           >
             ← Retour à l'Étude
           </button>
-          
-          <h1 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            fontWeight: '800',
-            margin: '0 0 8px 0',
-            textAlign: 'center',
-            textShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
-          }}>
+
+          <h1
+            style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+              fontWeight: '800',
+              margin: '0 0 8px 0',
+              textAlign: 'center',
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            }}
+          >
             📝 Mes Notes d'Étude Biblique
           </h1>
-          
-          <div style={{
-            fontSize: 'clamp(1rem, 3vw, 1.1rem)',
-            textAlign: 'center',
-            opacity: 0.9,
-            fontWeight: '500'
-          }}>
+
+          <div
+            style={{
+              fontSize: 'clamp(1rem, 3vw, 1.1rem)',
+              textAlign: 'center',
+              opacity: 0.9,
+              fontWeight: '500',
+            }}
+          >
             Carnet personnel permanent • {notes.length} caractères
           </div>
         </div>
       </div>
 
       {/* Contenu principal */}
-      <div style={{
-        maxWidth: '900px',
-        margin: '0 auto',
-        padding: '20px'
-      }}>
+      <div
+        style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          padding: '20px',
+        }}
+      >
         {/* Zone de saisie */}
-        <div style={{
-          background: 'white',
-          borderRadius: '16px',
-          padding: 'clamp(20px, 5vw, 30px)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-          border: '2px solid rgba(226, 232, 240, 0.8)',
-          marginBottom: '20px',
-          transition: 'border-color 0.3s ease'
-        }}>
+        <div
+          style={{
+            background: 'white',
+            borderRadius: '16px',
+            padding: 'clamp(20px, 5vw, 30px)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+            border: '2px solid rgba(226, 232, 240, 0.8)',
+            marginBottom: '20px',
+            transition: 'border-color 0.3s ease',
+          }}
+        >
           <textarea
             ref={textareaRef}
             value={notes}
@@ -319,43 +340,51 @@ Exemples d'utilisation :
               fontFamily: 'Georgia, serif',
               backgroundColor: 'transparent',
               color: '#374151',
-              transition: 'border-color 0.3s ease'
+              transition: 'border-color 0.3s ease',
             }}
           />
-          
+
           {/* Barre d'actions */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '20px',
-            flexWrap: 'wrap',
-            gap: '15px'
-          }}>
-            {/* Informations de sauvegarde */}
-            <div style={{
+          <div
+            style={{
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
+              marginTop: '20px',
+              flexWrap: 'wrap',
               gap: '15px',
-              flexWrap: 'wrap'
-            }}>
-              <div style={{
+            }}
+          >
+            {/* Informations de sauvegarde */}
+            <div
+              style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                fontSize: 'clamp(12px, 3vw, 14px)',
-                color: '#6b7280'
-              }}>
+                gap: '15px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontSize: 'clamp(12px, 3vw, 14px)',
+                  color: '#6b7280',
+                }}
+              >
                 {isSaving ? (
                   <>
-                    <div style={{
-                      width: '12px',
-                      height: '12px',
-                      border: '2px solid #e5e7eb',
-                      borderTop: '2px solid #10b981',
-                      borderRadius: '50%',
-                      animation: 'spin 0.8s linear infinite'
-                    }}></div>
+                    <div
+                      style={{
+                        width: '12px',
+                        height: '12px',
+                        border: '2px solid #e5e7eb',
+                        borderTop: '2px solid #10b981',
+                        borderRadius: '50%',
+                        animation: 'spin 0.8s linear infinite',
+                      }}
+                    ></div>
                     Sauvegarde...
                   </>
                 ) : (
@@ -365,21 +394,23 @@ Exemples d'utilisation :
                   </>
                 )}
               </div>
-              
-              <div style={{
-                fontSize: 'clamp(12px, 3vw, 14px)',
-                color: '#6b7280'
-              }}>
+
+              <div
+                style={{
+                  fontSize: 'clamp(12px, 3vw, 14px)',
+                  color: '#6b7280',
+                }}
+              >
                 {saveCount} sauvegarde{saveCount > 1 ? 's' : ''}
               </div>
             </div>
-            
+
             {/* Bouton de sauvegarde manuelle */}
             <button
               onClick={handleManualSave}
               disabled={isSaving}
               style={{
-                background: isSaving 
+                background: isSaving
                   ? 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)'
                   : 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                 color: 'white',
@@ -391,7 +422,7 @@ Exemples d'utilisation :
                 cursor: isSaving ? 'not-allowed' : 'pointer',
                 transition: 'all 0.3s ease',
                 boxShadow: '0 3px 12px rgba(16, 185, 129, 0.25)',
-                opacity: isSaving ? 0.7 : 1
+                opacity: isSaving ? 0.7 : 1,
               }}
               onMouseOver={(e) => {
                 if (!isSaving) {
@@ -412,50 +443,72 @@ Exemples d'utilisation :
         </div>
 
         {/* Informations sur la sécurité des données */}
-        <div style={{
-          background: 'rgba(16, 185, 129, 0.05)',
-          border: '2px solid rgba(16, 185, 129, 0.2)',
-          borderRadius: '12px',
-          padding: '20px',
-          marginBottom: '20px'
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '12px'
-          }}>
-            <div style={{
-              fontSize: '1.5rem',
-              minWidth: '32px',
-              textAlign: 'center'
-            }}>🔒</div>
+        <div
+          style={{
+            background: 'rgba(16, 185, 129, 0.05)',
+            border: '2px solid rgba(16, 185, 129, 0.2)',
+            borderRadius: '12px',
+            padding: '20px',
+            marginBottom: '20px',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '12px',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '1.5rem',
+                minWidth: '32px',
+                textAlign: 'center',
+              }}
+            >
+              🔒
+            </div>
             <div>
-              <h3 style={{
-                margin: '0 0 8px 0',
-                color: '#059669',
-                fontSize: 'clamp(1rem, 4vw, 1.1rem)',
-                fontWeight: '700'
-              }}>
+              <h3
+                style={{
+                  margin: '0 0 8px 0',
+                  color: '#059669',
+                  fontSize: 'clamp(1rem, 4vw, 1.1rem)',
+                  fontWeight: '700',
+                }}
+              >
                 Sécurité Maximum de vos Notes
               </h3>
-              <ul style={{
-                margin: 0,
-                paddingLeft: '20px',
-                color: '#374151',
-                fontSize: 'clamp(13px, 3.5vw, 14px)',
-                lineHeight: '1.5'
-              }}>
-                <li>🔄 <strong>Auto-sauvegarde</strong> toutes les 3 secondes</li>
-                <li>💾 <strong>Triple sauvegarde</strong> : primaire + 2 backups</li>
-                <li>🛡️ <strong>Sauvegarde avant fermeture</strong> de page automatique</li>
-                <li>🔄 <strong>Récupération automatique</strong> en cas de problème</li>
-                <li>♾️ <strong>Persistance garantie</strong> : vos notes ne seront JAMAIS perdues</li>
+              <ul
+                style={{
+                  margin: 0,
+                  paddingLeft: '20px',
+                  color: '#374151',
+                  fontSize: 'clamp(13px, 3.5vw, 14px)',
+                  lineHeight: '1.5',
+                }}
+              >
+                <li>
+                  🔄 <strong>Auto-sauvegarde</strong> toutes les 3 secondes
+                </li>
+                <li>
+                  💾 <strong>Triple sauvegarde</strong> : primaire + 2 backups
+                </li>
+                <li>
+                  🛡️ <strong>Sauvegarde avant fermeture</strong> de page automatique
+                </li>
+                <li>
+                  🔄 <strong>Récupération automatique</strong> en cas de problème
+                </li>
+                <li>
+                  ♾️ <strong>Persistance garantie</strong> : vos notes ne seront JAMAIS perdues
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      
+
       {/* Styles CSS pour les animations */}
       <style>
         {`

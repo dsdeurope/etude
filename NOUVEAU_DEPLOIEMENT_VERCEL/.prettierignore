@@ -1,0 +1,9 @@
+build
+node_modules
+coverage
+.eslintcache
+*.lock
+public/*.ico
+public/*.png
+# backups
+*.bak

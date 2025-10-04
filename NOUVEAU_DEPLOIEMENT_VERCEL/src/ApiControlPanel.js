@@ -15,7 +15,7 @@ const ApiControlPanel = ({ backendUrl }) => {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
         const healthData = await response.json();
-        
+
         // Adapter la réponse au format attendu par l'UI
         const adaptedStatus = {
           timestamp: new Date().toISOString(),
@@ -24,12 +24,16 @@ const ApiControlPanel = ({ backendUrl }) => {
             gemini_2: { color: 'green', name: 'Gemini Key 2', status: 'active' },
             gemini_3: { color: 'green', name: 'Gemini Key 3', status: 'active' },
             gemini_4: { color: 'green', name: 'Gemini Key 4', status: 'active' },
-            bible_api: { color: healthData.bible_api_configured ? 'green' : 'red', name: 'Bible API', status: healthData.bible_api_configured ? 'active' : 'inactive' }
+            bible_api: {
+              color: healthData.bible_api_configured ? 'green' : 'red',
+              name: 'Bible API',
+              status: healthData.bible_api_configured ? 'active' : 'inactive',
+            },
           },
           call_history: [],
-          active_api: healthData.current_key || 'gemini_1'
+          active_api: healthData.current_key || 'gemini_1',
         };
-        
+
         setApiStatus(adaptedStatus);
         setLastUpdate(new Date().toLocaleTimeString());
         console.log('[API STATUS] Mise à jour:', adaptedStatus);
@@ -39,20 +43,20 @@ const ApiControlPanel = ({ backendUrl }) => {
     }
   };
 
-  // Fonction pour récupérer l'historique des API  
+  // Fonction pour récupérer l'historique des API
   const fetchApiHistory = async () => {
     try {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
-    await response.json(); // discard unused response
-        
+        await response.json(); // discard unused response
+
         // Adapter pour l'historique
         const adaptedHistory = {
           timestamp: new Date().toISOString(),
           total_calls: 0,
-          history: []
+          history: [],
         };
-        
+
         setApiHistory(adaptedHistory);
         console.log('[API HISTORY] Historique récupéré:', adaptedHistory);
       }
@@ -62,18 +66,18 @@ const ApiControlPanel = ({ backendUrl }) => {
   };
 
   // Mise à jour toutes les 30 secondes
-// eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Première récupération
     fetchApiStatus();
     fetchApiHistory();
-    
+
     // Mise à jour automatique toutes les 30 secondes
     const interval = setInterval(() => {
       fetchApiStatus();
       fetchApiHistory();
     }, 30000);
-    
+
     return () => clearInterval(interval);
   }, [backendUrl]);
 
@@ -97,7 +101,7 @@ const ApiControlPanel = ({ backendUrl }) => {
     animation: color === '#00ff00' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
     display: 'inline-block',
     marginRight: '8px',
-    border: '2px solid rgba(255,255,255,0.3)'
+    border: '2px solid rgba(255,255,255,0.3)',
   });
 
   return (
@@ -199,7 +203,7 @@ const ApiControlPanel = ({ backendUrl }) => {
           textAlign: 'center',
           backdropFilter: 'blur(10px)',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
         onMouseOver={(e) => {
           e.target.style.transform = 'translateY(-4px) scale(1.02)';
@@ -214,55 +218,73 @@ const ApiControlPanel = ({ backendUrl }) => {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span>⚙️ API</span>
-          
+
           {/* Indicateur de statut global plus visible */}
           {apiStatus && (
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center',
-              gap: '6px',
-              background: 'rgba(255,255,255,0.2)',
-              padding: '4px 8px',
-              borderRadius: '8px'
-            }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'rgba(255,255,255,0.2)',
+                padding: '4px 8px',
+                borderRadius: '8px',
+              }}
+            >
               {/* Statut global */}
-              <div style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000',
-                boxShadow: `0 0 8px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
-                animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
-              }} />
-              
+              <div
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: Object.values(apiStatus.apis).every(
+                    (api) => api.color === 'green',
+                  )
+                    ? '#00ff00'
+                    : '#ff0000',
+                  boxShadow: `0 0 8px ${Object.values(apiStatus.apis).every((api) => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
+                  animation: Object.values(apiStatus.apis).every((api) => api.color === 'green')
+                    ? 'pulse-green 2s infinite'
+                    : 'pulse-red 1s infinite',
+                }}
+              />
+
               {/* Ascenseur API avec rotation des noms */}
               <div className="api-elevator">
-                <div style={{
-                  fontSize: '9px',
-                  fontWeight: 'bold',
-                  whiteSpace: 'nowrap',
-                  animation: 'api-ticker 6s infinite',
-                  lineHeight: '18px',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}>
+                <div
+                  style={{
+                    fontSize: '9px',
+                    fontWeight: 'bold',
+                    whiteSpace: 'nowrap',
+                    animation: 'api-ticker 6s infinite',
+                    lineHeight: '18px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
                   {Object.entries(apiStatus.apis).map(([key, api]) => (
-                    <div 
+                    <div
                       key={key}
-                      style={{ 
+                      style={{
                         height: '18px',
                         display: 'flex',
                         alignItems: 'center',
-                        color: key === apiStatus.active_api ? '#fff' : 'rgba(255,255,255,0.7)'
+                        color: key === apiStatus.active_api ? '#fff' : 'rgba(255,255,255,0.7)',
                       }}
                     >
-                      <span style={{ 
-                        color: api.color === 'green' ? '#00ff00' : '#ff0000',
-                        marginRight: '2px' 
-                      }}>
+                      <span
+                        style={{
+                          color: api.color === 'green' ? '#00ff00' : '#ff0000',
+                          marginRight: '2px',
+                        }}
+                      >
                         {api.color === 'green' ? '●' : '●'}
                       </span>
-                      {api.name.replace('Gemini Key ', 'G').replace(' (Primary)', '').replace(' (Secondary)', '').replace('Bible API', 'Bible')}
+                      {api.name
+                        .replace('Gemini Key ', 'G')
+                        .replace(' (Primary)', '')
+                        .replace(' (Secondary)', '')
+                        .replace('Bible API', 'Bible')}
                       <span style={{ marginLeft: '2px', fontSize: '8px' }}>
                         {api.color === 'green' ? 'OK' : 'ERR'}
                       </span>
@@ -270,11 +292,11 @@ const ApiControlPanel = ({ backendUrl }) => {
                   ))}
                 </div>
               </div>
-              
+
               {/* LED individuelles plus grandes */}
               <div style={{ display: 'flex', gap: '2px' }}>
                 {Object.entries(apiStatus.apis).map(([key, api]) => (
-                  <div 
+                  <div
                     key={key}
                     style={{
                       width: '6px',
@@ -282,7 +304,8 @@ const ApiControlPanel = ({ backendUrl }) => {
                       borderRadius: '50%',
                       backgroundColor: getLedColor(api),
                       boxShadow: `0 0 6px ${getLedColor(api)}`,
-                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                      animation:
+                        api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
                     }}
                     title={`${api.name}: ${api.status === 'available' ? 'Disponible' : 'Quota dépassé'}`}
                   />
@@ -291,62 +314,69 @@ const ApiControlPanel = ({ backendUrl }) => {
             </div>
           )}
         </div>
-        
+
         {/* Effet de brillance comme sur btn-generate */}
-        <div style={{
-          content: '',
-          position: 'absolute',
-          top: '0',
-          left: '-100%',
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
-          animation: 'shine 3s infinite',
-          zIndex: 1
-        }} />
-        
+        <div
+          style={{
+            content: '',
+            position: 'absolute',
+            top: '0',
+            left: '-100%',
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+            animation: 'shine 3s infinite',
+            zIndex: 1,
+          }}
+        />
+
         {/* Tooltip améliorée */}
         {showTooltip && apiStatus && (
           <div className={`api-control-tooltip ${showTooltip ? 'visible' : ''}`}>
-            {Object.values(apiStatus.apis).every(api => api.color === 'green') 
-              ? '🟢 Toutes les API sont opérationnelles' 
-              : '🔴 Certaines API ont des problèmes'
-            }
+            {Object.values(apiStatus.apis).every((api) => api.color === 'green')
+              ? '🟢 Toutes les API sont opérationnelles'
+              : '🔴 Certaines API ont des problèmes'}
           </div>
         )}
       </button>
 
       {/* Panneau de contrôle */}
       {isOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          right: '0',
-          marginTop: '10px',
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          borderRadius: '16px',
-          padding: '20px',
-          minWidth: '350px',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-          zIndex: 1000
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            right: '0',
+            marginTop: '10px',
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '16px',
+            padding: '20px',
+            minWidth: '350px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+            zIndex: 1000,
+          }}
+        >
           {/* En-tête */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '16px',
-            borderBottom: '1px solid rgba(0,0,0,0.1)',
-            paddingBottom: '12px'
-          }}>
-            <h3 style={{
-              margin: 0,
-              color: '#333',
-              fontSize: '16px',
-              fontWeight: 'bold'
-            }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '16px',
+              borderBottom: '1px solid rgba(0,0,0,0.1)',
+              paddingBottom: '12px',
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                color: '#333',
+                fontSize: '16px',
+                fontWeight: 'bold',
+              }}
+            >
               🔧 Statut des API
             </h3>
             <button
@@ -356,7 +386,7 @@ const ApiControlPanel = ({ backendUrl }) => {
                 border: 'none',
                 fontSize: '18px',
                 cursor: 'pointer',
-                color: '#999'
+                color: '#999',
               }}
             >
               ✕
@@ -375,31 +405,36 @@ const ApiControlPanel = ({ backendUrl }) => {
                     alignItems: 'center',
                     padding: '12px',
                     marginBottom: '8px',
-                    background: api.color === 'green' ? 'rgba(0, 255, 0, 0.1)' : 'rgba(255, 0, 0, 0.1)',
+                    background:
+                      api.color === 'green' ? 'rgba(0, 255, 0, 0.1)' : 'rgba(255, 0, 0, 0.1)',
                     border: `1px solid ${api.color === 'green' ? 'rgba(0, 255, 0, 0.3)' : 'rgba(255, 0, 0, 0.3)'}`,
                     borderRadius: '8px',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
                   }}
                 >
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <div style={ledStyle(getLedColor(api))} />
-                      <span style={{
-                        fontWeight: 'bold',
-                        color: '#333',
-                        marginRight: '8px'
-                      }}>
+                      <span
+                        style={{
+                          fontWeight: 'bold',
+                          color: '#333',
+                          marginRight: '8px',
+                        }}
+                      >
                         {api.name}
                       </span>
                       {key === apiStatus.active_api && (
-                        <span style={{
-                          background: 'linear-gradient(135deg, #4CAF50, #45a049)',
-                          color: 'white',
-                          padding: '2px 8px',
-                          borderRadius: '12px',
-                          fontSize: '10px',
-                          fontWeight: 'bold'
-                        }}>
+                        <span
+                          style={{
+                            background: 'linear-gradient(135deg, #4CAF50, #45a049)',
+                            color: 'white',
+                            padding: '2px 8px',
+                            borderRadius: '12px',
+                            fontSize: '10px',
+                            fontWeight: 'bold',
+                          }}
+                        >
                           ACTIVE
                         </span>
                       )}
@@ -407,17 +442,21 @@ const ApiControlPanel = ({ backendUrl }) => {
                     <div style={{ fontSize: '10px', color: '#666', marginLeft: '20px' }}>
                       ✅ {api.success_count} succès | ❌ {api.error_count} échecs
                       {api.last_used && (
-                        <div>Dernière utilisation: {new Date(api.last_used).toLocaleTimeString()}</div>
+                        <div>
+                          Dernière utilisation: {new Date(api.last_used).toLocaleTimeString()}
+                        </div>
                       )}
                     </div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{
-                      fontSize: '12px',
-                      color: api.color === 'green' ? '#4CAF50' : '#f44336',
-                      fontWeight: 'bold',
-                      textTransform: 'uppercase'
-                    }}>
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        color: api.color === 'green' ? '#4CAF50' : '#f44336',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                      }}
+                    >
                       {api.status === 'available' ? 'Disponible' : 'Quota Dépassé'}
                     </span>
                     <span style={{ fontSize: '16px', marginLeft: '8px' }}>
@@ -428,11 +467,13 @@ const ApiControlPanel = ({ backendUrl }) => {
               ))}
             </div>
           ) : (
-            <div style={{
-              textAlign: 'center',
-              padding: '20px',
-              color: '#666'
-            }}>
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '20px',
+                color: '#666',
+              }}
+            >
               📡 Chargement du statut...
             </div>
           )}
@@ -450,7 +491,7 @@ const ApiControlPanel = ({ backendUrl }) => {
               borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '12px',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
             }}
           >
             📊 {showHistory ? 'Masquer' : 'Afficher'} l'Historique
@@ -458,74 +499,81 @@ const ApiControlPanel = ({ backendUrl }) => {
 
           {/* Historique détaillé */}
           {showHistory && apiHistory && (
-            <div style={{
-              marginBottom: '16px',
-              maxHeight: '200px',
-              overflowY: 'auto',
-              border: '1px solid rgba(0,0,0,0.1)',
-              borderRadius: '8px',
-              padding: '8px',
-              background: 'rgba(0,0,0,0.02)'
-            }}>
+            <div
+              style={{
+                marginBottom: '16px',
+                maxHeight: '200px',
+                overflowY: 'auto',
+                border: '1px solid rgba(0,0,0,0.1)',
+                borderRadius: '8px',
+                padding: '8px',
+                background: 'rgba(0,0,0,0.02)',
+              }}
+            >
               <h4 style={{ margin: '0 0 8px 0', fontSize: '12px', color: '#666' }}>
                 📋 Derniers appels API ({apiHistory.total_calls} total)
               </h4>
-              {apiHistory.history.slice().reverse().map((call, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '6px',
-                    marginBottom: '4px',
-                    background: call.success ? 'rgba(0, 255, 0, 0.05)' : 'rgba(255, 0, 0, 0.05)',
-                    border: `1px solid ${call.success ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)'}`,
-                    borderRadius: '4px',
-                    fontSize: '10px'
-                  }}
-                >
-                  <div>
-                    <strong>{call.api_name}</strong>
-                    <div style={{ color: '#666' }}>
-                      {new Date(call.timestamp).toLocaleTimeString()}
+              {apiHistory.history
+                .slice()
+                .reverse()
+                .map((call, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '6px',
+                      marginBottom: '4px',
+                      background: call.success ? 'rgba(0, 255, 0, 0.05)' : 'rgba(255, 0, 0, 0.05)',
+                      border: `1px solid ${call.success ? 'rgba(0, 255, 0, 0.2)' : 'rgba(255, 0, 0, 0.2)'}`,
+                      borderRadius: '4px',
+                      fontSize: '10px',
+                    }}
+                  >
+                    <div>
+                      <strong>{call.api_name}</strong>
+                      <div style={{ color: '#666' }}>
+                        {new Date(call.timestamp).toLocaleTimeString()}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ color: call.success ? '#4CAF50' : '#f44336' }}>
+                        {call.success ? '✅ SUCCESS' : '❌ ERROR'}
+                      </div>
+                      <div style={{ color: '#666' }}>
+                        {call.content_length > 0 ? `${call.content_length} chars` : call.error}
+                      </div>
                     </div>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ color: call.success ? '#4CAF50' : '#f44336' }}>
-                      {call.success ? '✅ SUCCESS' : '❌ ERROR'}
-                    </div>
-                    <div style={{ color: '#666' }}>
-                      {call.content_length > 0 ? `${call.content_length} chars` : call.error}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           )}
 
           {/* Informations de mise à jour */}
-          <div style={{
-            fontSize: '11px',
-            color: '#666',
-            textAlign: 'center',
-            borderTop: '1px solid rgba(0,0,0,0.1)',
-            paddingTop: '12px'
-          }}>
+          <div
+            style={{
+              fontSize: '11px',
+              color: '#666',
+              textAlign: 'center',
+              borderTop: '1px solid rgba(0,0,0,0.1)',
+              paddingTop: '12px',
+            }}
+          >
             🔄 Mise à jour automatique toutes les 30s
-            {lastUpdate && (
-              <div>Dernière mise à jour: {lastUpdate}</div>
-            )}
+            {lastUpdate && <div>Dernière mise à jour: {lastUpdate}</div>}
           </div>
 
           {/* Légende */}
-          <div style={{
-            fontSize: '10px',
-            color: '#888',
-            marginTop: '12px',
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}>
+          <div
+            style={{
+              fontSize: '10px',
+              color: '#888',
+              marginTop: '12px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
             <span>🟢 Disponible</span>
             <span>🔴 Quota dépassé</span>
             <span>⚡ Rotation automatique</span>

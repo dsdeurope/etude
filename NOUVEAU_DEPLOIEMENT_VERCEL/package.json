@@ -2,7 +2,9 @@
   "name": "etude-bible",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": "18.x" },
+  "engines": {
+    "node": "18.x"
+  },
   "homepage": ".",
   "dependencies": {
     "react": "^18.2.0",
@@ -13,14 +15,30 @@
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "cross-env CI=false NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
-  "eslintConfig": { "extends": ["react-app", "react-app/jest"] },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "prettier": "^3.6.2"
   }
 }

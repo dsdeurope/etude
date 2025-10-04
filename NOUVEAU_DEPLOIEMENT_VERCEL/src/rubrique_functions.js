@@ -7,7 +7,7 @@ export const generateStructureContent = (passage, book, chapter, targetLength) =
 
 // Fonction pour questions du chapitre précédent (500 caractères)
 export const generatePreviousChapterContent = (passage, book, chapter, targetLength) => {
-  if (chapter === "1") {
+  if (chapter === '1') {
     return `${passage} ouvre le récit biblique sans prologue humain, plongeant directement dans l'acte créateur divin. Cette ouverture majestueuse établit Dieu comme l'acteur principal de l'histoire. L'absence de contexte préalable souligne l'éternité et la primauté divines. Cette introduction théologique prépare tout le développement biblique ultérieur, posant les fondements de l'alliance, de la révélation progressive et du plan de salut qui se déploieront dans toute l'Écriture.`;
   }
   return `L'étude de ${passage} s'inscrit dans la continuité du récit biblique. Les événements précédents éclairent la compréhension de ce passage et préparent les développements théologiques qui suivront.`;
