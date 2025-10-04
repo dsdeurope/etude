@@ -3,17 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "homepage": ".",
-  "engines": {
-    "node": "18.x || 20.x || 22.x"
-  },
+  "engines": { "node": ">=14 <=22" },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-
-    "ajv": "^8.17.1",
-    "ajv-formats": "^2.1.1",
-    "ajv-keywords": "^5.1.0"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts start",
@@ -30,16 +24,9 @@
     "cross-env": "^10.1.0"
   },
   "resolutions": {
-    "ajv": "^8.17.1",
-    "ajv@^6": "^8.17.1",
-    "ajv@6": "^8.17.1",
-    "ajv@~6.12.6": "^8.17.1",
-    "ajv@^6.12.6": "^8.17.1",
-
-    "schema-utils@^4.0.0/ajv": "^8.17.1",
-    "webpack-dev-server@^4.0.0/ajv": "^8.17.1",
-    "ajv-formats@^2.1.1/ajv": "^8.17.1",
-    "@apideck/better-ajv-errors@^0.3.6/ajv": "^8.17.1",
-    "workbox-build@^6.6.0/ajv": "^8.17.1"
+    "webpack-dev-server": "3.11.2",
+    "schema-utils": "2.7.1",
+    "ajv": "6.12.6",
+    "ajv-keywords": "3.5.2"
   }
 }
