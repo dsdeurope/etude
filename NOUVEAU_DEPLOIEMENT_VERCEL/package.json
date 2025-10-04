@@ -4,7 +4,7 @@
   "private": true,
   "homepage": ".",
   "engines": {
-    "node": "18.x"
+    "node": "18.x || 20.x || 22.x"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -29,4 +29,18 @@
       "not dead",
       "not op_mini all"
     ],
-    "develop
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "overrides": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^2.1.1",
+    "ajv-keywords": "^5.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
