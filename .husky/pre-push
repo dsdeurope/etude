@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+set -e
+UPSTREAM="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo)"
+RANGE="${UPSTREAM:-HEAD~1}..HEAD"
+PATTERN='^NOUVEAU_DEPLOIEMENT_VERCEL/(src|public|package\.json|yarn\.lock|vercel\.json|\.prettierrc.*|\.prettierignore|\.eslintrc.*)'
+if git diff --name-only "$RANGE" | grep -qE "$PATTERN"; then
+  echo "[pre-push] Changements CRA détectés → build…"
+  (cd NOUVEAU_DEPLOIEMENT_VERCEL && yarn build -s)
+else
+  echo "[pre-push] Pas de changement CRA → skip build."
+fi
