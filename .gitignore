@@ -177,3 +177,6 @@ yarn-error.log*
 .env
 NOUVEAU_DEPLOIEMENT_VERCEL/.env
 NOUVEAU_DEPLOIEMENT_VERCEL/.env
+
+# backups
+*.bak
