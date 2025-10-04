@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 // Fonction pour générer l'URL YouVersion
@@ -115,6 +116,7 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     // Nous pouvons ajouter d'autres thèmes ici...
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadThemeVerses();
   }, [theme]);

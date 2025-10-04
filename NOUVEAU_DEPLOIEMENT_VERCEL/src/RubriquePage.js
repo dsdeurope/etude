@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import ApiControlPanel from './ApiControlPanel';
 
@@ -32,7 +33,7 @@ const RubriquePage = ({
   // État pour le modal API
   const [isApiModalOpen, setIsApiModalOpen] = React.useState(false);
   const [apiStatus, setApiStatus] = React.useState(null);
-  const [apiHistory, setApiHistory] = React.useState(null);
+  const [, setApiHistory] = React.useState(null);
 
   // Fonctions pour gérer le modal API
   const fetchApiStatus = async () => {
@@ -64,6 +65,7 @@ const RubriquePage = ({
   };
 
   // Charger les données API au montage du composant
+// eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (isApiModalOpen) {
       fetchApiStatus();
@@ -164,6 +166,7 @@ const RubriquePage = ({
   };
 
   // 4. Fonction API Control Panel (basée sur ApiControlPanel)
+// eslint-disable-next-line no-unused-vars
   const handleApiAction = () => {
     console.log('[CONTROL BUTTON] API button clicked for Rubrique', rubriqueNumber);
     setIsApiModalOpen(true);

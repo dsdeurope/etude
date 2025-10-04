@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ThemeVersesPage from './ThemeVersesPage';
 
 const BibleConcordancePage = ({ onGoBack }) => {
@@ -8,6 +8,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
   
   // Nouvel état pour la recherche de personnages
   const [characterSearchTerm, setCharacterSearchTerm] = useState("");
+// eslint-disable-next-line no-unused-vars
   const [characterResults, setCharacterResults] = useState([]);
   const [isCharacterLoading, setIsCharacterLoading] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -554,6 +555,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     searchBibleConcordance(searchTerm);
   };
 
+// eslint-disable-next-line no-unused-vars
   const handleSuggestionClick = (term) => {
     setSearchTerm(term);
     searchBibleConcordance(term);

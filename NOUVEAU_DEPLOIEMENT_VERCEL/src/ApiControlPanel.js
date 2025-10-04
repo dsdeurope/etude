@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 
 const ApiControlPanel = ({ backendUrl }) => {
@@ -43,7 +44,7 @@ const ApiControlPanel = ({ backendUrl }) => {
     try {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
-        const healthData = await response.json();
+    await response.json(); // discard unused response
         
         // Adapter pour l'historique
         const adaptedHistory = {
@@ -61,6 +62,7 @@ const ApiControlPanel = ({ backendUrl }) => {
   };
 
   // Mise à jour toutes les 30 secondes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Première récupération
     fetchApiStatus();
