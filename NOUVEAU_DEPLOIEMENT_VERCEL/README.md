@@ -82,3 +82,5 @@ Votre nouvelle application aura :
 **🚀 Prêt pour déploiement immédiat sur Vercel !**
 
 - test husky + lint-staged
+
+# smoke test pre-push (build)
