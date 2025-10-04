@@ -9,7 +9,11 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+
+    "ajv": "^8.17.1",
+    "ajv-formats": "^2.1.1",
+    "ajv-keywords": "^5.1.0"
   },
   "scripts": {
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts start",
@@ -27,8 +31,10 @@
   },
   "resolutions": {
     "ajv": "^8.17.1",
-    "ajv-keywords": "^5.1.0",
-    "ajv-formats": "^2.1.1",
+    "ajv@^6": "^8.17.1",
+    "ajv@6": "^8.17.1",
+    "ajv@~6.12.6": "^8.17.1",
+    "ajv@^6.12.6": "^8.17.1",
 
     "schema-utils@^4.0.0/ajv": "^8.17.1",
     "webpack-dev-server@^4.0.0/ajv": "^8.17.1",
