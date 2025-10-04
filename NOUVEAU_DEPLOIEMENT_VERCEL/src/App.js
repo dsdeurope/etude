@@ -2698,4 +2698,3 @@ Exemples :
 }
 
 export default App;
-// pre-push trigger test
