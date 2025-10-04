@@ -44,7 +44,7 @@ const ApiControlPanel = ({ backendUrl }) => {
     try {
       const response = await fetch(`${backendUrl}/api/health`);
       if (response.ok) {
-        const healthData = await response.json();
+    await response.json(); // discard unused response
         
         // Adapter pour l'historique
         const adaptedHistory = {

@@ -33,7 +33,7 @@ const RubriquePage = ({
   // État pour le modal API
   const [isApiModalOpen, setIsApiModalOpen] = React.useState(false);
   const [apiStatus, setApiStatus] = React.useState(null);
-  const [_apiHistory, setApiHistory] = React.useState(null);
+  const [, setApiHistory] = React.useState(null);
 
   // Fonctions pour gérer le modal API
   const fetchApiStatus = async () => {
