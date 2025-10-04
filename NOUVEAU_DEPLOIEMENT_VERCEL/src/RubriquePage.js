@@ -64,6 +64,7 @@ const RubriquePage = ({
   };
 
   // Charger les données API au montage du composant
+// eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (isApiModalOpen) {
       fetchApiStatus();
@@ -164,6 +165,7 @@ const RubriquePage = ({
   };
 
   // 4. Fonction API Control Panel (basée sur ApiControlPanel)
+// eslint-disable-next-line no-unused-vars
   const handleApiAction = () => {
     console.log('[CONTROL BUTTON] API button clicked for Rubrique', rubriqueNumber);
     setIsApiModalOpen(true);

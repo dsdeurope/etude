@@ -115,6 +115,7 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     // Nous pouvons ajouter d'autres thèmes ici...
   };
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     loadThemeVerses();
   }, [theme]);

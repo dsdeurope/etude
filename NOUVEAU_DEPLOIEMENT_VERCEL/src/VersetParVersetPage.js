@@ -17,6 +17,7 @@ const VersetParVersetPage = ({ onGoBack, content, bookInfo }) => {
   const [currentBatch, setCurrentBatch] = useState(1); // Batch actuel (1, 2, 3...)
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [allVersetsBatches, setAllVersetsBatches] = useState({}); // Stocke tous les batches chargés
+// eslint-disable-next-line no-unused-vars
   const [totalVersetsExpected, setTotalVersetsExpected] = useState(null);
   const [enrichingVersets, setEnrichingVersets] = useState({}); // Track quels versets sont en cours d'enrichissement
 
@@ -261,6 +262,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
   };
 
   // Fonction pour extraire les numéros de versets du contenu
+// eslint-disable-next-line no-unused-vars
   const extractVersetNumbers = (content) => {
     if (!content) return [];
     

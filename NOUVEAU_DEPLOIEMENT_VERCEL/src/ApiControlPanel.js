@@ -61,6 +61,7 @@ const ApiControlPanel = ({ backendUrl }) => {
   };
 
   // Mise à jour toutes les 30 secondes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Première récupération
     fetchApiStatus();

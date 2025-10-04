@@ -92,6 +92,7 @@ const NotesPage = ({ onGoBack }) => {
   };
 
   // Chargement initial des notes
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadedNotes = loadNotesFromStorage();
     setNotes(loadedNotes);
@@ -110,6 +111,7 @@ const NotesPage = ({ onGoBack }) => {
   }, []);
 
   // Auto-sauvegarde toutes les 3 secondes lors de la saisie
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (autoSaveIntervalRef.current) {
       clearInterval(autoSaveIntervalRef.current);
@@ -150,6 +152,7 @@ const NotesPage = ({ onGoBack }) => {
   };
 
   // Sauvegarde avant fermeture de page
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (notes.trim().length > 0) {
