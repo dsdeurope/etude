@@ -1,0 +1,69 @@
+name: CRA Lint & Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'NOUVEAU_DEPLOIEMENT_VERCEL/**'
+      - '.github/workflows/cra-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'NOUVEAU_DEPLOIEMENT_VERCEL/**'
+      - '.github/workflows/cra-ci.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cra-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: NOUVEAU_DEPLOIEMENT_VERCEL
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 18 + Yarn cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: yarn
+          cache-dependency-path: NOUVEAU_DEPLOIEMENT_VERCEL/yarn.lock
+
+      - name: Show versions
+        run: |
+          node -v
+          yarn -v
+
+      - name: Install deps (frozen lockfile)
+        run: yarn install --frozen-lockfile
+
+      - name: Prettier check
+        run: yarn format:check
+
+      - name: ESLint (fail on warnings)
+        run: |
+          if npx --no-install eslint -v >/dev/null 2>&1; then
+            npx eslint --max-warnings=0 "src/**/*.{js,jsx}"
+          else
+            echo "eslint CLI not found -> skip ESLint check"
+          fi
+
+      - name: Build (production)
+        run: yarn build
+
+      - name: Upload build artifact (optional)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cra-build
+          path: NOUVEAU_DEPLOIEMENT_VERCEL/build
+          retention-days: 7
