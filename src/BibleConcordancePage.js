@@ -272,8 +272,6 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
 
       setCharacterHistory(history);
 
-Croise tous les passages bibliques disponibles. Sois narratif, détaillé et historiquement précis selon les Écritures. Minimum 2000 mots.`;
-
       // Histoire générée (simulée pour la démo)
       const mockHistory = generateMockCharacterHistory(character);
       setCharacterHistory(mockHistory);
