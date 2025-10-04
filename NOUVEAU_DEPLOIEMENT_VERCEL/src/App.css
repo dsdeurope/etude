@@ -4132,3 +4132,24 @@ strong {
   white-space: nowrap;
   border: 0;
 }
+
+/* === Bouton API dans le header === */
+.header-banner {
+  position: relative;
+  padding-bottom: 56px; /* espace pour loger le bouton */
+}
+
+.api-in-header {
+  position: absolute;
+  left: 50%;
+  bottom: -18px; /* fais-le déborder du header */
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 3;
+}
+
+.progress-container {
+  margin-top: 28px; /* espace sous le header */
+}
