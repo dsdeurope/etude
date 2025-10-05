@@ -21,11 +21,11 @@ function App() {
         margin: '20px auto',
         maxWidth: '400px'
       }}>
-        <h3>🔧 Configuration Vercel</h3>
+        <h3>🔧 Configuration Netlify</h3>
         <p>✅ React Scripts 4.0.3</p>
-        <p>✅ Node.js 18.x</p>
-        <p>✅ cross-env installé</p>
-        <p>✅ Variables d'environnement</p>
+        <p>✅ Build: npm run build</p>
+        <p>✅ Redirections SPA actives</p>
+        <p>✅ Auto-détection React</p>
       </div>
     </div>
   );
