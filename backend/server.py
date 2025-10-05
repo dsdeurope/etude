@@ -432,7 +432,8 @@ Produire un contenu enrichi et structuré sur le thème "{request.search_term}".
                 "search_term": request.search_term,
                 "bible_verses": bible_verses,
                 "enriched_analysis": gemini_content,
-                "source": "gemini_enriched"
+                "source": "gemini_enriched",
+                "api_used": api_used
             }
         
         # If we have Bible verses, enhance them with Gemini if requested
