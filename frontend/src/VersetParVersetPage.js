@@ -570,7 +570,17 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
   const formatExplicationTheologique = (text) => {
     if (!text) return '';
     
-    let formattedText = text;
+    // Décoder les entités HTML pour éviter l'affichage de code CSS brut
+    let formattedText = text
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#x27;/g, "'")
+      .replace(/&amp;/g, '&');
+    
+    // Nettoyer les styles CSS qui peuvent apparaître en texte brut
+    formattedText = formattedText.replace(/style="[^"]*background:\s*linear-gradient[^"]*"/g, '')
+                                 .replace(/background:\s*linear-gradient[^;]*;[^"]*"/g, '');
     
     // 1. Rendre les références bibliques cliquables
     const referencePattern = /(Genèse|Exode|Lévitique|Nombres|Deutéronome|Josué|Juges|Ruth|1 Samuel|2 Samuel|1 Rois|2 Rois|1 Chroniques|2 Chroniques|Esdras|Néhémie|Esther|Job|Psaumes|Proverbes|Ecclésiaste|Cantique|Ésaïe|Jérémie|Lamentations|Ézéchiel|Daniel|Osée|Joël|Amos|Abdias|Jonas|Michée|Nahum|Habacuc|Sophonie|Aggée|Zacharie|Malachie|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens|1 Thessaloniciens|2 Thessaloniciens|1 Timothée|2 Timothée|Tite|Philémon|Hébreux|Jacques|1 Pierre|2 Pierre|1 Jean|2 Jean|3 Jean|Jude|Apocalypse)\s+(\d+):(\d+(?:-\d+)?)/g;
