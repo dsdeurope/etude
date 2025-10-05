@@ -1363,7 +1363,7 @@ Découvrons l'art divin du suspense sanctifié. {passage} crée une attente lég
 Cette compréhension prospective enrichit notre lecture continue. Elle nous aide à saisir la logique divine de la révélation progressive et à cultiver une attente sanctifiée.
 
 DIRECTIVES ACADÉMIQUES :
-- Focus sur les véritables préparations vers {book} chapitre {int(chapter)+1 if chapter.isdigit() else "suivant"}
+- Focus sur les véritables préparations vers {book} chapitre {int(chapter)+1 if isinstance(chapter, int) else "suivant"}
 - {target_length} mots d'analyse transitionnelle narrative
 - Éviter les anticipations non-fondées sur le texte
 - Respecter la progression naturelle du récit biblique
