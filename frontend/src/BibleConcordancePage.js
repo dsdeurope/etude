@@ -97,7 +97,6 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
 *Contenu généré par Emergent LLM API - Service d'étude biblique enrichie*`;
       
       setCharacterHistory(fallbackContent);
-        "Abraham": `# 📖 ABRAHAM - Le Père de la Foi
 
 ## 🔹 IDENTITÉ ET GÉNÉALOGIE
 Abraham (initialement Abram, "père exalté", puis Abraham "père d'une multitude") est né à Ur en Chaldée vers 2166 av. J.-C. Fils de Térah, descendant de Sem, il appartient à la lignée bénie de Noé. Son nom changé par Dieu révèle sa destinée prophétique comme père spirituel de multiples nations.
