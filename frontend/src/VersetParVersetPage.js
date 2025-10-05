@@ -1148,6 +1148,37 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
                   border-radius: 10px;
                   margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  
+                /* Styles pour les éléments formatés */
+                .theological-concept {
+                  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+                  color: white !important;
+                  font-weight: 800 !important;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                }
+                
+                .quoted-text {
+                  background: #f59e0b;
+                  color: white !important;
+                  font-weight: 700 !important;
+                  font-style: italic;
+                  padding: 1px 4px;
+                  border-radius: 3px;
+                  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+                }
+                
+                .bible-reference {
+                  color: #8b5cf6 !important;
+                  text-decoration: underline;
+                  font-weight: 600;
+                  cursor: pointer;
+                }
+                
+                .bible-reference:hover {
+                  color: #7c3aed !important;
+                }
                   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
                   text-transform: uppercase;
                   letter-spacing: 0.5px;
