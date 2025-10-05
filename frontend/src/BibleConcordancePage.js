@@ -496,16 +496,12 @@ const BibleConcordancePage = ({ onGoBack }) => {
                         textTransform: 'capitalize'
                       }}
                       onMouseOver={(e) => {
-                        if (!isCharacterLoading) {
-                          e.target.style.transform = 'translateY(-2px)';
-                          e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
-                        }
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
                       }}
                       onMouseOut={(e) => {
-                        if (!isCharacterLoading) {
-                          e.target.style.transform = 'translateY(0px)';
-                          e.target.style.boxShadow = 'none';
-                        }
+                        e.target.style.transform = 'translateY(0px)';
+                        e.target.style.boxShadow = 'none';
                       }}
                     >
                       {character}
