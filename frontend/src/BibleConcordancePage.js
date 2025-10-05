@@ -14,6 +14,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [characterHistory, setCharacterHistory] = useState("");
   const [selectedTheme, setSelectedTheme] = useState(null);
+  const [selectedCharacterForHistory, setSelectedCharacterForHistory] = useState(null);
   const [currentTab, setCurrentTab] = useState('concordance');
 
   // Fonction pour ouvrir la page des versets thématiques
