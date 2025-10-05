@@ -1032,6 +1032,26 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     setCurrentPage('main');
   };
 
+  // Fonction pour revenir de la page d'histoire de personnage
+  const handleBackFromCharacter = () => {
+    setSelectedCharacterForHistory(null);
+  };
+
+  // Fonctions pour la navigation entre pages dédiées
+  const navigateToConcordance = () => {
+    setCurrentPage('concordance');
+  };
+
+  const navigateToVersets = (content, bookInfo) => {
+    setVersetPageContent(content);
+    setCurrentBookInfo(bookInfo);
+    setCurrentPage('versets');
+  };
+
+  const navigateToMain = () => {
+    setCurrentPage('main');
+  };
+
   const continueVerses = async () => {
     try {
       setIsLoading(true);
