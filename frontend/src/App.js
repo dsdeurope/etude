@@ -23,7 +23,7 @@ const getBackendUrl = () => {
   const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
   // fallback pour les environnements non configurés
-  return "https://faithflow-app.preview.emergentagent.com";
+  return "https://scripture-ai-7.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();
@@ -1894,7 +1894,7 @@ ${contextualEnrichment}
             
             {/* API Control Panel directement sous le pourcentage */}
             <div className="api-below-progress">
-              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://faithflow-app.preview.emergentagent.com"} />
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://scripture-ai-7.preview.emergentagent.com"} />
             </div>
             </div>
           </div>
