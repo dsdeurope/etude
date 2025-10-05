@@ -299,6 +299,16 @@ function App() {
   const [currentBookInfo, setCurrentBookInfo] = useState('');
   const [currentRubriqueNumber, setCurrentRubriqueNumber] = useState(1);
   const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
+  
+  // États pour la navigation entre les pages dédiées
+  const [selectedTheme, setSelectedTheme] = useState(null);
+  const [selectedCharacterForHistory, setSelectedCharacterForHistory] = useState(null);
+  const [currentTab, setCurrentTab] = useState('concordance');
+  const [currentPage, setCurrentPage] = useState('main');
+  const [versetPageContent, setVersetPageContent] = useState('');
+  const [currentBookInfo, setCurrentBookInfo] = useState('');
+  const [currentRubriqueNumber, setCurrentRubriqueNumber] = useState(1);
+  const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
 
   // Thèmes déplacés en début de fonction
 
