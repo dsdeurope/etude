@@ -2642,6 +2642,24 @@ strong {
   }
 }
 
+/* Styles globaux pour les personnages bibliques */
+.biblical-character-btn {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.character-history-container {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.character-history-container h1,
+.character-history-container h2,
+.character-history-container h3,
+.character-history-container p,
+.character-history-container div {
+  font-family: 'Montserrat', sans-serif !important;
+}
+}
+
   /* Contrôles en haut - compacts sur mobile */
   .controls-section {
     order: 1;
