@@ -463,7 +463,8 @@ Longueur : 600-800 mots. Style académique mais accessible.
                 "search_term": request.search_term,
                 "bible_verses": bible_verses,
                 "enriched_analysis": gemini_analysis,
-                "source": "bible_api_with_gemini"
+                "source": "bible_api_with_gemini",
+                "api_used": api_used
             }
         
         # Return just Bible API results if no enrichment requested
