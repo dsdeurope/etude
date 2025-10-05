@@ -1890,6 +1890,11 @@ ${contextualEnrichment}
                 </span>
               )}
             </div>
+            
+            {/* API Control Panel directement sous le pourcentage */}
+            <div className="api-below-progress">
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://faithflow-app.preview.emergentagent.com"} />
+            </div>
           </div>
 
           {/* Interface principale */}
