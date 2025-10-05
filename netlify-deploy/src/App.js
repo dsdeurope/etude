@@ -63,8 +63,8 @@ function App() {
         </div>
 
         <footer className="footer">
-          <p>🎉 React App déployé correctement - Build optimisé pour production !</p>
-          <p><small>Temps de build attendu : 30-60 secondes</small></p>
+          <p>🎉 Déployé sur Netlify - Plus fiable que Vercel !</p>
+          <p><small>✅ Build réussi - Application React fonctionnelle</small></p>
         </footer>
       </div>
     </div>
