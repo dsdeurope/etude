@@ -1930,7 +1930,7 @@ ${contextualEnrichment}
                 width: '100%',
                 maxWidth: '1600px',
                 margin: '0 auto',
-                padding: '0 40px',
+                padding: '0 25px',
                 boxSizing: 'border-box'
               }}>
                 <div className="balanced-buttons-grid" style={{
