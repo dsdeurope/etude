@@ -701,7 +701,7 @@ APPROCHE NARRATIVE HISTORIQUE :
 CHRONIQUE CONTEXTUELLE INSPIRÉE :
 
 **I. RÉCAPITULATIF DU CHAPITRE PRÉCÉDENT :**
-Dans les pages précédentes de cette épopée sacrée, l'Éternel avait orchestré... [Résumé narratif vivant du chapitre {int(chapter)-1 if chapter.isdigit() else "précédent"} de {book}]. Ces événements forment la toile de fond providentiellement préparée pour {passage}.
+Dans les pages précédentes de cette épopée sacrée, l'Éternel avait orchestré... [Résumé narratif vivant du chapitre {int(chapter)-1 if isinstance(chapter, int) and chapter > 1 else "précédent"} de {book}]. Ces événements forment la toile de fond providentiellement préparée pour {passage}.
 
 **II. LES FILS PROVIDENTIELS ENTRELACÉS :**
 Observez comment la main divine a tissé les événements précédents pour préparer cette nouvelle révélation. La typologie biblique (préfiguration où les événements anciens annoncent les réalités futures) se déploie majestueusement. L'économie du salut (plan divin de rédemption) progresse selon le dessein éternel.
