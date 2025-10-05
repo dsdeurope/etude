@@ -2035,6 +2035,7 @@ ${contextualEnrichment}
 
             </div>
           </div>
+          </div>
 
           {/* SUPPRIMÉ : Modal Notes - remplacée par page dédiée */}
         </>
