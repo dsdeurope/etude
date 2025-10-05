@@ -449,132 +449,66 @@ const BibleConcordancePage = ({ onGoBack }) => {
         )}
 
         {currentTab === 'personnages' && (
-          /* Section Personnages */
-          <div>
-            {!characterHistory ? (
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '20px',
-                padding: '30px',
-                backdropFilter: 'blur(15px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)'
-              }}>
-                <h2 style={{ color: 'white', textAlign: 'center', marginBottom: '30px', fontSize: '24px' }}>
-                  👥 Personnages Bibliques
-                </h2>
+          /* Section Personnages - Chaque personnage ouvre une page dédiée */
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '20px',
+            padding: '30px',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h2 style={{ color: 'white', textAlign: 'center', marginBottom: '30px', fontSize: '24px' }}>
+              👥 Personnages Bibliques
+            </h2>
+            <p style={{ color: 'rgba(255, 255, 255, 0.8)', textAlign: 'center', marginBottom: '30px', fontSize: '16px' }}>
+              Cliquez sur un personnage pour découvrir son histoire narrative détaillée
+            </p>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-                  gap: '12px',
-                  maxHeight: '500px',
-                  overflowY: 'auto',
-                  padding: '10px'
-                }}>
-                  {biblicalCharacters.map(character => (
-                    <button
-                      key={character}
-                      onClick={() => handleCharacterClick(character)}
-                      className="biblical-character-btn"
-                      style={{
-                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        border: 'none',
-                        borderRadius: '12px',
-                        padding: '12px 8px',
-                        color: 'white',
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        fontFamily: 'Montserrat, sans-serif',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        textAlign: 'center',
-                        minHeight: '60px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        opacity: 1,
-                        textTransform: 'capitalize'
-                      }}
-                      onMouseOver={(e) => {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.target.style.transform = 'translateY(0px)';
-                        e.target.style.boxShadow = 'none';
-                      }}
-                    >
-                      {character}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Les personnages ouvrent maintenant une page dédiée */}
-              </div>
-            ) : (
-              /* Affichage de l'histoire du personnage */
-              <div style={{
-                background: 'linear-gradient(135deg, #f8fafc, #f1f5f9)',
-                border: '1px solid rgba(139, 92, 246, 0.2)',
-                borderRadius: '12px',
-                padding: '30px',
-                maxHeight: '700px',
-                overflowY: 'auto',
-                fontSize: '15px',
-                lineHeight: '1.7',
-                fontFamily: 'Montserrat, Inter, sans-serif',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '20px',
-                  paddingBottom: '15px',
-                  borderBottom: '2px solid rgba(139, 92, 246, 0.2)'
-                }}>
-                  <button
-                    onClick={() => {
-                      setSelectedCharacter(null);
-                      setCharacterHistory("");
-                    }}
-                    style={{
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '8px 16px',
-                      color: 'white',
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    ← Retour aux personnages
-                  </button>
-                </div>
-
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: characterHistory
-                      // Titre principal sur une ligne
-                      .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 20px 0; font-size: 20px; font-weight: 700; font-family: Montserrat, sans-serif; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$1</h2>')
-                      // Supprimer les ### et numérotation pour un style narratif
-                      .replace(/###\s?\d*\.?\s*(.+)/g, '<p style="color: #1e293b; margin: 16px 0 12px 0; font-size: 16px; font-weight: 700; font-family: Montserrat, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">$1</p>')
-                      // Gras pour les passages importants
-                      .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700; font-family: Montserrat, sans-serif;">$1</strong>')
-                      // Italique pour les mots étrangers et citations
-                      .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic; font-family: Montserrat, sans-serif;">$1</em>')
-                      // Versets cliquables
-                      .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
-                        '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; font-family: Montserrat, sans-serif; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
-                      // Créer des paragraphes narratifs
-                      .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
-                      .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
-                      .replace(/$/, '</p>')
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+              gap: '12px',
+              maxHeight: '500px',
+              overflowY: 'auto',
+              padding: '10px'
+            }}>
+              {biblicalCharacters.map(character => (
+                <button
+                  key={character}
+                  onClick={() => handleCharacterClick(character)}
+                  className="biblical-character-btn"
+                  style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    border: 'none',
+                    borderRadius: '12px',
+                    padding: '12px 8px',
+                    color: 'white',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    fontFamily: 'Montserrat, sans-serif',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    textAlign: 'center',
+                    minHeight: '60px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: 1,
+                    textTransform: 'capitalize'
                   }}
-                />
-              </div>
-            )}
+                  onMouseOver={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  {character}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
