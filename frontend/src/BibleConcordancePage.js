@@ -265,11 +265,13 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
             <button
               key={tab.id}
               onClick={() => {
+                setCurrentTab(tab.id);
                 if (tab.id === 'concordance') {
                   setSelectedCharacter(null);
                   setCharacterHistory("");
-                } else {
-                  // Ne rien faire, laisser l'utilisateur cliquer sur un personnage
+                } else if (tab.id === 'personnages') {
+                  setSelectedCharacter(null);
+                  setCharacterHistory("");
                 }
               }}
               style={{
