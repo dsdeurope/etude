@@ -616,7 +616,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     ];
     
     conclusionPatterns.forEach(pattern => {
-      formattedText = formattedText.replace(pattern, '<em style="color: #059669; font-weight: 600; font-style: italic;">$1</em>');
+      formattedText = formattedText.replace(pattern, '<span style="background: #10b981; color: white !important; font-weight: 700 !important; font-style: italic; padding: 3px 8px; border-radius: 6px; display: inline-block; margin: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">$1</span>');
     });
     
     // 5. Mettre en gras les mots-clés doctrinaux
