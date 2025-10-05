@@ -32,35 +32,61 @@ const API_BASE = `${BACKEND_URL.replace(/\/+$/g, "")}/api`;
 // Variables d'environnement configurées
 // BACKEND_URL et API_BASE sont prêts à utiliser
 
-// Palette de couleurs harmonieuse pour les 6 boutons
+// Style unifié pour tous les boutons de contrôle (même typographie que btn-validate)
 const getButtonStyle = (gradientColors, shadowColor, isHovered = false) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '16px 12px',
-  borderRadius: '16px',
-  minHeight: '90px',
-  fontSize: '11px',
-  fontWeight: '700',
+  padding: '12px 8px',
+  borderRadius: '14px',
+  minHeight: '75px',
+  fontSize: '12px',                    // Adapté de btn-validate (16px → 12px pour boutons plus petits)
+  fontWeight: '700',                   // Identique à btn-validate
+  fontFamily: "'Montserrat', sans-serif", // Identique à btn-validate
   color: 'white',
   border: 'none',
   cursor: 'pointer',
   background: `linear-gradient(135deg, ${gradientColors.start} 0%, ${gradientColors.end} 100%)`,
   boxShadow: isHovered 
-    ? `0 12px 40px ${shadowColor.replace('0.25', '0.35')}, 0 4px 20px rgba(0, 0, 0, 0.15)`
-    : `0 8px 32px ${shadowColor}, 0 2px 16px rgba(0, 0, 0, 0.1)`,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  transform: isHovered ? 'translateY(-3px) scale(1.02)' : 'translateY(0)',
+    ? `0 10px 35px ${shadowColor.replace('0.25', '0.35')}, 0 3px 18px rgba(0, 0, 0, 0.15)`
+    : `0 6px 20px ${shadowColor}, 0 2px 14px rgba(0, 0, 0, 0.1)`, // Adapté de btn-validate
+  transition: 'all 0.3s ease',         // Identique à btn-validate
+  transform: isHovered ? 'translateY(-2px) scale(1.02)' : 'translateY(0)',
+  textTransform: 'uppercase',          // Identique à btn-validate
+  letterSpacing: '0.8px',              // Adapté de btn-validate (1px → 0.8px)
+  position: 'relative',                // Identique à btn-validate
+  overflow: 'hidden'                   // Identique à btn-validate
 })
 
-const buttonColors = {
-  reset: { start: '#4facfe', end: '#00f2fe', shadow: 'rgba(79, 172, 254, 0.25)' },
-  mystique: { start: '#a855f7', end: '#e879f9', shadow: 'rgba(168, 85, 247, 0.25)' },
-  genese: { start: '#10b981', end: '#34d399', shadow: 'rgba(16, 185, 129, 0.25)' },
-  gemini: { start: '#f59e0b', end: '#fbbf24', shadow: 'rgba(245, 158, 11, 0.25)' },
-  versets: { start: '#ef4444', end: '#f87171', shadow: 'rgba(239, 68, 68, 0.25)' },
-  generate: { start: '#8b5cf6', end: '#a78bfa', shadow: 'rgba(139, 92, 246, 0.25)' }
+// Fonction pour générer les couleurs des boutons basées sur le thème actuel
+// TOUS LES BOUTONS ont la même couleur basée sur le thème sélectionné
+const getThemeButtonColors = (theme) => {
+  // Couleur unique basée sur le thème actuel
+  const themeColor = {
+    start: theme.primary,
+    end: theme.secondary, 
+    shadow: `rgba(${hexToRgb(theme.primary)}, 0.25)`
+  };
+  
+  // Fonction helper pour convertir hex en rgb
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  }
+  
+  // Tous les boutons utilisent la même couleur thématique
+  return {
+    reset: themeColor,
+    mystique: themeColor, 
+    genese: themeColor,
+    gemini: themeColor,
+    versets: themeColor,
+    generate: themeColor,
+    concordance: themeColor
+  };
 }
 
 function asString(x) {
@@ -212,7 +238,34 @@ async function smartPost(pathList, payload) {
 ========================= */
 
 function App() {
+  // Thèmes (définis en premier pour éviter erreur d'initialisation)
+  const colorThemes = [
+    { name: "Violet Mystique", primary: "#667eea", secondary: "#764ba2", accent: "#667eea",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      headerBg: "linear-gradient(90deg, #3b4371 0%, #f093fb 50%, #f5576c 100%)" },
+    { name: "Océan Profond", primary: "#0891b2", secondary: "#0284c7", accent: "#0891b2",
+      background: "linear-gradient(135deg, #0891b2 0%, #0284c7 100%)",
+      headerBg: "linear-gradient(90deg, #075985 0%, #0ea5e9 50%, #38bdf8 100%)" },
+    { name: "Émeraude Vert", primary: "#10b981", secondary: "#059669", accent: "#10b981",
+      background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+      headerBg: "linear-gradient(90deg, #064e3b 0%, #34d399 50%, #6ee7b7 100%)" },
+    { name: "Rose Passion", primary: "#ec4899", secondary: "#db2777", accent: "#ec4899",
+      background: "linear-gradient(135deg, #ec4899 0%, #db2777 100%)",
+      headerBg: "linear-gradient(90deg, #831843 0%, #f472b6 50%, #f9a8d4 100%)" },
+    { name: "Orange Sunset", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
+      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+      headerBg: "linear-gradient(90deg, #92400e 0%, #fbbf24 50%, #fcd34d 100%)" },
+    { name: "Indigo Royal", primary: "#6366f1", secondary: "#4f46e5", accent: "#6366f1",
+      background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
+      headerBg: "linear-gradient(90deg, #312e81 0%, #818cf8 50%, #a5b4fc 100%)" }
+  ];
+
   // États principaux
+  const [currentTheme, setCurrentTheme] = useState(0);
+  
+  // Couleurs dynamiques basées sur le thème actuel (après colorThemes et currentTheme)
+  const currentButtonColors = getThemeButtonColors(colorThemes[currentTheme]);
+  
   const [selectedBook, setSelectedBook] = useState("Genèse");
   const [selectedChapter, setSelectedChapter] = useState("1");
   const [selectedVerse, setSelectedVerse] = useState("--");
@@ -223,7 +276,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [generatedRubriques, setGeneratedRubriques] = useState({}); // Stockage du contenu généré
   const [rubriquesStatus, setRubriquesStatus] = useState({});
-  const [currentTheme, setCurrentTheme] = useState(0);
   const [lastStudy, setLastStudy] = useState(null);
   const [progressPercent, setProgressPercent] = useState(0);
   const [searchQuery, setSearchQuery] = useState(""); // ← unique déclaration
@@ -247,45 +299,7 @@ function App() {
   const [currentRubriqueNumber, setCurrentRubriqueNumber] = useState(1);
   const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
 
-  // Thèmes
-  const colorThemes = [
-    { name: "Violet Mystique", primary: "#667eea", secondary: "#764ba2", accent: "#667eea",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      headerBg: "linear-gradient(90deg, #3b4371 0%, #f093fb 50%, #f5576c 100%)" },
-    { name: "Océan Profond", primary: "#0891b2", secondary: "#0284c7", accent: "#0891b2",
-      background: "linear-gradient(135deg, #0891b2 0%, #0284c7 100%)",
-      headerBg: "linear-gradient(90deg, #075985 0%, #0ea5e9 50%, #38bdf8 100%)" },
-    { name: "Émeraude Vert", primary: "#10b981", secondary: "#059669", accent: "#10b981",
-      background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-      headerBg: "linear-gradient(90deg, #064e3b 0%, #34d399 50%, #6ee7b7 100%)" },
-    { name: "Rose Passion", primary: "#ec4899", secondary: "#db2777", accent: "#ec4899",
-      background: "linear-gradient(135deg, #ec4899 0%, #db2777 100%)",
-      headerBg: "linear-gradient(90deg, #831843 0%, #f472b6 50%, #f9a8d4 100%)" },
-    { name: "Orange Sunset", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
-      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      headerBg: "linear-gradient(90deg, #92400e 0%, #fbbf24 50%, #fcd34d 100%)" },
-    { name: "Indigo Royal", primary: "#6366f1", secondary: "#4f46e5", accent: "#6366f1",
-      background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
-      headerBg: "linear-gradient(90deg, #312e81 0%, #8b5cf6 50%, #c4b5fd 100%)" },
-    { name: "Teal Tropical", primary: "#14b8a6", secondary: "#0f766e", accent: "#14b8a6",
-      background: "linear-gradient(135deg, #14b8a6 0%, #0f766e 100%)",
-      headerBg: "linear-gradient(90deg, #134e4a 0%, #5eead4 50%, #99f6e4 100%)" },
-    { name: "Crimson Fire", primary: "#dc2626", secondary: "#b91c1c", accent: "#dc2626",
-      background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)",
-      headerBg: "linear-gradient(90deg, #7f1d1d 0%, #f87171 50%, #fecaca 100%)" },
-    { name: "Amber Gold", primary: "#f59e0b", secondary: "#d97706", accent: "#f59e0b",
-      background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-      headerBg: "linear-gradient(90deg, #78350f 0%, #fbbf24 50%, #fef3c7 100%)" },
-    { name: "Slate Modern", primary: "#64748b", secondary: "#475569", accent: "#64748b",
-      background: "linear-gradient(135deg, #64748b 0%, #475569 100%)",
-      headerBg: "linear-gradient(90deg, #1e293b 0%, #94a3b8 50%, #e2e8f0 100%)" },
-    { name: "Lime Electric", primary: "#65a30d", secondary: "#4d7c0f", accent: "#65a30d",
-      background: "linear-gradient(135deg, #65a30d 0%, #4d7c0f 100%)",
-      headerBg: "linear-gradient(90deg, #365314 0%, #84cc16 50%, #d9f99d 100%)" },
-    { name: "Fuchsia Magic", primary: "#c026d3", secondary: "#a21caf", accent: "#c026d3",
-      background: "linear-gradient(135deg, #c026d3 0%, #a21caf 100%)",
-      headerBg: "linear-gradient(90deg, #701a75 0%, #e879f9 50%, #f5d0fe 100%)" },
-  ];
+  // Thèmes déplacés en début de fonction
 
   // Options de chapitres
   const availableChapters = useMemo(() => {
@@ -1162,7 +1176,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     const theme = colorThemes[nextTheme];
 
     const app = document.querySelector('.App');
-    if (app) app.style.background = theme.background;
+    if (app) app.style.background = 'transparent'; // Garder arrière-plan transparent
 
     const header = document.querySelector('.header-banner');
     if (header) header.style.background = theme.headerBg;
@@ -1902,50 +1916,54 @@ ${contextualEnrichment}
                 <button className="btn-read" onClick={openYouVersion}>Lire la Bible</button>
                 <button className="btn-chat" onClick={() => window.open('https://chatgpt.com/', '_blank')}>ChatGPT</button>
                 <button className="btn-notes" onClick={handleNotesClick}>📝 Prise de Note</button>
-                <button className="btn-concordance" onClick={navigateToConcordance}>📖 BIBLE DE CONCORDANCE</button>
               </div>
 
               {/* Boutons d'action - Design équilibré et soigné */}
               <div className="balanced-controls-container">
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(6, 1fr)',
-                  gap: '14px',
+                  gridTemplateColumns: 'repeat(7, 1fr)',
+                  gap: '12px',
                   marginBottom: '24px',
                   padding: '0 10px',
                   width: '100%',
                   boxSizing: 'border-box'
                 }}>
-                  <button className="btn-control" style={getButtonStyle(buttonColors.reset, buttonColors.reset.shadow)} onClick={handleReset}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
                     <span className="control-label">Reset</span>
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.mystique, buttonColors.mystique.shadow)} onClick={changePalette}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.mystique, currentButtonColors.mystique.shadow)} onClick={changePalette}>
                     <span className="control-icon">🎨</span>
                     <span className="control-label">{colorThemes[currentTheme].name}</span>
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.genese, buttonColors.genese.shadow)} onClick={restoreLastStudy} disabled={!lastStudy}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.genese, currentButtonColors.genese.shadow)} onClick={restoreLastStudy} disabled={!lastStudy}>
                     <span className="control-icon">📚</span>
                     <span className="control-label">{lastStudy ? `${lastStudy.book} ${lastStudy.chapter}` : "Genèse 1"}</span>
                   </button>
                   
-                  <button className={`btn-control ${isLoading ? "loading" : ""}`} style={getButtonStyle(buttonColors.gemini, buttonColors.gemini.shadow)} onClick={generateWithGemini} disabled={isLoading}>
+                  <button className={`btn-control ${isLoading ? "loading" : ""}`} style={getButtonStyle(currentButtonColors.gemini, currentButtonColors.gemini.shadow)} onClick={generateWithGemini} disabled={isLoading}>
                     <span className="control-icon">🤖</span>
                     <span className="control-label">Gemini Gratuit</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
                   </button>
                   
-                  <button className="btn-control" style={getButtonStyle(buttonColors.versets, buttonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.versets, currentButtonColors.versets.shadow)} onClick={generateVerseByVerseProgressive}>
                     <span className="control-icon">⚡</span>
                     <span className="control-label">Versets Prog</span>
                   </button>
                   
-                  <button className={`btn-control btn-primary ${isLoading ? "loading" : ""}`} style={getButtonStyle(buttonColors.generate, buttonColors.generate.shadow)} onClick={generate28Points} disabled={isLoading}>
+                  <button className={`btn-control btn-primary ${isLoading ? "loading" : ""}`} style={getButtonStyle(currentButtonColors.generate, currentButtonColors.generate.shadow)} onClick={generate28Points} disabled={isLoading}>
                     <span className="control-icon">✨</span>
                     <span className="control-label">Générer</span>
                     {isLoading && <div className="btn-mini-loader"></div>}
+                  </button>
+                  
+                  <button className="btn-control" style={getButtonStyle(currentButtonColors.concordance, currentButtonColors.concordance.shadow)} onClick={navigateToConcordance}>
+                    <span className="control-icon">📖</span>
+                    <span className="control-label">Bible Concordance</span>
                   </button>
                 </div>
                 
