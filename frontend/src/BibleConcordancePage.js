@@ -326,8 +326,7 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
 
   // Histoire générée via API Gemini - fonction generateMockCharacterHistory supprimée
 
-  // Fonction Gemini pour enrichir la concordance de thèmes
-        ## 🌟 ABRAHAM - Le Père de la Foi (vers 2000 av. J.-C.)
+  const handleGeminiConcordance = async () => {
 
         ### 1. IDENTITÉ ET GÉNÉALOGIE
         Abraham, né Abram (signifiant "père élevé"), fils de Térach, descendant de Sem. Originaire d'Ur en Chaldée (actuel Irak). Sa généalogie remonte à Noé par Sem. Marié à Sara (d'abord appelée Saraï), sa demi-sœur par son père.
