@@ -387,8 +387,8 @@ DIRECTIVES :
 Produire une biographie complète et enrichissante de {request.character_name}.
 """
 
-        # Call Gemini API for character history
-        character_content = await call_gemini_api(prompt, 2500)
+        # Call Emergent LLM API for character history
+        character_content = await call_emergent_llm(prompt, 2500)
         
         if request.enrich:
             # Add additional enrichment
