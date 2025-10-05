@@ -86,7 +86,115 @@ def reset_failed_keys():
     failed_keys.clear()
     logger.info("Reset failed keys - all keys available again")
 
-# Using Gemini APIs only - No Emergent LLM
+# Utility functions for intelligent API rotation and fallback
+
+def extract_bible_search_terms(prompt: str) -> str:
+    """Extract relevant terms from prompt for Bible API search"""
+    # Extract character names, biblical terms, etc.
+    import re
+    
+    # Common biblical character names and terms
+    biblical_terms = [
+        "Abraham", "Moïse", "David", "Barak", "Déborah", "Sisera", "Jabin",
+        "Isaac", "Jacob", "Joseph", "Aaron", "Miriam", "Josué", "Samuel",
+        "Saül", "Goliath", "Salomon", "Élie", "Élisée", "Jérémie", "Ésaïe",
+        "Daniel", "Jésus", "Pierre", "Paul", "Jean", "Matthieu", "Luc",
+        "foi", "obéissance", "courage", "justice", "miséricorde", "amour"
+    ]
+    
+    found_terms = []
+    prompt_lower = prompt.lower()
+    
+    for term in biblical_terms:
+        if term.lower() in prompt_lower:
+            found_terms.append(term)
+    
+    # Return the most relevant terms or a generic search
+    if found_terms:
+        return " ".join(found_terms[:3])  # Max 3 terms
+    else:
+        return "foi espérance amour"  # Default biblical search
+
+def generate_fallback_from_bible_api(bible_results: List[Dict], original_prompt: str) -> str:
+    """Generate content from Bible API results when Gemini fails"""
+    
+    if not bible_results:
+        return generate_quota_exhausted_message(original_prompt)
+    
+    # Extract character name if present
+    character_match = re.search(r'(Abraham|Moïse|David|Barak|Déborah|Isaac|Jacob|Joseph|Aaron|Miriam|Josué|Samuel|Saül|Salomon|Élie|Élisée|Daniel|Jésus|Pierre|Paul)', original_prompt, re.IGNORECASE)
+    character_name = character_match.group(1) if character_match else "Personnage Biblique"
+    
+    fallback_content = f"""# 📖 {character_name.upper()} - Histoire Biblique (Mode de Récupération)
+
+## 🔹 INFORMATIONS DISPONIBLES
+
+Nos serveurs de génération de contenu rencontrent actuellement une forte demande. Voici les informations bibliques disponibles basées sur nos recherches dans les Écritures :
+
+## 🔹 VERSETS BIBLIQUES PERTINENTS
+
+"""
+    
+    for i, result in enumerate(bible_results[:5], 1):
+        verse_text = result.get('text', '').strip()
+        reference = result.get('reference', f'Verset {i}')
+        
+        fallback_content += f"### {i}. {reference}\n\n"
+        fallback_content += f'*"{verse_text}"*\n\n'
+    
+    fallback_content += f"""
+## 🔹 GÉNÉRATION COMPLÈTE TEMPORAIREMENT INDISPONIBLE
+
+Le système de génération automatique d'histoires bibliques détaillées est momentanément surchargé. 
+
+**Fonctionnalités disponibles :**
+- ✅ Recherche de versets bibliques
+- ✅ Concordance thématique  
+- ✅ Navigation dans les Écritures
+- ⏳ Génération IA (en attente de disponibilité)
+
+## 🔹 RECOMMANDATIONS
+
+1. **Essayez à nouveau dans quelques minutes** - Les serveurs se libèrent régulièrement
+2. **Consultez les versets ci-dessus** qui contiennent des informations précieuses
+3. **Utilisez la concordance biblique** pour explorer d'autres aspects
+
+*Service de génération automatique - Système de récupération activé*
+"""
+    
+    return fallback_content
+
+def generate_quota_exhausted_message(original_prompt: str) -> str:
+    """Generate a helpful message when all APIs are exhausted"""
+    
+    character_match = re.search(r'(Abraham|Moïse|David|Barak|Déborah|Isaac|Jacob|Joseph|Aaron|Miriam|Josué|Samuel|Saül|Salomon|Élie|Élisée|Daniel|Jésus|Pierre|Paul)', original_prompt, re.IGNORECASE)
+    character_name = character_match.group(1) if character_match else "Personnage Biblique"
+    
+    return f"""# 📖 {character_name.upper()} - Service Temporairement Indisponible
+
+## 🔹 FORTE DEMANDE ACTUELLEMENT
+
+Notre système de génération d'histoires bibliques enrichies connaît actuellement une très forte affluence.
+
+## 🔹 SOLUTIONS ALTERNATIVES
+
+**En attendant la disponibilité du service :**
+
+1. **⏳ Réessayez dans 5-10 minutes** - Les quotas se renouvellent régulièrement
+2. **📚 Consultez la Concordance Biblique** - Explorez les thèmes doctrinaux
+3. **🔍 Utilisez la recherche de versets** - Trouvez des passages spécifiques
+4. **📖 Naviguez dans les Écritures** - Lecture directe des textes bibliques
+
+## 🔹 POURQUOI CETTE LIMITATION ?
+
+Notre système utilise plusieurs API de génération de contenu de haute qualité. Lorsque la demande est très élevée, nous privilégions la qualité plutôt que la rapidité.
+
+## 🔹 MERCI DE VOTRE PATIENCE
+
+Nous travaillons constamment à améliorer la disponibilité de nos services pour vous offrir la meilleure expérience d'étude biblique possible.
+
+*L'équipe Bible Study AI - Service de génération automatique*
+"""
 
 # Pydantic Models
 class GenerateRequest(BaseModel):
