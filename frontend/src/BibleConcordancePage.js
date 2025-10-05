@@ -297,7 +297,7 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
           ))}
         </div>
 
-        {!selectedCharacter ? (
+        {currentTab === 'concordance' && (
           /* Section Concordance */
           <div>
             <form onSubmit={handleSearchSubmit} style={{ marginBottom: '30px' }}>
