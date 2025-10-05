@@ -1930,11 +1930,15 @@ ${contextualEnrichment}
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(7, 1fr)',
-                  gap: '12px',
+                  gap: '10px',
                   marginBottom: '24px',
-                  padding: '0 10px',
+                  padding: '0 5px',
                   width: '100%',
-                  boxSizing: 'border-box'
+                  maxWidth: '1400px',
+                  margin: '0 auto 24px auto',
+                  boxSizing: 'border-box',
+                  gridAutoFlow: 'column',
+                  alignItems: 'center'
                 }}>
                   <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
