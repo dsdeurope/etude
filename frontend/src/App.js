@@ -1762,8 +1762,8 @@ ${contextualEnrichment}
       const contentEnCours = `# Étude - ${passage}\n\n## ${rubriqueNum}. ${rubriqueTitle}\n\n🔄 Génération intelligente en cours...`;
       setContent(formatContent(contentEnCours));
       
-      // Appel API LOCAL pour CETTE rubrique avec notre système Gemini intelligent
-      const apiUrl = `${API_BASE}/generate-study`;
+      // Appel API pour CETTE rubrique avec notre système Gemini intelligent
+      const apiUrl = `${API_BASE}/api/generate-rubrique-content`;
       
       let rubriqueContent;
       
@@ -1776,11 +1776,12 @@ ${contextualEnrichment}
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            rubrique_number: rubriqueNum,
+            rubrique_title: rubriqueTitle,
+            book: selectedBook || "Genèse",
+            chapter: selectedChapter || "1",
             passage: passage,
-            version: selectedVersion || 'LSG',
-            tokens: selectedLength || 1000,
-            selected_rubriques: [rubriqueNum], // Cette rubrique spécifiquement
-            use_gemini: true
+            target_length: parseInt(selectedLength) || 500
           })
         });
         
@@ -1790,32 +1791,20 @@ ${contextualEnrichment}
         
         const data = await response.json();
         console.log(`[API SUCCESS RUBRIQUE ${rubriqueNum}]`, data.content ? data.content.length : 0, "caractères");
-        console.log(`[API DATA FULL CONTENT]`, data.content); // Debug pour voir le contenu complet
+        console.log(`[API DATA]`, data);
         
-        // Parser pour extraire SEULEMENT cette rubrique
-        const rubriques = parseRubriquesContent(data.content || "");
-        console.log(`[PARSING] Rubriques extraites:`, Object.keys(rubriques).length, "rubriques trouvées");
-        console.log(`[PARSING] Clés disponibles:`, Object.keys(rubriques));
-        rubriqueContent = rubriques[rubriqueNum];
-        console.log(`[PARSING] Contenu rubrique ${rubriqueNum}:`, rubriqueContent ? rubriqueContent.slice(0, 100) + "..." : "VIDE");
-        
-        // Debug: Afficher TOUTES les rubriques disponibles
-        console.log(`[DEBUG TOUTES RUBRIQUES] Contenu disponible:`);
-        Object.keys(rubriques).forEach(key => {
-          console.log(`  Rubrique ${key}: ${rubriques[key] ? rubriques[key].slice(0, 50) + "..." : "VIDE"}`);
-        });
-        
-        // Si pas trouvé, utiliser le contenu complet pour cette rubrique
-        if (!rubriqueContent && data.content) {
-          console.log(`[FALLBACK PARSING] Utilisation du contenu complet pour rubrique ${rubriqueNum}`);
+        if (data.status === "success" || data.status === "fallback") {
           rubriqueContent = data.content;
+          console.log(`[RUBRIQUE ${rubriqueNum}] Contenu généré avec succès:`, rubriqueContent.slice(0, 100) + "...");
+        } else {
+          throw new Error("Réponse API invalide");
         }
         
       } catch (apiError) {
         console.error(`[API ÉCHEC RUBRIQUE ${rubriqueNum}] ${apiError.message}`, apiError);
-        console.warn(`[FALLBACK] Utilisation generateRubriqueContent pour rubrique ${rubriqueNum}`);
-        // Fallback avec contenu intelligent spécifique
-        rubriqueContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
+        console.warn(`[FALLBACK] Génération de contenu de base pour rubrique ${rubriqueNum}`);
+        // Fallback avec contenu de base
+        rubriqueContent = `# ${rubriqueNum}. ${rubriqueTitle}\n\n**Analyse de ${passage}**\n\nCette section nécessite une génération via l'API qui est temporairement indisponible.\n\n## Contenu de remplacement pour ${rubriqueTitle}\n\nL'étude de ${passage} sous l'angle de "${rubriqueTitle}" révèle des aspects importants de la révélation divine.\n\n*Contenu généré automatiquement - Version enrichie via API indisponible*`;
       }
       
       setProgressPercent(80);
