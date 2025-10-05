@@ -258,8 +258,9 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
           flexWrap: 'wrap'
         }}>
           {[
-            { id: 'concordance', label: '📚 Concordance Thématique', active: !selectedCharacter },
-            { id: 'personnages', label: '👥 Personnages Bibliques', active: selectedCharacter }
+            { id: 'concordance', label: '📚 Concordance Biblique', active: currentTab === 'concordance' },
+            { id: 'personnages', label: '👥 Personnages Bibliques', active: currentTab === 'personnages' },
+            { id: 'themes', label: '🎯 Thèmes Bibliques', active: currentTab === 'themes' }
           ].map(tab => (
             <button
               key={tab.id}
