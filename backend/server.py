@@ -716,7 +716,7 @@ Les protagonistes de cette histoire sainte poursuivent leur pèlerinage spiritue
 Cette progression narrative révèle des vérités profondes sur les attributs divins : sa fidélité (hesed), sa justice (tsedek), sa miséricorde (rachamim). Ces termes hébreux résonnent à travers l'histoire pour culminer dans {passage}.
 
 DIRECTIVES ACADÉMIQUES :
-- Focus narratif sur {book} chapitre {int(chapter)-1 if chapter.isdigit() else "précédent"} spécifiquement
+- Focus narratif sur {book} chapitre {int(chapter)-1 if isinstance(chapter, int) and chapter > 1 else "précédent"} spécifiquement
 - {target_length} mots de chronique contextuelle captivante
 - Citations des versets pertinents du chapitre précédent avec références exactes
 - Éviter les généralités, raconter l'histoire spécifique
