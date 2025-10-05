@@ -134,11 +134,11 @@
         - comment: "✅ TESTS COMPLETS RÉUSSIS - API /api/generate-character-history fonctionne parfaitement. Tests effectués: David, Abraham, Moïse avec/sans enrichissement. Contenu narratif riche (1500-2200 mots), temps de réponse 18-26s, rotation des clés Gemini opérationnelle. Qualité narrative excellente avec structure immersive. Backend logs confirment aucune erreur."
   - task: "Amélioration prompts 28 rubriques"
     implemented: true
-    working: true
+    working: "NA"
     file: "server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         - working: true
         - agent: "main"
@@ -146,6 +146,9 @@
         - working: true
         - agent: "testing"
         - comment: "✅ TESTS COMPLETS RÉUSSIS - API /api/generate-rubrique-content fonctionne parfaitement. Tests effectués sur rubriques 1, 4, 11, 20 avec passages Genèse 1 et Jean 3. Contenu hautement narratif et théologiquement académique généré (566-905 mots). Temps de réponse excellents (7-10s). Intégration Gemini opérationnelle avec rotation des clés. Qualité exceptionnelle: explications termes difficiles intégrées naturellement, style narratif immersif, vocabulaire théologique précis. Bug mineur corrigé (tuple unpacking). Prompts améliorés produisent contenu significativement supérieur aux prompts génériques."
+        - working: "NA"
+        - agent: "user"
+        - comment: "User reports API endpoint fixes were made - frontend was calling wrong endpoints. Need to retest the 28 rubriques functionality to verify the fixes work correctly."
 
 ## metadata:
   created_by: "main_agent"
