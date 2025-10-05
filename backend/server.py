@@ -302,7 +302,7 @@ async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> tuple[str, str
         if bible_results:
             fallback_content = generate_fallback_from_bible_api(bible_results, prompt)
             logger.info("✅ Bible API fallback successful")
-            return fallback_content
+            return fallback_content, "bible_api_fallback"
         else:
             raise Exception("Bible API returned no results")
             
@@ -310,7 +310,7 @@ async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> tuple[str, str
         logger.error(f"❌ Bible API fallback also failed: {str(e)}")
         
     # Final fallback - return structured error message
-    return generate_quota_exhausted_message(prompt)
+    return generate_quota_exhausted_message(prompt), "quota_exhausted"
 
 async def search_bible_api(query: str) -> List[Dict]:
     """Search Bible API for verses"""
