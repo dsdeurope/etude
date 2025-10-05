@@ -586,7 +586,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.95) 0%, rgba(124, 58, 237, 0.98) 100%)',
-      fontFamily: 'Inter, sans-serif'
+      fontFamily: 'Montserrat, Inter, sans-serif'
     }}>
       {/* En-tête */}
       <div style={{
