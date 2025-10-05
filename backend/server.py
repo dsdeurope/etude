@@ -390,7 +390,7 @@ Basé sur l'histoire précédente, ajouter :
 Longueur : 800-1000 mots supplémentaires. Maintenir le style académique et respectueux.
 """
             
-            enrichment_content = await call_emergent_llm(enrichment_prompt, 1000)
+            enrichment_content = await call_gemini_api(enrichment_prompt, 1000)
             
             full_content = f"{character_content}\n\n---\n\n## 🤖 ENRICHISSEMENT THÉOLOGIQUE APPROFONDI\n\n{enrichment_content}"
         else:
