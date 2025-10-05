@@ -122,6 +122,10 @@ strong {
   margin: 20px auto;
   max-width: 400px;
   gap: 20px;
+  /* Centrage parfait sur toute la largeur */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .progress-pill {
