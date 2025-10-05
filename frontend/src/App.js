@@ -1130,14 +1130,13 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       // Après génération, naviguer vers la page de rubrique avec le contenu généré
       navigateToRubrique(id, generatedContent || '');
     } else if (id === 0) {
-      // Rubrique 0 : Étude verset par verset
+      // Rubrique 0 : Étude verset par verset - naviguer vers la page dédiée si du contenu existe
       console.log(`[RUBRIQUE 0] Vérification contenu existant - clé: ${contentKey}`);
       
-      // Vérifier s'il y a du contenu existant pour cette rubrique
-      if (generatedRubriques[contentKey]) {
-        console.log(`[RUBRIQUE 0] Contenu trouvé, affichage - longueur: ${generatedRubriques[contentKey].length}`);
-        setContent(generatedRubriques[contentKey]);
-        setIsVersetsProgContent(true);
+      if (generatedRubriques[contentKey] && (generatedRubriques[contentKey].includes('VERSET') || generatedRubriques[contentKey].includes('**TEXTE BIBLIQUE'))) {
+        console.log(`[RUBRIQUE 0] Contenu verset par verset trouvé, navigation vers page dédiée`);
+        const bookInfo = `${selectedBook || 'Genèse'} ${selectedChapter || '1'}${selectedVerse !== "--" ? ":" + selectedVerse : ""}`;
+        navigateToVersets(generatedRubriques[contentKey], bookInfo);
       } else {
         console.log(`[RUBRIQUE 0] Aucun contenu trouvé, affichage message d'instruction`);
         setContent("Cliquez sur **Versets Prog** pour générer l'étude verset par verset de ce chapitre.");
