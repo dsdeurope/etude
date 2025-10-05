@@ -3747,12 +3747,13 @@ strong {
   50% { opacity: 0.8; }
 }
 
-.control-icon {
-  font-size: 22px;
-  display: block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  text-align: center;
-  width: 100%;
+.btn-control .control-icon {
+  font-size: 22px !important;
+  display: block !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
 }
 
 .control-label {
