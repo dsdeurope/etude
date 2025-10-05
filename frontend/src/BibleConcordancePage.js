@@ -174,10 +174,10 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
     return text.replace(regex, '<mark style="background: #fef3c7; color: #92400e; padding: 2px 4px; border-radius: 4px;">$1</mark>');
   };
 
-  // Rendu conditionnel pour la page des versets thématiques
+  // Gestion du rendu conditionnel pour les thèmes
   if (selectedTheme) {
     return (
-      <ThemeVersesPage 
+      <ThemeVersesPage
         theme={selectedTheme}
         onGoBack={handleBackFromTheme}
       />
@@ -419,6 +419,69 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
           </div>
         )}
 
+        {currentTab === 'themes' && (
+          /* Section 30 Thèmes Essentiels */
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '20px',
+            padding: '30px',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h2 style={{ color: 'white', textAlign: 'center', marginBottom: '30px', fontSize: '24px' }}>
+              ✨ 30 Thèmes Essentiels de la Sainte Bible
+            </h2>
+            <p style={{ color: 'rgba(255, 255, 255, 0.8)', textAlign: 'center', marginBottom: '30px', fontSize: '16px' }}>
+              Chaque thème contient plus de 30 versets soigneusement sélectionnés avec liens cliquables vers YouVersion
+            </p>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '15px',
+              maxHeight: '500px',
+              overflowY: 'auto',
+              padding: '10px'
+            }}>
+              {biblicalThemes.map((theme, index) => (
+                <button
+                  key={theme}
+                  onClick={() => handleThemeClick(theme)}
+                  style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    border: 'none',
+                    borderRadius: '12px',
+                    padding: '16px 12px',
+                    color: 'white',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    fontFamily: 'Montserrat, sans-serif',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    textAlign: 'center',
+                    minHeight: '80px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textTransform: 'capitalize',
+                    lineHeight: '1.3'
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  {`${index + 1}. ${theme}`}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {currentTab === 'personnages' && (
           /* Section Personnages */
           <div>
@@ -500,9 +563,7 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
                   </div>
                 )}
               </div>
-            )}
-
-            {characterHistory && (
+            ) : (
               /* Affichage de l'histoire du personnage */
               <div style={{
                 background: 'linear-gradient(135deg, #f8fafc, #f1f5f9)',
@@ -569,66 +630,6 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
           </div>
         )}
 
-        {currentTab === 'themes' && (
-          /* Section Thèmes */
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            borderRadius: '20px',
-            padding: '30px',
-            backdropFilter: 'blur(15px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
-          }}>
-            <h2 style={{ color: 'white', textAlign: 'center', marginBottom: '30px', fontSize: '24px' }}>
-              🎯 Thèmes Bibliques
-            </h2>
-
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '15px',
-              maxHeight: '500px',
-              overflowY: 'auto',
-              padding: '10px'
-            }}>
-              {biblicalThemes.map(theme => (
-                <button
-                  key={theme}
-                  onClick={() => handleThemeClick(theme)}
-                  className="biblical-theme-btn"
-                  style={{
-                    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                    border: 'none',
-                    borderRadius: '12px',
-                    padding: '15px 12px',
-                    color: 'white',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                    fontFamily: 'Montserrat, sans-serif',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    textAlign: 'center',
-                    minHeight: '70px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textTransform: 'capitalize',
-                    lineHeight: '1.3'
-                  }}
-                  onMouseOver={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 6px 20px rgba(79, 172, 254, 0.4)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.target.style.transform = 'translateY(0px)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                >
-                  {theme}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
