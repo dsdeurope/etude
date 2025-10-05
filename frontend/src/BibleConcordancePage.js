@@ -45,14 +45,42 @@ const BibleConcordancePage = ({ onGoBack }) => {
     "Tite", "Philémon", "Lydie", "Priscille", "Aquila", "Apollos", "Silas"
   ].sort();
 
-  // Base de données complète des personnages bibliques avec histoires enrichies
+  // Génération de l'histoire des personnages bibliques via API
   const generateCharacterHistory = async (character) => {
     setIsCharacterLoading(true);
     setSelectedCharacter(character);
 
     try {
-      // Simuler un appel API pour générer l'histoire du personnage
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Appel API réel pour générer l'histoire du personnage
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-character-history`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          character_name: character,
+          enrich: true
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur API: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        setCharacterHistory(result.content);
+        console.log(`[EMERGENT LLM] Histoire générée pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
+      } else {
+        throw new Error('Erreur lors de la génération du contenu');
+      }
+
+    } catch (error) {
+      console.error("Erreur génération histoire:", error);
+      
+      // Fallback vers contenu statique en cas d'erreur API
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Base de données enrichie des personnages bibliques
       const charactersDatabase = {
