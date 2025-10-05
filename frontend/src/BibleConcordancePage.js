@@ -324,9 +324,6 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
       setIsCharacterLoading(false);
     }
   };
-
-  // Fonction pour générer une histoire mock (en attendant l'intégration API)
-  const generateMockCharacterHistory = (character) => {
     const histories = {
       "Abraham": `
         ## 🌟 ABRAHAM - Le Père de la Foi (vers 2000 av. J.-C.)
