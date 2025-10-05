@@ -380,8 +380,8 @@ DIRECTIVES :
         if request.enriched:
             base_prompt += "\nENRICHISSEMENT : Approfondir l'analyse théologique avec des éléments historiques, culturels et doctrinaux supplémentaires.\n"
 
-        # Call Gemini API
-        content = await call_gemini_api(base_prompt, request.tokens)
+        # Call Gemini API with intelligent rotation
+        content, api_used = await call_gemini_api(base_prompt, request.tokens)
         
         return {
             "status": "success",
