@@ -1649,15 +1649,16 @@ ${contextualEnrichment}
       
       try {
         // Générer la Rubrique 1 avec un appel API direct plus rapide
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-study`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-rubrique-content`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            rubrique_number: 1,
+            rubrique_title: "Prière d'ouverture",
+            book: selectedBook || "Genèse",
+            chapter: selectedChapter || "1",
             passage: passage,
-            version: selectedVersion || 'LSG',
-            tokens: 500, // Plus court pour plus de rapidité
-            selected_rubriques: [1], // Rubrique 1 uniquement
-            use_gemini: true
+            target_length: 500
           })
         });
         
