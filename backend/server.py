@@ -624,7 +624,7 @@ MISSION : Rédiger une prière d'ouverture digne des plus grandes traditions mon
 
 STYLE NARRATIF EXIGÉ :
 - Ton solennel et révérencieux, à la manière des prières de l'Ancien Testament
-- Prose biblique fluide avec rythme et cadence liturgique
+- Prose biblique fluide avec rythme et cadence liturgique  
 - Vocabulaire théologique précis mais accessible
 - Transitions naturelles entre les sections de prière
 - Explication naturelle des termes théologiques complexes dans le flux narratif
@@ -656,46 +656,223 @@ OBJECTIF : Créer une prière qui élève l'âme, instruit l'esprit et prépare 
             2: f"""
 STRUCTURE ET PLAN LITTÉRAIRE de {passage}
 
-MISSION : Analyser la structure littéraire détaillée de {passage} avec ses divisions, progressions et schémas narratifs/poétiques.
+MISSION : Analyser la structure littéraire de {passage} comme un maître narrateur biblique révélant les beautés architecturales du texte sacré.
 
-ANALYSE REQUISE :
-1. **DIVISION STRUCTURELLE** : Identifier les sections et sous-sections
-2. **PROGRESSION NARRATIVE/ARGUMENTATIVE** : Comment le texte se développe
-3. **SCHÉMAS LITTÉRAIRES** : Parallélismes, chiasmes, inclusions
-4. **MOTS-CLÉS RÉCURRENTS** : Termes qui structurent le passage
-5. **CONNECTEURS LOGIQUES** : Liens entre les idées et sections
+APPROCHE NARRATIVE EXIGÉE :
+- Raconter l'analyse comme une découverte progressive des trésors littéraires
+- Style vivant et captivant, digne des plus grands exégètes narratifs
+- Explications claires des termes techniques (chiasme, parallélisme, inclusio)
+- Métaphores architecturales pour décrire la structure du texte
 
-DIRECTIVES :
-- Analyse précise du texte hébreu/grec original quand pertinent  
-- {target_length} mots d'analyse détaillée
-- Schémas visuels avec indentation et numérotation
-- Références aux commentaires académiques reconnus
-- Applications herméneutiques pratiques
+ANALYSE NARRATIVE APPROFONDIE :
 
-Analyser spécifiquement {passage}, pas des généralités sur {book}.
+**I. L'ARCHITECTURE DIVINE DU TEXTE :**
+Découvrez comment l'Esprit Saint a inspiré une structure parfaite dans {passage}. Le parallélisme hébraïque (technique poétique où les idées se répondent en écho) révèle la symétrie divine. L'inclusio (répétition d'un même élément au début et à la fin) forme les colonnes de ce temple littéraire.
+
+**II. LA PROGRESSION NARRATIVE INSPIRÉE :**
+Suivez le fil d'or de la révélation qui traverse {passage}. Chaque verset s'enchaîne selon la logique divine, créant une crescendo théologique (montée progressive vers le climax spirituel). Les connecteurs logiques hébreux (waw consécutif, particules emphatiques) tissent cette tapisserie sacrée.
+
+**III. LES MOTS-CLÉS COMME JOYAUX :**
+Découvrez les termes hébreux/grecs récurrents qui scintillent à travers {passage}. Ces Leitworte (mots conducteurs allemands) forment les fils d'or du texte, créant unité et emphasis. Chaque répétition révèle une intention divine.
+
+**IV. LES SCHÉMAS LITTÉRAIRES CACHÉS :**
+Explorez les chiasmes (structures en miroir A-B-C-B'-A') qui révèlent le centre théologique du passage. L'anaphore (répétition en début de phrase) et l'épiphore (répétition en fin) créent le rythme sacré de la révélation.
+
+DIRECTIVES ACADÉMIQUES :
+- Analyse précise du texte hébreu/grec original quand pertinent
+- {target_length} mots d'analyse narrative captivante
+- Schémas visuels avec indentation poétique
+- Références aux commentaires de Calvin, Luther, Spurgeon
+- Applications herméneutiques pratiques pour la prédication
+
+Révélez la beauté littéraire divine spécifique à {passage}, pas des généralités sur {book}.
 """,
             3: f"""
 CONTEXTE DU CHAPITRE PRÉCÉDENT pour {passage}
 
-MISSION : Expliquer comment le chapitre précédent de {book} prépare et éclaire la compréhension de {passage}.
+MISSION : Raconter comme un chroniqueur biblique comment le chapitre précédent prépare et illumine {passage} dans le grand récit de la rédemption.
 
-ANALYSE CONTEXTUELLE :
-1. **RÉSUMÉ DU CHAPITRE PRÉCÉDENT** : Événements et enseignements clés
-2. **LIENS NARRATIFS/THÉMATIQUES** : Connexions directes avec {passage}
-3. **PROGRESSION DE LA RÉVÉLATION** : Comment Dieu révèle sa vérité progressivement
-4. **PERSONNAGES ET SITUATIONS** : Continuité ou contraste
-5. **IMPLICATIONS THÉOLOGIQUES** : Développement doctrinal
+APPROCHE NARRATIVE HISTORIQUE :
+- Style de chronique biblique, à la manière des livres historiques
+- Transitions fluides montrant la continuité divine
+- Explications des termes théologiques (économie du salut, progression révélationnelle)
+- Perspective de l'histoire sainte (Heilsgeschichte)
 
-DIRECTIVES :
-- Focus sur {book} chapitre {chapter-1} spécifiquement
-- {target_length} mots d'analyse contextuelle
-- Citations des versets pertinents du chapitre précédent
-- Éviter les généralités, rester spécifique au texte
-- Perspective canonique et théologique
+CHRONIQUE CONTEXTUELLE INSPIRÉE :
 
-Montrer concrètement comment le contexte précédent enrichit {passage}.
+**I. RÉCAPITULATIF DU CHAPITRE PRÉCÉDENT :**
+Dans les pages précédentes de cette épopée sacrée, l'Éternel avait orchestré... [Résumé narratif vivant du chapitre {int(chapter)-1 if chapter.isdigit() else "précédent"} de {book}]. Ces événements forment la toile de fond providentiellement préparée pour {passage}.
+
+**II. LES FILS PROVIDENTIELS ENTRELACÉS :**
+Observez comment la main divine a tissé les événements précédents pour préparer cette nouvelle révélation. La typologie biblique (préfiguration où les événements anciens annoncent les réalités futures) se déploie majestueusement. L'économie du salut (plan divin de rédemption) progresse selon le dessein éternel.
+
+**III. PROGRESSION DE LA RÉVÉLATION DIVINE :**
+Le principe de la révélation progressive (revelatio progressiva) se manifeste brillamment ici. Chaque vérité révélée précédemment éclaire {passage} d'une lumière nouvelle. L'herméneutique canonique nous enseigne que l'Écriture s'interprète par l'Écriture.
+
+**IV. CONTINUITÉ DES PERSONNAGES ET THÈMES :**
+Les protagonistes de cette histoire sainte poursuivent leur pèlerinage spirituel. Leurs caractères se développent, leurs foi grandit ou vacille, révélant les vérités éternelles sur la nature humaine et la grâce divine.
+
+**V. IMPLICATIONS THÉOLOGIQUES TRANSFORMATRICES :**
+Cette progression narrative révèle des vérités profondes sur les attributs divins : sa fidélité (hesed), sa justice (tsedek), sa miséricorde (rachamim). Ces termes hébreux résonnent à travers l'histoire pour culminer dans {passage}.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus narratif sur {book} chapitre {int(chapter)-1 if chapter.isdigit() else "précédent"} spécifiquement
+- {target_length} mots de chronique contextuelle captivante
+- Citations des versets pertinents du chapitre précédent avec références exactes
+- Éviter les généralités, raconter l'histoire spécifique
+- Perspective canonique et rédemptionnelle
+
+Révélez concrètement comment le contexte précédent enrichit dramatiquement {passage} dans le grand récit divin.
 """,
-            # Ajouter plus de prompts pour les autres rubriques...
+            4: f"""
+MOTS DIFFICILES ET EXPLICATION pour {passage}
+
+MISSION : Devenir un guide linguistique narratif, expliquant les termes complexes de {passage} comme un sage exégète partageant des trésors lexicaux.
+
+APPROCHE PÉDAGOGIQUE NARRATIVE :
+- Style de maître enseignant dévoilant des mystères linguistiques
+- Explications progressives du simple au complexe
+- Étymologies hébraïques/grecques racontées comme des découvertes
+- Applications contemporaines des concepts anciens
+
+EXPLORATION LEXICALE INSPIRÉE :
+
+**I. TRÉSOR LINGUISTIQUE PRINCIPAL :**
+Au cœur de {passage} brillent des gemmes lexicales d'une richesse inouïe. Chaque terme hébreu/grec porte en lui des siècles de révélation divine. L'herméneutique lexicale (étude approfondie des mots) nous révèle des nuances perdues dans nos traductions modernes.
+
+**II. TERMES THÉOLOGIQUES MAJEURS :**
+Découvrons ensemble les concepts-clés qui structurent ce passage :
+- Les termes de l'alliance (berith, diatheke) qui révèlent les relations divines
+- Le vocabulaire sacrificiel (korban, thusia) qui préfigure la rédemption
+- Les mots de la sainteté (qadosh, hagios) qui définissent la nature divine
+[Adaptation spécifique aux termes présents dans {passage}]
+
+**III. DIFFICULTÉS CULTURELLES CONTEXTUALISÉES :**
+Plongeons dans l'univers biblique pour comprendre :
+- Les réalités socio-culturelles qui éclairent certaines expressions
+- Les idiomes hébreux (hébraïsmes) qui déroutent nos mentalités modernes
+- Les concepts juridiques et cultuels de l'époque biblique
+- Les métaphores agricoles, pastorales, guerrières selon le contexte
+
+**IV. NUANCES GRAMMATICALES RÉVÉLATRICES :**
+La syntaxe hébraïque/grecque révèle des subtilités divines :
+- Les temps verbaux hébreux (accompli/inaccompli) qui transcendent nos catégories temporelles
+- Les constructions emphatiques (infinitif absolu, génitif de qualité)
+- Les jeux de mots (paronomases) qui révèlent l'intention prophétique
+
+**V. APPLICATIONS TRANSFORMATRICES :**
+Ces découvertes linguistiques illuminent notre compréhension contemporaine. Chaque terme correctement compris enrichit notre vie spirituelle et notre témoignage chrétien.
+
+DIRECTIVES ACADÉMIQUES :
+- Analyse lexicale spécifique aux mots effectivement présents dans {passage}
+- {target_length} mots d'exploration linguistique narrative
+- Références aux dictionnaires théologiques (TDNT, TDOT, BDB)
+- Applications pratiques pour la prédication et l'étude personnelle
+- Niveau académique accessible au chrétien cultivé
+
+Révélez les trésors linguistiques cachés spécifiquement dans {passage}, transformant l'étude en aventure lexicale captivante.
+""",
+            5: f"""
+GÉOGRAPHIE ET LIEUX pour {passage}
+
+MISSION : Transporter le lecteur dans les paysages bibliques de {passage}, révélant comment la géographie sacrée illumine le texte divin.
+
+APPROCHE GÉOGRAPHIQUE NARRATIVE :
+- Style de guide-explorateur des terres bibliques
+- Descriptions vivantes des paysages et leur signification spirituelle
+- Explications des termes géographiques (topographie, archéologie biblique)
+- Connexions entre géographie physique et vérités spirituelles
+
+VOYAGE GÉOGRAPHIQUE INSPIRÉ :
+
+**I. EXPLORATION DU THÉÂTRE BIBLIQUE :**
+Embarquons pour les lieux sacrés de {passage}. La géographie biblique n'est jamais accidentelle ; l'Éternel a choisi ces décors pour révéler ses vérités éternelles. Chaque montagne, vallée, désert, ville porte une signification théologique (la topographie comme théophanie).
+
+**II. PAYSAGES ET LEUR SYMBOLISME DIVIN :**
+Découvrons les lieux mentionnés dans {passage} :
+- Les montagnes (har, oros) : lieux de révélation, de rencontre avec Dieu
+- Les vallées (emek, koilas) : symboles d'humiliation ou de fertilité spirituelle  
+- Les déserts (midbar, eremos) : espaces de purification et d'épreuve
+- Les eaux (mayim, hydor) : sources de vie, purification, jugement
+[Adaptation aux lieux réellement mentionnés dans {passage}]
+
+**III. CONTEXTE ARCHÉOLOGIQUE ÉCLAIRANT :**
+L'archéologie biblique révèle les réalités concrètes derrière {passage}. Les découvertes récentes confirment et enrichissent notre compréhension du texte sacré. Chaque tessons, inscription, fondation dévoile l'historicité de la Parole divine.
+
+**IV. ROUTES ET CHEMINS PROVIDENTIELS :**
+Suivons les itinéraires divins à travers {passage}. Les voies commerciales, pèlerinages, exodes révèlent comment Dieu orchestre l'histoire. La géographie devient prophétie, chaque déplacement portant une signification rédemptionnelle.
+
+**V. CLIMAT ET SAISONS SPIRITUELLES :**
+Le climat palestinien (saison sèche/pluvieuse, vents, températures) influence profondément les métaphores bibliques. Comprendre ces réalités météorologiques dévoile des richesses herméneutiques insoupçonnées dans {passage}.
+
+**VI. APPLICATIONS CONTEMPORAINES :**
+Ces paysages bibliques parlent encore aujourd'hui. Ils nous enseignent sur notre propre géographie spirituelle : nos montagnes de communion, nos vallées d'épreuve, nos déserts de formation.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus géographique sur les lieux réellement mentionnés dans {passage}
+- {target_length} mots d'exploration géographique narrative
+- Références aux atlas bibliques, guides archéologiques
+- Cartes mentales et descriptions topographiques précises
+- Applications spirituelles des réalités géographiques
+
+Révélez comment la géographie sacrée de {passage} enrichit dramatiquement sa compréhension théologique et spirituelle.
+""",
+            6: f"""
+COUTUMES ET MENTALITÉ pour {passage}
+
+MISSION : Plonger dans l'univers culturel de {passage}, révélant comment les coutumes antiques éclairent les vérités éternelles.
+
+APPROCHE ANTHROPOLOGIQUE NARRATIVE :
+- Style d'ethnographe biblique explorant les civilisations anciennes
+- Descriptions vivantes des pratiques sociales et leur signification spirituelle
+- Explications des termes culturels (anthropologie biblique, sociologie hébraïque)
+- Passerelles entre mentalités antiques et contemporaines
+
+IMMERSION CULTURELLE INSPIRÉE :
+
+**I. PLONGÉE DANS LA MENTALITÉ HÉBRAÏQUE/GRECQUE :**
+Entrons dans l'univers mental des contemporains de {passage}. La pensée sémitique (mode de pensée hébraïque holistique) diffère fondamentalement de notre logique grecque analytique. Cette mentalité orientale privilégie le concret sur l'abstrait, l'expérientiel sur le conceptuel.
+
+**II. STRUCTURES SOCIALES ET FAMILIALES :**
+Découvrons l'organisation sociale qui donne sens à {passage} :
+- Le système patriarcal et ses implications théologiques
+- Les liens de parenté (clan, tribu) et solidarité communautaire
+- Les rôles masculins/féminins selon l'ordre créationnel divin
+- L'économie domestique et ses métaphores spirituelles
+[Adaptation aux structures réellement pertinentes pour {passage}]
+
+**III. COUTUMES RELIGIEUSES ET CULTUELLES :**
+Explorons les pratiques spirituelles qui éclairent {passage} :
+- Les rituels de purification (niddah, katharsis) et leur symbolisme
+- Les fêtes et calendrier liturgique (moed, heorte) et leur prophétisme
+- Les sacrifices et offrandes (korban, prosphora) et leur typologie christologique
+- Les lieux de culte (mishkan, naos) et leur architecture symbolique
+
+**IV. CODES D'HONNEUR ET DE HONTE :**
+Comprenons les valeurs fondamentales qui régissent les comportements dans {passage}. La culture méditerranéenne antique fonctionne sur les concepts d'honneur (kavod, doxa) et de honte (bosheth, aischros), éclairant de nombreux passages énigmatiques.
+
+**V. PRATIQUES COMMERCIALES ET JURIDIQUES :**
+Décryptons les réalités économiques et légales :
+- Les contrats et alliances (berith, diatheke) selon les codes anciens
+- Le système monétaire, poids et mesures bibliques
+- Les pratiques agricoles et pastorales métaphorisées
+- Les coutumes juridiques (témoignage, jugement, châtiment)
+
+**VI. HOSPITALITÉ ET RELATIONS SOCIALES :**
+L'hospitalité orientale (philoxenia) révèle des dimensions spirituelles profondes. Les codes de politesse, salutations, repas communautaires portent une signification théologique dans {passage}.
+
+**VII. APPLICATIONS TRANSFORMATRICES :**
+Cette immersion culturelle transforme notre lecture contemporaine. Elle nous aide à distinguer les principes éternels des expressions culturelles temporaires, enrichissant notre herméneutique contextuelle.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus culturel sur les coutumes réellement pertinentes pour {passage}
+- {target_length} mots d'exploration anthropologique narrative
+- Références aux études culturelles bibliques (de Vaux, Malina, Pilch)
+- Applications herméneutiques pour l'actualisation du texte
+- Respect de la diversité culturelle tout en affirmant les vérités universelles
+
+Révélez comment l'univers culturel de {passage} enrichit dramatiquement sa compréhension théologique et son application contemporaine.
+"""
         }
         
         # Utiliser le prompt spécialisé ou un prompt générique
