@@ -101,3 +101,49 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## user_problem_statement: Les personnages bibliques ne s'ouvrent pas dans une page dédiée avec du contenu narratif riche. L'utilisateur veut que chaque personnage s'ouvre dans une nouvelle page avec une histoire détaillée sur un ton narratif, racontant le passé et le présent du personnage pour donner une connaissance approfondie.
+
+## frontend:
+  - task: "Page dédiée pour personnages bibliques"
+    implemented: false
+    working: false
+    file: "BibleConcordancePage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+        - agent: "main"
+        - comment: "Les personnages restent dans la même vue au lieu d'ouvrir une page dédiée comme les thèmes"
+
+## backend:
+  - task: "Génération contenu narratif personnages"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "L'API génère du contenu mais peut être améliorée pour être plus narrative"
+
+## metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+## test_plan:
+  current_focus:
+    - "Page dédiée pour personnages bibliques"
+    - "Amélioration contenu narratif"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+## agent_communication:
+    - agent: "main"
+    - message: "Début implémentation des pages dédiées pour personnages bibliques avec contenu narratif enrichi"
