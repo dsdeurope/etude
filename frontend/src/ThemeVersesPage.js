@@ -119,16 +119,118 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     loadThemeVerses();
   }, [theme]);
 
-  const loadThemeVerses = () => {
+  const loadThemeVerses = async () => {
     setIsLoading(true);
     
-    // Simuler un chargement
-    setTimeout(() => {
-      const themeKey = theme.toLowerCase();
-      const themeVerses = themesDatabase[themeKey] || [];
-      setVerses(themeVerses);
+    try {
+      // Extraire les mots-clés du thème pour la recherche API
+      const searchTerms = extractThemeKeywords(theme);
+      
+      // Appel API pour récupérer les versets du thème
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/search-concordance`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          search_term: searchTerms,
+          enrich: true
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur API: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      if (result.status === 'success' && result.bible_verses) {
+        // Prendre les 30 premiers versets
+        const themeVerses = result.bible_verses.slice(0, 30).map(verse => ({
+          book: verse.book || "Livre",
+          chapter: verse.chapter || 1,
+          verse: verse.verse || 1,
+          text: verse.text || verse.content || "Texte du verset"
+        }));
+        
+        setVerses(themeVerses);
+        console.log(`[API GEMINI] ${themeVerses.length} versets récupérés pour "${theme}" - API: ${result.api_used || 'gemini'}`);
+      } else {
+        // Fallback vers une recherche simple
+        await loadFallbackVerses(theme);
+      }
+      
+    } catch (error) {
+      console.error("Erreur chargement versets thème:", error);
+      await loadFallbackVerses(theme);
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
+  };
+
+  // Fonction pour extraire les mots-clés d'un thème
+  const extractThemeKeywords = (themeName) => {
+    const themeKeywords = {
+      "Amour et Charité": "amour charité aimer",
+      "Foi et Confiance": "foi confiance croire",
+      "Espérance et Promesses": "espérance promesse espoir",
+      "Pardon et Miséricorde": "pardon miséricorde pardonner",
+      "Justice et Droiture": "justice droiture juste",
+      "Sagesse et Connaissance": "sagesse connaissance sage",
+      "Prière et Adoration": "prière adoration prier",
+      "Paix et Réconciliation": "paix réconciliation paisible",
+      "Joie et Louange": "joie louange réjouir",
+      "Humilité et Service": "humilité service servir",
+      "Courage et Force": "courage force fort",
+      "Patience et Persévérance": "patience persévérance patient",
+      "Compassion et Bonté": "compassion bonté compatissant",
+      "Vérité et Sincérité": "vérité sincérité vrai",
+      "Liberté et Délivrance": "liberté délivrance libérer",
+      "Guérison et Restauration": "guérison restauration guérir",
+      "Famille et Relations": "famille relation parent",
+      "Travail et Vocation": "travail vocation œuvre",
+      "Richesse et Pauvreté": "richesse pauvreté riche pauvre",
+      "Souffrance et Épreuves": "souffrance épreuve souffrir",
+      "Mort et Résurrection": "mort résurrection mourir ressusciter",
+      "Création et Nature": "création nature créer",
+      "Prophétie et Révélation": "prophétie révélation prophète",
+      "Royaume de Dieu": "royaume ciel céleste",
+      "Salut et Rédemption": "salut rédemption sauver",
+      "Saint-Esprit": "esprit saint consolateur",
+      "Église et Communauté": "église communauté assemblée",
+      "Mission et Évangélisation": "mission évangélisation évangile",
+      "Sanctification": "sanctification saint sanctifier",
+      "Eschatologie et Fin des Temps": "eschatologie fin temps dernier jour"
+    };
+    
+    return themeKeywords[themeName] || themeName.replace(/\set\s/g, ' ').toLowerCase();
+  };
+
+  // Fallback vers quelques versets de base si l'API échoue
+  const loadFallbackVerses = async (themeName) => {
+    const fallbackVerses = [
+      { 
+        book: "1 Jean", 
+        chapter: 4, 
+        verse: 8, 
+        text: "Celui qui n'aime pas n'a pas connu Dieu, car Dieu est amour." 
+      },
+      { 
+        book: "Jean", 
+        chapter: 3, 
+        verse: 16, 
+        text: "Car Dieu a tant aimé le monde qu'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu'il ait la vie éternelle." 
+      },
+      { 
+        book: "1 Corinthiens", 
+        chapter: 13, 
+        verse: 4, 
+        text: "L'amour est patient, l'amour est plein de bonté; l'amour n'est point envieux; l'amour ne se vante point, il ne s'enfle point d'orgueil." 
+      }
+    ];
+    
+    setVerses(fallbackVerses);
+    console.log(`[FALLBACK] Utilisation de ${fallbackVerses.length} versets de base pour "${themeName}"`);
   };
 
   if (isLoading) {
