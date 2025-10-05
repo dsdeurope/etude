@@ -79,11 +79,24 @@ const BibleConcordancePage = ({ onGoBack }) => {
     } catch (error) {
       console.error("Erreur génération histoire:", error);
       
-      // Fallback vers contenu statique en cas d'erreur API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Fallback vers contenu de base en cas d'erreur API
+      const fallbackContent = `# 📖 ${character.toUpperCase()} - Histoire Biblique Détaillée
 
-      // Base de données enrichie des personnages bibliques
-      const charactersDatabase = {
+## 🔹 GÉNÉRATION EN COURS...
+L'histoire complète de ${character} est en cours de génération via notre API enrichie par intelligence artificielle.
+
+## 🔹 FONCTIONNALITÉS
+- **Analyse complète** des passages bibliques concernant ${character}
+- **Contexte historique** et théologique approfondi  
+- **Applications contemporaines** pour la vie chrétienne
+- **Références croisées** avec d'autres personnages bibliques
+
+## 🔹 ERREUR TEMPORAIRE
+Une erreur temporaire empêche la génération du contenu. Veuillez réessayer dans quelques instants.
+
+*Contenu généré par Emergent LLM API - Service d'étude biblique enrichie*`;
+      
+      setCharacterHistory(fallbackContent);
         "Abraham": `# 📖 ABRAHAM - Le Père de la Foi
 
 ## 🔹 IDENTITÉ ET GÉNÉALOGIE
