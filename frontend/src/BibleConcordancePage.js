@@ -485,7 +485,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
                         fontSize: '12px',
                         fontWeight: '600',
                         fontFamily: 'Montserrat, sans-serif',
-                        cursor: isCharacterLoading ? 'not-allowed' : 'pointer',
+                        cursor: 'pointer',
                         transition: 'all 0.3s ease',
                         textAlign: 'center',
                         minHeight: '60px',
