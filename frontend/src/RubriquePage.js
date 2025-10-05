@@ -338,40 +338,147 @@ const RubriquePage = ({
               justifyContent: 'center'
             }}>
               {/* Bouton Gemini */}
-              <button
+              <button 
                 onClick={handleGeminiAction}
-                className="btn-gemini control-btn"
                 disabled={isLoading}
                 title="Enrichissement théologique avec Gemini"
+                style={{
+                  background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(139, 92, 246, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  textAlign: 'center',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
+                  }
+                }}
               >
                 🤖 Gemini
               </button>
 
+              {/* Bouton Prise de Note */}
+              <button 
+                onClick={handleNotesAction}
+                disabled={isLoading}
+                title="Prise de notes biblique"
+                style={{
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(16, 185, 129, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  textAlign: 'center',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = '0 3px 10px rgba(16, 185, 129, 0.3)';
+                  }
+                }}
+              >
+                📝 Prise de Note
+              </button>
+
               {/* Bouton ChatGPT */}
-              <button
+              <button 
                 onClick={handleChatGPTAction}
-                className="btn-chat control-btn"
-                title="Ouvrir ChatGPT dans un nouvel onglet"
+                disabled={isLoading}
+                title="Consultation ChatGPT"
+                style={{
+                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(245, 158, 11, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  textAlign: 'center',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = '0 3px 10px rgba(245, 158, 11, 0.3)';
+                  }
+                }}
               >
                 💬 ChatGPT
               </button>
 
-              {/* Bouton Prise de Note */}
-              <button
-                onClick={handleNotesAction}
-                className="btn-notes control-btn"
-                title="Ouvrir la page de prise de notes"
-              >
-                📝 Notes
-              </button>
-
               {/* Bouton Lire la Bible */}
-              <button
+              <button 
                 onClick={handleBibleAction}
-                className="btn-read control-btn"
-                title="Ouvrir ce passage sur YouVersion"
+                disabled={isLoading}
+                title="Consultation rapide Bible"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(59, 130, 246, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  textAlign: 'center',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = '0 3px 10px rgba(59, 130, 246, 0.3)';
+                  }
+                }}
               >
-                📖 Bible
+                📖 Lire la Bible
               </button>
 
               {/* Composant API complet avec LEDs */}
