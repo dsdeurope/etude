@@ -316,10 +316,6 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
 
       setCharacterHistory(history);
 
-      // Histoire générée (simulée pour la démo)
-      const mockHistory = generateMockCharacterHistory(character);
-      setCharacterHistory(mockHistory);
-
     } catch (error) {
       console.error("Erreur génération histoire:", error);
       setCharacterHistory("Erreur lors de la génération de l'histoire du personnage.");
