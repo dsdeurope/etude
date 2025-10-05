@@ -566,6 +566,67 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
             )}
           </div>
         )}
+
+        {currentTab === 'themes' && (
+          /* Section Thèmes */
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '20px',
+            padding: '30px',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <h2 style={{ color: 'white', textAlign: 'center', marginBottom: '30px', fontSize: '24px' }}>
+              🎯 Thèmes Bibliques
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '15px',
+              maxHeight: '500px',
+              overflowY: 'auto',
+              padding: '10px'
+            }}>
+              {biblicalThemes.map(theme => (
+                <button
+                  key={theme}
+                  onClick={() => handleThemeClick(theme)}
+                  className="biblical-theme-btn"
+                  style={{
+                    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                    border: 'none',
+                    borderRadius: '12px',
+                    padding: '15px 12px',
+                    color: 'white',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    fontFamily: 'Montserrat, sans-serif',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    textAlign: 'center',
+                    minHeight: '70px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textTransform: 'capitalize',
+                    lineHeight: '1.3'
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 6px 20px rgba(79, 172, 254, 0.4)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.transform = 'translateY(0px)';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  {theme}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
