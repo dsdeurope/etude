@@ -315,7 +315,7 @@ def test_rubrique_content_api():
                 continue
             
             # Validate response structure
-            required_fields = ["status", "content", "passage", "tokens_requested", "api_used"]
+            required_fields = ["status", "content", "passage", "word_count", "api_used"]
             missing_fields = [field for field in required_fields if field not in data]
             
             if missing_fields:
