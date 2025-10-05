@@ -45,108 +45,24 @@ const BibleConcordancePage = ({ onGoBack }) => {
     "Tite", "Philémon", "Lydie", "Priscille", "Aquila", "Apollos", "Silas"
   ].sort();
 
-  // Génération de l'histoire des personnages bibliques via API
+  // Base de données complète des personnages bibliques avec histoires enrichies
   const generateCharacterHistory = async (character) => {
     setIsCharacterLoading(true);
     setSelectedCharacter(character);
 
     try {
-      // Appel API réel pour générer l'histoire du personnage
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-character-history`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          character_name: character,
-          enrich: true
-        })
-      });
+      // Simuler un appel API pour générer l'histoire du personnage
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      if (!response.ok) {
-        throw new Error(`Erreur API: ${response.status}`);
-      }
+      // Base de données enrichie des personnages bibliques
+      const charactersDatabase = {
+        "Abraham": `# 📖 ABRAHAM - Le Père de la Foi
 
-      const result = await response.json();
-      
-      if (result.status === 'success') {
-        setCharacterHistory(result.content);
-        console.log(`[EMERGENT LLM] Histoire générée pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
-      } else {
-        throw new Error('Erreur lors de la génération du contenu');
-      }
+## 🔹 IDENTITÉ ET GÉNÉALOGIE
+Abraham (initialement Abram, "père exalté", puis Abraham "père d'une multitude") est né à Ur en Chaldée vers 2166 av. J.-C. Fils de Térah, descendant de Sem, il appartient à la lignée bénie de Noé. Son nom changé par Dieu révèle sa destinée prophétique comme père spirituel de multiples nations.
 
-    } catch (error) {
-      console.error("Erreur génération histoire:", error);
-      
-      // Fallback vers contenu de base en cas d'erreur API
-      const fallbackContent = `# 📖 ${character.toUpperCase()} - Histoire Biblique Détaillée
-
-## 🔹 GÉNÉRATION EN COURS...
-L'histoire complète de ${character} est en cours de génération via notre API enrichie par intelligence artificielle.
-
-## 🔹 FONCTIONNALITÉS
-- **Analyse complète** des passages bibliques concernant ${character}
-- **Contexte historique** et théologique approfondi  
-- **Applications contemporaines** pour la vie chrétienne
-- **Références croisées** avec d'autres personnages bibliques
-
-## 🔹 ERREUR TEMPORAIRE
-Une erreur temporaire empêche la génération du contenu. Veuillez réessayer dans quelques instants.
-
-*Contenu généré par Emergent LLM API - Service d'étude biblique enrichie*`;
-      
-      setCharacterHistory(fallbackContent);
-
-    } catch (error) {
-      console.error("Erreur génération histoire:", error);
-      setCharacterHistory("Erreur lors de la génération de l'histoire du personnage.");
-    } finally {
-      setIsCharacterLoading(false);
-    }
-  };
-
-  // Fonction pour obtenir les résultats uniques
-  const getUniqueResults = (results) => {
-    const seen = new Set();
-    const uniqueResults = [];
-    
-    for (const result of results) {
-      const key = `${result.book}_${result.chapter}_${result.verse}`;
-      if (!seen.has(key)) {
-        seen.add(key);
-        uniqueResults.push(result);
-      }
-    }
-    
-    return uniqueResults.slice(0, 10);
-  };
-
-  const searchBibleConcordance = async (searchTerm) => {
-    if (!searchTerm || searchTerm.trim().length < 2) {
-      setResults([]);
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/search-concordance`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ search_term: searchTerm, enrich: true })
-      });
-      
-      if (!response.ok) throw new Error('Erreur API');
-      
-      const data = await response.json();
-      setResults(data.bible_verses || []);
-    } catch (error) {
-      console.error("Erreur recherche concordance:", error);
-      setResults([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+## 🔹 APPEL DIVIN ET MIGRATION
+À l'âge de 75 ans, Abraham reçoit l'appel de Dieu : "Va-t'en de ton pays, de ta patrie, et de la maison de ton père, dans le pays que je te montrerai" (Genèse 12:1). Cette obéissance par la foi marque le début de l'histoire du salut. Il quitte Harran avec sa femme Sara, son neveu Lot, et toute sa maison, ne connaissant pas sa destination.
 
 ## 🔹 LES PROMESSES DIVINES
 Dieu établit avec Abraham une alliance éternelle comportant trois promesses fondamentales :
@@ -367,6 +283,109 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
       setIsCharacterLoading(false);
     }
   };
+
+  // Fonction pour générer une histoire mock (en attendant l'intégration API)
+  const generateMockCharacterHistory = (character) => {
+    const histories = {
+      "Abraham": `
+        ## 🌟 ABRAHAM - Le Père de la Foi (vers 2000 av. J.-C.)
+
+        ### 1. IDENTITÉ ET GÉNÉALOGIE
+        Abraham, né Abram (signifiant "père élevé"), fils de Térach, descendant de Sem. Originaire d'Ur en Chaldée (actuel Irak). Sa généalogie remonte à Noé par Sem. Marié à Sara (d'abord appelée Saraï), sa demi-sœur par son père.
+
+        ### 2. NAISSANCE ET JEUNESSE À UR
+        Né vers 2166 av. J.-C. à Ur, grande cité mésopotamienne connue pour ses ziggourats et le culte des idoles. Térah, son père, était probablement marchand. Environnement païen où l'on adorait le dieu-lune Nanna.
+
+        ### 3. L'APPEL DE DIEU ET LA GRANDE MIGRATION
+        **Genèse 12:1-3** : "L'Éternel dit à Abram: Va-t'en de ton pays, de ta patrie, et de la maison de ton père, dans le pays que je te montrerai." À 75 ans, obéit à l'appel divin sans connaître sa destination. Première manifestation de sa foi exceptionnelle.
+
+        **Étapes du voyage** :
+        - Ur → Charan (avec Térach, mort à 205 ans)  
+        - Charan → Canaan (avec Sara, Lot, serviteurs)
+        - Première étape en Canaan : Sichem, chêne de Moré
+
+        ### 4. LES ALLIANCES DIVINES
+        **Première alliance (Genèse 12:2-3)** : Promesse d'une grande nation, bénédiction personnelle, bénédiction universelle.
+
+        **Alliance renforcée (Genèse 15:5-6)** : "Regarde vers le ciel, et compte les étoiles... Ainsi sera ta postérité." Abraham crut et cela lui fut imputé à justice.
+
+        **Alliance de la circoncision (Genèse 17:4-8)** : Changement de nom (Abram → Abraham, "père d'une multitude"), circoncision comme signe, promesse de la terre de Canaan.
+
+        ### 5. ÉPREUVES DE FOI MAJEURES
+        **La famine en Égypte (Genèse 12:10-20)** : Première grande épreuve, mensonge sur Sara, intervention divine pour la protéger.
+
+        **Séparation d'avec Lot (Genèse 13)** : Conflits entre bergers, Abraham choisit la paix en laissant Lot choisir sa terre.
+
+        **Guerre des rois (Genèse 14)** : Abraham guerrier libérant Lot, rencontre avec Melchisédek, refus des biens du roi de Sodome.
+
+        **Le sacrifice d'Isaac (Genèse 22)** : Épreuve suprême de la foi. "Prends ton fils, ton unique, que tu aimes, Isaac..." Intervention de l'ange au dernier moment.
+
+        ### 6. DESCENDANCE ET PROMESSES
+        **Ismaël avec Agar** (Genèse 16) : Né quand Abraham avait 86 ans. Sara stérile pousse Abraham vers sa servante. Source de tensions familiales.
+
+        **Isaac, fils de la promesse** (Genèse 21) : Né quand Abraham avait 100 ans et Sara 90 ans. Rire de Sara : "Dieu m'a fait un sujet de rire."
+
+        ### 7. RELATIONS ET INTERCESSION
+        **Intercession pour Sodome** (Genèse 18:22-33) : Dialogue extraordinaire avec Dieu, marchandage pour sauver la ville. Révèle son cœur compassionnel.
+
+        **Relations avec les peuples locaux** : Alliances avec Abimélec, respect mutuel avec les Héthiens pour l'achat de la grotte de Macpéla.
+
+        ### 8. MORT ET SÉPULTURE
+        Mort à 175 ans (Genèse 25:7-8) : "Abraham expira et mourut dans une heureuse vieillesse, âgé et rassasié de jours." Enterré dans la grotte de Macpéla avec Sara par Isaac et Ismaël réconciliés.
+
+        ### 9. HÉRITAGE SPIRITUEL
+        **Père de trois religions monothéistes** : Judaïsme, Christianisme, Islam le vénèrent.
+
+        **Modèle de foi** (Romains 4:16, Hébreux 11:8-12) : "C'est pourquoi les héritiers le sont par la foi, pour que ce soit par grâce."
+
+        **Ami de Dieu** (Jacques 2:23, 2 Chroniques 20:7) : Titre unique dans les Écritures.
+
+        ### 10. VERSETS-CLÉS À RETENIR
+        - **Genèse 15:6** : "Abram crut à l'Éternel, qui le lui imputa à justice."
+        - **Genèse 22:14** : "Abraham donna à ce lieu le nom de Jéhovah-Jiré."  
+        - **Romains 4:17** : "Dieu qui donne la vie aux morts, et qui appelle les choses qui ne sont point comme si elles étaient."
+        - **Galates 3:9** : "De sorte que ceux qui croient sont bénis avec Abraham le croyant."
+
+        Abraham demeure le prototype du croyant qui obéit à Dieu par la foi, modèle éternel pour tous les âges.
+      `,
+      "Aaron": `
+        ## AARON - Le Grand Prêtre d'Israël (vers 1393-1273 av. J.-C.)
+
+        Aaron, dont le nom hébreu signifie "montagnard" ou "éclairé", naît vers 1396 av. J.-C. en Égypte sous l'oppression pharaonique. Fils d'Amram et de Jokébed de la tribu de Lévi, il grandit aux côtés de son frère cadet Moïse et de sa sœur Miriam dans une famille pieuse qui préserve la foi d'Abraham malgré l'esclavage. Son mariage avec Élischéba, fille d'Amminadab, lui donne quatre fils : Nadab, Abihu, Éléazar et Ithamar, qui marqueront l'histoire du sacerdoce d'Israël.
+
+        L'appel divin transforme Aaron en porte-parole de Moïse. Selon **Exode 4:14-16**, l'Éternel déclare : "N'y a-t-il pas ton frère Aaron, le Lévite ? Je sais qu'il parlera facilement." Cette élection divine scelle le destin d'Aaron comme médiateur entre Dieu et son peuple. Leur première rencontre prophétique à la montagne de Dieu après quarante ans de séparation inaugure un ministère commun extraordinaire.
+
+        Devant Pharaon, Aaron démontre la puissance divine en transformant son bâton en serpent qui dévore ceux des magiciens égyptiens. Il exécute plusieurs des dix plaies : l'eau changée en sang, les grenouilles et les moustiques, attestant ainsi la supériorité du Dieu d'Israël sur les divinités égyptiennes. Cette démonstration de force prépare la libération d'Israël de l'esclavage.
+
+        Pendant l'Exode, Aaron guide avec Moïse plus de 600 000 hommes hors d'Égypte, participant aux grands miracles : le passage de la mer Rouge, l'eau jaillissant du rocher et la manne tombant du ciel. Lors de la bataille contre Amalek, Aaron soutient avec Hur les mains levées de Moïse, assurant ainsi la victoire d'Israël par la prière et l'intercession.
+
+        L'institution divine de la prêtrise marque l'apogée de la vie d'Aaron. Selon **Exode 28:1**, Dieu ordonne : "Fais approcher de toi Aaron, ton frère, et ses fils avec lui, du milieu des enfants d'Israël, pour qu'ils soient à mon service dans le sacerdoce." Aaron revêt alors les vêtements sacrés : l'éphod, le pectoral orné de douze pierres précieuses représentant les tribus d'Israël, et la tiare portant l'inscription "Sainteté à l'Éternel". Sept jours de consécration, l'onction d'huile sainte et des sacrifices d'expiation établissent le sacerdoce aaronique pour l'éternité.
+
+        Comme Grand Prêtre, Aaron assume des responsabilités uniques. Seul autorisé à pénétrer dans le Saint des Saints lors du Jour des Expiations, il offre l'expiation pour les péchés d'Israël. Ses journées se remplissent d'holocaustes perpétuels matin et soir, d'intercession constante pour le peuple. La bénédiction sacerdotale de **Nombres 6:24-26** résonne de sa bouche : "Que l'Éternel te bénisse, et qu'il te garde ! Que l'Éternel fasse luire sa face sur toi, et qu'il t'accorde sa grâce !"
+
+        Cependant, Aaron n'échappe pas aux épreuves humaines. En l'absence de Moïse au Sinaï, il cède à la pression populaire et façonne le veau d'or, proclamant : "Voici ton dieu, Israël, qui t'a fait sortir d'Égypte !" Ce grave péché d'idolâtrie révèle sa vulnérabilité, mais l'intercession de Moïse lui obtient le pardon divin. Plus tard, la mort foudroyante de ses fils Nadab et Abihu, qui offrent un "feu étranger" devant l'Éternel, le plonge dans un silence douloureux mais soumis au jugement de Dieu.
+
+        Sa rébellion avec Miriam contre Moïse concernant sa femme éthiopienne révèle également ses luttes fraternelles. Quand Miriam est frappée de lèpre, Aaron intercède pour sa sœur, manifestant son cœur compatissant. La révolte de Koré contre son autorité sacerdotale trouve sa réponse divine dans le miracle de la verge : seule celle d'Aaron fleurit et produit des amandes, confirmant son élection. Cette verge miraculeuse est conservée dans l'arche comme témoignage perpétuel.
+
+        À 123 ans, Aaron gravit le mont Hor avec Moïse et son fils Éléazar. Dieu lui annonce sa mort imminente en châtiment de sa rébellion aux eaux de Meriba. Dans un geste solennel, Aaron transmet ses vêtements sacerdotaux à Éléazar qui lui succède, puis rend paisiblement son dernier souffle. "Toute la maison d'Israël pleura Aaron pendant trente jours," témoignage de l'amour du peuple pour son Grand Prêtre.
+
+        L'héritage spirituel d'Aaron traverse les siècles. Sa lignée assure le sacerdoce jusqu'à l'époque de Jésus, préfigurant le Christ, notre Grand Souverain Sacrificateur selon **Hébreux 4:14-16**. Tandis qu'Aaron offrait des sacrifices répétés, Christ s'est offert une fois pour toutes. Aaron demeure le modèle du médiateur fidèle, intercédant malgré ses faiblesses humaines, annonçant le parfait sacerdoce du Messie qui réconcilie définitivement Dieu et les hommes.
+      `
+    };
+
+    return histories[character] || `
+      ## ${character} - Histoire Biblique Détaillée
+
+      L'histoire complète de ${character} sera générée en croisant tous les passages bibliques le concernant. Cette fonctionnalité utilisera l'API Gemini pour créer un récit détaillé incluant :
+
+      - Sa généalogie et origine
+      - Les événements majeurs de sa vie
+      - Ses relations avec Dieu et les hommes  
+      - Son héritage spirituel
+      - Les versets-clés le concernant
+
+      *Génération en cours de développement...*
+    `;
   };
 
   // Fonction Gemini pour enrichir la concordance de thèmes
@@ -567,7 +586,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.95) 0%, rgba(124, 58, 237, 0.98) 100%)',
-      fontFamily: 'Montserrat, Inter, sans-serif'
+      fontFamily: 'Inter, sans-serif'
     }}>
       {/* En-tête */}
       <div style={{
@@ -1088,26 +1107,25 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                       overflowY: 'auto',
                       fontSize: '15px',
                       lineHeight: '1.7',
-                      fontFamily: 'Montserrat, Inter, sans-serif',
                       boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
                     }}>
                       <div dangerouslySetInnerHTML={{
                         __html: characterHistory
                           .replace(/\n/g, '<br>')
                           // Titre principal sur une ligne
-                          .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 20px 0; font-size: 20px; font-weight: 700; font-family: Montserrat, sans-serif; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$1</h2>')
+                          .replace(/##\s(.+)/g, '<h2 style="color: #1e293b; margin: 24px 0 20px 0; font-size: 20px; font-weight: 700; border-bottom: 2px solid rgba(139, 92, 246, 0.3); padding-bottom: 8px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">$1</h2>')
                           // Supprimer les ### et numérotation pour un style narratif
-                          .replace(/###\s?\d*\.?\s*(.+)/g, '<p style="color: #1e293b; margin: 16px 0 12px 0; font-size: 16px; font-weight: 700; font-family: Montserrat, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">$1</p>')
+                          .replace(/###\s?\d*\.?\s*(.+)/g, '<p style="color: #1e293b; margin: 16px 0 12px 0; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">$1</p>')
                           // Gras pour les passages importants
-                          .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700; font-family: Montserrat, sans-serif;">$1</strong>')
+                          .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700;">$1</strong>')
                           // Italique pour les mots étrangers et citations
-                          .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic; font-family: Montserrat, sans-serif;">$1</em>')
+                          .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic;">$1</em>')
                           // Versets cliquables
                           .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
-                            '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; font-family: Montserrat, sans-serif; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
+                            '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
                           // Créer des paragraphes narratifs
-                          .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
-                          .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
                           .replace(/$/, '</p>')
                       }} />
                     </div>
