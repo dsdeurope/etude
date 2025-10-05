@@ -118,7 +118,7 @@
         - comment: "Les personnages restent dans la même vue au lieu d'ouvrir une page dédiée comme les thèmes"
   - task: "CSS formatting fix in VersetParVersetPage"
     implemented: true
-    working: false
+    working: true
     file: "VersetParVersetPage.js"
     stuck_count: 1
     priority: "high"
@@ -130,6 +130,9 @@
         - working: false
         - agent: "testing"
         - comment: "❌ CRITICAL ISSUE CONFIRMED - CSS formatting fix is NOT working. Raw CSS code is still appearing as literal text in theological explanations. Found multiple instances of 'background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white !important; font-weight: 800 !important; padding: 2px 6px; border-radius: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);' appearing as text instead of being cleaned up. Also found HTML anchor tags with CSS styles appearing as literal text. The formatExplicationTheologique function's CSS cleanup regex patterns are not working correctly. Screenshots show clear evidence of the issue in EXPLICATION THÉOLOGIQUE sections."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ CSS FORMATTING FIX IS NOW WORKING! Main agent's second attempt successfully resolved the issue. The formatExplicationTheologique function has been completely rewritten to aggressively clean ALL CSS inline styles and replace them with proper CSS classes (.theological-concept, .quoted-text, .bible-reference). Tested via VERSETS PROG functionality - no raw CSS code appears as literal text anymore. Theological concepts are properly highlighted using CSS classes instead of inline styles. The issue was that the function was both cleaning CSS AND adding more CSS inline, creating a loop. Now it completely removes raw CSS text and applies clean formatting via classes. Screenshots confirm proper formatting throughout EXPLICATION THÉOLOGIQUE sections."
 
 ## backend:
   - task: "Génération contenu narratif personnages"
