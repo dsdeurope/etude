@@ -962,19 +962,19 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                       </button>
                     </div>
                     
-                    {/* Contenu de l'explication */}
-                    <div style={{ 
-                      color: '#374151',
-                      lineHeight: '1.7',
-                      marginBottom: '10px'
-                    }}>
-                      {section.explication.split('\n').map((line, lineIndex) => (
-                        <React.Fragment key={lineIndex}>
-                          {line}
-                          {lineIndex < section.explication.split('\n').length - 1 && <br />}
-                        </React.Fragment>
-                      ))}
-                    </div>
+                    {/* Contenu de l'explication avec formatage intelligent */}
+                    <div 
+                      style={{ 
+                        color: '#374151',
+                        lineHeight: '1.7',
+                        marginBottom: '10px',
+                        fontSize: '15px',
+                        textAlign: 'justify'
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: formatExplicationTheologique(section.explication)
+                      }}
+                    />
                     
                     {/* Indicateur de chargement */}
                     {enrichingVersets[`${currentBatch}-${section.number}`] && (
