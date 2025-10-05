@@ -121,7 +121,32 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
     
     return uniqueResults.slice(0, 10);
   };
-À l'âge de 75 ans, Abraham reçoit l'appel de Dieu : "Va-t'en de ton pays, de ta patrie, et de la maison de ton père, dans le pays que je te montrerai" (Genèse 12:1). Cette obéissance par la foi marque le début de l'histoire du salut. Il quitte Harran avec sa femme Sara, son neveu Lot, et toute sa maison, ne connaissant pas sa destination.
+
+  const searchBibleConcordance = async (searchTerm) => {
+    if (!searchTerm || searchTerm.trim().length < 2) {
+      setResults([]);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/search-concordance`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ search_term: searchTerm, enrich: true })
+      });
+      
+      if (!response.ok) throw new Error('Erreur API');
+      
+      const data = await response.json();
+      setResults(data.bible_verses || []);
+    } catch (error) {
+      console.error("Erreur recherche concordance:", error);
+      setResults([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
 ## 🔹 LES PROMESSES DIVINES
 Dieu établit avec Abraham une alliance éternelle comportant trois promesses fondamentales :
