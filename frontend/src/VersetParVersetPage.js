@@ -482,36 +482,8 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                 📖 Lire la Bible
               </button>
 
-              {/* Bouton API */}
-              <button 
-                onClick={() => {
-                  // Afficher un modal simple avec le statut API ou ouvrir une popup
-                  alert('Statut API:\n✅ Gemini Keys: Actives\n✅ Bible API: Active\n🔄 Système de rotation opérationnel');
-                }}
-                style={{
-                  background: 'linear-gradient(135deg, #3742fa, #2f3542)',
-                  border: 'none',
-                  borderRadius: '10px',
-                  color: 'white',
-                  padding: '8px 14px',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  boxShadow: '0 3px 10px rgba(55, 66, 250, 0.3)',
-                  fontFamily: 'Montserrat, sans-serif'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.transform = 'translateY(-1px)';
-                  e.target.style.boxShadow = '0 4px 15px rgba(55, 66, 250, 0.4)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.transform = 'translateY(0px)';
-                  e.target.style.boxShadow = '0 3px 10px rgba(55, 66, 250, 0.3)';
-                }}
-              >
-                ⚡ API
-              </button>
+              {/* Bouton API avec LEDs physiques */}
+              <ApiStatusButton />
             </div>
           </div>
           
