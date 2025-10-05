@@ -485,56 +485,54 @@ async def generate_character_history(request: CharacterRequest):
     try:
         # Create comprehensive prompt for character study
         prompt = f"""
-HISTOIRE BIBLIQUE COMPLÈTE : {request.character_name}
+NARRATION BIBLIQUE IMMERSIVE : {request.character_name}
 
-MISSION : Générer l'histoire biblique détaillée et documentée de {request.character_name} en croisant TOUS les passages des Écritures le concernant.
+MISSION : Raconter l'histoire captivante de {request.character_name} comme un récit narratif vivant qui transporte le lecteur dans l'époque biblique. Créer une biographie narrative qui donne une connaissance approfondie et personnelle du personnage.
 
-STRUCTURE NARRATIVE REQUISE :
-1. 🔹 IDENTITÉ ET GÉNÉALOGIE
-   - Nom, signification, origine familiale
-   - Contexte historique et géographique
+STYLE NARRATIF EXIGÉ :
+- Écriture à la troisième personne avec un ton narratif engageant
+- Utiliser des descriptions vivantes et des détails contextuels
+- Raconter l'histoire chronologiquement comme un récit captivant
+- Intégrer naturellement les références bibliques dans la narration
+- Créer des transitions fluides entre les différentes phases de la vie
 
-2. 🔹 NAISSANCE ET JEUNESSE  
-   - Circonstances de naissance
-   - Formation et environnement familial
+STRUCTURE NARRATIVE IMMERSIVE :
 
-3. 🔹 ÉVÉNEMENTS MAJEURS DE SA VIE
-   - Chronologie des faits marquants
-   - Interventions divines significatives
+## 🔹 ORIGINES ET NAISSANCE
+Racontez l'histoire de ses origines, le contexte familial, les circonstances de sa naissance. Décrivez l'époque, le lieu, l'environnement culturel et religieux dans lequel {request.character_name} a grandi.
 
-4. 🔹 RELATIONS ET MINISTÈRE
-   - Relations familiales, amicales, ennemis
-   - Rôle dans l'histoire du salut
+## 🔹 JEUNESSE ET FORMATION
+Narrez ses premières années, son éducation, les influences qui ont façonné sa personnalité. Comment était la vie quotidienne à son époque ? Quelles étaient les traditions familiales et sociales ?
 
-5. 🔹 ŒUVRES ET ACCOMPLISSEMENTS
-   - Réalisations principales
-   - Impact sur son époque
+## 🔹 L'APPEL ET LES DÉBUTS
+Racontez de manière vivante comment {request.character_name} est entré dans l'histoire sacrée. Décrivez ses premiers pas, ses premières rencontres avec Dieu, ses premières missions ou responsabilités.
 
-6. 🔹 ÉPREUVES ET DÉFIS
-   - Difficultés rencontrées
-   - Réactions et leçons apprises
+## 🔹 LES GRANDES AVENTURES DE SA VIE
+Narrez chronologiquement les événements marquants de sa vie comme une épopée. Utilisez des détails descriptifs pour faire revivre les scènes bibliques. Décrivez les lieux, les personnages secondaires, les défis rencontrés.
 
-7. 🔹 FOI ET RELATION AVEC DIEU
-   - Expériences spirituelles
-   - Évolution de la foi
+## 🔹 SES RELATIONS ET SON ENTOURAGE
+Racontez ses relations familiales, ses amitiés, ses alliances, ses conflits. Comment interagissait-il avec les autres ? Quels étaient ses proches collaborateurs ou opposants ?
 
-8. 🔹 HÉRITAGE ET POSTÉRITÉ
-   - Impact sur les générations suivantes
-   - Leçons pour aujourd'hui
+## 🔹 LES ÉPREUVES ET LES VICTOIRES
+Narrez de manière dramatique les moments difficiles et les triomphes de sa vie. Comment a-t-il fait face aux défis ? Quelles leçons a-t-il apprises ? Comment sa foi a-t-elle évolué ?
 
-9. 🔹 VERSETS-CLÉS À RETENIR
-   - 10 passages bibliques essentiels avec références précises
+## 🔹 SON HÉRITAGE ET SA MORT
+Racontez la fin de sa vie terrestre et l'impact durable qu'il a eu. Comment est-il remembered ? Quel exemple a-t-il laissé pour les générations futures ?
 
-DIRECTIVES :
-- Longueur : 2000-2500 mots minimum
-- Style : narratif, captivant et respectueux
-- Exactitude biblique rigoureuse
-- Citer les références scripturaires (Livre Chapitre:Verset)
-- Perspective théologique évangélique
-- Inclure des éléments historiques et culturels
-- Format Markdown avec sous-titres clairs
+## 🔹 VERSETS-CLÉS DE SON HISTOIRE
+Présentez 8-10 passages bibliques essentiels avec références précises (Livre Chapitre:Verset) qui racontent les moments les plus importants de sa vie.
 
-Produire une biographie complète et enrichissante de {request.character_name}.
+DIRECTIVES NARRATIVES :
+- Longueur : 2500-3000 mots minimum pour une biographie complète
+- Ton : narratif, engageant, respectueux et édifiant
+- Perspective : évangélique avec exactitude biblique rigoureuse
+- Intégration historique : inclure des éléments de contexte historique et culturel
+- Citations bibliques : intégrer naturellement les références dans le récit
+- Format Markdown avec émojis et sous-titres attractifs
+
+OBJECTIF : Créer une biographie narrative si captivante que le lecteur aura l'impression de connaître personnellement {request.character_name} et de comprendre profondément son parcours spirituel et humain.
+
+Commencez maintenant cette narration immersive de la vie de {request.character_name}.
 """
 
         # Call Gemini API for character history with intelligent rotation
