@@ -24,6 +24,18 @@ const BibleConcordancePage = ({ onGoBack }) => {
     setSelectedTheme(null);
   };
 
+  // Liste des 30 thèmes bibliques principaux
+  const biblicalThemes = [
+    "Amour et Charité", "Foi et Confiance", "Espérance et Promesses", "Pardon et Miséricorde", 
+    "Justice et Droiture", "Sagesse et Connaissance", "Prière et Adoration", "Paix et Réconciliation",
+    "Joie et Louange", "Humilité et Service", "Courage et Force", "Patience et Persévérance",
+    "Compassion et Bonté", "Vérité et Sincérité", "Liberté et Délivrance", "Guérison et Restauration",
+    "Famille et Relations", "Travail et Vocation", "Richesse et Pauvreté", "Souffrance et Épreuves",
+    "Mort et Résurrection", "Création et Nature", "Prophétie et Révélation", "Royaume de Dieu",
+    "Salut et Rédemption", "Saint-Esprit", "Église et Communauté", "Mission et Évangélisation",
+    "Sanctification", "Eschatologie et Fin des Temps"
+  ];
+
   // Liste des personnages bibliques principaux
   const biblicalCharacters = [
     "Abraham", "Isaac", "Jacob", "Joseph", "Moïse", "Aaron", "Miriam", "Josué", "Samuel", 
