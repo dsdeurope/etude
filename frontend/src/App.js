@@ -1532,7 +1532,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
 
   // Fonction pour enrichissement théologique contextuel et intelligent
   const generateTheologicalEnrichment = (rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength) => {
-    const baseContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
+    const baseContent = await generateRubriqueContentViaAPI(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
     
     // Enrichissement spécifique selon le livre biblique
     const bookEnrichment = getBookSpecificEnrichment(book, chapter);
