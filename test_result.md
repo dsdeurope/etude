@@ -129,6 +129,9 @@
         - working: true
         - agent: "main"
         - comment: "L'API génère du contenu mais peut être améliorée pour être plus narrative"
+        - working: true
+        - agent: "testing"
+        - comment: "✅ TESTS COMPLETS RÉUSSIS - API /api/generate-character-history fonctionne parfaitement. Tests effectués: David, Abraham, Moïse avec/sans enrichissement. Contenu narratif riche (1500-2200 mots), temps de réponse 18-26s, rotation des clés Gemini opérationnelle. Qualité narrative excellente avec structure immersive. Backend logs confirment aucune erreur."
 
 ## metadata:
   created_by: "main_agent"
