@@ -286,7 +286,7 @@ async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> tuple[str, str
         try:
             result, used_key = await call_single_gemini_key(api_key, key_name, prompt, max_tokens)
             logger.info(f"✅ Success with {used_key}")
-            return result
+            return result, used_key
             
         except Exception as e:
             logger.warning(f"❌ Failed with {key_name}: {str(e)}")
