@@ -158,8 +158,8 @@
 
 ## test_plan:
   current_focus:
+    - "Amélioration prompts 28 rubriques"
     - "Page dédiée pour personnages bibliques"
-    - "Diagnostic problème état chargement"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
