@@ -53,14 +53,38 @@ GEMINI_KEYS = [
 
 # Current API rotation state
 current_key_index = 0
+failed_keys = set()  # Track failed keys to avoid retry during same session
 
-def get_current_gemini_key():
-    """Get current Gemini API key with rotation"""
+def get_next_available_gemini_key():
+    """Get next available Gemini API key, skipping failed ones"""
     global current_key_index
-    key = GEMINI_KEYS[current_key_index]
-    current_key_index = (current_key_index + 1) % len(GEMINI_KEYS)
-    logger.info(f"Using Gemini key #{current_key_index + 1}")
-    return key
+    
+    # Try all keys, starting from current index
+    for _ in range(len(GEMINI_KEYS)):
+        key = GEMINI_KEYS[current_key_index]
+        key_name = f"gemini_key_{current_key_index + 1}"
+        
+        # Skip if this key has already failed in current session
+        if key_name not in failed_keys:
+            current_key_index = (current_key_index + 1) % len(GEMINI_KEYS)
+            logger.info(f"Using Gemini key #{current_key_index}")
+            return key, key_name
+        
+        current_key_index = (current_key_index + 1) % len(GEMINI_KEYS)
+    
+    # All keys failed
+    return None, None
+
+def mark_key_as_failed(key_name: str):
+    """Mark a key as failed for current session"""
+    failed_keys.add(key_name)
+    logger.warning(f"Marked {key_name} as failed - quota exhausted or error")
+
+def reset_failed_keys():
+    """Reset failed keys (can be called periodically)"""
+    global failed_keys
+    failed_keys.clear()
+    logger.info("Reset failed keys - all keys available again")
 
 # Using Gemini APIs only - No Emergent LLM
 
