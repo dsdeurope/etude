@@ -312,10 +312,6 @@ L'histoire de ${character} nous encourage à vivre une vie de foi authentique, s
 ### 💡 **Réflexion**
 Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du salut, en gardant les yeux fixés sur Jésus, l'auteur et le consommateur de la foi.
 
-*Histoire générée à partir des données bibliques disponibles. Pour une étude plus approfondie, consultez les commentaires bibliques spécialisés.*`;
-
-      setCharacterHistory(history);
-
     } catch (error) {
       console.error("Erreur génération histoire:", error);
       setCharacterHistory("Erreur lors de la génération de l'histoire du personnage.");
