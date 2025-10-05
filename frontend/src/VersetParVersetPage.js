@@ -566,6 +566,75 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     return matches;
   };
 
+  // Fonction pour formater intelligemment l'explication théologique
+  const formatExplicationTheologique = (text) => {
+    if (!text) return '';
+    
+    let formattedText = text;
+    
+    // 1. Rendre les références bibliques cliquables
+    const referencePattern = /(Genèse|Exode|Lévitique|Nombres|Deutéronome|Josué|Juges|Ruth|1 Samuel|2 Samuel|1 Rois|2 Rois|1 Chroniques|2 Chroniques|Esdras|Néhémie|Esther|Job|Psaumes|Proverbes|Ecclésiaste|Cantique|Ésaïe|Jérémie|Lamentations|Ézéchiel|Daniel|Osée|Joël|Amos|Abdias|Jonas|Michée|Nahum|Habacuc|Sophonie|Aggée|Zacharie|Malachie|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens|1 Thessaloniciens|2 Thessaloniciens|1 Timothée|2 Timothée|Tite|Philémon|Hébreux|Jacques|1 Pierre|2 Pierre|1 Jean|2 Jean|3 Jean|Jude|Apocalypse)\s+(\d+):(\d+(?:-\d+)?)/g;
+    
+    formattedText = formattedText.replace(referencePattern, (match, livre, chapitre, verset) => {
+      const searchQuery = encodeURIComponent(`${livre} ${chapitre}:${verset}`);
+      return `<a href="https://www.bible.com/search/bible?q=${searchQuery}" target="_blank" style="color: #8b5cf6; text-decoration: underline; font-weight: 600; cursor: pointer;" onmouseover="this.style.color='#7c3aed'" onmouseout="this.style.color='#8b5cf6'" title="Cliquer pour lire ce verset sur YouVersion">${match}</a>`;
+    });
+    
+    // 2. Mettre en gras les concepts théologiques importants
+    const conceptsTheologiques = [
+      'bénédiction divine', 'volonté de Dieu', 'fils de Dieu', 'filles d\'hommes',
+      'croissance démographique', 'lignée de Seth', 'lignée de Caïn',
+      'application pratique', 'sur le plan spirituel', 'contexte historique',
+      'signification théologique', 'enseignement biblique', 'principe biblique',
+      'perspective chrétienne', 'vérité spirituelle', 'message divin',
+      'révélation divine', 'sagesse divine', 'justice divine', 'miséricorde divine',
+      'alliance divine', 'promesse divine', 'amour de Dieu', 'grâce divine',
+      'royaume de Dieu', 'peuple élu', 'salut', 'rédemption', 'sanctification',
+      'justification', 'régénération', 'conversion', 'repentance', 'foi',
+      'espérance', 'charité', 'humilité', 'obéissance', 'soumission',
+      'témoignage chrétien', 'vie chrétienne', 'disciple', 'discipleship'
+    ];
+    
+    conceptsTheologiques.forEach(concept => {
+      const regex = new RegExp(`(${concept})`, 'gi');
+      formattedText = formattedText.replace(regex, '<strong style="color: #1f2937; font-weight: 700;">$1</strong>');
+    });
+    
+    // 3. Mettre en gras les expressions importantes entre guillemets
+    formattedText = formattedText.replace(/"([^"]+)"/g, '<strong style="color: #374151; font-weight: 600; font-style: italic;">"$1"</strong>');
+    
+    // 4. Mettre en évidence les phrases de conclusion/application
+    const conclusionPatterns = [
+      /(L'application pratique [^.]+\.)/gi,
+      /(En conclusion[^.]+\.)/gi,
+      /(Ainsi[^.]+\.)/gi,
+      /(Par conséquent[^.]+\.)/gi,
+      /(Il en résulte [^.]+\.)/gi,
+      /(Cela nous enseigne [^.]+\.)/gi,
+      /(Nous pouvons donc [^.]+\.)/gi,
+      /(Cette vérité nous [^.]+\.)/gi
+    ];
+    
+    conclusionPatterns.forEach(pattern => {
+      formattedText = formattedText.replace(pattern, '<em style="color: #059669; font-weight: 600; font-style: italic;">$1</em>');
+    });
+    
+    // 5. Mettre en gras les mots-clés doctrinaux
+    const motsClesDoctrinaux = [
+      'fécondité', 'procréation', 'sexualité', 'mariage', 'famille',
+      'responsabilité', 'intendance', 'dégénérescence', 'corruption',
+      'péché', 'chute', 'rachat', 'restauration', 'nouvelle création',
+      'esprit', 'âme', 'corps', 'trinité', 'incarnation', 'résurrection'
+    ];
+    
+    motsClesDoctrinaux.forEach(mot => {
+      const regex = new RegExp(`\\b(${mot})\\b`, 'gi');
+      formattedText = formattedText.replace(regex, '<span style="background: rgba(139, 92, 246, 0.1); padding: 1px 4px; border-radius: 3px; font-weight: 600; color: #1f2937;">$1</span>');
+    });
+    
+    return formattedText;
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
