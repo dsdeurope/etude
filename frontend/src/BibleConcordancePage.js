@@ -196,6 +196,16 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
     );
   }
 
+  // Gestion du rendu conditionnel pour les personnages
+  if (selectedCharacterForHistory) {
+    return (
+      <CharacterHistoryPage
+        character={selectedCharacterForHistory}
+        onGoBack={handleBackFromCharacter}
+      />
+    );
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
