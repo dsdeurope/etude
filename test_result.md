@@ -178,7 +178,6 @@
 
 ## test_plan:
   current_focus:
-    - "CSS formatting fix in VersetParVersetPage"
     - "Page dédiée pour personnages bibliques"
   stuck_tasks: []
   test_all: false
