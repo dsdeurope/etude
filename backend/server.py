@@ -429,7 +429,7 @@ Longueur : 800-1000 mots supplémentaires. Maintenir le style académique et res
             "content": full_content,
             "enriched": request.enrich,
             "word_count": len(full_content.split()),
-            "gemini_key_used": f"gemini_{current_key_index}"
+            "api_used": "emergent_llm_gpt4o-mini"
         }
         
     except Exception as e:
