@@ -7,12 +7,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   
-  // Nouvel état pour la recherche de personnages
-  const [characterSearchTerm, setCharacterSearchTerm] = useState("");
-  const [characterResults, setCharacterResults] = useState([]);
-  const [isCharacterLoading, setIsCharacterLoading] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [characterHistory, setCharacterHistory] = useState("");
+  // Plus besoin de ces états - les personnages ouvrent maintenant une page dédiée
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [selectedCharacterForHistory, setSelectedCharacterForHistory] = useState(null);
   const [currentTab, setCurrentTab] = useState('concordance');
