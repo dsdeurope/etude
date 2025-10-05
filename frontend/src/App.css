@@ -161,6 +161,16 @@ strong {
   animation: pulse 2s infinite;
 }
 
+/* Wrapper pour centrage parfait */
+.centered-progress-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 /* API Control Panel sous le pourcentage */
 .api-below-progress {
   display: flex;
