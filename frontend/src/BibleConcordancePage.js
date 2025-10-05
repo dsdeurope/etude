@@ -227,13 +227,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
               key={tab.id}
               onClick={() => {
                 setCurrentTab(tab.id);
-                if (tab.id === 'concordance') {
-                  setSelectedCharacter(null);
-                  setCharacterHistory("");
-                } else if (tab.id === 'personnages') {
-                  setSelectedCharacter(null);
-                  setCharacterHistory("");
-                }
+                // Les personnages ouvrent maintenant leurs propres pages dédiées
               }}
               style={{
                 background: tab.active 
