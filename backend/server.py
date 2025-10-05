@@ -388,7 +388,7 @@ DIRECTIVES :
             "content": content,
             "passage": request.passage,
             "tokens_requested": request.tokens,
-            "gemini_key_used": f"gemini_{current_key_index}"
+            "api_used": api_used
         }
         
     except Exception as e:
