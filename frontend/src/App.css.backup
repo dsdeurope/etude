@@ -3687,14 +3687,12 @@ strong {
 }
 
 .api-centered {
-  position: absolute !important;
-  top: 120px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 10 !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  margin-top: 20px !important;
+  width: 100% !important;
+  text-align: center !important;
 }
 
 @keyframes spin {
