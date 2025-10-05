@@ -112,6 +112,7 @@ strong {
 
 .progress-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 30px 40px;
@@ -120,6 +121,7 @@ strong {
   border-radius: 20px;
   margin: 20px auto;
   max-width: 400px;
+  gap: 20px;
 }
 
 .progress-pill {
