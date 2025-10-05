@@ -324,10 +324,9 @@ Comme ${character}, nous sommes appelés à jouer notre rôle dans l'histoire du
     }
   };
 
-  // Fonction pour générer une histoire mock (en attendant l'intégration API)
-  const generateMockCharacterHistory = (character) => {
-    const histories = {
-      "Abraham": `
+  // Histoire générée via API Gemini - fonction generateMockCharacterHistory supprimée
+
+  // Fonction Gemini pour enrichir la concordance de thèmes
         ## 🌟 ABRAHAM - Le Père de la Foi (vers 2000 av. J.-C.)
 
         ### 1. IDENTITÉ ET GÉNÉALOGIE
