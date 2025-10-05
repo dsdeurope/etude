@@ -1107,6 +1107,7 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                       overflowY: 'auto',
                       fontSize: '15px',
                       lineHeight: '1.7',
+                      fontFamily: 'Montserrat, Inter, sans-serif',
                       boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
                     }}>
                       <div dangerouslySetInnerHTML={{
