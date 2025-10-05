@@ -63,6 +63,10 @@ def get_current_gemini_key():
     logger.info(f"Using Gemini key #{current_key_index + 1}")
     return key
 
+# Emergent LLM Configuration
+EMERGENT_LLM_KEY = os.getenv("EMERGENT_LLM_KEY")
+emergent_llm = EmergentLLM(api_key=EMERGENT_LLM_KEY) if EMERGENT_LLM_KEY else None
+
 # Pydantic Models
 class GenerateRequest(BaseModel):
     passage: str
