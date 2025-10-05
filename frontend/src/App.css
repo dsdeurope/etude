@@ -3565,6 +3565,41 @@ strong {
   box-sizing: border-box !important;
 }
 
+/* Responsive adjustments pour les boutons */
+@media (max-width: 1400px) {
+  .balanced-controls-container {
+    padding: 0 20px !important;
+  }
+  
+  .balanced-buttons-grid {
+    gap: 12px !important;
+    padding: 15px 20px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .balanced-controls-container {
+    padding: 0 10px !important;
+  }
+  
+  .balanced-buttons-grid {
+    gap: 8px !important;
+    padding: 12px 15px !important;
+  }
+  
+  .btn-control {
+    min-height: 70px !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
 .btn-control {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   border: none !important;
