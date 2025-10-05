@@ -15,6 +15,9 @@ from pydantic import BaseModel
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
+# Emergent LLM integration
+from emergentintegrations import EmergentLLM
+
 # API requests
 import httpx
 import requests
