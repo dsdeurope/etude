@@ -15,8 +15,7 @@ from pydantic import BaseModel
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
-# Emergent LLM integration
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+# Removed Emergent LLM - Using Gemini APIs instead
 
 # API requests
 import httpx
