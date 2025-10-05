@@ -474,8 +474,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
                   {biblicalCharacters.map(character => (
                     <button
                       key={character}
-                      onClick={() => generateCharacterHistory(character)}
-                      disabled={isCharacterLoading}
+                      onClick={() => handleCharacterClick(character)}
                       className="biblical-character-btn"
                       style={{
                         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
