@@ -348,11 +348,11 @@ function App() {
 
   // Initialiser la rubrique 0 au chargement avec le livre et chapitre sélectionnés
   useEffect(() => {
-    if (selectedBook !== "--" && selectedChapter !== "--") {
+    if (selectedBook !== "--" && selectedChapter !== "--" && activeRubrique === 0) {
       console.log("[INIT RUBRIQUE] Initialisation rubrique 0 pour:", selectedBook, selectedChapter);
       handleRubriqueSelect(0);
     }
-  }, [selectedBook, selectedChapter, activeRubrique]);
+  }, [selectedBook, selectedChapter]);
 
   const saveCurrentStudy = () => {
     console.log("[DEBUG SAUVEGARDE] Tentative sauvegarde:", {
