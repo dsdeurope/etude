@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ThemeVersesPage from './ThemeVersesPage';
+import CharacterHistoryPage from './CharacterHistoryPage';
 
 const BibleConcordancePage = ({ onGoBack }) => {
   const [searchTerm, setSearchTerm] = useState("");
