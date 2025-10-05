@@ -456,7 +456,7 @@ MISSION : Analyser ces versets dans leur contexte théologique et fournir :
 Longueur : 600-800 mots. Style académique mais accessible.
 """
             
-            gemini_analysis = await call_gemini_api(prompt, 800)
+            gemini_analysis, api_used = await call_gemini_api(prompt, 800)
             
             return {
                 "status": "success", 
