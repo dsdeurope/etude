@@ -3753,7 +3753,8 @@ strong {
 }
 
 .control-label {
-  font-size: 10px;
+  font-family: 'Montserrat', -apple-system, sans-serif;
+  font-size: 12px;
   font-weight: 700;
   text-align: center;
   line-height: 1.1;
