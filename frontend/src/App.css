@@ -3819,6 +3819,8 @@ strong {
   
   .control-icon {
     font-size: 18px;
+    text-align: center;
+    width: 100%;
   }
   
   .control-label {
