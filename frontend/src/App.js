@@ -1209,17 +1209,9 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       
       setIsLoading(false);
       return;
-    } else if (id >= 1 && id <= 28) {
-      // Générer la rubrique à la demande ET naviguer vers sa page dédiée
-      console.log(`[GÉNÉRATION REQUISE] Rubrique ${id} non trouvée dans le cache`);
-      const passage = (selectedVerse === "--" || selectedVerse === "vide")
-        ? `${selectedBook || 'Genèse'} ${selectedChapter || '1'}`
-        : `${selectedBook || 'Genèse'} ${selectedChapter || '1'}:${selectedVerse}`;
-      const generatedContent = await generateSingleRubrique(id, BASE_RUBRIQUES[id], passage);
-      
-      // Après génération, naviguer vers la page de rubrique avec le contenu généré
-      navigateToRubrique(id, generatedContent || '');
-    } else if (id === 0) {
+    }
+    
+    if (id === 0) {
       // Rubrique 0 : Étude verset par verset - naviguer vers la page dédiée si du contenu existe
       console.log(`[RUBRIQUE 0] Vérification contenu existant - clé: ${contentKey}`);
       
