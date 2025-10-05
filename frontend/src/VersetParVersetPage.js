@@ -580,7 +580,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       return `<a href="https://www.bible.com/search/bible?q=${searchQuery}" target="_blank" style="color: #8b5cf6; text-decoration: underline; font-weight: 600; cursor: pointer;" onmouseover="this.style.color='#7c3aed'" onmouseout="this.style.color='#8b5cf6'" title="Cliquer pour lire ce verset sur YouVersion">${match}</a>`;
     });
     
-    // 2. Mettre en gras les concepts théologiques importants
+    // 2. Mettre en gras les concepts théologiques importants avec des couleurs visibles
     const conceptsTheologiques = [
       'bénédiction divine', 'volonté de Dieu', 'fils de Dieu', 'filles d\'hommes',
       'croissance démographique', 'lignée de Seth', 'lignée de Caïn',
@@ -597,7 +597,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     
     conceptsTheologiques.forEach(concept => {
       const regex = new RegExp(`(${concept})`, 'gi');
-      formattedText = formattedText.replace(regex, '<strong style="color: #1f2937; font-weight: 700;">$1</strong>');
+      formattedText = formattedText.replace(regex, '<strong style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white !important; font-weight: 800 !important; padding: 2px 6px; border-radius: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">$1</strong>');
     });
     
     // 3. Mettre en gras les expressions importantes entre guillemets
