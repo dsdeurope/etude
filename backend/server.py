@@ -2361,7 +2361,7 @@ Créer un contenu riche et spécialisé pour {rubrique_title} en analysant {pass
 
         # Appeler l'API Gemini
         try:
-            gemini_content = await call_gemini_api(base_prompt)
+            gemini_content, api_used = await call_gemini_api(base_prompt)
             
             # Calculer le nombre de mots
             word_count = len(gemini_content.split())
@@ -2373,7 +2373,7 @@ Créer un contenu riche et spécialisé pour {rubrique_title} en analysant {pass
                 "content": gemini_content,
                 "word_count": word_count,
                 "passage": passage,
-                "api_used": "gemini_keys"
+                "api_used": api_used
             }
             
         except Exception as gemini_error:
