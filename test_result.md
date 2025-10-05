@@ -161,7 +161,6 @@
 
 ## test_plan:
   current_focus:
-    - "Amélioration prompts 28 rubriques"
     - "Page dédiée pour personnages bibliques"
   stuck_tasks: []
   test_all: false
