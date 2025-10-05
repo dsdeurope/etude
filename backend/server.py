@@ -618,26 +618,40 @@ async def generate_rubrique_content(request: dict):
         # Définir les prompts spécialisés pour chaque rubrique
         rubrique_prompts = {
             1: f"""
-PRIÈRE D'OUVERTURE pour {passage}
+PRIÈRE D'OUVERTURE THÉOLOGIQUE pour {passage}
 
-MISSION : Créer une prière d'ouverture authentique et profonde spécifiquement pour l'étude de {passage}.
+MISSION : Rédiger une prière d'ouverture digne des plus grandes traditions monastiques et académiques, spécifiquement pour l'étude de {passage}, dans un style narratif biblique inspiré des Écritures.
 
-STRUCTURE REQUISE :
-**ADORATION :** Reconnaître la grandeur divine révélée dans {passage}
-**CONFESSION :** Confesser humblement nos manquements face à la sainteté divine
-**DEMANDE :** Solliciter l'éclairage du Saint-Esprit pour comprendre {passage}
-**INTERCESSION :** Prier pour l'Église et le monde à la lumière de {passage}
+STYLE NARRATIF EXIGÉ :
+- Ton solennel et révérencieux, à la manière des prières de l'Ancien Testament
+- Prose biblique fluide avec rythme et cadence liturgique
+- Vocabulaire théologique précis mais accessible
+- Transitions naturelles entre les sections de prière
+- Explication naturelle des termes théologiques complexes dans le flux narratif
 
-DIRECTIVES :
-- Prière personnelle et authentique, pas générique
-- Références spécifiques aux thèmes et vérités de {passage}
-- Longueur : {target_length} mots
-- Ton : révérencieux, personnel, bibliquement fondé
-- Style : prose priante avec des citations bibliques pertinentes
-- Perspective : évangélique réformée
-- Inclure des "Amen" appropriés
+STRUCTURE THÉOLOGIQUE APPROFONDIE :
 
-Créer une prière qui prépare vraiment le cœur à étudier {passage}.
+**I. ADORATION TRINITAIRE :**
+Élévation vers le Père, contemplation du Fils révélé dans {passage}, invocation du Saint-Esprit. Utiliser le vocabulaire des attributs divins (omniscience, omnipotence, omniprésence) en expliquant naturellement leur signification.
+
+**II. CONFESSION PÉNITENTIELLE :**
+Reconnaissance humble de notre condition pécheresse face à la sainteté révélée dans {passage}. Employer les concepts de justification, sanctification et régénération en expliquant leur sens spirituel.
+
+**III. SUPPLICATION ÉCLAIRANTE :**
+Demande d'illumination herméneutique pour saisir les vérités théologiques de {passage}. Invoquer les dons spirituels de sagesse (sophia), connaissance (gnosis) et discernement (diakrisis) - expliquer ces termes grecs dans le contexte.
+
+**IV. INTERCESSION ECCLÉSIALE :**
+Prière pour l'Église universelle et locale à la lumière des enseignements de {passage}. Inclure les concepts d'ecclésiologie (étude de l'Église), koinonia (communion fraternelle) et diakonia (service).
+
+DIRECTIVES ACADÉMIQUES :
+- Intégrer naturellement 8-10 termes théologiques précis avec leurs explications subtiles
+- Références croisées avec d'autres passages bibliques pertinents
+- Perspective herméneutique évangélique réformée
+- Longueur : {target_length} mots de substance théologique
+- Inclure des formulations liturgiques traditionnelles ("Que ton nom soit sanctifié", "Selon ta volonté divine")
+- Conclure par des "Amen" appropriés selon la tradition chrétienne
+
+OBJECTIF : Créer une prière qui élève l'âme, instruit l'esprit et prépare le cœur à une étude biblique de niveau académique supérieur, digne d'une école de théologie renommée.
 """,
             2: f"""
 STRUCTURE ET PLAN LITTÉRAIRE de {passage}
