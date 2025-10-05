@@ -1664,19 +1664,20 @@ ${contextualEnrichment}
         
         if (response.ok) {
           const data = await response.json();
-          const rubrique1Content = data.content || '';
-          
-          console.log(`[NAVIGATION IMMÉDIATE] Rubrique 1 générée: ${rubrique1Content.length} caractères`);
-          console.log(`[CONTENU PREVIEW]`, rubrique1Content.slice(0, 100) + "...");
-          
-          // Sauvegarder le contenu dans l'état
-          const contentKey = `${selectedBook}_${selectedChapter}_1`;
-          setGeneratedRubriques(prev => ({ ...prev, [contentKey]: rubrique1Content }));
-          setRubriquesStatus(p => ({ ...p, 1: "completed" }));
-          
-          // Navigation immédiate avec le contenu frais
-          navigateToRubrique(1, rubrique1Content);
-          setProgressPercent(4); // 1/28 ≈ 4%
+          if (data.status === "success" || data.status === "fallback") {
+            const rubrique1Content = data.content || '';
+            
+            console.log(`[NAVIGATION IMMÉDIATE] Rubrique 1 générée: ${rubrique1Content.length} caractères - API: ${data.api_used}`);
+            console.log(`[CONTENU PREVIEW]`, rubrique1Content.slice(0, 100) + "...");
+            
+            // Sauvegarder le contenu dans l'état
+            const contentKey = `${selectedBook}_${selectedChapter}_1`;
+            setGeneratedRubriques(prev => ({ ...prev, [contentKey]: rubrique1Content }));
+            setRubriquesStatus(p => ({ ...p, 1: "completed" }));
+            
+            // Navigation immédiate avec le contenu frais
+            navigateToRubrique(1, rubrique1Content);
+            setProgressPercent(4); // 1/28 ≈ 4%
           
         } else {
           console.error("[API ERREUR] Impossible de générer la Rubrique 1");
