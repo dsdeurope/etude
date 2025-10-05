@@ -355,22 +355,37 @@ async def generate_verse_by_verse(request: GenerateRequest):
     try:
         # Create enhanced prompt for Bible study
         base_prompt = f"""
-ÉTUDE BIBLIQUE APPROFONDIE : {request.passage}
+ÉTUDE VERSET PAR VERSET : {request.passage}
 
-MISSION : Générer une étude théologique complète et structurée du passage biblique "{request.passage}".
+MISSION : Générer une étude biblique détaillée verset par verset du passage "{request.passage}".
 
-STRUCTURE REQUISE :
-1. CONTEXTE HISTORIQUE ET LITTÉRAIRE
-2. ANALYSE THÉOLOGIQUE APPROFONDIE 
-3. APPLICATIONS SPIRITUELLES CONTEMPORAINES
-4. RÉFÉRENCES CROISÉES IMPORTANTES
+FORMAT EXACT REQUIS pour chaque verset (RESPECTER EXACTEMENT ce format) :
 
-DIRECTIVES :
-- Longueur : environ {request.tokens} mots
-- Style : académique mais accessible
-- Perspective : évangélique et fidèle aux Écritures
-- Inclure des références bibliques pertinentes
-- Proposer des applications pratiques pour le croyant d'aujourd'hui
+**VERSET 1**
+
+**TEXTE BIBLIQUE :**
+[Texte exact du verset 1 en français selon la version LSG]
+
+**EXPLICATION THÉOLOGIQUE :**
+[Explication détaillée de 150-200 mots : contexte historique, sens théologique, applications spirituelles]
+
+**VERSET 2**
+
+**TEXTE BIBLIQUE :**
+[Texte exact du verset 2 en français selon la version LSG]
+
+**EXPLICATION THÉOLOGIQUE :**
+[Explication détaillée de 150-200 mots]
+
+[Continuer ainsi pour les 5 premiers versets du chapitre]
+
+EXIGENCES STRICTES :
+- Traiter EXACTEMENT les versets 1 à 5 du chapitre spécifié
+- RESPECTER EXACTEMENT le format avec **VERSET N**, **TEXTE BIBLIQUE :** et **EXPLICATION THÉOLOGIQUE :**
+- Utiliser le texte de la Bible Louis Segond (LSG)
+- Chaque explication doit faire 150-200 mots
+- Style évangélique, académique mais accessible
+- Inclure contexte historique et applications pratiques
 
 """
 
