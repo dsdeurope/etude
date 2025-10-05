@@ -1032,6 +1032,14 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     setCurrentPage('main');
   };
 
+  const navigateToRubrique = (rubriqueNumber, content = '') => {
+    setCurrentRubriqueNumber(rubriqueNumber);
+    setCurrentRubriqueContent(content);
+    const bookInfo = `${selectedBook || 'Genèse'} ${selectedChapter || '1'}${selectedVerse !== "--" ? ":" + selectedVerse : ""}`;
+    setCurrentBookInfo(bookInfo);
+    setCurrentPage('rubrique');
+  };
+
   // Fonction pour revenir de la page d'histoire de personnage
   const handleBackFromCharacter = () => {
     setSelectedCharacterForHistory(null);
