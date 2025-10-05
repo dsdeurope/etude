@@ -124,11 +124,9 @@ async def health_check():
         gemini_keys_count=len(GEMINI_KEYS)
     )
 
-async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> str:
-    """Call Gemini API with current key rotation"""
+async def call_single_gemini_key(api_key: str, key_name: str, prompt: str, max_tokens: int = 1500) -> str:
+    """Call Gemini API with a specific key"""
     try:
-        # Get current key and configure Gemini
-        api_key = get_current_gemini_key()
         genai.configure(api_key=api_key)
         
         # Configure the model
@@ -152,14 +150,59 @@ async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> str:
         )
         
         if response and response.text:
-            logger.info(f"Gemini API successful, response length: {len(response.text)}")
-            return response.text
+            logger.info(f"Gemini API successful with {key_name}, response length: {len(response.text)}")
+            return response.text, key_name
         else:
-            raise Exception("No response text from Gemini")
+            raise Exception(f"No response text from Gemini {key_name}")
             
     except Exception as e:
-        logger.error(f"Gemini API error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Gemini API error: {str(e)}")
+        error_msg = str(e).lower()
+        if "quota" in error_msg or "limit" in error_msg or "exhausted" in error_msg:
+            logger.warning(f"Quota exhausted for {key_name}: {str(e)}")
+            mark_key_as_failed(key_name)
+        else:
+            logger.error(f"Gemini API error with {key_name}: {str(e)}")
+        raise e
+
+async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> str:
+    """Call Gemini API with intelligent rotation and fallback"""
+    
+    # Try all available Gemini keys
+    for attempt in range(len(GEMINI_KEYS)):
+        api_key, key_name = get_next_available_gemini_key()
+        
+        if api_key is None:
+            logger.error("All Gemini keys have failed - no more keys to try")
+            break
+            
+        try:
+            result, used_key = await call_single_gemini_key(api_key, key_name, prompt, max_tokens)
+            logger.info(f"✅ Success with {used_key}")
+            return result
+            
+        except Exception as e:
+            logger.warning(f"❌ Failed with {key_name}: {str(e)}")
+            continue
+    
+    # If all Gemini keys failed, try Bible API as fallback for biblical content
+    logger.info("🔄 All Gemini keys failed, attempting Bible API fallback...")
+    try:
+        # Extract key terms from prompt for Bible search
+        search_terms = extract_bible_search_terms(prompt)
+        bible_results = await search_bible_api(search_terms)
+        
+        if bible_results:
+            fallback_content = generate_fallback_from_bible_api(bible_results, prompt)
+            logger.info("✅ Bible API fallback successful")
+            return fallback_content
+        else:
+            raise Exception("Bible API returned no results")
+            
+    except Exception as e:
+        logger.error(f"❌ Bible API fallback also failed: {str(e)}")
+        
+    # Final fallback - return structured error message
+    return generate_quota_exhausted_message(prompt)
 
 async def search_bible_api(query: str) -> List[Dict]:
     """Search Bible API for verses"""
