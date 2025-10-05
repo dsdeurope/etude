@@ -10,10 +10,10 @@ function App() {
       color: 'white',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <h1>🎯 BIBLE STUDY AI - TEST SIMPLE</h1>
-      <h2>✅ REACT FONCTIONNE !</h2>
-      <p>Configuration du 3 octobre appliquée</p>
-      <p>Build Vercel : {new Date().toLocaleString()}</p>
+      <h1>🎯 BIBLE STUDY AI - NETLIFY DEPLOY</h1>
+      <h2>✅ REACT FONCTIONNE SUR NETLIFY !</h2>
+      <p>Alternative fiable à Vercel - Déploiement réussi</p>
+      <p>Build Netlify : {new Date().toLocaleString()}</p>
       <div style={{
         background: 'rgba(255,255,255,0.1)',
         padding: '20px',
