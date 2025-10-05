@@ -601,6 +601,158 @@ Longueur : 800-1000 mots supplémentaires. Maintenir le style académique et res
         logger.error(f"Generate character history error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/api/generate-rubrique-content")
+async def generate_rubrique_content(request: dict):
+    """
+    Génère le contenu d'une rubrique spécifique via l'API Gemini
+    en fonction du livre, chapitre et titre de la rubrique
+    """
+    try:
+        rubrique_number = request.get("rubrique_number")
+        rubrique_title = request.get("rubrique_title")
+        book = request.get("book")
+        chapter = request.get("chapter")
+        passage = request.get("passage", f"{book} {chapter}")
+        target_length = request.get("target_length", 500)
+        
+        # Définir les prompts spécialisés pour chaque rubrique
+        rubrique_prompts = {
+            1: f"""
+PRIÈRE D'OUVERTURE pour {passage}
+
+MISSION : Créer une prière d'ouverture authentique et profonde spécifiquement pour l'étude de {passage}.
+
+STRUCTURE REQUISE :
+**ADORATION :** Reconnaître la grandeur divine révélée dans {passage}
+**CONFESSION :** Confesser humblement nos manquements face à la sainteté divine
+**DEMANDE :** Solliciter l'éclairage du Saint-Esprit pour comprendre {passage}
+**INTERCESSION :** Prier pour l'Église et le monde à la lumière de {passage}
+
+DIRECTIVES :
+- Prière personnelle et authentique, pas générique
+- Références spécifiques aux thèmes et vérités de {passage}
+- Longueur : {target_length} mots
+- Ton : révérencieux, personnel, bibliquement fondé
+- Style : prose priante avec des citations bibliques pertinentes
+- Perspective : évangélique réformée
+- Inclure des "Amen" appropriés
+
+Créer une prière qui prépare vraiment le cœur à étudier {passage}.
+""",
+            2: f"""
+STRUCTURE ET PLAN LITTÉRAIRE de {passage}
+
+MISSION : Analyser la structure littéraire détaillée de {passage} avec ses divisions, progressions et schémas narratifs/poétiques.
+
+ANALYSE REQUISE :
+1. **DIVISION STRUCTURELLE** : Identifier les sections et sous-sections
+2. **PROGRESSION NARRATIVE/ARGUMENTATIVE** : Comment le texte se développe
+3. **SCHÉMAS LITTÉRAIRES** : Parallélismes, chiasmes, inclusions
+4. **MOTS-CLÉS RÉCURRENTS** : Termes qui structurent le passage
+5. **CONNECTEURS LOGIQUES** : Liens entre les idées et sections
+
+DIRECTIVES :
+- Analyse précise du texte hébreu/grec original quand pertinent  
+- {target_length} mots d'analyse détaillée
+- Schémas visuels avec indentation et numérotation
+- Références aux commentaires académiques reconnus
+- Applications herméneutiques pratiques
+
+Analyser spécifiquement {passage}, pas des généralités sur {book}.
+""",
+            3: f"""
+CONTEXTE DU CHAPITRE PRÉCÉDENT pour {passage}
+
+MISSION : Expliquer comment le chapitre précédent de {book} prépare et éclaire la compréhension de {passage}.
+
+ANALYSE CONTEXTUELLE :
+1. **RÉSUMÉ DU CHAPITRE PRÉCÉDENT** : Événements et enseignements clés
+2. **LIENS NARRATIFS/THÉMATIQUES** : Connexions directes avec {passage}
+3. **PROGRESSION DE LA RÉVÉLATION** : Comment Dieu révèle sa vérité progressivement
+4. **PERSONNAGES ET SITUATIONS** : Continuité ou contraste
+5. **IMPLICATIONS THÉOLOGIQUES** : Développement doctrinal
+
+DIRECTIVES :
+- Focus sur {book} chapitre {chapter-1} spécifiquement
+- {target_length} mots d'analyse contextuelle
+- Citations des versets pertinents du chapitre précédent
+- Éviter les généralités, rester spécifique au texte
+- Perspective canonique et théologique
+
+Montrer concrètement comment le contexte précédent enrichit {passage}.
+""",
+            # Ajouter plus de prompts pour les autres rubriques...
+        }
+        
+        # Utiliser le prompt spécialisé ou un prompt générique
+        if rubrique_number in rubrique_prompts:
+            base_prompt = rubrique_prompts[rubrique_number]
+        else:
+            base_prompt = f"""
+{rubrique_title.upper()} pour {passage}
+
+MISSION : Développer une analyse approfondie de {passage} sous l'angle : {rubrique_title}
+
+DIRECTIVES :
+- Contenu spécifique à {passage}, pas générique
+- Longueur : {target_length} mots
+- Analyse biblique rigoureuse et académique
+- Perspective évangélique réformée
+- Applications pratiques et contemporaines
+- Citations bibliques précises avec références
+
+Créer un contenu riche et spécialisé pour {rubrique_title} en analysant {passage}.
+"""
+
+        # Appeler l'API Gemini
+        try:
+            gemini_content = await call_gemini_api(base_prompt)
+            
+            # Calculer le nombre de mots
+            word_count = len(gemini_content.split())
+            
+            return {
+                "status": "success",
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "content": gemini_content,
+                "word_count": word_count,
+                "passage": passage,
+                "api_used": "gemini_keys"
+            }
+            
+        except Exception as gemini_error:
+            logger.error(f"Gemini API error for rubrique {rubrique_number}: {str(gemini_error)}")
+            
+            # Fallback vers contenu générique en cas d'erreur
+            fallback_content = f"""
+# {rubrique_title}
+
+**Analyse de {passage}**
+
+Cette section nécessite une génération via l'API Gemini qui est temporairement indisponible.
+
+## Contenu de remplacement pour {rubrique_title}
+
+L'étude de {passage} sous l'angle de "{rubrique_title}" révèle des aspects importants de la révélation divine.
+
+*Contenu généré automatiquement - Version enrichie via API indisponible*
+"""
+            
+            return {
+                "status": "fallback",
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "content": fallback_content,
+                "word_count": len(fallback_content.split()),
+                "passage": passage,
+                "api_used": "fallback"
+            }
+    
+    except Exception as e:
+        logger.error(f"Generate rubrique content error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/")
 async def root():
     """Root endpoint"""
