@@ -132,6 +132,17 @@
         - working: true
         - agent: "testing"
         - comment: "✅ TESTS COMPLETS RÉUSSIS - API /api/generate-character-history fonctionne parfaitement. Tests effectués: David, Abraham, Moïse avec/sans enrichissement. Contenu narratif riche (1500-2200 mots), temps de réponse 18-26s, rotation des clés Gemini opérationnelle. Qualité narrative excellente avec structure immersive. Backend logs confirment aucune erreur."
+  - task: "Amélioration prompts 28 rubriques"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Tous les 28 prompts de rubriques considérablement améliorés avec style narratif académique théologique, explications des termes difficiles intégrées, approche immersive inspirée des Saintes Écritures. Chaque rubrique a maintenant un prompt spécialisé de très haute qualité."
 
 ## metadata:
   created_by: "main_agent"
