@@ -107,7 +107,7 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
   };
 
   // Fonction pour obtenir les résultats uniques
-Abraham (initialement Abram, "père exalté", puis Abraham "père d'une multitude") est né à Ur en Chaldée vers 2166 av. J.-C. Fils de Térah, descendant de Sem, il appartient à la lignée bénie de Noé. Son nom changé par Dieu révèle sa destinée prophétique comme père spirituel de multiples nations.
+  const getUniqueResults = (results) => {
 
 ## 🔹 APPEL DIVIN ET MIGRATION
 À l'âge de 75 ans, Abraham reçoit l'appel de Dieu : "Va-t'en de ton pays, de ta patrie, et de la maison de ton père, dans le pays que je te montrerai" (Genèse 12:1). Cette obéissance par la foi marque le début de l'histoire du salut. Il quitte Harran avec sa femme Sara, son neveu Lot, et toute sa maison, ne connaissant pas sa destination.
