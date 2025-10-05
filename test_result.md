@@ -139,11 +139,11 @@
 ## test_plan:
   current_focus:
     - "Page dédiée pour personnages bibliques"
-    - "Amélioration contenu narratif"
+    - "Diagnostic problème état chargement"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 ## agent_communication:
-    - agent: "main"
-    - message: "Début implémentation des pages dédiées pour personnages bibliques avec contenu narratif enrichi"
+    - agent: "main"  
+    - message: "Page dédiée créée mais état de chargement reste affiché. API backend fonctionne correctement. Problème dans le frontend à diagnostiquer."
