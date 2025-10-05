@@ -3544,11 +3544,13 @@ strong {
 
 .balanced-buttons-grid {
   display: grid !important;
-  grid-template-columns: repeat(6, 1fr) !important;
-  gap: 14px !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 8px !important;
   margin-bottom: 24px !important;
-  padding: 0 10px !important;
+  padding: 0 5px !important;
   width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto 24px auto !important;
   box-sizing: border-box !important;
 }
 
