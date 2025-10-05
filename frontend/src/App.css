@@ -161,6 +161,15 @@ strong {
   animation: pulse 2s infinite;
 }
 
+/* API Control Panel sous le pourcentage */
+.api-below-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
 /* Barre de progression supprimée - remplacée par un design centré moderne */
 
 /* =========================
