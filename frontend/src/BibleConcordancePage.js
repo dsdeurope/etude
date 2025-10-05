@@ -27,6 +27,16 @@ const BibleConcordancePage = ({ onGoBack }) => {
     setSelectedTheme(null);
   };
 
+  // Fonction pour ouvrir la page d'histoire d'un personnage
+  const handleCharacterClick = (character) => {
+    setSelectedCharacterForHistory(character);
+  };
+
+  // Fonction pour revenir de la page d'histoire de personnage
+  const handleBackFromCharacter = () => {
+    setSelectedCharacterForHistory(null);
+  };
+
   // Liste des 30 thèmes bibliques essentiels
   const biblicalThemes = [
     "Amour et Charité", "Foi et Confiance", "Espérance et Promesses", "Pardon et Miséricorde", 
