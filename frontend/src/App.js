@@ -1971,11 +1971,6 @@ ${contextualEnrichment}
                     <span className="control-label">Bible Concordance</span>
                   </button>
                 </div>
-                
-                {/* API Control Panel centré en bas */}
-                <div className="api-centered">
-                  <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://faithflow-app.preview.emergentagent.com"} />
-                </div>
               </div>
             </div>
 
