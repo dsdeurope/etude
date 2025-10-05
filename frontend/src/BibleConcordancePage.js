@@ -509,20 +509,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
                   ))}
                 </div>
 
-                {isCharacterLoading && (
-                  <div style={{
-                    textAlign: 'center',
-                    color: 'white',
-                    fontSize: '16px',
-                    marginTop: '30px',
-                    padding: '20px'
-                  }}>
-                    <div style={{ marginBottom: '10px' }}>🤖 Génération en cours...</div>
-                    <div style={{ fontSize: '14px', opacity: 0.8 }}>
-                      Création de l'histoire de {selectedCharacter} via l'API Gemini
-                    </div>
-                  </div>
-                )}
+                {/* Les personnages ouvrent maintenant une page dédiée */}
               </div>
             ) : (
               /* Affichage de l'histoire du personnage */
