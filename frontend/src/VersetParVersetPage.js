@@ -704,10 +704,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   transition: 'all 0.3s ease',
                   boxShadow: '0 3px 10px rgba(16, 185, 129, 0.3)',
                   fontFamily: 'Montserrat, sans-serif',
-                  textAlign: 'center',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                  textAlign: 'center'
                 }}
                 onMouseOver={(e) => {
                   e.target.style.transform = 'translateY(-1px)';
@@ -736,10 +733,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   transition: 'all 0.3s ease',
                   boxShadow: '0 3px 10px rgba(245, 158, 11, 0.3)',
                   fontFamily: 'Montserrat, sans-serif',
-                  textAlign: 'center',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                  textAlign: 'center'
                 }}
                 onMouseOver={(e) => {
                   e.target.style.transform = 'translateY(-1px)';
@@ -768,10 +762,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   transition: 'all 0.3s ease',
                   boxShadow: '0 3px 10px rgba(59, 130, 246, 0.3)',
                   fontFamily: 'Montserrat, sans-serif',
-                  textAlign: 'center',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                  textAlign: 'center'
                 }}
                 onMouseOver={(e) => {
                   e.target.style.transform = 'translateY(-1px)';
