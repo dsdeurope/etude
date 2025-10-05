@@ -1881,7 +1881,8 @@ ${contextualEnrichment}
           </header>
 
           {/* Indicateur de progression centré */}
-          <div className="progress-container">
+          <div className="centered-progress-wrapper">
+            <div className="progress-container">
             <div className="progress-pill">
               {progressPercent}%
               {isProgressiveLoading && progressiveStats && (
