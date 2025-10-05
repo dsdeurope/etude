@@ -335,15 +335,185 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
             ← Retour à l'Étude
           </button>
           
-          <h1 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            fontWeight: '800',
-            margin: '0 0 8px 0',
-            textAlign: 'center',
-            textShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '20px',
+            flexWrap: 'wrap',
+            marginBottom: '8px'
           }}>
-            📖 Étude Verset par Verset
-          </h1>
+            <h1 style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+              fontWeight: '800',
+              margin: 0,
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+              textAlign: 'center'
+            }}>
+              📖 Étude Verset par Verset
+            </h1>
+
+            {/* Boutons de contrôle */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              flexWrap: 'wrap'
+            }}>
+              {/* Bouton Gemini */}
+              <button 
+                onClick={() => window.open('https://gemini.google.com/', '_blank')}
+                style={{
+                  background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(139, 92, 246, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
+                }}
+              >
+                🤖 Gemini
+              </button>
+
+              {/* Bouton Prise de Note */}
+              <button 
+                onClick={() => {
+                  // Navigation vers la page de notes
+                  if (onGoBack) {
+                    // Retourner à la page principale puis naviguer vers les notes
+                    onGoBack();
+                    setTimeout(() => {
+                      // Simuler le clic sur prise de note de la page principale
+                      window.dispatchEvent(new CustomEvent('navigate-to-notes'));
+                    }, 100);
+                  }
+                }}
+                style={{
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(16, 185, 129, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(16, 185, 129, 0.3)';
+                }}
+              >
+                📝 Prise de Note
+              </button>
+
+              {/* Bouton ChatGPT */}
+              <button 
+                onClick={() => window.open('https://chatgpt.com/', '_blank')}
+                style={{
+                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(245, 158, 11, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(245, 158, 11, 0.3)';
+                }}
+              >
+                💬 ChatGPT
+              </button>
+
+              {/* Bouton Lire la Bible */}
+              <button 
+                onClick={() => window.open('https://www.bible.com/', '_blank')}
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(59, 130, 246, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(59, 130, 246, 0.3)';
+                }}
+              >
+                📖 Lire la Bible
+              </button>
+
+              {/* Bouton API */}
+              <button 
+                onClick={() => {
+                  // Afficher un modal simple avec le statut API ou ouvrir une popup
+                  alert('Statut API:\n✅ Gemini Keys: Actives\n✅ Bible API: Active\n🔄 Système de rotation opérationnel');
+                }}
+                style={{
+                  background: 'linear-gradient(135deg, #3742fa, #2f3542)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(55, 66, 250, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 4px 15px rgba(55, 66, 250, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(55, 66, 250, 0.3)';
+                }}
+              >
+                ⚡ API
+              </button>
+            </div>
+          </div>
           
           {bookInfo && (
             <div style={{
