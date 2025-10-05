@@ -492,7 +492,7 @@ const BibleConcordancePage = ({ onGoBack }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        opacity: isCharacterLoading ? 0.6 : 1,
+                        opacity: 1,
                         textTransform: 'capitalize'
                       }}
                       onMouseOver={(e) => {
