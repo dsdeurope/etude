@@ -513,7 +513,9 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
                   </div>
                 )}
               </div>
-            ) : (
+            )}
+
+            {characterHistory && (
               /* Affichage de l'histoire du personnage */
               <div style={{
                 background: 'linear-gradient(135deg, #f8fafc, #f1f5f9)',
