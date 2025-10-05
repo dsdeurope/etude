@@ -1027,6 +1027,14 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     window.open(url, "_blank");
   };
 
+  // Rendre la fonction disponible globalement pour éviter les erreurs "not defined"
+  React.useEffect(() => {
+    window.openYouVersion = openYouVersion;
+    return () => {
+      delete window.openYouVersion;
+    };
+  }, [selectedBook, selectedChapter, selectedVerse]);
+
   const handleReset = () => {
     saveCurrentStudy();
     setSelectedBook("--"); setSelectedChapter("--"); setSelectedVerse("--");
