@@ -1163,6 +1163,52 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       else {
         setContent(generatedRubriques[contentKey]);
       }
+    }
+
+    // Pour les rubriques 1-28, générer via API au lieu du contenu statique
+    if (id >= 1 && id <= 28) {
+      console.log(`[GÉNÉRATION API RUBRIQUE ${id}] Début génération via API pour ${selectedBook} ${selectedChapter}`);
+      
+      setIsLoading(true);
+      setRubriquesStatus(prev => ({ ...prev, [id]: "loading" }));
+      
+      try {
+        const rubriqueTitle = getRubTitle(id);
+        const passage = `${selectedBook || 'Genèse'} ${selectedChapter || '1'}`;
+        const targetLength = getRubriqueLength(id);
+        
+        // Appel API pour générer le contenu dynamique
+        const apiContent = await generateRubriqueContentViaAPI(
+          id, 
+          rubriqueTitle, 
+          passage, 
+          selectedBook || 'Genèse', 
+          selectedChapter || '1', 
+          targetLength
+        );
+        
+        // Sauvegarder le contenu généré
+        setGeneratedRubriques(prev => ({
+          ...prev,
+          [contentKey]: apiContent
+        }));
+        
+        setRubriquesStatus(prev => ({ ...prev, [id]: "completed" }));
+        
+        console.log(`[SUCCÈS API RUBRIQUE ${id}] Contenu généré et sauvegardé - longueur: ${apiContent.length}`);
+        
+        // Naviguer vers la page rubrique dédiée avec le nouveau contenu
+        navigateToRubrique(id, apiContent);
+        
+      } catch (error) {
+        console.error(`[ERREUR API RUBRIQUE ${id}]`, error);
+        
+        setRubriquesStatus(prev => ({ ...prev, [id]: "error" }));
+        setContent(`❌ Erreur lors de la génération de la rubrique ${id}: ${getRubTitle(id)}`);
+      }
+      
+      setIsLoading(false);
+      return;
     } else if (id >= 1 && id <= 28) {
       // Générer la rubrique à la demande ET naviguer vers sa page dédiée
       console.log(`[GÉNÉRATION REQUISE] Rubrique ${id} non trouvée dans le cache`);
