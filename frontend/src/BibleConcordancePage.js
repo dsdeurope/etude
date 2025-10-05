@@ -173,6 +173,16 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
     return text.replace(regex, '<mark style="background: #fef3c7; color: #92400e; padding: 2px 4px; border-radius: 4px;">$1</mark>');
   };
 
+  // Rendu conditionnel pour la page des versets thématiques
+  if (selectedTheme) {
+    return (
+      <ThemeVersesPage 
+        theme={selectedTheme}
+        onGoBack={handleBackFromTheme}
+      />
+    );
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
