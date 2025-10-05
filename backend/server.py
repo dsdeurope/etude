@@ -1369,6 +1369,237 @@ DIRECTIVES ACADÉMIQUES :
 - Respecter la progression naturelle du récit biblique
 
 Révélez comment {passage} nous prépare à recevoir avec fruit les nouvelles merveilles que Dieu révélera dans la suite de son récit sacré.
+""",
+            17: f"""
+LEÇONS MORALES ET ÉTHIQUES pour {passage}
+
+MISSION : Devenir un moraliste chrétien narratif, extrayant les enseignements éthiques de {passage} pour édifier le caractère selon l'image du Christ.
+
+APPROCHE ÉTHIQUE NARRATIVE :
+- Style de sage biblique dispensant la sagesse divine
+- Éthique christocentrique et scripturaire
+- Explications des termes moraux (sanctification, transformation, vertus chrétiennes)
+- Applications concrètes pour la formation du caractère
+
+ÉCOLE DE SAGESSE INSPIRÉE :
+
+**I. FONDEMENTS DE L'ÉTHIQUE BIBLIQUE :**
+Établissons les bases de la morale chrétienne révélée dans {passage}. L'éthique biblique n'est pas légalisme pharisaïque mais transformation gracieuse à l'image de Christ. Elle jaillit de la régénération et vise la glorification de Dieu.
+
+**II. VERTUS CHRÉTIENNES RÉVÉLÉES :**
+Découvrons les excellences morales que {passage} enseigne :
+- Les fruits de l'Esprit manifestés dans les actions et attitudes
+- Les vertus cardinales réinterprétées à la lumière de l'Évangile
+- Les grâces chrétiennes spécifiques (humilité, patience, fidélité)
+- Le développement progressif du caractère christiforme
+
+**III. VICES DÉNONCÉS ET LEURS REMÈDES :**
+Analysons les travers moraux exposés et leurs corrections divines :
+- Les péchés révélés et leurs conséquences spirituelles
+- Les tentations communes et leurs antidotes bibliques
+- Les faiblesses caractérielles et leur transformation possible
+- La repentance authentique et la restauration divine
+
+**IV. PRINCIPES DE CONDUITE CHRÉTIENNE :**
+Extrayons les règles de vie que {passage} établit :
+- Les motivations pures vs les motivations charnelles
+- Les priorités divines vs les priorités mondaines
+- Les relations justes selon l'ordre créationnel et rédemptif
+- La sagesse pratique pour les décisions quotidiennes
+
+**V. FORMATION DU CARACTÈRE CHRISTIFORME :**
+Explorons le processus de transformation morale :
+- Le rôle de la Parole, de la prière, de la communion fraternelle
+- L'importance de la discipline spirituelle et de l'exercice des vertus
+- La croissance graduelle vs les victoires instantanées
+- La persévérance dans la sanctification progressive
+
+**VI. APPLICATIONS CONTEMPORAINES :**
+Ces enseignements moraux s'appliquent à nos défis modernes. Ils nous équipent pour vivre avec intégrité dans un monde déchu, témoignant de la beauté morale de l'Évangile.
+
+DIRECTIVES ACADÉMIQUES :
+- Éthique authentiquement dérivée de {passage} spécifiquement
+- {target_length} mots de formation morale narrative
+- Équilibre entre grâce et responsabilité, liberté et sainteté
+- Applications pratiques pour la croissance spirituelle
+
+Révélez comment {passage} forme des disciples aux mœurs célestes, reflétant la beauté morale du Royaume de Dieu.
+""",
+            18: f"""
+COMMENTAIRE TRADITIONNEL pour {passage}
+
+MISSION : Devenir un gardien de la tradition exégétique, transmettant la sagesse herméneutique des Pères de l'Église et des Réformateurs sur {passage}.
+
+APPROCHE TRADITIONNELLE NARRATIVE :
+- Style de chroniqueur de la tradition chrétienne
+- Respect de l'herméneutique historique et de la règle de foi
+- Explications des termes patristiques (consensus patrum, analogie de la foi)
+- Continuité avec la tradition apostolique authentique
+
+TRANSMISSION TRADITIONNELLE INSPIRÉE :
+
+**I. FONDEMENTS DE L'INTERPRÉTATION TRADITIONNELLE :**
+Puisons dans le trésor herméneutique légué par nos pères dans la foi. Le consensus patrum (accord des Pères) et la regula fidei (règle de foi) nous guident pour interpréter {passage} dans la continuité apostolique, évitant les novations dangereuses.
+
+**II. VOIX DES PÈRES DE L'ÉGLISE :**
+Écoutons les géants spirituels des premiers siècles sur {passage} :
+- L'exégèse christocentrique des Pères apostoliques
+- Les lumières théologiques des Pères de Nicée et post-nicéens
+- La sagesse spirituelle des Pères monastiques et mystiques
+- L'apport des commentateurs byzantins et latins
+
+**III. ÉCLAIRAGES DES RÉFORMATEURS :**
+Découvrons les perspectives réformatrices sur {passage} :
+- L'exégèse de Luther et son retour à l'Écriture seule
+- Les commentaires systématiques de Calvin et sa clarté théologique
+- Les apports des autres Réformateurs (Zwingli, Bullinger, Bèze)
+- Le développement de l'herméneutique réformée orthodoxe
+
+**IV. CONSENSUS ÉVANGÉLIQUE HISTORIQUE :**
+Explorons l'accord substantiel de la tradition évangélique :
+- Les vérités fondamentales unanimement confessées
+- Les interprétations établies par les conciles œcuméniques
+- La synthèse des confessions de foi protestantes
+- L'harmonie essentielle malgré les nuances secondaires
+
+**V. DÉVELOPPEMENTS HERMÉNEUTIQUES LÉGITIMES :**
+Analysons comment la compréhension de {passage} s'est approfondie :
+- Les précisions doctrinales nécessaires face aux hérésies
+- L'enrichissement par les découvertes archéologiques et linguistiques
+- L'application créative aux nouveaux défis historiques
+- La continuité dans le changement légitime
+
+**VI. APPLICATIONS DE LA SAGESSE TRADITIONNELLE :**
+Cette sagesse ancestrale nous préserve des erreurs contemporaines et enrichit notre compréhension. Elle nous ancre dans la foi apostolique tout en nous équipant pour les défis actuels.
+
+DIRECTIVES ACADÉMIQUES :
+- Citations authentiques des sources traditionnelles sur {passage}
+- {target_length} mots de transmission traditionnelle narrative
+- Références aux Pères, Réformateurs, confessions historiques
+- Équilibre entre tradition et Écriture seule
+
+Révélez comment la tradition chrétienne authentique enrichit notre compréhension de {passage} dans la continuité de la foi apostolique.
+""",
+            19: f"""
+ANALYSES GRAMMATICALES pour {passage}
+
+MISSION : Devenir un linguiste sacré narratif, dévoilant les subtilités grammaticales de {passage} qui révèlent des nuances théologiques précieuses.
+
+APPROCHE GRAMMATICALE NARRATIVE :
+- Style de philologue biblique explorant les mystères linguistiques
+- Analyse technique rendue accessible et spirituellement profitable
+- Explications des termes grammaticaux (syntaxe, morphologie, sémantique)
+- Révélations théologiques à travers les structures linguistiques
+
+LABORATOIRE LINGUISTIQUE INSPIRÉ :
+
+**I. ARCHITECTURE SYNTAXIQUE DIVINE :**
+Pénétrons dans l'atelier divin de la syntaxe sacrée. Chaque construction grammaticale de {passage} porte une intention théologique. L'Esprit Saint a inspiré non seulement les mots mais aussi leur agencement syntaxique révélateur.
+
+**II. MORPHOLOGIE RÉVÉLATRICE :**
+Analysons les formes grammaticales qui enrichissent le sens :
+- Les temps verbaux hébreux/grecs et leurs nuances aspectuelles
+- Les modes (indicatif, impératif, subjonctif) et leurs implications théologiques
+- Les voix (active, passive, moyenne) révélant l'agency divine et humaine
+- Les constructions causatives, intensives, reflexives et leur signification
+
+**III. STRUCTURES SYNTAXIQUES SIGNIFICATIVES :**
+Explorons les arrangements grammaticaux porteurs de sens :
+- Les constructions emphatiques (ordre des mots, particules)
+- Les ellipses et sous-entendus révélateurs
+- Les parallélismes syntaxiques et leur fonction rhétorique
+- Les chiasmes grammaticaux et leur centre théologique
+
+**IV. PARTICULARITÉS SÉMANTIQUES :**
+Découvrons les nuances de sens portées par la grammaire :
+- Les jeux de mots (paronomases) et leur intention prophétique
+- Les métonymies et synecdoques révélant des connexions spirituelles
+- Les constructions idiomatiques hébraïques/grecques
+- Les euphémismes et leur délicatesse théologique
+
+**V. ANALYSE COMPARATIVE DES MANUSCRITS :**
+Explorons les variantes textuelles et leur impact herméneutique :
+- Les leçons divergentes et leur évaluation critique
+- Les corrections scribales et leur motivation théologique
+- L'apport des versions anciennes à la compréhension grammaticale
+- La stabilité remarquable du texte inspiré
+
+**VI. APPLICATIONS EXÉGÉTIQUES TRANSFORMATRICES :**
+Ces analyses grammaticales affinent notre compréhension théologique. Elles révèlent des nuances doctrinales, éthiques, pastorales qui enrichissent notre prédication et notre vie spirituelle.
+
+DIRECTIVES ACADÉMIQUES :
+- Analyses grammaticales authentiques basées sur {passage} spécifiquement
+- {target_length} mots d'exploration linguistique narrative accessible
+- Références aux grammaires de référence (Gesenius, Wallace, etc.)
+- Applications herméneutiques et homilétiques pratiques
+
+Révélez comment la grammaire sacrée de {passage} devient une fenêtre sur les subtilités de la révélation divine.
+""",
+            20: f"""
+MÉDITATION SPIRITUELLE pour {passage}
+
+MISSION : Devenir un guide de méditation sacrée, conduisant l'âme dans la contemplation transformatrice des vérités spirituelles révélées dans {passage}.
+
+APPROCHE MÉDITATIVE NARRATIVE :
+- Style de directeur spirituel guidant l'oraison chrétienne
+- Méditation biblique substantielle et transformatrice
+- Explications des termes spirituels (lectio divina, contemplation, union mystique)
+- Croissance dans la communion intime avec Dieu
+
+RETRAITE SPIRITUELLE INSPIRÉE :
+
+**I. PRÉPARATION DU CŒUR À LA MÉDITATION :**
+Préparons notre âme à recevoir les grâces divines de {passage}. La méditation chrétienne diffère de la contemplation orientale ; elle se nourrit de la Parole révélée pour conduire à l'union avec le Dieu personnel et trinitaire.
+
+**II. LECTIO DIVINA : LECTURE SACRÉE :**
+Pratiquons la lecture orante de {passage} selon la tradition monastique :
+- Lectio : Lecture attentive et répétée du texte sacré
+- Meditatio : Rumination spirituelle des vérités révélées
+- Oratio : Prière jaillissant de la contemplation
+- Contemplatio : Repos de l'âme en Dieu à travers sa Parole
+
+**III. CONTEMPLATION DES VÉRITÉS DIVINES :**
+Contemplons les mystères révélés dans {passage} :
+- Les attributs divins manifestés et leur adoration
+- L'œuvre du Christ révélée et notre gratitude
+- L'action du Saint-Esprit et notre coopération
+- Les promesses divines et notre espérance fortifiée
+
+**IV. APPLICATIONS TRANSFORMATRICES :**
+Laissons {passage} transformer notre être intérieur :
+- Purification des affections désordonnées révélées par la Parole
+- Illumination de l'intelligence par les vérités contemplées
+- Embrasement de la volonté par l'amour divin manifesté
+- Union croissante avec Dieu par la méditation assidue
+
+**V. PRIÈRES INSPIRÉES PAR LE PASSAGE :**
+Transformons notre méditation en oraison fervente :
+- Adoration pour les perfections divines révélées
+- Confession des péchés mis en lumière par le texte
+- Supplication pour la grâce de vivre ces vérités
+- Intercession inspirée par les enseignements reçus
+
+**VI. FRUITS SPIRITUELS DE LA MÉDITATION :**
+Recueillons les grâces que cette méditation produit :
+- Paix profonde dans la communion avec Dieu
+- Joie spirituelle dans la contemplation divine
+- Force pour la sanctification progressive
+- Zèle pour le témoignage et le service
+
+**VII. INTÉGRATION DANS LA VIE QUOTIDIENNE :**
+Portons les fruits de cette méditation dans notre existence :
+- Présence de Dieu cultivée tout au long du jour
+- Décisions éclairées par les vérités méditées
+- Relations transformées par l'amour divin reçu
+- Témoignage authentique de la beauté divine contemplée
+
+DIRECTIVES ACADÉMIQUES :
+- Méditation authentiquement enracinée dans {passage} spécifiquement
+- {target_length} mots de guidance spirituelle méditative
+- Équilibre entre substance doctrinale et piété expérientielle
+- Applications pratiques pour la croissance spirituelle
+
+Conduisez l'âme dans une rencontre transformatrice avec Dieu à travers les vérités spirituelles de {passage}.
 """
         }
         
