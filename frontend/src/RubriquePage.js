@@ -329,10 +329,11 @@ const RubriquePage = ({
               </div>
             </div>
 
-            {/* 5 boutons de contrôle */}
+            {/* 5 boutons de contrôle - disposition améliorée */}
             <div style={{
               display: 'flex',
-              gap: '8px',
+              alignItems: 'center',
+              gap: '12px',
               flexWrap: 'wrap',
               justifyContent: 'center'
             }}>
