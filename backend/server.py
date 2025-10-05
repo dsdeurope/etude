@@ -272,7 +272,7 @@ async def call_single_gemini_key(api_key: str, key_name: str, prompt: str, max_t
             logger.error(f"Gemini API error with {key_name}: {str(e)}")
         raise e
 
-async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> str:
+async def call_gemini_api(prompt: str, max_tokens: int = 1500) -> tuple[str, str]:
     """Call Gemini API with intelligent rotation and fallback"""
     
     # Try all available Gemini keys
