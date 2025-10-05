@@ -1896,6 +1896,7 @@ ${contextualEnrichment}
             <div className="api-below-progress">
               <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://faithflow-app.preview.emergentagent.com"} />
             </div>
+            </div>
           </div>
 
           {/* Interface principale */}
