@@ -576,7 +576,51 @@ function App() {
   };
 
   // Fonction pour générer du contenu narratif théologique spécifique
-  const generateRubriqueContent = (rubriqueNum, rubriqueTitle, passage, book, chapter, userSelectedLength = null) => {
+  // Nouvelle fonction pour générer le contenu des rubriques via API
+  const generateRubriqueContentViaAPI = async (rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength) => {
+    try {
+      console.log(`[API RUBRIQUE ${rubriqueNum}] Génération via API: ${rubriqueTitle} pour ${book} ${chapter}`);
+      
+      const response = await fetch(`${getBackendUrl()}/api/generate-rubrique-content`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          rubrique_number: rubriqueNum,
+          rubrique_title: rubriqueTitle,
+          book: book,
+          chapter: parseInt(chapter),
+          passage: passage,
+          target_length: targetLength,
+          use_gemini: true,
+          enriched: true
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur API: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        console.log(`[API RUBRIQUE ${rubriqueNum}] Succès - ${result.word_count} mots - API: ${result.api_used}`);
+        return result.content;
+      } else {
+        throw new Error('Erreur lors de la génération du contenu');
+      }
+
+    } catch (error) {
+      console.error(`[ERROR RUBRIQUE ${rubriqueNum}]`, error);
+      
+      // Fallback vers le contenu statique en cas d'erreur API
+      return generateRubriqueContentStatic(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
+    }
+  };
+
+  // Renommer l'ancienne fonction pour le fallback
+  const generateRubriqueContentStatic = (rubriqueNum, rubriqueTitle, passage, book, chapter, userSelectedLength = null) => {
     // Utiliser la longueur choisie par l'utilisateur ou la longueur par défaut de la rubrique
     const targetLength = userSelectedLength || getRubriqueLength(rubriqueNum);
     
