@@ -48,46 +48,75 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     setIsLoading(true);
     
     try {
-      // Extraire les mots-clés du thème pour la recherche API
-      const searchTerms = extractThemeKeywords(theme);
+      // Stratégie multi-recherches pour garantir 20+ versets
+      const searchStrategies = getSearchStrategies(theme);
+      let allVerses = [];
       
-      // Appel API pour récupérer les versets du thème
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/search-concordance`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          search_term: searchTerms,
-          enrich: true
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`Erreur API: ${response.status}`);
-      }
-
-      const result = await response.json();
-      
-      if (result.status === 'success' && result.bible_verses) {
-        // Prendre les 30 premiers versets
-        const themeVerses = result.bible_verses.slice(0, 30).map(verse => ({
-          book: verse.book || "Livre",
-          chapter: verse.chapter || 1,
-          verse: verse.verse || 1,
-          text: verse.text || verse.content || "Texte du verset"
-        }));
+      // Effectuer plusieurs recherches pour collecter suffisamment de versets
+      for (const searchTerm of searchStrategies) {
+        if (allVerses.length >= 25) break; // Arrêter quand on a assez de versets
         
-        setVerses(themeVerses);
-        console.log(`[API GEMINI] ${themeVerses.length} versets récupérés pour "${theme}" - API: ${result.api_used || 'gemini'}`);
+        try {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/search-concordance`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              search_term: searchTerm,
+              enrich: true
+            })
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            
+            if (result.status === 'success' && result.bible_verses) {
+              const newVerses = result.bible_verses.map(verse => ({
+                book: verse.book || "Livre",
+                chapter: verse.chapter || 1,
+                verse: verse.verse || 1,
+                text: verse.text || verse.content || "Texte du verset",
+                reference: `${verse.book || 'Livre'} ${verse.chapter || 1}:${verse.verse || 1}`
+              }));
+              
+              // Éviter les doublons
+              const uniqueVerses = newVerses.filter(newVerse => 
+                !allVerses.some(existing => 
+                  existing.reference === newVerse.reference
+                )
+              );
+              
+              allVerses = [...allVerses, ...uniqueVerses];
+              console.log(`[API GEMINI] ${uniqueVerses.length} nouveaux versets pour "${searchTerm}" - Total: ${allVerses.length}`);
+            }
+          }
+        } catch (searchError) {
+          console.warn(`Erreur recherche pour "${searchTerm}":`, searchError);
+        }
+      }
+      
+      // S'assurer d'avoir au moins 20 versets
+      if (allVerses.length < 20) {
+        console.log(`Seulement ${allVerses.length} versets trouvés, ajout de versets de référence...`);
+        const extraVerses = await getThemeReferenceVerses(theme);
+        allVerses = [...allVerses, ...extraVerses].slice(0, 30);
+      }
+      
+      // Limiter à 30 versets maximum et garantir minimum 20
+      const finalVerses = allVerses.slice(0, 30);
+      
+      if (finalVerses.length >= 20) {
+        setVerses(finalVerses);
+        console.log(`[SUCCESS] ${finalVerses.length} versets récupérés pour "${theme}"`);
       } else {
-        // Fallback vers une recherche simple
-        await loadFallbackVerses(theme);
+        // Si encore insuffisant, utiliser le fallback étendu
+        await loadExtendedFallbackVerses(theme);
       }
       
     } catch (error) {
       console.error("Erreur chargement versets thème:", error);
-      await loadFallbackVerses(theme);
+      await loadExtendedFallbackVerses(theme);
     } finally {
       setIsLoading(false);
     }
