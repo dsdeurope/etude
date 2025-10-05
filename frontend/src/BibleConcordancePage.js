@@ -1118,9 +1118,9 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                           // Supprimer les ### et numérotation pour un style narratif
                           .replace(/###\s?\d*\.?\s*(.+)/g, '<p style="color: #1e293b; margin: 16px 0 12px 0; font-size: 16px; font-weight: 700; font-family: Montserrat, sans-serif; text-transform: uppercase; letter-spacing: 0.5px;">$1</p>')
                           // Gras pour les passages importants
-                          .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700;">$1</strong>')
+                          .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #7c3aed; font-weight: 700; font-family: Montserrat, sans-serif;">$1</strong>')
                           // Italique pour les mots étrangers et citations
-                          .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic;">$1</em>')
+                          .replace(/\*(.+?)\*/g, '<em style="color: #64748b; font-style: italic; font-family: Montserrat, sans-serif;">$1</em>')
                           // Versets cliquables
                           .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
                             '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
