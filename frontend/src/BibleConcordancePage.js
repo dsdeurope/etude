@@ -417,7 +417,9 @@ Une erreur temporaire empêche la génération du contenu. Veuillez réessayer d
               </div>
             )}
           </div>
-        ) : (
+        )}
+
+        {currentTab === 'personnages' && (
           /* Section Personnages */
           <div>
             {!characterHistory ? (
