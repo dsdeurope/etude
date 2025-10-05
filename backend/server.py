@@ -65,26 +65,27 @@ def get_current_gemini_key():
 
 # Emergent LLM Configuration
 EMERGENT_LLM_KEY = os.getenv("EMERGENT_LLM_KEY")
-emergent_llm = EmergentLLM(api_key=EMERGENT_LLM_KEY) if EMERGENT_LLM_KEY else None
 
 async def call_emergent_llm(prompt: str, max_tokens: int = 2000) -> str:
     """Call Emergent LLM API for content generation"""
     try:
-        if not emergent_llm:
-            raise Exception("Emergent LLM not configured")
+        if not EMERGENT_LLM_KEY:
+            raise Exception("Emergent LLM key not configured")
         
-        response = await asyncio.to_thread(
-            emergent_llm.chat.completions.create,
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "Tu es un expert en études bibliques et théologie évangélique. Tu génères du contenu biblique précis, respectueux et enrichissant en français."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=max_tokens,
-            temperature=0.7
-        )
+        # Initialize Emergent LLM chat
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=f"bible-character-{uuid.uuid4()}",
+            system_message="Tu es un expert en études bibliques et théologie évangélique. Tu génères du contenu biblique précis, respectueux et enrichissant en français."
+        ).with_model("openai", "gpt-4o-mini")
         
-        return response.choices[0].message.content
+        # Create user message
+        user_message = UserMessage(text=prompt)
+        
+        # Send message and get response
+        response = await chat.send_message(user_message)
+        
+        return response
         
     except Exception as e:
         logger.error(f"Emergent LLM API error: {str(e)}")
