@@ -232,7 +232,7 @@ async def health_check():
         gemini_keys_count=len(GEMINI_KEYS)
     )
 
-async def call_single_gemini_key(api_key: str, key_name: str, prompt: str, max_tokens: int = 1500) -> str:
+async def call_single_gemini_key(api_key: str, key_name: str, prompt: str, max_tokens: int = 1500) -> tuple[str, str]:
     """Call Gemini API with a specific key"""
     try:
         genai.configure(api_key=api_key)
