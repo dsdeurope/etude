@@ -1,5 +1,286 @@
 import React, { useState, useEffect } from 'react';
 
+// Composant API avec LEDs physiques (copié de VersetParVersetPage.js)
+const ApiStatusButton = () => {
+  const [apiStatus, setApiStatus] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  // Configuration du backend
+  const getBackendUrl = () => {
+    if (process.env.REACT_APP_BACKEND_URL) {
+      return process.env.REACT_APP_BACKEND_URL;
+    }
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
+    return "https://scripture-ai-7.preview.emergentagent.com";
+  };
+
+  const BACKEND_URL = getBackendUrl();
+
+  const fetchApiStatus = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/health`);
+      if (response.ok) {
+        const healthData = await response.json();
+        
+        const adaptedStatus = {
+          timestamp: new Date().toISOString(),
+          apis: {
+            gemini_1: { color: 'green', name: 'Gemini Key 1', status: 'active' },
+            gemini_2: { color: 'green', name: 'Gemini Key 2', status: 'active' },
+            gemini_3: { color: 'green', name: 'Gemini Key 3', status: 'active' },
+            gemini_4: { color: 'green', name: 'Gemini Key 4', status: 'active' },
+            bible_api: { color: healthData.bible_api_configured ? 'green' : 'red', name: 'Bible API', status: healthData.bible_api_configured ? 'active' : 'inactive' }
+          },
+          active_api: healthData.current_key || 'gemini_1'
+        };
+        
+        setApiStatus(adaptedStatus);
+      }
+    } catch (error) {
+      console.error('[API STATUS] Erreur:', error);
+    }
+  };
+
+  const getLedColor = (api) => {
+    return api.color === 'green' ? '#00ff00' : '#ff0000';
+  };
+
+  useEffect(() => {
+    fetchApiStatus();
+    const interval = setInterval(fetchApiStatus, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <style>
+        {`
+          @keyframes pulse-green {
+            0%, 100% { 
+              box-shadow: 0 0 8px #00ff00, 0 0 16px #00ff00; 
+              opacity: 1; 
+            }
+            50% { 
+              box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00; 
+              opacity: 0.8; 
+            }
+          }
+          @keyframes pulse-red {
+            0%, 100% { 
+              box-shadow: 0 0 8px #ff0000, 0 0 16px #ff0000; 
+              opacity: 1; 
+            }
+            50% { 
+              box-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000; 
+              opacity: 0.4; 
+            }
+          }
+          .api-tooltip-theme {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 6px 12px;
+            borderRadius: 8px;
+            fontSize: 10px;
+            whiteSpace: nowrap;
+            zIndex: 1001;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .api-tooltip-theme.visible {
+            opacity: 1;
+          }
+        `}
+      </style>
+
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          background: 'linear-gradient(135deg, #3742fa, #2f3542)',
+          border: 'none',
+          borderRadius: '10px',
+          color: 'white',
+          padding: '8px 14px',
+          fontSize: '12px',
+          fontWeight: '600',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 3px 10px rgba(55, 66, 250, 0.3)',
+          fontFamily: 'Montserrat, sans-serif',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+        onMouseOver={(e) => {
+          e.target.style.transform = 'translateY(-1px)';
+          e.target.style.boxShadow = '0 4px 15px rgba(55, 66, 250, 0.4)';
+          setShowTooltip(true);
+        }}
+        onMouseOut={(e) => {
+          e.target.style.transform = 'translateY(0px)';
+          e.target.style.boxShadow = '0 3px 10px rgba(55, 66, 250, 0.3)';
+          setShowTooltip(false);
+        }}
+      >
+        <span>⚡ API</span>
+        
+        {apiStatus && (
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            gap: '4px',
+            background: 'rgba(255,255,255,0.15)',
+            padding: '2px 6px',
+            borderRadius: '6px'
+          }}>
+            <div style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              backgroundColor: Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000',
+              animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+            }} />
+            
+            <div style={{ display: 'flex', gap: '2px' }}>
+              {Object.entries(apiStatus.apis).map(([key, api]) => (
+                <div 
+                  key={key}
+                  style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    backgroundColor: getLedColor(api),
+                    animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                  }}
+                  title={`${api.name}: ${api.status}`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {showTooltip && apiStatus && (
+          <div className={`api-tooltip-theme ${showTooltip ? 'visible' : ''}`}>
+            {Object.values(apiStatus.apis).every(api => api.color === 'green') 
+              ? '🟢 Toutes les API sont opérationnelles' 
+              : '🔴 Certaines API ont des problèmes'
+            }
+          </div>
+        )}
+      </button>
+
+      {isOpen && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          right: '0',
+          marginTop: '10px',
+          background: 'rgba(255, 255, 255, 0.95)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '16px',
+          minWidth: '280px',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+          zIndex: 1000
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '12px',
+            borderBottom: '1px solid rgba(0,0,0,0.1)',
+            paddingBottom: '8px'
+          }}>
+            <h4 style={{
+              margin: 0,
+              color: '#333',
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }}>
+              🔧 Statut des API
+            </h4>
+            <button
+              onClick={() => setIsOpen(false)}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '16px',
+                cursor: 'pointer',
+                color: '#666'
+              }}
+            >
+              ×
+            </button>
+          </div>
+
+          {apiStatus && (
+            <div style={{ fontSize: '12px' }}>
+              {Object.entries(apiStatus.apis).map(([key, api]) => (
+                <div 
+                  key={key}
+                  style={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '6px 0',
+                    borderBottom: '1px solid rgba(0,0,0,0.05)'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: getLedColor(api),
+                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                    }} />
+                    <span style={{ color: '#333', fontWeight: '500' }}>
+                      {api.name}
+                    </span>
+                  </div>
+                  <span style={{ 
+                    color: api.color === 'green' ? '#059669' : '#dc2626',
+                    fontSize: '11px',
+                    fontWeight: '600'
+                  }}>
+                    {api.color === 'green' ? '✅ OK' : '❌ ERR'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <button
+            onClick={fetchApiStatus}
+            style={{
+              marginTop: '12px',
+              width: '100%',
+              padding: '8px',
+              background: 'linear-gradient(135deg, #3742fa, #2f3542)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '12px',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            🔄 Rafraîchir
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Fonction pour générer l'URL YouVersion
 const generateYouVersionUrl = (book, chapter, verse) => {
   // Mapping des noms de livres français vers les codes YouVersion
