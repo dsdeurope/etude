@@ -1926,19 +1926,26 @@ ${contextualEnrichment}
               </div>
 
               {/* Boutons d'action - Design équilibré et soigné */}
-              <div className="balanced-controls-container">
+              <div className="balanced-controls-container" style={{
+                width: '100%',
+                maxWidth: '1600px',
+                margin: '0 auto',
+                padding: '0 40px',
+                boxSizing: 'border-box'
+              }}>
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(7, 1fr)',
-                  gap: '10px',
+                  gap: '16px',
                   marginBottom: '24px',
-                  padding: '0 5px',
+                  padding: '20px 30px',
                   width: '100%',
-                  maxWidth: '1400px',
-                  margin: '0 auto 24px auto',
                   boxSizing: 'border-box',
-                  gridAutoFlow: 'column',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: '20px',
+                  border: '1px solid rgba(255, 255, 255, 0.12)'
                 }}>
                   <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
