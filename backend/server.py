@@ -1047,6 +1047,328 @@ DIRECTIVES ACADÉMIQUES :
 - Applications pour la compréhension globale et la prédication séquentielle
 
 Révélez comment {passage} s'épanouit pleinement quand on comprend sa place organique dans l'ensemble inspiré de {book}.
+""",
+            11: f"""
+DOCTRINE ENSEIGNÉE pour {passage}
+
+MISSION : Devenir un théologien systématique narratif, extrayant et exposant les vérités doctrinales que {passage} révèle dans le grand système de la foi chrétienne.
+
+APPROCHE DOCTRINALE NARRATIVE :
+- Style de maître théologien tissant les vérités éternelles
+- Systématisation biblique rigoureuse et accessible
+- Explications des termes doctrinaux (sotériologie, pneumatologie, eschatologie)
+- Applications transformatrices des vérités révélées
+
+TRAITÉ DOCTRINAL INSPIRÉ :
+
+**I. IDENTIFICATION DES VÉRITÉS CENTRALES :**
+Extrayons les gemmes doctrinales que {passage} révèle. Chaque texte biblique contribue à l'édifice de la théologie systématique. Découvrons quelles doctrines fondamentales s'épanouissent dans ce passage sacré.
+
+**II. THÉOLOGIE PROPRE (DOCTRINE DE DIEU) :**
+Explorons ce que {passage} révèle sur la nature divine :
+- Les attributs de Dieu manifestés (omniscience, omnipotence, sainteté)
+- Les relations trinitaires révélées ou implicites
+- La souveraineté divine et son exercice providentiel
+- Les noms divins et leurs significations théologiques
+
+**III. CHRISTOLOGIE ET SOTÉRIOLOGIE :**
+Découvrons les vérités sur le Christ et le salut :
+- Les préfigurations messianiques ou accomplissements christologiques
+- Les aspects de l'œuvre rédemptrice révélés
+- La justification, sanctification, glorification enseignées
+- L'union mystique avec Christ manifestée
+
+**IV. PNEUMATOLOGIE ET ECCLESIOLOGIE :**
+Analysons l'enseignement sur l'Esprit et l'Église :
+- L'œuvre du Saint-Esprit révélée dans {passage}
+- Les vérités sur l'Église visible et invisible
+- Les moyens de grâce et leur administration
+- La communion des saints et ses implications
+
+**V. ESCHATOLOGIE ET ÉTHIQUE :**
+Explorons les enseignements sur les fins dernières et la conduite chrétienne :
+- Les aspects du royaume de Dieu révélés
+- Les vérités sur la résurrection, jugement, vie éternelle
+- Les implications éthiques et morales du passage
+- Les applications pratiques pour la sanctification
+
+**VI. APPLICATIONS PASTORALES :**
+Ces vérités doctrinales transforment la vie chrétienne. Elles fortifient la foi, dirigent la conduite, consolent dans l'épreuve, et équipent pour le témoignage.
+
+DIRECTIVES ACADÉMIQUES :
+- Extraction doctrinale rigoureuse basée sur {passage} spécifiquement
+- {target_length} mots de théologie systématique narrative
+- Références aux confessions de foi historiques (Westminster, Augsbourg, etc.)
+- Applications pastorales et d'édification spirituelle
+
+Révélez comment {passage} enrichit notre compréhension du système doctrinal chrétien et transforme notre vie de foi.
+""",
+            12: f"""
+APPLICATIONS PRATIQUES pour {passage}
+
+MISSION : Devenir un guide spirituel pratique, construisant des ponts solides entre les vérités éternelles de {passage} et la vie chrétienne contemporaine.
+
+APPROCHE APPLICATIVE NARRATIVE :
+- Style de directeur spirituel sage et expérimenté
+- Actualisation contextuelle respectueuse du texte
+- Explications des principes herméneutiques (principe/application, contextualisation)
+- Transformations concrètes et réalisables
+
+GUIDE SPIRITUEL INSPIRÉ :
+
+**I. PRINCIPES ÉTERNELS ET APPLICATIONS TEMPORELLES :**
+Distinguons soigneusement entre les principes transculturels de {passage} et leurs expressions culturelles spécifiques. L'herméneutique contextuelle nous guide pour actualiser fidèlement sans dénaturer le message divin.
+
+**II. APPLICATIONS POUR LA VIE PERSONNELLE :**
+Découvrons comment {passage} transforme notre marche individuelle avec Dieu :
+- Croissance spirituelle et disciplines de la grâce
+- Combat contre le péché et poursuite de la sainteté
+- Développement du caractère chrétien et des vertus spirituelles
+- Approfondissement de la communion avec le Père, le Fils et le Saint-Esprit
+
+**III. IMPLICATIONS FAMILIALES ET RELATIONNELLES :**
+Explorons les transformations que {passage} opère dans nos relations :
+- Rapports conjugaux selon l'ordre créationnel et rédemptif
+- Éducation chrétienne des enfants et transmission de la foi
+- Relations fraternelles dans la communauté de foi
+- Témoignage chrétien dans les cercles non-chrétiens
+
+**IV. APPLICATIONS ECCLÉSIASTIQUES :**
+Analysons l'impact de {passage} sur la vie d'Église :
+- Adoration, prédication, enseignement transformés
+- Exercice des dons spirituels et ministères
+- Discipline ecclésiastique et restauration
+- Mission et évangélisation inspirées par ces vérités
+
+**V. IMPLICATIONS SOCIALES ET CULTURELLES :**
+Découvrons comment {passage} influence notre engagement dans la société :
+- Éthique chrétienne face aux défis contemporains
+- Justice sociale et compassion évangélique
+- Transformation culturelle par l'Évangile
+- Citoyenneté terrestre à la lumière de la citoyenneté céleste
+
+**VI. APPLICATIONS ESCHATOLOGIQUES :**
+Vivons dès maintenant à la lumière des réalités futures révélées dans {passage}. L'espérance chrétienne transforme notre perspective présente et notre engagement temporal.
+
+DIRECTIVES ACADÉMIQUES :
+- Applications authentiquement dérivées de {passage} spécifiquement
+- {target_length} mots de guidance spirituelle narrative
+- Équilibre entre fidélité exégétique et pertinence contemporaine
+- Sagesse pastorale et discernement spirituel
+
+Révélez comment les vérités éternelles de {passage} transforment concrètement chaque dimension de l'existence chrétienne contemporaine.
+""",
+            13: f"""
+TYPES ET SYMBOLES pour {passage}
+
+MISSION : Devenir un herméneute typologique, dévoilant les ombres et reflets de Christ cachés dans {passage}, révélant la beauté de la pédagogie divine.
+
+APPROCHE TYPOLOGIQUE NARRATIVE :
+- Style de détective spirituel découvrant les mystères christologiques
+- Herméneutique typologique rigoureuse et respectueuse
+- Explications des termes typologiques (type, antitype, allégorie, symbole)
+- Révélations progressives culminant dans le Christ
+
+EXPLORATION TYPOLOGIQUE INSPIRÉE :
+
+**I. FONDEMENTS DE LA TYPOLOGIE BIBLIQUE :**
+Pénétrons dans l'art divin de la préfiguration. La typologie biblique révèle comment l'Ancien Testament dessine les contours du Nouveau. Dans {passage}, l'Esprit Saint a tissé des ombres prophétiques qui trouvent leur substance en Christ.
+
+**II. TYPES PERSONNELS CHRISTOLOGIQUES :**
+Découvrons les personnages de {passage} qui préfigurent le Messie :
+- Leurs rôles de prophètes, sacrificateurs, rois annonçant Christ
+- Leurs expériences d'humiliation et d'exaltation reflétant la Pâque du Seigneur
+- Leurs œuvres de délivrance, médiation, jugement préparant l'œuvre parfaite
+- Leurs imperfections révélant la nécessité du Médiateur parfait
+
+**III. TYPES INSTITUTIONNELS ET RITUELS :**
+Explorons les institutions divines qui préfigurent les réalités évangéliques :
+- Les sacrifices et leur accomplissement dans l'œuvre expiatoire
+- Les fêtes et leurs significations prophétiques réalisées
+- Le sacerdoce et sa perfection dans le grand Souverain Sacrificateur
+- Les lieux saints et leur réalisation dans le sanctuaire céleste
+
+**IV. SYMBOLES ET MÉTAPHORES RÉVÉLATRICES :**
+Analysons le langage symbolique qui révèle les vérités spirituelles :
+- Les éléments naturels (eau, feu, lumière) et leurs significations spirituelles
+- Les objets cultuels et leur symbolisme christologique
+- Les nombres sacrés et leur signification théologique
+- Les couleurs, matériaux, formes et leurs messages divins
+
+**V. PROGRESSION RÉVÉLATIONNELLE :**
+Suivons comment {passage} s'inscrit dans la pédagogie divine progressive. Chaque type prépare une révélation plus complète, culminant dans l'Incarnation et l'œuvre parfaite du Christ.
+
+**VI. APPLICATIONS SPIRITUELLES CONTEMPORAINES :**
+Ces types anciens parlent encore aujourd'hui. Ils enrichissent notre compréhension christologique, notre adoration, et notre espérance eschatologique.
+
+DIRECTIVES ACADÉMIQUES :
+- Typologie authentique basée sur les correspondances réelles dans {passage}
+- {target_length} mots d'exploration typologique narrative
+- Respect de l'herméneutique évangélique et des analogies scripturaires
+- Applications christocentriques et édifiantes
+
+Révélez comment {passage} devient une fenêtre ouverte sur la beauté du Christ, transformant notre contemplation du Sauveur.
+""",
+            14: f"""
+PROPHÉTIES ET ACCOMPLISSEMENTS pour {passage}
+
+MISSION : Devenir un prophétologue narratif, traçant les fils d'or prophétiques qui traversent {passage} et révèlent l'orchestration divine de l'histoire.
+
+APPROCHE PROPHÉTOLOGIQUE NARRATIVE :
+- Style de chroniqueur prophétique dévoilant les mystères divins
+- Herméneutique prophétique équilibrée et biblique
+- Explications des termes prophétiques (vaticinium ex eventu, typologie prophétique, eschatologie)
+- Révélations de la souveraineté divine sur l'histoire
+
+CHRONIQUE PROPHÉTIQUE INSPIRÉE :
+
+**I. NATURE DE LA PROPHÉTIE BIBLIQUE :**
+Pénétrons dans l'art divin de la prédiction. La prophétie biblique révèle comment l'Éternel annonce l'avenir pour fortifier la foi et diriger la conduite. Dans {passage}, découvrons les oracles divins et leur accomplissement providentiel.
+
+**II. PROPHÉTIES MESSIANIQUES :**
+Explorons les annonces du Christ dans {passage} :
+- Prophéties directes concernant la personne du Messie
+- Prédictions sur son œuvre rédemptrice (naissance, ministère, mort, résurrection)
+- Annonces de son règne et de sa gloire eschatologique
+- Chronologie prophétique et ses accomplissements historiques
+
+**III. PROPHÉTIES CONCERNANT ISRAËL :**
+Analysons les oracles sur le peuple élu :
+- Promesses d'alliance et leurs accomplissements progressifs
+- Prédictions d'exil, restauration, et destinée finale
+- Prophéties sur la terre promise et Jérusalem
+- Rôle prophétique d'Israël dans l'économie divine
+
+**IV. PROPHÉTIES DES NATIONS :**
+Découvrons les oracles concernant les gentils :
+- Jugements annoncés et leurs accomplissements historiques
+- Promesses d'inclusion dans l'alliance abrahamique
+- Rôle des empires dans le plan divin
+- Destinée eschatologique des nations
+
+**V. PROPHÉTIES ESCHATOLOGIQUES :**
+Explorons les révélations sur les fins dernières :
+- Signes des temps et leur identification contemporaine
+- Événements de la Parousie et du royaume millénaire
+- Résurrection, jugement final, nouveaux cieux et nouvelle terre
+- Chronologie prophétique et ses interprétations équilibrées
+
+**VI. HERMÉNEUTIQUE PROPHÉTIQUE ÉQUILIBRÉE :**
+Appliquons une interprétation prophétique fidèle, évitant les excès du littéralisme rigide et de l'allégorisme excessif. La règle d'or : l'Écriture s'interprète par l'Écriture.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus sur les prophéties réellement présentes dans {passage}
+- {target_length} mots d'analyse prophétologique narrative
+- Références aux accomplissements bibliques et historiques vérifiables
+- Éviter les spéculations non-fondées et les dates précises
+
+Révélez comment les prophéties de {passage} manifestent la fidélité divine et fortifient notre espérance chrétienne.
+""",
+            15: f"""
+PARALLÈLES BIBLIQUES pour {passage}
+
+MISSION : Devenir un harmoniste scripturaire, tissant les connexions divines entre {passage} et l'ensemble du canon, révélant l'unité organique de la révélation.
+
+APPROCHE CANONIQUE NARRATIVE :
+- Style de bibliothécaire divin explorant les correspondances sacrées
+- Herméneutique canonique et analogie de l'Écriture
+- Explications des principes d'intertextualité biblique (citation, allusion, écho)
+- Révélation de l'harmonie divine progressive
+
+EXPLORATION HARMONIQUE INSPIRÉE :
+
+**I. PRINCIPE DE L'ANALOGIE SCRIPTURAIRE :**
+Pénétrons dans l'art divin de l'auto-interprétation biblique. L'Écriture est son propre interprète (Scriptura sui ipsius interpres). Dans {passage}, découvrons les échos, correspondances et développements qui résonnent à travers tout le canon.
+
+**II. PARALLÈLES THÉMATIQUES DIRECTS :**
+Explorons les passages qui traitent des mêmes sujets que {passage} :
+- Textes parallèles dans les évangiles synoptiques ou récits historiques
+- Développements thématiques à travers l'Ancien et le Nouveau Testament
+- Progressions doctrinales du prototype à l'accomplissement
+- Correspondances entre promesses et réalisations
+
+**III. ÉCHOS LEXICAUX ET CONCEPTUELS :**
+Analysons les réseaux de mots et concepts qui relient {passage} au reste de l'Écriture :
+- Termes-clés récurrents et leur développement sémantique
+- Métaphores et images qui traversent le canon
+- Concepts théologiques et leur maturation progressive
+- Formules liturgiques et leur usage canonique
+
+**IV. CITATIONS ET ALLUSIONS INTERTEXTUELLES :**
+Découvrons comment {passage} cite ou fait écho à d'autres textes bibliques :
+- Citations explicites et leur contexte d'origine
+- Allusions subtiles et leur enrichissement mutuel
+- Réinterprétations créatives sous inspiration divine
+- Accomplissements typologiques et prophétiques
+
+**V. CONTRASTES ET COMPLÉMENTARITÉS :**
+Explorons aussi les tensions créatives qui révèlent la richesse divine :
+- Paradoxes apparents qui s'harmonisent dans la vérité supérieure
+- Perspectives complémentaires sur le même mystère divin
+- Progressions révélationnelles de l'ombre à la réalité
+- Diversité dans l'unité de l'inspiration divine
+
+**VI. APPLICATIONS HERMÉNEUTIQUES :**
+Cette approche canonique transforme notre compréhension. Elle nous garde de l'isolement textuel et enrichit notre saisie de la symphonie divine complète.
+
+DIRECTIVES ACADÉMIQUES :
+- Parallèles authentiques et vérifiables avec {passage} spécifiquement
+- {target_length} mots d'exploration canonique narrative
+- Références bibliques précises avec citations pertinentes
+- Équilibre entre unité canonique et diversité littéraire
+
+Révélez comment {passage} s'épanouit dans le concert harmonieux de toute l'Écriture, enrichissant notre contemplation de la révélation divine.
+""",
+            16: f"""
+CONTEXTE DU CHAPITRE SUIVANT pour {passage}
+
+MISSION : Devenir un guide prophétique, préparant la compréhension du chapitre suivant en montrant comment {passage} ouvre la voie à la suite du récit divin.
+
+APPROCHE TRANSITIONNELLE NARRATIVE :
+- Style de guide littéraire anticipant la suite de l'épopée sacrée
+- Vision prospective et préparatoire
+- Explications des techniques narratives (suspense, préparation, transition)
+- Révélation de la continuité divine dans la progression textuelle
+
+PRÉPARATION PROSPECTIVE INSPIRÉE :
+
+**I. TRANSITIONS NARRATIVES ET THÉMATIQUES :**
+Observons comment {passage} prépare organiquement le chapitre suivant. Dans l'art narratif divin, rien n'est accidentel. Chaque conclusion ouvre une nouvelle perspective, chaque résolution soulève de nouvelles questions qui trouveront leur réponse dans la suite du récit sacré.
+
+**II. SEMENCES PLANTED POUR LA SUITE :**
+Découvrons les germes narratifs et théologiques que {passage} plante :
+- Questions soulevées qui attendent leur résolution
+- Personnages introduits qui joueront un rôle crucial
+- Thèmes amorcés qui se développeront pleinement
+- Tensions créées qui trouveront leur dénouement
+
+**III. PRÉPARATIONS PROVIDENTIELLES :**
+Analysons comment {passage} orchestre providentiellement la suite :
+- Événements qui conditionnent les développements futurs
+- Décisions des personnages qui engagent l'avenir
+- Interventions divines qui préparent de nouveaux actes
+- Contextes établis pour les révélations suivantes
+
+**IV. PROGRESSIONS RÉVÉLATIONNELLES ANNONCÉES :**
+Explorons comment {passage} anticipe de nouveaux dévoilements divins :
+- Vérités partiellement révélées qui s'approfondiront
+- Mystères effleurés qui se dévoileront davantage
+- Promesses énoncées qui trouveront leur réalisation
+- Types esquissés qui se préciseront
+
+**V. SUSPENSE SPIRITUEL ET ANTICIPATION :**
+Découvrons l'art divin du suspense sanctifié. {passage} crée une attente légitime qui préparera notre cœur à recevoir les nouvelles révélations. Cette pédagogie divine cultive notre foi et notre persévérance.
+
+**VI. APPLICATIONS POUR LA LECTURE SÉQUENTIELLE :**
+Cette compréhension prospective enrichit notre lecture continue. Elle nous aide à saisir la logique divine de la révélation progressive et à cultiver une attente sanctifiée.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus sur les véritables préparations vers {book} chapitre {int(chapter)+1 if chapter.isdigit() else "suivant"}
+- {target_length} mots d'analyse transitionnelle narrative
+- Éviter les anticipations non-fondées sur le texte
+- Respecter la progression naturelle du récit biblique
+
+Révélez comment {passage} nous prépare à recevoir avec fruit les nouvelles merveilles que Dieu révélera dans la suite de son récit sacré.
 """
         }
         
