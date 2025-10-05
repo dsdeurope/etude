@@ -1,7 +1,0 @@
-src
-public
-node_modules
-.git
-*.md
-package-lock.json
-yarn.lock
