@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "buildCommand": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true yarn build",
+  "outputDirectory": "build",
+  "devCommand": "yarn start",
+  "installCommand": "yarn install",
+  "framework": "create-react-app",
+  "env": {
+    "SKIP_PREFLIGHT_CHECK": "true",
+    "NODE_OPTIONS": "--openssl-legacy-provider"
+  },
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
