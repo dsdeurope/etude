@@ -601,7 +601,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     });
     
     // 3. Mettre en gras les expressions importantes entre guillemets
-    formattedText = formattedText.replace(/"([^"]+)"/g, '<strong style="color: #374151; font-weight: 600; font-style: italic;">"$1"</strong>');
+    formattedText = formattedText.replace(/"([^"]+)"/g, '<strong style="background: #f59e0b; color: white !important; font-weight: 700 !important; font-style: italic; padding: 1px 4px; border-radius: 3px; text-shadow: 0 1px 1px rgba(0,0,0,0.3);">"$1"</strong>');
     
     // 4. Mettre en évidence les phrases de conclusion/application
     const conclusionPatterns = [
