@@ -1938,7 +1938,7 @@ ${contextualEnrichment}
                   gridTemplateColumns: 'repeat(7, 1fr)',
                   gap: '16px',
                   marginBottom: '24px',
-                  padding: '20px 30px',
+                  padding: '20px 20px',
                   width: '100%',
                   boxSizing: 'border-box',
                   alignItems: 'center',
