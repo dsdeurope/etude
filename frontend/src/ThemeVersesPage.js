@@ -122,42 +122,64 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     }
   };
 
-  // Fonction pour extraire les mots-clés d'un thème
-  const extractThemeKeywords = (themeName) => {
-    const themeKeywords = {
-      "Amour et Charité": "amour charité aimer",
-      "Foi et Confiance": "foi confiance croire",
-      "Espérance et Promesses": "espérance promesse espoir",
-      "Pardon et Miséricorde": "pardon miséricorde pardonner",
-      "Justice et Droiture": "justice droiture juste",
-      "Sagesse et Connaissance": "sagesse connaissance sage",
-      "Prière et Adoration": "prière adoration prier",
-      "Paix et Réconciliation": "paix réconciliation paisible",
-      "Joie et Louange": "joie louange réjouir",
-      "Humilité et Service": "humilité service servir",
-      "Courage et Force": "courage force fort",
-      "Patience et Persévérance": "patience persévérance patient",
-      "Compassion et Bonté": "compassion bonté compatissant",
-      "Vérité et Sincérité": "vérité sincérité vrai",
-      "Liberté et Délivrance": "liberté délivrance libérer",
-      "Guérison et Restauration": "guérison restauration guérir",
-      "Famille et Relations": "famille relation parent",
-      "Travail et Vocation": "travail vocation œuvre",
-      "Richesse et Pauvreté": "richesse pauvreté riche pauvre",
-      "Souffrance et Épreuves": "souffrance épreuve souffrir",
-      "Mort et Résurrection": "mort résurrection mourir ressusciter",
-      "Création et Nature": "création nature créer",
-      "Prophétie et Révélation": "prophétie révélation prophète",
-      "Royaume de Dieu": "royaume ciel céleste",
-      "Salut et Rédemption": "salut rédemption sauver",
-      "Saint-Esprit": "esprit saint consolateur",
-      "Église et Communauté": "église communauté assemblée",
-      "Mission et Évangélisation": "mission évangélisation évangile",
-      "Sanctification": "sanctification saint sanctifier",
-      "Eschatologie et Fin des Temps": "eschatologie fin temps dernier jour"
+  // Stratégies de recherche multiples pour garantir 20+ versets
+  const getSearchStrategies = (themeName) => {
+    const strategies = {
+      "Amour et Charité": ["amour", "charité", "aimer", "aimé", "bien-aimé", "amoureux"],
+      "Foi et Confiance": ["foi", "croire", "confiance", "fidèle", "croyant", "conviction"],
+      "Espérance et Promesses": ["espérance", "promesse", "espoir", "attendre", "attente", "espérer"],
+      "Pardon et Miséricorde": ["pardon", "miséricorde", "pardonner", "miséricordieux", "grâce", "compassion"],
+      "Justice et Droiture": ["justice", "juste", "droiture", "équité", "jugement", "droit"],
+      "Sagesse et Connaissance": ["sagesse", "sage", "connaissance", "intelligence", "prudence", "instruction"],
+      "Prière et Adoration": ["prière", "prier", "adoration", "adorer", "invoquer", "supplier"],
+      "Paix et Réconciliation": ["paix", "paisible", "réconciliation", "réconcilier", "repos", "tranquille"],
+      "Joie et Louange": ["joie", "réjouir", "louange", "louer", "allégresse", "bonheur"],
+      "Humilité et Service": ["humilité", "humble", "service", "servir", "serviteur", "modeste"],
+      "Courage et Force": ["courage", "fort", "force", "vaillant", "brave", "puissant"],
+      "Patience et Persévérance": ["patience", "patient", "persévérance", "endurance", "supporter", "attendre"],
+      "Compassion et Bonté": ["compassion", "bonté", "bon", "compatissant", "bienveillant", "doux"],
+      "Vérité et Sincérité": ["vérité", "vrai", "sincérité", "sincère", "fidélité", "véracité"],
+      "Liberté et Délivrance": ["liberté", "libre", "délivrance", "délivrer", "affranchir", "libérer"],
+      "Guérison et Restauration": ["guérison", "guérir", "restauration", "restaurer", "santé", "rétablir"],
+      "Famille et Relations": ["famille", "père", "mère", "enfant", "frère", "sœur"],
+      "Travail et Vocation": ["travail", "œuvre", "vocation", "appel", "travailler", "labeur"],
+      "Richesse et Pauvreté": ["richesse", "riche", "pauvreté", "pauvre", "trésor", "biens"],
+      "Souffrance et Épreuves": ["souffrance", "souffrir", "épreuve", "affliction", "tribulation", "douleur"],
+      "Mort et Résurrection": ["mort", "mourir", "résurrection", "ressusciter", "vie", "éternelle"],
+      "Création et Nature": ["création", "créer", "terre", "ciel", "monde", "univers"],
+      "Prophétie et Révélation": ["prophète", "prophétie", "révélation", "révéler", "vision", "songe"],
+      "Royaume de Dieu": ["royaume", "roi", "ciel", "céleste", "trône", "régner"],
+      "Salut et Rédemption": ["salut", "sauver", "rédemption", "racheter", "sauveur", "délivrance"],
+      "Saint-Esprit": ["esprit", "saint", "consolateur", "souffle", "onction", "baptême"],
+      "Église et Communauté": ["église", "assemblée", "communauté", "corps", "frères", "peuple"],
+      "Mission et Évangélisation": ["évangile", "mission", "prêcher", "témoignage", "annoncer", "proclamer"],
+      "Sanctification": ["sanctification", "saint", "sanctifier", "pur", "purification", "consécration"],
+      "Eschatologie et Fin des Temps": ["fin", "dernier", "jugement", "éternité", "avènement", "retour"]
     };
     
-    return themeKeywords[themeName] || themeName.replace(/\set\s/g, ' ').toLowerCase();
+    return strategies[themeName] || [themeName.toLowerCase(), themeName.replace(/\set\s/g, ' ').toLowerCase()];
+  };
+
+  // Versets de référence spécifiques par thème
+  const getThemeReferenceVerses = async (themeName) => {
+    const referenceVerses = {
+      "Amour et Charité": [
+        { book: "1 Jean", chapter: 4, verse: 7, text: "Bien-aimés, aimons-nous les uns les autres; car l'amour est de Dieu, et quiconque aime est né de Dieu et connaît Dieu.", reference: "1 Jean 4:7" },
+        { book: "1 Jean", chapter: 4, verse: 16, text: "Et nous, nous avons connu l'amour que Dieu a pour nous, et nous y avons cru. Dieu est amour; et celui qui demeure dans l'amour demeure en Dieu, et Dieu demeure en lui.", reference: "1 Jean 4:16" },
+        { book: "Matthieu", chapter: 22, verse: 37, text: "Jésus lui répondit: Tu aimeras le Seigneur, ton Dieu, de tout ton cœur, de toute ton âme, et de toute ta pensée.", reference: "Matthieu 22:37" },
+        { book: "Jean", chapter: 13, verse: 34, text: "Je vous donne un commandement nouveau: Aimez-vous les uns les autres; comme je vous ai aimés, vous aussi, aimez-vous les uns les autres.", reference: "Jean 13:34" },
+        { book: "1 Corinthiens", chapter: 13, verse: 13, text: "Maintenant donc ces trois choses demeurent: la foi, l'espérance, la charité; mais la plus grande de ces choses, c'est la charité.", reference: "1 Corinthiens 13:13" }
+      ],
+      "Foi et Confiance": [
+        { book: "Hébreux", chapter: 11, verse: 6, text: "Or sans la foi il est impossible de lui être agréable; car il faut que celui qui s'approche de Dieu croie que Dieu existe, et qu'il est le rémunérateur de ceux qui le cherchent.", reference: "Hébreux 11:6" },
+        { book: "Romains", chapter: 10, verse: 17, text: "Ainsi la foi vient de ce qu'on entend, et ce qu'on entend vient de la parole de Christ.", reference: "Romains 10:17" },
+        { book: "Marc", chapter: 11, verse: 22, text: "Jésus prit la parole, et leur dit: Ayez foi en Dieu.", reference: "Marc 11:22" },
+        { book: "Éphésiens", chapter: 2, verse: 8, text: "Car c'est par la grâce que vous êtes sauvés, par le moyen de la foi. Et cela ne vient pas de vous, c'est le don de Dieu.", reference: "Éphésiens 2:8" },
+        { book: "Jacques", chapter: 2, verse: 17, text: "Il en est ainsi de la foi: si elle n'a pas les œuvres, elle est morte en elle-même.", reference: "Jacques 2:17" }
+      ]
+    };
+    
+    return referenceVerses[themeName] || [];
   };
 
   // Fallback vers quelques versets de base si l'API échoue
