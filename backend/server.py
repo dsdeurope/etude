@@ -16,7 +16,7 @@ import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # Emergent LLM integration
-from emergentintegrations import EmergentLLM
+from emergentintegrations.llm.chat import LlmChat, UserMessage
 
 # API requests
 import httpx
