@@ -578,19 +578,28 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       .replace(/&#x27;/g, "'")
       .replace(/&amp;/g, '&');
     
-    // Nettoyer les styles CSS qui peuvent apparaître en texte brut
-    formattedText = formattedText.replace(/style="[^"]*background:\s*linear-gradient[^"]*"/g, '')
-                                 .replace(/background:\s*linear-gradient[^;]*;[^"]*"/g, '');
+    // Nettoyer COMPLÈTEMENT tous les styles CSS qui peuvent apparaître en texte brut
+    formattedText = formattedText
+      .replace(/style="[^"]*"/g, '') // Supprimer tous les attributs style
+      .replace(/background:\s*linear-gradient\([^)]*\);?/g, '') // Supprimer les CSS linear-gradient
+      .replace(/color:\s*white\s*!important;?/g, '') // Supprimer color: white
+      .replace(/font-weight:\s*\d+\s*!important;?/g, '') // Supprimer font-weight
+      .replace(/padding:\s*[^;]*;?/g, '') // Supprimer padding
+      .replace(/border-radius:\s*[^;]*;?/g, '') // Supprimer border-radius  
+      .replace(/text-shadow:\s*[^;]*;?/g, '') // Supprimer text-shadow
+      .replace(/[^>]*">/g, '>') // Nettoyer les remnants de balises
+      .replace(/>\s*"/g, '>') // Nettoyer les guillemets orphelins
+      .replace(/"\s*</g, '<'); // Nettoyer les guillemets orphelins
     
-    // 1. Rendre les références bibliques cliquables
+    // 1. Rendre les références bibliques cliquables (simplifié, sans style inline)
     const referencePattern = /(Genèse|Exode|Lévitique|Nombres|Deutéronome|Josué|Juges|Ruth|1 Samuel|2 Samuel|1 Rois|2 Rois|1 Chroniques|2 Chroniques|Esdras|Néhémie|Esther|Job|Psaumes|Proverbes|Ecclésiaste|Cantique|Ésaïe|Jérémie|Lamentations|Ézéchiel|Daniel|Osée|Joël|Amos|Abdias|Jonas|Michée|Nahum|Habacuc|Sophonie|Aggée|Zacharie|Malachie|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens|1 Thessaloniciens|2 Thessaloniciens|1 Timothée|2 Timothée|Tite|Philémon|Hébreux|Jacques|1 Pierre|2 Pierre|1 Jean|2 Jean|3 Jean|Jude|Apocalypse)\s+(\d+):(\d+(?:-\d+)?)/g;
     
     formattedText = formattedText.replace(referencePattern, (match, livre, chapitre, verset) => {
       const searchQuery = encodeURIComponent(`${livre} ${chapitre}:${verset}`);
-      return `<a href="https://www.bible.com/search/bible?q=${searchQuery}" target="_blank" style="color: #8b5cf6; text-decoration: underline; font-weight: 600; cursor: pointer;" onmouseover="this.style.color='#7c3aed'" onmouseout="this.style.color='#8b5cf6'" title="Cliquer pour lire ce verset sur YouVersion">${match}</a>`;
+      return `<a href="https://www.bible.com/search/bible?q=${searchQuery}" target="_blank" class="bible-reference" title="Cliquer pour lire ce verset sur YouVersion">${match}</a>`;
     });
     
-    // 2. Mettre en gras les concepts théologiques importants avec des couleurs visibles
+    // 2. Mettre en gras les concepts théologiques importants (utiliser des classes CSS)
     const conceptsTheologiques = [
       'bénédiction divine', 'volonté de Dieu', 'fils de Dieu', 'filles d\'hommes',
       'croissance démographique', 'lignée de Seth', 'lignée de Caïn',
@@ -607,11 +616,11 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     
     conceptsTheologiques.forEach(concept => {
       const regex = new RegExp(`(${concept})`, 'gi');
-      formattedText = formattedText.replace(regex, '<strong style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white !important; font-weight: 800 !important; padding: 2px 6px; border-radius: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">$1</strong>');
+      formattedText = formattedText.replace(regex, '<strong class="theological-concept">$1</strong>');
     });
     
     // 3. Mettre en gras les expressions importantes entre guillemets
-    formattedText = formattedText.replace(/"([^"]+)"/g, '<strong style="background: #f59e0b; color: white !important; font-weight: 700 !important; font-style: italic; padding: 1px 4px; border-radius: 3px; text-shadow: 0 1px 1px rgba(0,0,0,0.3);">"$1"</strong>');
+    formattedText = formattedText.replace(/"([^"]+)"/g, '<strong class="quoted-text">"$1"</strong>');
     
     // 4. Mettre en évidence les phrases de conclusion/application
     const conclusionPatterns = [
