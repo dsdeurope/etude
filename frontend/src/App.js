@@ -1803,8 +1803,8 @@ ${contextualEnrichment}
       } catch (apiError) {
         console.error(`[API ÉCHEC RUBRIQUE ${rubriqueNum}] ${apiError.message}`, apiError);
         console.warn(`[FALLBACK] Génération de contenu de base pour rubrique ${rubriqueNum}`);
-        // Fallback avec contenu de base
-        rubriqueContent = `# ${rubriqueNum}. ${rubriqueTitle}\n\n**Analyse de ${passage}**\n\nCette section nécessite une génération via l'API qui est temporairement indisponible.\n\n## Contenu de remplacement pour ${rubriqueTitle}\n\nL'étude de ${passage} sous l'angle de "${rubriqueTitle}" révèle des aspects importants de la révélation divine.\n\n*Contenu généré automatiquement - Version enrichie via API indisponible*`;
+        // Fallback avec contenu statique
+        rubriqueContent = generateRubriqueContentStatic(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
       }
       
       setProgressPercent(80);
