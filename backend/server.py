@@ -872,6 +872,181 @@ DIRECTIVES ACADÉMIQUES :
 - Respect de la diversité culturelle tout en affirmant les vérités universelles
 
 Révélez comment l'univers culturel de {passage} enrichit dramatiquement sa compréhension théologique et son application contemporaine.
+""",
+            7: f"""
+HISTOIRE ET CHRONOLOGIE pour {passage}
+
+MISSION : Devenir un chroniqueur de l'histoire sainte, situant {passage} dans le grand récit de la rédemption divine.
+
+APPROCHE CHRONOLOGIQUE NARRATIVE :
+- Style de chroniqueur biblique relatant l'épopée divine
+- Contextualisation historique vivante et précise
+- Explications des termes chronologiques (ères bibliques, périodes deutérocanoniques)
+- Vision de l'histoire comme théâtre de la providence divine
+
+CHRONIQUE HISTORIQUE INSPIRÉE :
+
+**I. SITUATION DANS L'HISTOIRE SAINTE :**
+Situons {passage} sur la timeline divine de la rédemption. L'Heilsgeschichte (histoire du salut) se déroule selon le dessein éternel, chaque époque préparant la suivante dans l'économie divine. Voici où s'inscrit notre passage dans cette chronologie sacrée.
+
+**II. CONTEXTE POLITIQUE ET SOCIAL :**
+Explorons les réalités historiques contemporaines de {passage} :
+- Les empires en présence et leurs implications prophétiques
+- Les dynamiques géopolitiques révélant la souveraineté divine
+- Les personnages historiques et leur rôle dans le plan divin
+- L'état spirituel du peuple de Dieu à cette époque
+
+**III. ARRIÈRE-PLAN RELIGIEUX :**
+Découvrons le climat spirituel de l'époque :
+- L'évolution de la révélation progressive jusqu'à {passage}
+- Les institutions religieuses et leur fidélité/infidélité
+- Les courants théologiques et mouvements spirituels
+- La préparation providentielle pour les événements de {passage}
+
+**IV. SYNCHRONISMES PROPHÉTIQUES :**
+Observons comment {passage} s'inscrit dans les prophéties bibliques. Les synchronismes divins révèlent l'orchestration parfaite de l'histoire par l'Éternel. Chaque "coïncidence" historique manifeste la providence souveraine.
+
+**V. IMPLICATIONS ESCHATOLOGIQUES :**
+Comprenons comment {passage} préfigure ou accomplit les promesses messianiques. L'eschatologie réalisée et l'eschatologie future s'articulent dans cette perspective historique rédemptionnelle.
+
+DIRECTIVES ACADÉMIQUES :
+- Chronologie précise basée sur les données bibliques et archéologiques
+- {target_length} mots d'analyse historique narrative
+- Références aux chronologies bibliques établies
+- Applications typologiques et prophétiques appropriées
+
+Révélez comment le contexte historique de {passage} magnifie sa signification rédemptionnelle dans l'épopée divine.
+""",
+            8: f"""
+PERSONNAGES PRINCIPAUX pour {passage}
+
+MISSION : Dresser les portraits narratifs des protagonistes de {passage}, révélant leurs caractères comme miroirs de vérités spirituelles éternelles.
+
+APPROCHE BIOGRAPHIQUE NARRATIVE :
+- Style de portraitiste biblique saisissant les âmes
+- Analyses psychologiques et spirituelles approfondies
+- Explications des termes caractérologiques (typologie biblique, développement spirituel)
+- Applications contemporaines des caractères bibliques
+
+GALERIE DE PORTRAITS INSPIRÉS :
+
+**I. PROTAGONISTES DIVINS ET HUMAINS :**
+Rencontrons les acteurs principaux de {passage}. Chaque personnage biblique porte en lui des vérités universelles sur la nature humaine et divine. L'anthropologie biblique révèle comment ces figures historiques deviennent des types spirituels pour tous les temps.
+
+**II. CARACTÈRES ET TEMPÉRAMENTS RÉVÉLÉS :**
+Analysons les personnalités complexes dévoilées dans {passage} :
+- Leurs motivations profondes et conflits intérieurs
+- Leur croissance ou déclin spirituel
+- Leurs forces et faiblesses caractérologiques
+- Leur rôle dans l'économie rédemptionnelle
+
+**III. DÉVELOPPEMENT SPIRITUEL ET MORAL :**
+Suivons l'évolution des personnages à travers {passage}. La sanctification progressive (croissance en sainteté) ou la déchéance spirituelle (apostasie) révèlent les lois morales du royaume divin.
+
+**IV. TYPOLOGIE CHRISTOLOGIQUE :**
+Découvrons comment certains personnages préfigurent le Christ (typologie positive) ou l'antichrist (typologie négative). Ces ombres et reflets enrichissent notre compréhension messianique.
+
+**V. LEÇONS CARACTÉROLOGIQUES CONTEMPORAINES :**
+Ces portraits anciens parlent aujourd'hui. Ils nous enseignent sur nos propres tendances, tentations, vocations spirituelles et transformations possibles par la grâce divine.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus sur les personnages réellement présents dans {passage}
+- {target_length} mots d'analyse caractérologique narrative
+- Références aux études bibliques caractérologiques
+- Applications pastorales et d'édification personnelle
+
+Révélez comment les personnages de {passage} deviennent des miroirs transformateurs pour notre propre pèlerinage spirituel.
+""",
+            9: f"""
+ÉTUDE DES MOTS-CLÉS pour {passage}
+
+MISSION : Devenir un orfèvre des mots sacrés, ciselant chaque terme-clé de {passage} pour révéler ses facettes spirituelles multiples.
+
+APPROCHE LEXICOGRAPHIQUE NARRATIVE :
+- Style d'orfèvre linguistique polissant les gemmes lexicales
+- Analyse sémantique approfondie et évolutive
+- Explications des termes techniques (champ sémantique, polysémie, métonymie)
+- Applications herméneutiques transformatrices
+
+ATELIER LEXICAL INSPIRÉ :
+
+**I. IDENTIFICATION DES GEMMES LEXICALES :**
+Sélectionnons les mots-clés qui scintillent dans {passage}. Ces termes répétés, emphasisés, ou théologiquement chargés forment l'ossature conceptuelle du texte. La lexicographie biblique révèle leurs richesses cachées.
+
+**II. ANALYSE ÉTYMOLOGIQUE RÉVÉLATRICE :**
+Remontons aux racines hébraïques/grecques de chaque mot-clé :
+- Leurs origines étymologiques et évolutions sémantiques
+- Leurs occurrences dans l'ensemble du canon biblique
+- Leurs champs sémantiques et connotations théologiques
+- Leurs traductions et leurs limites dans nos versions modernes
+
+**III. DÉVELOPPEMENT CANONIQUE :**
+Suivons l'évolution de ces concepts à travers l'Écriture. La révélation progressive enrichit progressivement le sens de chaque terme, culminant dans la révélation néotestamentaire et christologique.
+
+**IV. RÉSONANCES THÉOLOGIQUES :**
+Découvrons comment ces mots-clés révèlent des doctrines fondamentales :
+- Leur contribution à la théologie systématique
+- Leur rôle dans l'herméneutique biblique
+- Leur signification sotériologique et eschatologique
+
+**V. APPLICATIONS TRANSFORMATRICES :**
+Ces découvertes lexicales transforment notre compréhension spirituelle. Chaque nuance correctement saisie enrichit notre communion avec Dieu et notre témoignage chrétien.
+
+DIRECTIVES ACADÉMIQUES :
+- Focus sur les mots-clés réellement présents et significatifs dans {passage}
+- {target_length} mots d'analyse lexicale narrative captivante
+- Références aux concordances et dictionnaires théologiques
+- Applications pratiques pour l'étude et la prédication
+
+Révélez comment les mots-clés de {passage} deviennent des clés d'or ouvrant les trésors divins cachés dans le texte sacré.
+""",
+            10: f"""
+CONTEXTE DU LIVRE pour {passage}
+
+MISSION : Situer {passage} dans l'architecture globale de {book}, révélant sa fonction organique dans l'œuvre littéraire et théologique complète.
+
+APPROCHE ARCHITECTURALE NARRATIVE :
+- Style d'architecte littéraire explorant l'édifice biblique
+- Vision d'ensemble puis focus spécifique sur {passage}
+- Explications des termes structuraux (macrostructure, péricope, unité littéraire)
+- Compréhension organique du dessein éditorial divin
+
+EXPLORATION ARCHITECTURALE INSPIRÉE :
+
+**I. VISION PANORAMIQUE DE {book} :**
+Contemplons d'abord l'ensemble majestueux de {book}. Chaque livre biblique forme un édifice littéraire parfait, orchestré par l'Esprit Saint. Découvrons le thème central, la progression argumentative, et l'objectif théologique de cette œuvre inspirée.
+
+**II. DIVISION CANONIQUE ET LITTÉRAIRE :**
+Explorons la structure globale de {book} :
+- Ses grandes sections thématiques et narratives
+- Sa progression théologique et révélationnelle  
+- Ses techniques littéraires caractéristiques
+- Sa place dans le canon biblique (Torah, Neviim, Ketuvim, ou corpus paulinien, etc.)
+
+**III. POSITION STRATÉGIQUE DE {passage} :**
+Situons précisément {passage} dans cette architecture :
+- Sa fonction dans la progression du livre
+- Ses connexions avec les passages antérieurs et postérieurs
+- Son rôle dans le développement thématique global
+- Sa contribution à l'objectif théologique général
+
+**IV. RÉSONNANCES INTRA-CANONIQUES :**
+Découvrons comment {passage} dialogue avec le reste de {book} :
+- Les échos thématiques et lexicaux
+- Les développements progressifs des concepts
+- Les préparations et accomplissements internes
+- L'unité littéraire et théologique du livre complet
+
+**V. APPLICATIONS HERMÉNEUTIQUES :**
+Cette compréhension contextuelle transforme notre interprétation. Elle nous garde de l'atomisation exégétique et enrichit notre saisie de l'intention divine globale.
+
+DIRECTIVES ACADÉMIQUES :
+- Analyse contextuelle spécifique à la structure réelle de {book}
+- {target_length} mots d'exploration architecturale narrative
+- Références aux introductions et commentaires de {book}
+- Applications pour la compréhension globale et la prédication séquentielle
+
+Révélez comment {passage} s'épanouit pleinement quand on comprend sa place organique dans l'ensemble inspiré de {book}.
 """
         }
         
