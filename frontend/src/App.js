@@ -1111,8 +1111,19 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       // Après génération, naviguer vers la page de rubrique avec le contenu généré
       navigateToRubrique(id, generatedContent || '');
     } else if (id === 0) {
-      // Rubrique 0 utilise VERSETS PROG - ne pas interférer
-      setContent("");
+      // Rubrique 0 : Étude verset par verset
+      console.log(`[RUBRIQUE 0] Vérification contenu existant - clé: ${contentKey}`);
+      
+      // Vérifier s'il y a du contenu existant pour cette rubrique
+      if (generatedRubriques[contentKey]) {
+        console.log(`[RUBRIQUE 0] Contenu trouvé, affichage - longueur: ${generatedRubriques[contentKey].length}`);
+        setContent(generatedRubriques[contentKey]);
+        setIsVersetsProgContent(true);
+      } else {
+        console.log(`[RUBRIQUE 0] Aucun contenu trouvé, affichage message d'instruction`);
+        setContent("Cliquez sur **Versets Prog** pour générer l'étude verset par verset de ce chapitre.");
+        setIsVersetsProgContent(false);
+      }
     } else {
       setContent("");
     }
