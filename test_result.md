@@ -150,3 +150,5 @@
 ## agent_communication:
     - agent: "main"  
     - message: "Page dédiée créée mais état de chargement reste affiché. API backend fonctionne correctement. Problème dans le frontend à diagnostiquer."
+    - agent: "testing"
+    - message: "✅ DIAGNOSTIC COMPLET EFFECTUÉ - L'API backend /api/generate-character-history fonctionne parfaitement. Tests exhaustifs réalisés avec David, Abraham, Moïse. Contenu narratif de haute qualité généré (1500-2200 mots). Rotation des clés Gemini opérationnelle. Temps de réponse acceptables (18-26s). Le problème d'état de chargement perpétuel vient EXCLUSIVEMENT du frontend, pas du backend. L'API répond correctement avec du contenu riche et structuré."
