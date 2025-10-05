@@ -154,6 +154,7 @@
   current_focus:
     - "Page dédiée pour personnages bibliques"
     - "Diagnostic problème état chargement"
+    - "Test amélioration prompts 28 rubriques"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
