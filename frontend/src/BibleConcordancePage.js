@@ -1125,8 +1125,8 @@ L'intelligence artificielle Gemini a analysé ${selectedCharacter} en croisant t
                           .replace(/(Exode|Lévitique|Nombres|Genèse|Deutéronome|Psaumes|Hébreux|Matthieu|Marc|Luc|Jean|Actes|Romains|1 Corinthiens|2 Corinthiens|Galates|Éphésiens|Philippiens|Colossiens)\s+(\d+):(\d+(?:-\d+)?)/g, 
                             '<span onclick="window.open(\'https://www.bible.com/search/bible?q=$1+$2%3A$3\', \'_blank\')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: 600; font-family: Montserrat, sans-serif; display: inline-block; margin: 2px; transition: all 0.3s ease;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'" title="Cliquer pour lire ce verset">📖 $1 $2:$3</span>')
                           // Créer des paragraphes narratifs
-                          .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
-                          .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/([.!?])\s*<br>/g, '$1</p><p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
+                          .replace(/^/, '<p style="color: #374151; font-size: 15px; line-height: 1.7; font-family: Montserrat, sans-serif; margin: 12px 0; text-align: justify; text-indent: 20px;">')
                           .replace(/$/, '</p>')
                       }} />
                     </div>
