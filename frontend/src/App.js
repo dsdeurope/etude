@@ -1678,9 +1678,12 @@ ${contextualEnrichment}
             // Navigation immédiate avec le contenu frais
             navigateToRubrique(1, rubrique1Content);
             setProgressPercent(4); // 1/28 ≈ 4%
-          
+          } else {
+            console.error("[API ERREUR] Impossible de générer la Rubrique 1");
+            throw new Error("API call failed");
+          }
         } else {
-          console.error("[API ERREUR] Impossible de générer la Rubrique 1");
+          console.error("[API ERREUR] Réponse non OK:", response.status);
           throw new Error("API call failed");
         }
         
