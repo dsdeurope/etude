@@ -570,8 +570,10 @@ Longueur : 800-1000 mots supplémentaires. Maintenir le style académique et res
             enrichment_content, enrichment_api_used = await call_gemini_api(enrichment_prompt, 1000)
             
             full_content = f"{character_content}\n\n---\n\n## 🤖 ENRICHISSEMENT THÉOLOGIQUE APPROFONDI\n\n{enrichment_content}"
+            final_api_used = f"{api_used}+{enrichment_api_used}"
         else:
             full_content = character_content
+            final_api_used = api_used
         
         return {
             "status": "success",
@@ -579,7 +581,7 @@ Longueur : 800-1000 mots supplémentaires. Maintenir le style académique et res
             "content": full_content,
             "enriched": request.enrich,
             "word_count": len(full_content.split()),
-            "api_used": f"gemini_key_{current_key_index}"
+            "api_used": final_api_used
         }
         
     except Exception as e:
