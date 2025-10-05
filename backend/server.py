@@ -425,7 +425,7 @@ EXIGENCES :
 Produire un contenu enrichi et structuré sur le thème "{request.search_term}".
 """
             
-            gemini_content = await call_gemini_api(prompt, 1200)
+            gemini_content, api_used = await call_gemini_api(prompt, 1200)
             
             return {
                 "status": "success",
