@@ -1249,7 +1249,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       setContent(formatContent(contentEnCours));
       
       // Générer le contenu intelligent pour cette rubrique
-      const rubriqueContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
+      const rubriqueContent = await generateRubriqueContentViaAPI(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
       
       // Délai pour effet visuel
       await wait(1000);
