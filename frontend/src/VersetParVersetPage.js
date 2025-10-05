@@ -629,7 +629,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     
     motsClesDoctrinaux.forEach(mot => {
       const regex = new RegExp(`\\b(${mot})\\b`, 'gi');
-      formattedText = formattedText.replace(regex, '<span style="background: rgba(139, 92, 246, 0.1); padding: 1px 4px; border-radius: 3px; font-weight: 600; color: #1f2937;">$1</span>');
+      formattedText = formattedText.replace(regex, '<span style="background: #ef4444; color: white !important; padding: 2px 5px; border-radius: 4px; font-weight: 700 !important; text-shadow: 0 1px 1px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2);">$1</span>');
     });
     
     return formattedText;
