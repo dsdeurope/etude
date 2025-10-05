@@ -1600,6 +1600,742 @@ DIRECTIVES ACADÉMIQUES :
 - Applications pratiques pour la croissance spirituelle
 
 Conduisez l'âme dans une rencontre transformatrice avec Dieu à travers les vérités spirituelles de {passage}.
+""",
+            21: f"""
+QUESTIONS D'APPROFONDISSEMENT pour {passage}
+
+MISSION : Devenir un maître socratique biblique, formulant des questions pénétrantes qui sondent les profondeurs spirituelles de {passage} et stimulent la croissance spirituelle.
+
+APPROCHE INTERROGATIVE NARRATIVE :
+- Style de maître spirituel utilisant la maïeutique sacrée
+- Questions progressives du simple au complexe
+- Explications des méthodes pédagogiques (questionnement socratique, dialectique spirituelle)
+- Stimulation de la réflexion et de l'application personnelle
+
+SÉMINAIRE SOCRATIQUE INSPIRÉ :
+
+**I. ART DU QUESTIONNEMENT SPIRITUEL :**
+Maîtrisons l'art divin du questionnement qui conduit à la découverte. Jésus lui-même utilisait les questions pour révéler les vérités du Royaume. Formulons des interrogations qui ouvrent l'intelligence et touchent le cœur à travers {passage}.
+
+**II. QUESTIONS EXÉGÉTIQUES FONDAMENTALES :**
+Sondons le sens littéral et théologique de {passage} :
+- Que révèle ce passage sur la nature et les attributs de Dieu ?
+- Quelles vérités christologiques émergent de ce texte ?
+- Comment l'œuvre du Saint-Esprit se manifeste-t-elle ici ?
+- Quels enseignements sur l'humanité et le péché découvrons-nous ?
+[Adaptation aux contenus réellement présents dans {passage}]
+
+**III. QUESTIONS HERMÉNEUTIQUES APPROFONDIES :**
+Explorons les méthodes d'interprétation révélées :
+- Comment ce passage s'harmonise-t-il avec l'ensemble de l'Écriture ?
+- Quelles difficultés apparentes trouvent leur résolution dans le contexte ?
+- Quelle progression révélationnelle observe-t-on ici ?
+- Comment les genres littéraires influencent-ils notre compréhension ?
+
+**IV. QUESTIONS APPLICATIVES TRANSFORMATRICES :**
+Stimulons l'application personnelle et communautaire :
+- Quelles transformations ce passage opère-t-il dans notre caractère ?
+- Comment ces vérités influencent-elles nos relations familiales et sociales ?
+- Quelles implications pour notre culte et notre service chrétien ?
+- Comment témoigner de ces vérités dans notre contexte contemporain ?
+
+**V. QUESTIONS DE MÉDITATION CONTEMPLATIVE :**
+Approfondissons la dimension spirituelle expérientielle :
+- Comment ce passage enrichit-il notre communion avec Dieu ?
+- Quelles consolations divines y découvrons-nous pour nos épreuves ?
+- Comment nourrit-il notre espérance eschatologique ?
+- Quelles invitations à la sainteté y entendons-nous ?
+
+**VI. QUESTIONS DE SYNTHÈSE ET D'INTÉGRATION :**
+Unifions notre compréhension dans une vision cohérente :
+- Comment ce passage contribue-t-il à notre théologie personnelle ?
+- Quelle place occupe-t-il dans l'histoire de la rédemption ?
+- Comment enrichit-il notre compréhension des autres portions scripturaires ?
+- Quelles vérités centrales résument l'enseignement de ce passage ?
+
+**VII. GUIDE POUR L'ÉTUDE PERSONNELLE ET DE GROUPE :**
+Utilisons ces questions pour approfondir notre étude :
+- Progression pédagogique pour l'animation de groupe
+- Méthodes de réflexion personnelle et de journal spirituel
+- Techniques de mémorisation et de méditation quotidienne
+- Applications pour l'enseignement et le discipulat
+
+DIRECTIVES ACADÉMIQUES :
+- Questions authentiquement générées par {passage} spécifiquement
+- {target_length} mots de questionnement pédagogique narratif
+- Progression logique du simple au complexe, du textuel au spirituel
+- Applications pratiques pour l'étude individuelle et communautaire
+
+Formulez des questions qui ouvrent les trésors cachés de {passage} et conduisent à une transformation spirituelle authentique.
+""",
+            22: f"""
+RÉFÉRENCES CROISÉES pour {passage}
+
+MISSION : Devenir un harmoniste canonique, tissant les liens divins entre {passage} et l'ensemble scripturaire, révélant l'unité organique de la révélation progressive.
+
+APPROCHE CANONIQUE SYSTÉMATIQUE :
+- Style de concordancier inspiré explorant les connexions divines
+- Méthodologie rigoureuse de l'intertextualité biblique
+- Explications des principes herméneutiques (analogie scripturaire, intertextualité)
+- Révélation de l'harmonie divine dans la diversité canonique
+
+RÉSEAU CANONIQUE INSPIRÉ :
+
+**I. MÉTHODOLOGIE DES RÉFÉRENCES CROISÉES :**
+Maîtrisons l'art divin de la référence croisée qui révèle l'unité scripturaire. Chaque passage biblique résonne avec d'autres portions, créant une symphonie révélationnelle. Découvrons comment {passage} s'harmonise avec l'ensemble canonique.
+
+**II. RÉFÉRENCES THÉMATIQUES DIRECTES :**
+Explorons les passages qui partagent les mêmes sujets que {passage} :
+- Textes traitant des mêmes doctrines ou événements
+- Développements parallèles dans différents livres bibliques
+- Progressions thématiques de l'Ancien au Nouveau Testament
+- Accomplissements et préfigurations mutuelles
+[Adaptation aux thèmes réellement présents dans {passage}]
+
+**III. CONNEXIONS LEXICALES ET CONCEPTUELLES :**
+Analysons les réseaux de mots et d'idées qui relient {passage} à d'autres textes :
+- Termes-clés hébreux/grecs et leurs occurrences significatives
+- Concepts théologiques développés ailleurs dans l'Écriture
+- Métaphores et images récurrentes dans le canon
+- Formules caractéristiques et leur usage scripturaire
+
+**IV. CITATIONS ET ALLUSIONS INTERTEXTUELLES :**
+Découvrons les références explicites et implicites dans {passage} :
+- Citations directes d'autres portions bibliques
+- Allusions subtiles révélant des connexions profondes
+- Échos phraséologiques et leur signification herméneutique
+- Réinterprétations créatives sous inspiration divine
+
+**V. PARALLÈLES TYPOLOGIQUES ET PROPHÉTIQUES :**
+Explorons les correspondances révélatrices dans l'économie divine :
+- Types vétérotestamentaires et leurs antitypes néotestamentaires
+- Prophéties et leurs accomplissements canoniques
+- Préfigurations rituelles et leurs réalisations spirituelles
+- Progressions révélationnelles culminant dans le Christ
+
+**VI. HARMONIES DOCTRINALES ET ÉTHIQUES :**
+Analysons comment {passage} s'intègre dans l'enseignement scripturaire global :
+- Contributions à la théologie systématique biblique
+- Développements éthiques et moraux à travers le canon
+- Enseignements sur le salut, la sanctification, l'eschatologie
+- Applications pastorales enrichies par les parallèles
+
+**VII. CONTRASTES RÉVÉLATEURS ET COMPLÉMENTARITÉS :**
+Explorons les tensions créatives qui révèlent la richesse divine :
+- Paradoxes apparents résolus par l'analogie scripturaire
+- Perspectives complémentaires sur les mêmes mystères
+- Progressions révélationnelles de l'ombre à la lumière
+- Diversité dans l'unité de l'inspiration divine
+
+**VIII. APPLICATIONS HERMÉNEUTIQUES PRATIQUES :**
+Utilisons ces connexions pour enrichir notre compréhension :
+- Méthode d'étude comparative et canonique
+- Prédication enrichie par les références croisées
+- Enseignement systématique basé sur les harmonies scripturaires
+- Apologétique fondée sur l'unité canonique
+
+DIRECTIVES ACADÉMIQUES :
+- Références authentiques et vérifiables liées à {passage} spécifiquement
+- {target_length} mots d'exploration canonique systématique
+- Citations bibliques précises avec références exactes
+- Équilibre entre exhaustivité et pertinence herméneutique
+
+Révélez comment {passage} s'épanouit dans le concert harmonieux de l'Écriture entière, enrichissant notre contemplation de la révélation divine unifiée.
+""",
+            23: f"""
+NOTES HISTORIQUES pour {passage}
+
+MISSION : Devenir un chroniqueur de l'histoire sainte, situant {passage} dans son contexte historique précis pour illuminer sa signification providentielle dans l'épopée divine.
+
+APPROCHE HISTORICO-CRITIQUE NARRATIVE :
+- Style d'historien biblique maîtrisant les sources anciennes
+- Contextualisation historique rigoureuse et spirituellement profitable
+- Explications des termes historiques (historiographie biblique, synchronismes)
+- Révélation de la providence divine à travers l'histoire
+
+ARCHIVES HISTORIQUES INSPIRÉES :
+
+**I. MÉTHODOLOGIE DE L'HISTOIRE BIBLIQUE :**
+Appliquons une historiographie sacrée qui reconnaît l'action divine dans l'histoire humaine. {passage} s'inscrit dans l'histoire réelle, vérifiable, où l'Éternel orchestre les événements selon son dessein éternel de rédemption.
+
+**II. CONTEXTE POLITIQUE ET GÉOPOLITIQUE :**
+Situons {passage} dans les réalités politiques de son époque :
+- Empires et royaumes contemporains et leur influence
+- Dynamiques géopolitiques affectant le peuple de Dieu
+- Personnalités historiques mentionnées ou sous-entendues
+- Conflits et alliances révélant la souveraineté divine
+[Adaptation au contexte historique réel de {passage}]
+
+**III. ARRIÈRE-PLAN SOCIO-ÉCONOMIQUE :**
+Explorons les réalités sociales qui éclairent {passage} :
+- Structure sociale et hiérarchies de l'époque
+- Conditions économiques et leur impact spirituel
+- Pratiques commerciales et leur symbolisme biblique
+- Vie quotidienne et ses métaphores dans le texte
+
+**IV. CONTEXTE RELIGIEUX ET CULTUEL :**
+Analysons l'environnement spirituel contemporain :
+- État de la religion révélée à l'époque de {passage}
+- Influences religieuses païennes et syncrétistes
+- Institutions cultuelles et leur fonctionnement
+- Mouvements spirituels et leurs implications théologiques
+
+**V. CHRONOLOGIE ET SYNCHRONISMES :**
+Établissons la datation précise et ses implications :
+- Chronologie biblique et extra-biblique coordonnée
+- Synchronismes avec l'histoire ancienne vérifiable
+- Calendriers et systèmes de datation de l'époque
+- Implications prophétiques et eschatologiques
+
+**VI. SOURCES HISTORIQUES COMPLÉMENTAIRES :**
+Explorons les témoignages extra-bibliques pertinents :
+- Documents cunéiformes, hiéroglyphiques, épigraphiques
+- Témoignages d'historiens anciens (Hérodote, Thucydide, Josèphe)
+- Découvertes archéologiques confirmant le récit biblique
+- Traditions orales et leur contribution à la compréhension
+
+**VII. GÉOGRAPHIE HISTORIQUE :**
+Situons {passage} dans son cadre géographique ancien :
+- Topographie et climat de l'époque
+- Voies de communication et centres urbains
+- Évolutions géopolitiques et leurs conséquences
+- Archéologie des sites mentionnés
+
+**VIII. IMPLICATIONS PROVIDENTIELLES :**
+Découvrons la main divine dans ces circonstances historiques :
+- Préparation providentielle des événements de {passage}
+- Orchestration divine des facteurs humains
+- Accomplissement des promesses à travers l'histoire
+- Leçons sur la souveraineté divine dans l'histoire humaine
+
+DIRECTIVES ACADÉMIQUES :
+- Données historiques authentiques et vérifiables concernant {passage}
+- {target_length} mots d'analyse historique narrative rigoureuse
+- Références aux sources primaires et secondaires fiables
+- Équilibre entre érudition historique et édification spirituelle
+
+Révélez comment le contexte historique de {passage} magnifie la providence divine et enrichit notre compréhension de l'action souveraine de Dieu dans l'histoire.
+""",
+            24: f"""
+PRIÈRE DE CLÔTURE pour {passage}
+
+MISSION : Composer une prière de conclusion digne des plus hautes traditions liturgiques, synthétisant les vérités de {passage} en une oraison transformatrice qui scelle l'étude dans l'adoration.
+
+APPROCHE LITURGIQUE NARRATIVE :
+- Style de liturgiste inspiré composant l'oraison parfaite
+- Synthèse priante des vérités étudiées
+- Explications des termes liturgiques (doxologie, épilogue orante, conclusion eucharistique)
+- Transformation de l'étude en adoration contemplative
+
+ORATOIRE LITURGIQUE INSPIRÉ :
+
+**I. ART DE LA PRIÈRE DE CLÔTURE :**
+Composons une oraison qui couronne dignement notre étude de {passage}. La prière de clôture transforme l'étude intellectuelle en communion spirituelle, l'analyse théologique en adoration contemplative, la connaissance en expérience transformatrice.
+
+**II. SYNTHÈSE ADORATRICE DES VÉRITÉS RÉVÉLÉES :**
+Rassemblons en prière les enseignements reçus de {passage} :
+
+*Père céleste, Auteur de toute révélation sacrée,*
+*Nous voici devant Toi, transformés par la contemplation de {passage}.*
+*Tes vérités éternelles ont illuminé nos intelligences,*
+*Ton Esprit Saint a touché nos cœurs,*
+*Ta Parole vivante a sondé nos consciences.*
+
+**III. CONFESSION ET PURIFICATION :**
+*Seigneur, {passage} nous a révélé notre condition devant Toi.*
+*Nous confessons humblement nos manquements aux vérités contemplées,*
+*Nos résistances aux appels divins entendus,*
+*Notre lenteur à vivre selon Tes enseignements parfaits.*
+*Purifie-nous par le sang de Christ, notre Médiateur parfait.*
+
+**IV. SUPPLICATION TRANSFORMATRICE :**
+*Accorde-nous, Père de miséricorde,*
+*La grâce de mettre en pratique les enseignements de {passage}.*
+*Que Ton Esprit grave ces vérités dans nos cœurs renouvelés,*
+*Qu'elles transforment nos caractères à l'image de Ton Fils,*
+*Qu'elles dirigent nos pas dans les sentiers de la justice.*
+
+**V. INTERCESSION ECCLESIALE ET MISSIONNAIRE :**
+*Étends Tes bénédictions, Seigneur, à Ton Église universelle.*
+*Que les vérités de {passage} nourrissent Tes enfants dispersés,*
+*Qu'elles fortifient les faibles, consolent les affligés,*
+*Qu'elles équipent les serviteurs pour l'édification du Corps de Christ.*
+*Utilise ces enseignements pour l'avancement de Ton Royaume.*
+
+**VI. DOXOLOGIE ET GLORIFICATION :**
+*À Toi, Père éternel, source de toute vérité,*
+*Au Fils, Parole incarnée révélée dans {passage},*
+*Au Saint-Esprit, Illuminateur de nos intelligences,*
+*Soient rendus honneur, gloire et adoration,*
+*Maintenant et dans tous les siècles des siècles.*
+
+**VII. ENGAGEMENT ET CONSÉCRATION :**
+*Seigneur, que cette étude ne reste pas stérile,*
+*Mais qu'elle produise du fruit pour Ta gloire.*
+*Aide-nous à être des disciples fidèles,*
+*Témoins authentiques de Tes vérités éternelles,*
+*Instruments de Ta grâce transformatrice.*
+
+**VIII. CONCLUSION EUCHARISTIQUE :**
+*Merci, Père céleste, pour le privilège de sonder Tes mystères,*
+*Pour la richesse de {passage} qui nourrit nos âmes,*
+*Pour l'espérance que ces vérités allument en nos cœurs.*
+*Garde-nous dans Ta vérité, conduis-nous par Ta Parole,*
+*Jusqu'au jour glorieux de la vision béatifique.*
+
+*Amen et Amen.*
+
+DIRECTIVES ACADÉMIQUES :
+- Prière authentiquement inspirée par les contenus spécifiques de {passage}
+- {target_length} mots d'oraison liturgique narrative élaborée
+- Respect des traditions liturgiques chrétiennes historiques
+- Applications spirituelles concrètes et transformatrices
+
+Composez une prière qui transforme l'étude de {passage} en rencontre adoratrice avec le Dieu vivant, scellant l'apprentissage dans la communion divine.
+""",
+            25: f"""
+PLAN D'ENSEIGNEMENT pour {passage}
+
+MISSION : Devenir un pédagogue biblique expert, élaborant une stratégie d'enseignement complète qui transmet efficacement les vérités de {passage} selon les meilleures méthodes didactiques chrétiennes.
+
+APPROCHE PÉDAGOGIQUE NARRATIVE :
+- Style de maître enseignant expérimenté concevant le cursus parfait
+- Méthodologie d'enseignement biblique éprouvée
+- Explications des termes pédagogiques (andragogie chrétienne, progression didactique)
+- Formation de disciples équipés et transformés
+
+ACADÉMIE BIBLIQUE INSPIRÉE :
+
+**I. PHILOSOPHIE DE L'ENSEIGNEMENT BIBLIQUE :**
+Établissons les fondements d'une pédagogie christocentrique pour {passage}. L'enseignement biblique vise la transformation, pas seulement l'information. Il engage l'intelligence, touche le cœur, et équipe pour l'action selon le modèle du Maître Jésus.
+
+**II. ANALYSE DES APPRENANTS ET CONTEXTUALISATION :**
+Adaptons notre enseignement aux besoins spécifiques :
+- Niveaux spirituels et intellectuels des participants
+- Contextes culturels et générationnels à considérer
+- Défis contemporains que {passage} peut adresser
+- Motivations et attentes légitimes des apprenants
+
+**III. OBJECTIFS PÉDAGOGIQUES TRANSFORMATEURS :**
+Définissons clairement ce que les apprenants devront maîtriser :
+
+*OBJECTIFS COGNITIFS (Savoir) :*
+- Comprendre le contexte historique et littéraire de {passage}
+- Maîtriser les vérités doctrinales enseignées
+- Saisir les applications herméneutiques appropriées
+
+*OBJECTIFS AFFECTIFS (Être) :*
+- Développer l'amour pour la Parole de Dieu
+- Cultiver la soumission aux vérités révélées
+- Nourrir l'adoration et la reconnaissance
+
+*OBJECTIFS PSYCHOMOTEURS (Faire) :*
+- Appliquer les enseignements dans la vie quotidienne
+- Partager efficacement ces vérités avec d'autres
+- Utiliser {passage} dans l'édification mutuelle
+
+**IV. PROGRESSION DIDACTIQUE STRUCTURÉE :**
+
+*SÉANCE 1 : APPROCHE ET CONTEXTE*
+- Accroche spirituelle captivant l'attention
+- Présentation du contexte historique et littéraire
+- Lecture méditative et première impression
+
+*SÉANCE 2 : ANALYSE TEXTUELLE*
+- Étude des mots-clés et structures grammaticales
+- Exploration des difficultés textuelles
+- Comparaison des traductions
+
+*SÉANCE 3 : THÉOLOGIE ET DOCTRINE*
+- Extraction des vérités doctrinales
+- Connexions avec l'ensemble scripturaire
+- Développement systématique des enseignements
+
+*SÉANCE 4 : APPLICATIONS TRANSFORMATRICES*
+- Implications pour la vie personnelle et familiale
+- Applications ecclésiastiques et missionnaires
+- Engagement concret et mesurable
+
+**V. MÉTHODES PÉDAGOGIQUES VARIÉES :**
+- Exposition magistrale pour les fondements théologiques
+- Discussion dirigée pour l'appropriation personnelle  
+- Travaux de groupe pour l'approfondissement
+- Études de cas pour l'application pratique
+- Mémorisation pour l'intériorisation
+- Prière et méditation pour la transformation
+
+**VI. SUPPORTS DIDACTIQUES ET RESSOURCES :**
+- Matériel visuel (cartes, chronologies, schémas)
+- Ressources textuelles (commentaires, dictionnaires)
+- Supports multimédia appropriés
+- Fiches de travail et guides d'étude personnelle
+
+**VII. ÉVALUATION ET SUIVI :**
+- Évaluation formative par questions et discussions
+- Évaluation sommative par projets d'application
+- Suivi personnel pour la croissance spirituelle
+- Encouragement à l'enseignement mutuel
+
+**VIII. ADAPTATION POUR DIFFÉRENTS CONTEXTES :**
+- Version intensive pour retraite spirituelle
+- Série dominicale pour culte public
+- Étude approfondie pour groupe biblique
+- Formation pastorale pour responsables
+
+DIRECTIVES ACADÉMIQUES :
+- Plan pédagogique adapté aux contenus réels de {passage}
+- {target_length} mots de stratégie d'enseignement narrative complète
+- Méthodes éprouvées d'enseignement biblique adulte
+- Applications pratiques pour divers contextes ecclésiaux
+
+Élaborez une stratégie d'enseignement qui transforme {passage} en expérience d'apprentissage enrichissante, formant des disciples équipés pour la gloire de Dieu.
+""",
+            26: f"""
+VOCABULAIRE THÉOLOGIQUE pour {passage}
+
+MISSION : Devenir un lexicographe sacré, créant un glossaire théologique complet qui décode les termes spirituels de {passage} et enrichit le vocabulaire biblique des étudiants.
+
+APPROCHE LEXICOGRAPHIQUE NARRATIVE :
+- Style de compilateur de dictionnaire biblique spécialisé
+- Définitions rigoureuses et spirituellement enrichissantes  
+- Explications des méthodes lexicales (étymologie, sémantique, évolution conceptuelle)
+- Formation d'un vocabulaire théologique précis et transformateur
+
+DICTIONNAIRE THÉOLOGIQUE INSPIRÉ :
+
+**I. MÉTHODOLOGIE LEXICOGRAPHIQUE SACRÉE :**
+Établissons les principes d'un vocabulaire théologique authentique pour {passage}. Chaque terme biblique porte des siècles de révélation progressive. Notre glossaire révélera les richesses cachées dans le langage inspiré de ce passage.
+
+**II. TERMES HÉBREUX/GRECS FONDAMENTAUX :**
+Explorons les vocables originaux qui structurent {passage} :
+
+[Adaptation selon les termes réellement présents dans {passage}]
+
+*Exemple de structure pour chaque terme :*
+
+**TERME ORIGINAL** [Hébreu : xxxxx / Grec : xxxxx]
+- *Étymologie* : Racine et développement sémantique
+- *Occurrences bibliques* : Fréquence et contextes significatifs  
+- *Champ sémantique* : Nuances et concepts connexes
+- *Évolution théologique* : Développement de l'AT au NT
+- *Applications spirituelles* : Implications pour la vie chrétienne
+
+**III. CONCEPTS DOCTRINAUX MAJEURS :**
+Analysons les notions théologiques centrales révélées :
+
+*SOTÉRIOLOGIE (Doctrine du Salut) :*
+- Termes de rédemption, justification, sanctification
+- Vocabulaire de l'expiation et de la réconciliation
+- Concepts de grâce, foi, régénération selon {passage}
+
+*THÉOLOGIE PROPRE (Doctrine de Dieu) :*
+- Noms divins et leurs significations révélées
+- Attributs communicables et incommunicables manifestés
+- Terminologie trinitaire explicite ou implicite
+
+*CHRISTOLOGIE (Doctrine du Christ) :*
+- Titres messianiques et leurs implications
+- Vocabulaire de l'incarnation et de l'œuvre médiatrice
+- Termes décrivant les natures divine et humaine
+
+*PNEUMATOLOGIE (Doctrine du Saint-Esprit) :*
+- Appellations du Saint-Esprit dans {passage}
+- Terminologie de ses œuvres et ministères
+- Vocabulaire des dons et fruits spirituels
+
+**IV. TERMINOLOGIE CULTUELLE ET LITURGIQUE :**
+Découvrons le vocabulaire de l'adoration et du service divin :
+- Termes sacrificiels et leur symbolisme
+- Vocabulaire liturgique et ses significations spirituelles
+- Appellations des lieux saints et leur portée théologique
+- Terminologie des fêtes et temps sacrés
+
+**V. CONCEPTS ÉTHIQUES ET MORAUX :**
+Explorons le langage de la sainteté et de la conduite chrétienne :
+- Vocabulaire des vertus et leur développement biblique
+- Terminologie des vices et leurs antidotes spirituels
+- Concepts de pureté, justice, intégrité selon {passage}
+- Langage de la transformation morale
+
+**VI. VOCABULAIRE ESCHATOLOGIQUE :**
+Analysons les termes des réalités futures révélées :
+- Terminologie du royaume de Dieu et sa manifestation
+- Vocabulaire de la résurrection et de la vie éternelle
+- Concepts du jugement et de la rétribution divine
+- Langage de l'espérance et de la consommation finale
+
+**VII. MÉTAPHORES ET IMAGES SYMBOLIQUES :**
+Décodons le langage figuratif et sa richesse spirituelle :
+- Images pastorales, agricoles, architecturales
+- Métaphores familiales, juridiques, militaires
+- Symbolisme des couleurs, nombres, matériaux
+- Paraboles et allégories selon leur contexte
+
+**VIII. APPLICATIONS HERMÉNEUTIQUES :**
+Utilisons ce vocabulaire pour enrichir notre compréhension :
+- Principes d'interprétation basés sur la précision lexicale
+- Méthodes d'étude personnelle enrichies
+- Prédication et enseignement plus fidèles au texte
+- Apologétique fondée sur la richesse conceptuelle
+
+DIRECTIVES ACADÉMIQUES :
+- Glossaire authentique basé sur les termes réellement présents dans {passage}
+- {target_length} mots de vocabulaire théologique narratif complet
+- Références aux dictionnaires théologiques de référence (TDNT, TDOT, etc.)
+- Applications pratiques pour l'étude et l'enseignement biblique
+
+Créez un vocabulaire théologique qui transforme {passage} en école de formation linguistique sacrée, équipant pour une compréhension plus riche de la révélation divine.
+""",
+            27: f"""
+RÉFLEXIONS PASTORALES pour {passage}
+
+MISSION : Devenir un pasteur-théologien expérimenté, distillant la sagesse pastorale que {passage} offre pour le ministère chrétien contemporain et le soin des âmes.
+
+APPROCHE PASTORALE NARRATIVE :
+- Style de pasteur chevronné partageant sa sagesse ministérielle
+- Théologie pastorale enracinée dans l'Écriture
+- Explications des concepts pastoraux (cure d'âmes, discernement spirituel, direction)
+- Applications transformatrices pour le ministère et l'accompagnement
+
+CABINET PASTORAL INSPIRÉ :
+
+**I. FONDEMENTS DE LA THÉOLOGIE PASTORALE :**
+Puisons dans {passage} les principes divins du ministère pastoral. Chaque texte biblique équipe les serviteurs de Dieu pour "paître le troupeau avec intelligence et sagesse". Découvrons comment ce passage forme et dirige le cœur pastoral.
+
+**II. DISCERNEMENT SPIRITUEL ET DIAGNOSTIC D'ÂMES :**
+Apprenons de {passage} à diagnostiquer les états spirituels :
+
+*RECONNAISSANCE DES TEMPÉRAMENTS SPIRITUELS :*
+- Les âmes affamées de Dieu et leur nourriture appropriée
+- Les consciences troublées et leur consolation biblique
+- Les cœurs endurcis et les moyens de grâce nécessaires
+- Les esprits confus et l'éclairage doctrinal requis
+
+*DISCERNEMENT DES SAISONS SPIRITUELLES :*
+- Temps de croissance et leurs encouragements
+- Périodes d'épreuve et leurs consolations divines
+- Moments de stagnation et leurs stimulations appropriées
+- Saisons de récolte et leurs celebrations légitimes
+
+**III. PRÉDICATION ET ENSEIGNEMENT PASTORAL :**
+Découvrons comment {passage} nourrit la prédication transformatrice :
+
+*HOMILÉTIQUE CHRISTOCENTRIQUE :*
+- Extraction du message central pour l'édification
+- Applications contemporaines respectueuses du texte
+- Illustrations tirées de l'expérience pastorale
+- Appels à la repentance et à la consécration
+
+*CATÉCHÈSE ET FORMATION :*
+- Enseignements doctrinaux pour l'affermissement
+- Formation pratique pour le service chrétien
+- Discipulat personnalisé selon les besoins
+- Préparation aux sacrements et à l'engagement
+
+**IV. CONSOLATION ET ENCOURAGEMENT :**
+Explorons les ressources consolatrices de {passage} :
+
+*MINISTÈRE AUPRÈS DES AFFLIGÉS :*
+- Vérités bibliques pour les temps de deuil
+- Promesses divines pour les périodes d'épreuve
+- Perspectives éternelles face aux souffrances temporelles
+- Accompagnement spirituel dans la vallée de l'ombre
+
+*RESTAURATION DES CHUTÉS :*
+- Approche biblique de la discipline ecclésiastique
+- Processus de repentance et de réconciliation
+- Réintégration dans la communion fraternelle
+- Prévention des rechutes par l'affermissement
+
+**V. DIRECTION SPIRITUELLE ET ACCOMPAGNEMENT :**
+Apprenons de {passage} l'art du guidance spirituel :
+
+*DISCERNEMENT DES VOCATIONS :*
+- Identification des dons spirituels et naturels
+- Orientation vers les ministères appropriés
+- Formation et équipement des serviteurs
+- Accompagnement dans les transitions ministérielles
+
+*CROISSANCE SPIRITUELLE PERSONNALISÉE :*
+- Plans de lecture et de méditation biblique
+- Disciplines spirituelles adaptées aux tempéraments
+- Correction fraternelle avec amour et sagesse
+- Encouragement à la persévérance dans la foi
+
+**VI. ADMINISTRATION ECCLÉSIASTIQUE SAGE :**
+Découvrons les principes de gouvernance révélés dans {passage} :
+- Leadership serviteur selon le modèle christique
+- Prise de décision communautaire sous l'autorité divine
+- Gestion des conflits par la réconciliation évangélique
+- Développement de la vision missionnaire locale
+
+**VII. ÉVANGÉLISATION ET MISSION :**
+Explorons comment {passage} équipe pour le témoignage :
+- Apologétique biblique face aux objections contemporaines
+- Méthodes d'évangélisation respectueuses et efficaces
+- Formation des témoins et évangélistes
+- Intégration des nouveaux convertis
+
+**VIII. ÉQUILIBRE ET SANTÉ MINISTÉRIELLE :**
+Apprenons de {passage} la sagesse pour la durabilité pastorale :
+- Prévention de l'épuisement par la dépendance divine
+- Cultiver la vie spirituelle personnelle
+- Maintenir l'équilibre famille-ministère
+- Rechercher le soutien fraternel et la supervision
+
+DIRECTIVES ACADÉMIQUES :
+- Sagesse pastorale authentiquement tirée de {passage} spécifiquement
+- {target_length} mots de réflexions pastorales narratives approfondies
+- Applications concrètes pour le ministère contemporain
+- Équilibre entre profondeur théologique et praticabilité pastorale
+
+Distillez la sagesse pastorale que {passage} révèle, équipant les serviteurs de Dieu pour un ministère fidèle et transformateur dans l'Église contemporaine.
+""",
+            28: f"""
+PLAN D'ÉTUDE PERSONNELLE pour {passage}
+
+MISSION : Devenir un mentor spirituel personnel, concevant un parcours d'étude individuelle qui transforme {passage} en expérience de croissance spirituelle profonde et durable.
+
+APPROCHE MENTORIELLE NARRATIVE :
+- Style de directeur spirituel élaborant un itinéraire sur mesure
+- Pédagogie de l'auto-formation biblique
+- Explications des méthodes d'étude personnelle (lectio divina, mémorisation, journaling)
+- Transformation de l'étude en rencontre avec Dieu
+
+RETRAITE PERSONNELLE INSPIRÉE :
+
+**I. PHILOSOPHIE DE L'ÉTUDE BIBLIQUE PERSONNELLE :**
+Établissons les fondements d'une approche transformatrice de {passage}. L'étude personnelle dépasse l'accumulation d'informations ; elle vise la transformation du cœur par la rencontre avec le Dieu vivant à travers sa Parole révélée.
+
+**II. PRÉPARATION SPIRITUELLE ET PRATIQUE :**
+
+*DISPOSITION DU CŒUR :*
+- Prière d'ouverture demandant l'illumination divine
+- Confession préalable pour un cœur réceptif
+- Soumission à l'autorité de la Parole divine
+- Attente expectante de la transformation
+
+*ENVIRONNEMENT D'ÉTUDE :*
+- Lieu calme propice à la concentration
+- Horaires réguliers pour la discipline
+- Matériel d'étude approprié (Bible, cahier, ressources)
+- Élimination des distractions temporelles
+
+**III. PROGRAMME D'ÉTUDE STRUCTURÉ (4 SEMAINES) :**
+
+*SEMAINE 1 : IMMERSION TEXTUELLE*
+
+*Jour 1-2 : Lecture contemplative*
+- Lecture répétée de {passage} en plusieurs versions
+- Note des premières impressions et questions
+- Prière méditative sur le texte
+- Journaling des réactions spirituelles initiales
+
+*Jour 3-4 : Contexte et arrière-plan*
+- Étude du contexte historique et littéraire
+- Recherche des circonstances d'écriture
+- Exploration de la place dans le livre biblique
+- Applications du contexte à la compréhension
+
+*Jour 5-7 : Analyse structurelle*
+- Identification de la structure du passage
+- Découverte des mots-clés et thèmes récurrents
+- Analyse des progressions argumentatives
+- Schématisation visuelle du texte
+
+*SEMAINE 2 : APPROFONDISSEMENT EXÉGÉTIQUE*
+
+*Jour 8-10 : Étude lexicale*
+- Recherche des termes difficiles ou significatifs
+- Consultation de concordances et dictionnaires
+- Exploration des champs sémantiques
+- Enrichissement du vocabulaire biblique personnel
+
+*Jour 11-12 : Références croisées*
+- Recherche des passages parallèles
+- Étude des citations et allusions
+- Harmonisation avec l'ensemble scripturaire
+- Construction d'un réseau textuel personnel
+
+*Jour 13-14 : Difficultés et questions*
+- Identification des passages problématiques
+- Recherche dans les commentaires fiables
+- Consultation de ressources théologiques
+- Formulation de conclusions personnelles
+
+*SEMAINE 3 : SYNTHÈSE THÉOLOGIQUE*
+
+*Jour 15-17 : Doctrine et enseignement*
+- Extraction des vérités doctrinales
+- Organisation systematique des enseignements
+- Connexion avec la théologie biblique globale
+- Mémorisation des vérités centrales
+
+*Jour 18-19 : Types et symboles*
+- Recherche des éléments typologiques
+- Découverte du symbolisme biblique
+- Connexions christologiques appropriées
+- Enrichissement de la vision du Christ
+
+*Jour 20-21 : Applications spirituelles*
+- Identification des implications personnelles
+- Confession des manquements révélés
+- Engagements concrets de transformation
+- Prières d'application et de consécration
+
+*SEMAINE 4 : INTÉGRATION ET TÉMOIGNAGE*
+
+*Jour 22-24 : Méditation approfondie*
+- Lectio divina quotidienne sur {passage}
+- Contemplation des beautés divines révélées
+- Intercession inspirée par les vérités découvertes
+- Adoration enrichie par l'étude accomplie
+
+*Jour 25-26 : Partage et enseignement*
+- Préparation d'un résumé pour autrui
+- Identification des applications familiales/communautaires
+- Planification du témoignage et du partage
+- Engagement dans l'édification mutuelle
+
+*Jour 27-28 : Synthèse et engagement*
+- Rédaction d'une synthèse personnelle complète
+- Formulation d'engagements durables
+- Planification de la révision périodique
+- Action de grâces pour les grâces reçues
+
+**IV. MÉTHODES D'ÉTUDE COMPLÉMENTAIRES :**
+
+*TECHNIQUES DE MÉMORISATION :*
+- Sélection des versets-clés pour mémorisation
+- Méthodes mnémotechniques appropriées
+- Révision systématique et récitation
+- Applications pratiques des textes mémorisés
+
+*JOURNALING SPIRITUEL :*
+- Carnet de découvertes et d'applications
+- Enregistrement des prières inspirées
+- Suivi des transformations personnelles
+- Archives des grâces divines reçues
+
+**V. RESSOURCES ET OUTILS RECOMMANDÉS :**
+- Commentaires bibliques de qualité
+- Dictionnaires et concordances
+- Atlas et ressources historiques
+- Applications numériques appropriées
+
+**VI. ÉVALUATION ET SUIVI :**
+- Auto-évaluation hebdomadaire des progrès
+- Révision mensuelle des découvertes majeures
+- Partage avec un mentor ou groupe de soutien
+- Planification des études futures
+
+DIRECTIVES ACADÉMIQUES :
+- Plan d'étude adapté aux contenus spécifiques de {passage}
+- {target_length} mots de guidance personnelle narrative complète
+- Méthodes éprouvées d'étude biblique individuelle
+- Applications pratiques pour la croissance spirituelle durable
+
+Élaborez un itinéraire d'étude personnelle qui transforme {passage} en école de formation spirituelle, produisant une croissance authentique et durable dans la connaissance et l'amour de Dieu.
 """
         }
         
