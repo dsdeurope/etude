@@ -9,7 +9,7 @@ test('renders without crashing', () => {
 // Micro-test 2: Le titre principal s'affiche
 test('renders main title', () => {
   render(<App />);
-  const titleElement = screen.getByText(/Bible Study AI/i);
+  const titleElement = screen.getByRole('heading', { name: /📖 Bible Study AI/i });
   expect(titleElement).toBeInTheDocument();
 });
 
