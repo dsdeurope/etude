@@ -182,31 +182,36 @@ const ThemeVersesPage = ({ theme, onGoBack }) => {
     return referenceVerses[themeName] || [];
   };
 
-  // Fallback vers quelques versets de base si l'API échoue
-  const loadFallbackVerses = async (themeName) => {
+  // Fallback étendu avec au moins 20 versets
+  const loadExtendedFallbackVerses = async (themeName) => {
     const fallbackVerses = [
-      { 
-        book: "1 Jean", 
-        chapter: 4, 
-        verse: 8, 
-        text: "Celui qui n'aime pas n'a pas connu Dieu, car Dieu est amour." 
-      },
-      { 
-        book: "Jean", 
-        chapter: 3, 
-        verse: 16, 
-        text: "Car Dieu a tant aimé le monde qu'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu'il ait la vie éternelle." 
-      },
-      { 
-        book: "1 Corinthiens", 
-        chapter: 13, 
-        verse: 4, 
-        text: "L'amour est patient, l'amour est plein de bonté; l'amour n'est point envieux; l'amour ne se vante point, il ne s'enfle point d'orgueil." 
-      }
+      { book: "1 Jean", chapter: 4, verse: 8, text: "Celui qui n'aime pas n'a pas connu Dieu, car Dieu est amour.", reference: "1 Jean 4:8" },
+      { book: "Jean", chapter: 3, verse: 16, text: "Car Dieu a tant aimé le monde qu'il a donné son Fils unique, afin que quiconque croit en lui ne périsse point, mais qu'il ait la vie éternelle.", reference: "Jean 3:16" },
+      { book: "1 Corinthiens", chapter: 13, verse: 4, text: "L'amour est patient, l'amour est plein de bonté; l'amour n'est point envieux; l'amour ne se vante point, il ne s'enfle point d'orgueil.", reference: "1 Corinthiens 13:4" },
+      { book: "1 Corinthiens", chapter: 13, verse: 13, text: "Maintenant donc ces trois choses demeurent: la foi, l'espérance, la charité; mais la plus grande de ces choses, c'est la charité.", reference: "1 Corinthiens 13:13" },
+      { book: "Matthieu", chapter: 22, verse: 37, text: "Jésus lui répondit: Tu aimeras le Seigneur, ton Dieu, de tout ton cœur, de toute ton âme, et de toute ta pensée.", reference: "Matthieu 22:37" },
+      { book: "Jean", chapter: 13, verse: 34, text: "Je vous donne un commandement nouveau: Aimez-vous les uns les autres; comme je vous ai aimés, vous aussi, aimez-vous les uns les autres.", reference: "Jean 13:34" },
+      { book: "Romains", chapter: 5, verse: 8, text: "Mais Dieu prouve son amour envers nous, en ce que, lorsque nous étions encore des pécheurs, Christ est mort pour nous.", reference: "Romains 5:8" },
+      { book: "1 Pierre", chapter: 4, verse: 8, text: "Avant tout, ayez les uns pour les autres une ardente charité, car La charité couvre une multitude de péchés.", reference: "1 Pierre 4:8" },
+      { book: "Jean", chapter: 15, verse: 13, text: "Il n'y a pas de plus grand amour que de donner sa vie pour ses amis.", reference: "Jean 15:13" },
+      { book: "Romains", chapter: 8, verse: 39, text: "ni la hauteur, ni la profondeur, ni aucune autre créature ne pourra nous séparer de l'amour de Dieu manifesté en Jésus-Christ notre Seigneur.", reference: "Romains 8:39" },
+      { book: "1 Jean", chapter: 3, verse: 16, text: "Nous avons connu l'amour, en ce qu'il a donné sa vie pour nous; nous aussi, nous devons donner notre vie pour les frères.", reference: "1 Jean 3:16" },
+      { book: "Éphésiens", chapter: 5, verse: 2, text: "et marchez dans la charité, à l'exemple de Christ, qui nous a aimés, et qui s'est livré lui-même à Dieu pour nous comme une offrande et un sacrifice de bonne odeur.", reference: "Éphésiens 5:2" },
+      { book: "Colossiens", chapter: 3, verse: 14, text: "Mais par-dessus toutes ces choses revêtez-vous de la charité, qui est le lien de la perfection.", reference: "Colossiens 3:14" },
+      { book: "1 Thessaloniciens", chapter: 4, verse: 9, text: "Pour ce qui est de l'amour fraternel, vous n'avez pas besoin qu'on vous en écrive; car vous avez vous-mêmes appris de Dieu à vous aimer les uns les autres.", reference: "1 Thessaloniciens 4:9" },
+      { book: "Hébreux", chapter: 10, verse: 24, text: "Veillons les uns sur les autres, pour nous exciter à la charité et aux bonnes œuvres.", reference: "Hébreux 10:24" },
+      { book: "1 Jean", chapter: 4, verse: 11, text: "Bien-aimés, si Dieu nous a ainsi aimés, nous devons aussi nous aimer les uns les autres.", reference: "1 Jean 4:11" },
+      { book: "Jean", chapter: 14, verse: 21, text: "Celui qui a mes commandements et qui les garde, c'est celui qui m'aime; et celui qui m'aime sera aimé de mon Père, je l'aimerai, et je me ferai connaître à lui.", reference: "Jean 14:21" },
+      { book: "1 Corinthiens", chapter: 16, verse: 14, text: "Que tout ce que vous faites se fasse avec charité!", reference: "1 Corinthiens 16:14" },
+      { book: "Galates", chapter: 5, verse: 13, text: "Frères, vous avez été appelés à la liberté, seulement ne faites pas de cette liberté un prétexte de vivre selon la chair; mais rendez-vous, par la charité, serviteurs les uns des autres.", reference: "Galates 5:13" },
+      { book: "1 Pierre", chapter: 1, verse: 22, text: "Ayant purifié vos âmes en obéissant à la vérité pour avoir un amour fraternel sincère, aimez-vous ardemment les uns les autres, de tout votre cœur.", reference: "1 Pierre 1:22" },
+      { book: "1 Jean", chapter: 2, verse: 15, text: "N'aimez point le monde, ni les choses qui sont dans le monde. Si quelqu'un aime le monde, l'amour du Père n'est point en lui.", reference: "1 Jean 2:15" },
+      { book: "Deutéronome", chapter: 6, verse: 5, text: "Tu aimeras l'Éternel, ton Dieu, de tout ton cœur, de toute ton âme et de toute ta force.", reference: "Deutéronome 6:5" },
+      { book: "Cantique", chapter: 8, verse: 7, text: "Les grandes eaux ne peuvent éteindre l'amour, Et les fleuves ne le submergeraient pas; Quand un homme offrirait tous les biens de sa maison contre l'amour, Il ne s'attirerait que le mépris.", reference: "Cantique 8:7" }
     ];
     
     setVerses(fallbackVerses);
-    console.log(`[FALLBACK] Utilisation de ${fallbackVerses.length} versets de base pour "${themeName}"`);
+    console.log(`[FALLBACK ÉTENDU] ${fallbackVerses.length} versets de base pour "${themeName}"`);
   };
 
   if (isLoading) {
