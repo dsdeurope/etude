@@ -3568,12 +3568,12 @@ strong {
 /* Responsive adjustments pour les boutons */
 @media (max-width: 1400px) {
   .balanced-controls-container {
-    padding: 0 20px !important;
+    padding: 0 15px !important;
   }
   
   .balanced-buttons-grid {
     gap: 12px !important;
-    padding: 15px 20px !important;
+    padding: 15px 15px !important;
   }
 }
 
@@ -3584,7 +3584,7 @@ strong {
   
   .balanced-buttons-grid {
     gap: 8px !important;
-    padding: 12px 15px !important;
+    padding: 12px 10px !important;
   }
   
   .btn-control {
