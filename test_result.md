@@ -116,6 +116,17 @@
         - working: false
         - agent: "main"
         - comment: "Les personnages restent dans la même vue au lieu d'ouvrir une page dédiée comme les thèmes"
+  - task: "CSS formatting fix in VersetParVersetPage"
+    implemented: true
+    working: "NA"
+    file: "VersetParVersetPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "Added HTML entity decoding and CSS cleanup in formatExplicationTheologique function to prevent raw CSS code from appearing as text in theological explanations. Need to test that CSS code like 'background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white !important...' no longer appears as literal text."
 
 ## backend:
   - task: "Génération contenu narratif personnages"
