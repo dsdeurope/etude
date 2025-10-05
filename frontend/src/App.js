@@ -346,6 +346,14 @@ function App() {
     }
   }, [selectedBook, selectedChapter]);
 
+  // Initialiser la rubrique 0 au chargement avec le livre et chapitre sélectionnés
+  useEffect(() => {
+    if (selectedBook !== "--" && selectedChapter !== "--") {
+      console.log("[INIT RUBRIQUE] Initialisation rubrique 0 pour:", selectedBook, selectedChapter);
+      handleRubriqueSelect(0);
+    }
+  }, [selectedBook, selectedChapter, activeRubrique]);
+
   const saveCurrentStudy = () => {
     console.log("[DEBUG SAUVEGARDE] Tentative sauvegarde:", {
       selectedBook,
