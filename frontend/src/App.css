@@ -3644,6 +3644,7 @@ strong {
   overflow: hidden !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  text-align: center !important;
 }
 
 .btn-control::before {
