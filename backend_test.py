@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Backend API Testing Suite for Bible Study AI
-Testing the /api/generate-character-history endpoint
+Testing the enhanced rubrique content generation and character history endpoints
 """
 
 import requests
