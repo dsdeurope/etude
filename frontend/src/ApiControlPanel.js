@@ -151,18 +151,35 @@ const ApiControlPanel = ({ backendUrl }) => {
     return apiInfo?.color === 'green' ? '✅' : '❌';
   };
 
-  // Style pour les LED clignotantes (amélioré)
-  const ledStyle = (color) => ({
-    width: '14px',
-    height: '14px',
-    borderRadius: '50%',
-    backgroundColor: color,
-    boxShadow: `0 0 12px ${color}, 0 0 24px ${color}`,
-    animation: color === '#00ff00' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
-    display: 'inline-block',
-    marginRight: '8px',
-    border: '2px solid rgba(255,255,255,0.3)'
-  });
+  // Style pour les LED clignotantes ultra-réalistes
+  const ledStyle = (color, isActive = false, isRotating = false) => {
+    const baseColor = color === '#00ff00' ? '#00ff00' : 
+                      color === '#ff0000' ? '#ff0000' : 
+                      color === '#ffff00' ? '#ffff00' : '#888888';
+    
+    return {
+      width: isActive ? '16px' : '14px',
+      height: isActive ? '16px' : '14px',
+      borderRadius: '50%',
+      backgroundColor: baseColor,
+      boxShadow: isActive 
+        ? `0 0 20px ${baseColor}, 0 0 40px ${baseColor}, inset 0 0 10px rgba(255,255,255,0.3)` 
+        : `0 0 12px ${baseColor}, 0 0 24px ${baseColor}`,
+      animation: isRotating 
+        ? 'led-rotating 0.5s infinite' 
+        : color === '#00ff00' 
+          ? 'pulse-green 2s infinite' 
+          : color === '#ffff00' 
+            ? 'pulse-yellow 1.5s infinite'
+            : 'pulse-red 1s infinite',
+      display: 'inline-block',
+      marginRight: '8px',
+      border: `2px solid ${isActive ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)'}`,
+      transition: 'all 0.3s ease',
+      transform: isActive ? 'scale(1.1)' : 'scale(1)',
+      position: 'relative'
+    };
+  };
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
