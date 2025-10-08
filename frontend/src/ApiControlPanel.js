@@ -651,9 +651,9 @@ const ApiControlPanel = ({ backendUrl }) => {
                     transition: 'all 0.3s ease'
                   }}
                 >
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <div style={ledStyle(getLedColor(api))} />
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={ledStyle(getLedColor(api), key === apiStatus.active_api, rotationActive && key.includes('gemini'))} />
                       <span style={{
                         fontWeight: 'bold',
                         color: '#333',
@@ -661,23 +661,68 @@ const ApiControlPanel = ({ backendUrl }) => {
                       }}>
                         {api.name}
                       </span>
-                      {key === apiStatus.active_api && (
-                        <span style={{
-                          background: 'linear-gradient(135deg, #4CAF50, #45a049)',
-                          color: 'white',
-                          padding: '2px 8px',
-                          borderRadius: '12px',
-                          fontSize: '10px',
-                          fontWeight: 'bold'
-                        }}>
-                          ACTIVE
-                        </span>
-                      )}
+                      
+                      {/* Badges de statut */}
+                      <div style={{ display: 'flex', gap: '4px' }}>
+                        {key === apiStatus.active_api && (
+                          <span style={{
+                            background: 'linear-gradient(135deg, #4CAF50, #45a049)',
+                            color: 'white',
+                            padding: '2px 6px',
+                            borderRadius: '8px',
+                            fontSize: '9px',
+                            fontWeight: 'bold'
+                          }}>
+                            ACTIVE
+                          </span>
+                        )}
+                        
+                        {rotationActive && key.includes('gemini') && (
+                          <span style={{
+                            background: 'linear-gradient(135deg, #ff9800, #f57c00)',
+                            color: 'white',
+                            padding: '2px 6px',
+                            borderRadius: '8px',
+                            fontSize: '9px',
+                            fontWeight: 'bold',
+                            animation: 'pulse-yellow 1s infinite'
+                          }}>
+                            ROTATING
+                          </span>
+                        )}
+                        
+                        {api.color === 'red' && (
+                          <span style={{
+                            background: 'linear-gradient(135deg, #f44336, #d32f2f)',
+                            color: 'white',
+                            padding: '2px 6px',
+                            borderRadius: '8px',
+                            fontSize: '9px',
+                            fontWeight: 'bold'
+                          }}>
+                            QUOTA EXCEEDED
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div style={{ fontSize: '10px', color: '#666', marginLeft: '20px' }}>
-                      ✅ {api.success_count} succès | ❌ {api.error_count} échecs
+                    
+                    <div style={{ fontSize: '10px', color: '#666', marginLeft: '24px', marginTop: '4px' }}>
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                        <span>✅ {api.success_count || 0} succès</span>
+                        <span>❌ {api.error_count || 0} échecs</span>
+                        {api.success_count > 0 && (
+                          <span style={{
+                            color: '#4CAF50',
+                            fontWeight: 'bold'
+                          }}>
+                            {Math.round((api.success_count / (api.success_count + (api.error_count || 0))) * 100)}% réussite
+                          </span>
+                        )}
+                      </div>
                       {api.last_used && (
-                        <div>Dernière utilisation: {new Date(api.last_used).toLocaleTimeString()}</div>
+                        <div style={{ marginTop: '2px', fontSize: '9px', color: '#999' }}>
+                          Dernière utilisation: {new Date(api.last_used).toLocaleTimeString()}
+                        </div>
                       )}
                     </div>
                   </div>
