@@ -7,6 +7,8 @@ const ApiControlPanel = ({ backendUrl }) => {
   const [apiHistory, setApiHistory] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [rotationActive, setRotationActive] = useState(false);
+  const [currentRotatingKey, setCurrentRotatingKey] = useState(0);
 
   // Fonction pour récupérer le statut des API
   const fetchApiStatus = async () => {
