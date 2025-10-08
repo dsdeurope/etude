@@ -126,20 +126,30 @@ const ApiControlPanel = ({ backendUrl }) => {
     }
   };
 
-  // Mise à jour toutes les 30 secondes
+  // Mise à jour plus fréquente pour montrer la rotation
   useEffect(() => {
     // Première récupération
     fetchApiStatus();
     fetchApiHistory();
     
-    // Mise à jour automatique toutes les 30 secondes
+    // Mise à jour automatique toutes les 10 secondes pour la rotation
     const interval = setInterval(() => {
       fetchApiStatus();
       fetchApiHistory();
-    }, 30000);
+    }, 10000);
     
-    return () => clearInterval(interval);
-  }, [backendUrl]);
+    // Mise à jour rapide de la rotation toutes les 2 secondes
+    const rotationInterval = setInterval(() => {
+      if (rotationActive) {
+        setCurrentRotatingKey(prev => (prev + 1) % 4);
+      }
+    }, 2000);
+    
+    return () => {
+      clearInterval(interval);
+      clearInterval(rotationInterval);
+    };
+  }, [backendUrl, rotationActive]);
 
   // Fonction pour obtenir la couleur LED
   const getLedColor = (apiInfo) => {
