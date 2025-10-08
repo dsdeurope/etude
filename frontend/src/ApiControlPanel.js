@@ -13,7 +13,8 @@ const ApiControlPanel = ({ backendUrl }) => {
   // Fonction pour récupérer le statut des API avec simulation de rotation
   const fetchApiStatus = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/health`);
+      const healthUrl = process.env.REACT_APP_API_HEALTH_URL || `${backendUrl}/api/health`;
+      const response = await fetch(healthUrl);
       if (response.ok) {
         const healthData = await response.json();
         
