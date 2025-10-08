@@ -143,7 +143,9 @@ const ApiControlPanel = ({ backendUrl }) => {
 
   // Fonction pour obtenir la couleur LED
   const getLedColor = (apiInfo) => {
-    return apiInfo?.color === 'green' ? '#00ff00' : '#ff0000';
+    if (apiInfo?.color === 'green') return '#00ff00';
+    if (apiInfo?.color === 'yellow') return '#ffff00';
+    return '#ff0000';
   };
 
   // Fonction pour obtenir l'icône de statut
