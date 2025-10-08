@@ -1,12 +1,5 @@
 {
-  "installCommand": "cd frontend && npm ci --legacy-peer-deps",
-  "buildCommand": "cd frontend && npm run build",
-  "outputDirectory": "frontend/build",
-  "build": {
-    "env": {
-      "NODE_VERSION": "18",
-      "NODE_OPTIONS": "--openssl-legacy-provider",
-      "CI": "false"
-    }
-  }
+  "installCommand": "npm ci --legacy-peer-deps",
+  "buildCommand": "CI=false npm run build",
+  "outputDirectory": "build"
 }
