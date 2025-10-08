@@ -183,31 +183,65 @@ const ApiControlPanel = ({ backendUrl }) => {
 
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
-      {/* CSS pour les animations LED améliorées */}
+      {/* CSS pour les animations LED ultra-réalistes */}
       <style>
         {`
           @keyframes pulse-green {
             0%, 100% { 
-              box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00; 
+              box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00, inset 0 0 5px rgba(255,255,255,0.3); 
               opacity: 1; 
               transform: scale(1);
             }
             50% { 
-              box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; 
-              opacity: 0.8; 
-              transform: scale(1.1);
+              box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00, inset 0 0 8px rgba(255,255,255,0.5); 
+              opacity: 0.9; 
+              transform: scale(1.05);
             }
           }
           @keyframes pulse-red {
             0%, 100% { 
-              box-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000; 
+              box-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000, inset 0 0 5px rgba(255,255,255,0.2); 
               opacity: 1; 
               transform: scale(1);
             }
             50% { 
-              box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000; 
-              opacity: 0.4; 
-              transform: scale(1.2);
+              box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 60px #ff0000, inset 0 0 8px rgba(255,255,255,0.4); 
+              opacity: 0.6; 
+              transform: scale(1.1);
+            }
+          }
+          @keyframes pulse-yellow {
+            0%, 100% { 
+              box-shadow: 0 0 12px #ffff00, 0 0 24px #ffff00, inset 0 0 5px rgba(255,255,255,0.4); 
+              opacity: 1; 
+              transform: scale(1);
+            }
+            50% { 
+              box-shadow: 0 0 18px #ffff00, 0 0 36px #ffff00, 0 0 54px #ffff00, inset 0 0 8px rgba(255,255,255,0.6); 
+              opacity: 0.8; 
+              transform: scale(1.08);
+            }
+          }
+          @keyframes led-rotating {
+            0% { 
+              box-shadow: 0 0 15px #ffff00, 0 0 30px #ffff00; 
+              transform: scale(1) rotate(0deg);
+            }
+            25% { 
+              box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; 
+              transform: scale(1.1) rotate(90deg);
+            }
+            50% { 
+              box-shadow: 0 0 25px #ffff00, 0 0 50px #ffff00; 
+              transform: scale(1.15) rotate(180deg);
+            }
+            75% { 
+              box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; 
+              transform: scale(1.1) rotate(270deg);
+            }
+            100% { 
+              box-shadow: 0 0 15px #ffff00, 0 0 30px #ffff00; 
+              transform: scale(1) rotate(360deg);
             }
           }
           .api-control-tooltip {
