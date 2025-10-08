@@ -282,6 +282,13 @@ const ApiControlPanel = ({ backendUrl }) => {
             66%, 96% { transform: translateY(-36px); }
             100% { transform: translateY(0); }
           }
+          @keyframes api-ticker-fast {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-18px); }
+            50%, 70% { transform: translateY(-36px); }
+            75%, 95% { transform: translateY(-54px); }
+            100% { transform: translateY(0); }
+          }
           @keyframes shine {
             0% { left: -100%; }
             100% { left: 100%; }
