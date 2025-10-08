@@ -108,7 +108,8 @@ const ApiControlPanel = ({ backendUrl }) => {
   // Fonction pour récupérer l'historique des API  
   const fetchApiHistory = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/health`);
+      const statusUrl = process.env.REACT_APP_API_STATUS_URL || `${backendUrl}/api/health`;
+      const response = await fetch(statusUrl);
       if (response.ok) {
         const healthData = await response.json();
         
