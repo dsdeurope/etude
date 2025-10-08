@@ -350,39 +350,76 @@ const ApiControlPanel = ({ backendUrl }) => {
                 animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
               }} />
               
-              {/* Ascenseur API avec rotation des noms */}
+              {/* Ascenseur API avec rotation intelligente */}
               <div className="api-elevator">
                 <div style={{
                   fontSize: '9px',
                   fontWeight: 'bold',
                   whiteSpace: 'nowrap',
-                  animation: 'api-ticker 6s infinite',
+                  animation: rotationActive ? 'api-ticker-fast 4s infinite' : 'api-ticker 8s infinite',
                   lineHeight: '18px',
                   display: 'flex',
                   flexDirection: 'column'
                 }}>
-                  {Object.entries(apiStatus.apis).map(([key, api]) => (
-                    <div 
-                      key={key}
-                      style={{ 
-                        height: '18px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        color: key === apiStatus.active_api ? '#fff' : 'rgba(255,255,255,0.7)'
-                      }}
-                    >
-                      <span style={{ 
-                        color: api.color === 'green' ? '#00ff00' : '#ff0000',
-                        marginRight: '2px' 
-                      }}>
-                        {api.color === 'green' ? '●' : '●'}
-                      </span>
-                      {api.name.replace('Gemini Key ', 'G').replace(' (Primary)', '').replace(' (Secondary)', '').replace('Bible API', 'Bible')}
-                      <span style={{ marginLeft: '2px', fontSize: '8px' }}>
-                        {api.color === 'green' ? 'OK' : 'ERR'}
-                      </span>
-                    </div>
-                  ))}
+                  {Object.entries(apiStatus.apis)
+                    .filter(([key]) => key.startsWith('gemini_')) // Gemini seulement dans l'ascenseur
+                    .map(([key, api], index) => {
+                      const isCurrentlyActive = key === apiStatus.active_api;
+                      const isRotating = rotationActive && index === currentRotatingKey;
+                      
+                      return (
+                        <div 
+                          key={key}
+                          style={{ 
+                            height: '18px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            color: isCurrentlyActive ? '#fff' : 'rgba(255,255,255,0.7)',
+                            background: isCurrentlyActive ? 'rgba(255,255,255,0.1)' : 'transparent',
+                            borderRadius: '4px',
+                            padding: '0 2px',
+                            transition: 'all 0.3s ease'
+                          }}
+                        >
+                          <span style={{ 
+                            color: api.color === 'green' ? '#00ff00' : 
+                                   api.color === 'yellow' ? '#ffff00' : '#ff0000',
+                            marginRight: '2px',
+                            animation: isRotating ? 'led-rotating 0.8s infinite' : 'none',
+                            fontSize: '10px'
+                          }}>
+                            {isRotating ? '◉' : '●'}
+                          </span>
+                          
+                          <span style={{ 
+                            color: isCurrentlyActive ? '#fff' : 'rgba(255,255,255,0.8)',
+                            fontWeight: isCurrentlyActive ? 'bold' : 'normal'
+                          }}>
+                            G{index + 1}
+                          </span>
+                          
+                          {isRotating && (
+                            <span style={{ 
+                              marginLeft: '2px', 
+                              fontSize: '7px',
+                              color: '#ffff00',
+                              animation: 'pulse-yellow 0.5s infinite'
+                            }}>
+                              ↻
+                            </span>
+                          )}
+                          
+                          <span style={{ 
+                            marginLeft: '2px', 
+                            fontSize: '7px',
+                            color: api.color === 'green' ? '#00ff00' : '#ff0000'
+                          }}>
+                            {api.color === 'green' ? 'OK' : 
+                             api.color === 'yellow' ? 'WAIT' : 'FULL'}
+                          </span>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
               
