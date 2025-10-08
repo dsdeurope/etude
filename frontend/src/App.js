@@ -2046,6 +2046,7 @@ ${contextualEnrichment}
                 padding: '0 25px',
                 boxSizing: 'border-box'
               }}>
+                {/* Grille de boutons de contrôle - 7 boutons alignés incluant Bible Concordance */}
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(7, 1fr)',
