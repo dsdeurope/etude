@@ -1,5 +1,5 @@
 {
   "installCommand": "npm ci --legacy-peer-deps",
-  "buildCommand": "CI=false npm run build",
+  "buildCommand": "REACT_APP_COMMIT_SHA= CI=false npm run build",
   "outputDirectory": "build"
 }
