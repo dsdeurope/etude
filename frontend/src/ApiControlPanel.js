@@ -386,22 +386,133 @@ const ApiControlPanel = ({ backendUrl }) => {
                 </div>
               </div>
               
-              {/* LED individuelles plus grandes */}
-              <div style={{ display: 'flex', gap: '2px' }}>
-                {Object.entries(apiStatus.apis).map(([key, api]) => (
+              {/* LED individuelles ultra-réalistes avec rotation */}
+              <div style={{ 
+                display: 'flex', 
+                gap: '3px', 
+                background: 'rgba(0,0,0,0.3)', 
+                padding: '4px 8px', 
+                borderRadius: '12px',
+                border: '1px solid rgba(255,255,255,0.2)'
+              }}>
+                {Object.entries(apiStatus.apis)
+                  .filter(([key]) => key.startsWith('gemini_')) // Afficher seulement les clés Gemini
+                  .map(([key, api], index) => {
+                    const isCurrentlyActive = key === apiStatus.active_api;
+                    const isRotating = rotationActive && index === currentRotatingKey;
+                    
+                    return (
+                      <div 
+                        key={key}
+                        style={{
+                          position: 'relative',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '2px'
+                        }}
+                        title={`${api.name}: ${api.status} (${api.success_count} succès, ${api.error_count} erreurs)`}
+                      >
+                        {/* LED principale */}
+                        <div style={{
+                          width: isCurrentlyActive ? '10px' : '8px',
+                          height: isCurrentlyActive ? '10px' : '8px',
+                          borderRadius: '50%',
+                          backgroundColor: getLedColor(api),
+                          boxShadow: isCurrentlyActive 
+                            ? `0 0 15px ${getLedColor(api)}, 0 0 30px ${getLedColor(api)}, inset 0 0 5px rgba(255,255,255,0.5)` 
+                            : `0 0 8px ${getLedColor(api)}, 0 0 16px ${getLedColor(api)}`,
+                          animation: isRotating 
+                            ? 'led-rotating 0.8s infinite' 
+                            : api.color === 'green' 
+                              ? 'pulse-green 2s infinite' 
+                              : api.color === 'yellow'
+                                ? 'pulse-yellow 1.5s infinite'
+                                : 'pulse-red 1s infinite',
+                          border: `1px solid ${isCurrentlyActive ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.4)'}`,
+                          transition: 'all 0.3s ease'
+                        }} />
+                        
+                        {/* Indicateur numéro de clé */}
+                        <div style={{
+                          fontSize: '6px',
+                          color: isCurrentlyActive ? '#fff' : 'rgba(255,255,255,0.7)',
+                          fontWeight: 'bold',
+                          textShadow: isCurrentlyActive ? '0 0 4px rgba(255,255,255,0.8)' : 'none'
+                        }}>
+                          {index + 1}
+                        </div>
+                        
+                        {/* Indicateur de rotation */}
+                        {isRotating && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '-2px',
+                            right: '-2px',
+                            width: '4px',
+                            height: '4px',
+                            borderRadius: '50%',
+                            backgroundColor: '#ffff00',
+                            boxShadow: '0 0 4px #ffff00',
+                            animation: 'pulse-yellow 0.5s infinite'
+                          }} />
+                        )}
+                        
+                        {/* Indicateur clé active */}
+                        {isCurrentlyActive && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '-3px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '0',
+                            height: '0',
+                            borderLeft: '3px solid transparent',
+                            borderRight: '3px solid transparent',
+                            borderBottom: '4px solid #00ff00',
+                            filter: 'drop-shadow(0 0 2px #00ff00)'
+                          }} />
+                        )}
+                      </div>
+                    );
+                  })}
+                
+                {/* Indicateur Bible API séparé */}
+                <div style={{
+                  width: '1px',
+                  height: '16px',
+                  backgroundColor: 'rgba(255,255,255,0.3)',
+                  margin: '0 2px'
+                }} />
+                
+                {apiStatus.apis.bible_api && (
                   <div 
-                    key={key}
                     style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: getLedColor(api),
-                      boxShadow: `0 0 6px ${getLedColor(api)}`,
-                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '2px'
                     }}
-                    title={`${api.name}: ${api.status === 'available' ? 'Disponible' : 'Quota dépassé'}`}
-                  />
-                ))}
+                    title={`Bible API: ${apiStatus.apis.bible_api.status}`}
+                  >
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: getLedColor(apiStatus.apis.bible_api),
+                      boxShadow: `0 0 8px ${getLedColor(apiStatus.apis.bible_api)}`,
+                      animation: apiStatus.apis.bible_api.color === 'green' ? 'pulse-green 3s infinite' : 'pulse-red 1s infinite',
+                      border: '1px solid rgba(255,255,255,0.4)'
+                    }} />
+                    <div style={{
+                      fontSize: '5px',
+                      color: 'rgba(255,255,255,0.8)',
+                      fontWeight: 'bold'
+                    }}>
+                      B
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
