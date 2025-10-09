@@ -4,8 +4,7 @@ import "./App.css";
 import "./rubriques.css";
 import RubriquesInline from "./RubriquesInline";
 import BibleConcordancePage from "./BibleConcordancePage";
-import CharacterHistoryPage from './CharacterHistoryPage';
-import VersetParVersetPage from './VersetParVersetPage';
+import VersetParVersetPage from "./VersetParVersetPage";
 import NotesPage from "./NotesPage";
 import RubriquePage from "./RubriquePage";
 import ApiControlPanel from "./ApiControlPanel";
@@ -24,7 +23,7 @@ const getBackendUrl = () => {
   const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
   // fallback pour les environnements non configurés
-  return process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_BACKEND_URL || "https://sacred-text-explorer.preview.emergentagent.com";
+  return "https://faithflow-app.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();
@@ -299,11 +298,6 @@ function App() {
   const [currentBookInfo, setCurrentBookInfo] = useState('');
   const [currentRubriqueNumber, setCurrentRubriqueNumber] = useState(1);
   const [currentRubriqueContent, setCurrentRubriqueContent] = useState('');
-  
-  // États pour la navigation entre les pages dédiées
-  const [selectedTheme, setSelectedTheme] = useState(null);
-  const [selectedCharacterForHistory, setSelectedCharacterForHistory] = useState(null);
-  const [currentTab, setCurrentTab] = useState('concordance');
 
   // Thèmes déplacés en début de fonction
 
@@ -349,14 +343,6 @@ function App() {
     if (selectedBook !== "--" && selectedChapter !== "--") {
       console.log("[TEST SAUVEGARDE] Sélection valide détectée:", selectedBook, selectedChapter);
       saveCurrentStudy();
-    }
-  }, [selectedBook, selectedChapter]);
-
-  // Initialiser la rubrique 0 au chargement avec le livre et chapitre sélectionnés
-  useEffect(() => {
-    if (selectedBook !== "--" && selectedChapter !== "--" && activeRubrique === 0) {
-      console.log("[INIT RUBRIQUE] Initialisation rubrique 0 pour:", selectedBook, selectedChapter);
-      handleRubriqueSelect(0);
     }
   }, [selectedBook, selectedChapter]);
 
@@ -576,51 +562,7 @@ function App() {
   };
 
   // Fonction pour générer du contenu narratif théologique spécifique
-  // Nouvelle fonction pour générer le contenu des rubriques via API
-  const generateRubriqueContentViaAPI = async (rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength) => {
-    try {
-      console.log(`[API RUBRIQUE ${rubriqueNum}] Génération via API: ${rubriqueTitle} pour ${book} ${chapter}`);
-      
-      const response = await fetch(`${getBackendUrl()}/api/generate-rubrique-content`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          rubrique_number: rubriqueNum,
-          rubrique_title: rubriqueTitle,
-          book: book,
-          chapter: parseInt(chapter),
-          passage: passage,
-          target_length: targetLength,
-          use_gemini: true,
-          enriched: true
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`Erreur API: ${response.status}`);
-      }
-
-      const result = await response.json();
-      
-      if (result.status === 'success') {
-        console.log(`[API RUBRIQUE ${rubriqueNum}] Succès - ${result.word_count} mots - API: ${result.api_used}`);
-        return result.content;
-      } else {
-        throw new Error('Erreur lors de la génération du contenu');
-      }
-
-    } catch (error) {
-      console.error(`[ERROR RUBRIQUE ${rubriqueNum}]`, error);
-      
-      // Fallback vers le contenu statique en cas d'erreur API
-      return generateRubriqueContentStatic(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
-    }
-  };
-
-  // Renommer l'ancienne fonction pour le fallback
-  const generateRubriqueContentStatic = (rubriqueNum, rubriqueTitle, passage, book, chapter, userSelectedLength = null) => {
+  const generateRubriqueContent = (rubriqueNum, rubriqueTitle, passage, book, chapter, userSelectedLength = null) => {
     // Utiliser la longueur choisie par l'utilisateur ou la longueur par défaut de la rubrique
     const targetLength = userSelectedLength || getRubriqueLength(rubriqueNum);
     
@@ -1027,14 +969,6 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     window.open(url, "_blank");
   };
 
-  // Rendre la fonction disponible globalement pour éviter les erreurs "not defined"
-  React.useEffect(() => {
-    window.openYouVersion = openYouVersion;
-    return () => {
-      delete window.openYouVersion;
-    };
-  }, [selectedBook, selectedChapter, selectedVerse]);
-
   const handleReset = () => {
     saveCurrentStudy();
     setSelectedBook("--"); setSelectedChapter("--"); setSelectedVerse("--");
@@ -1082,11 +1016,6 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
 
   const navigateToMain = () => {
     setCurrentPage('main');
-  };
-
-  // Fonction pour revenir de la page d'histoire de personnage
-  const handleBackFromCharacter = () => {
-    setSelectedCharacterForHistory(null);
   };
 
   const continueVerses = async () => {
@@ -1171,67 +1100,19 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       else {
         setContent(generatedRubriques[contentKey]);
       }
-    }
-
-    // Pour les rubriques 1-28, générer via API au lieu du contenu statique
-    if (id >= 1 && id <= 28) {
-      console.log(`[GÉNÉRATION API RUBRIQUE ${id}] Début génération via API pour ${selectedBook} ${selectedChapter}`);
+    } else if (id >= 1 && id <= 28) {
+      // Générer la rubrique à la demande ET naviguer vers sa page dédiée
+      console.log(`[GÉNÉRATION REQUISE] Rubrique ${id} non trouvée dans le cache`);
+      const passage = (selectedVerse === "--" || selectedVerse === "vide")
+        ? `${selectedBook || 'Genèse'} ${selectedChapter || '1'}`
+        : `${selectedBook || 'Genèse'} ${selectedChapter || '1'}:${selectedVerse}`;
+      const generatedContent = await generateSingleRubrique(id, BASE_RUBRIQUES[id], passage);
       
-      setIsLoading(true);
-      setRubriquesStatus(prev => ({ ...prev, [id]: "loading" }));
-      
-      try {
-        const rubriqueTitle = getRubTitle(id);
-        const passage = `${selectedBook || 'Genèse'} ${selectedChapter || '1'}`;
-        const targetLength = getRubriqueLength(id);
-        
-        // Appel API pour générer le contenu dynamique
-        const apiContent = await generateRubriqueContentViaAPI(
-          id, 
-          rubriqueTitle, 
-          passage, 
-          selectedBook || 'Genèse', 
-          selectedChapter || '1', 
-          targetLength
-        );
-        
-        // Sauvegarder le contenu généré
-        setGeneratedRubriques(prev => ({
-          ...prev,
-          [contentKey]: apiContent
-        }));
-        
-        setRubriquesStatus(prev => ({ ...prev, [id]: "completed" }));
-        
-        console.log(`[SUCCÈS API RUBRIQUE ${id}] Contenu généré et sauvegardé - longueur: ${apiContent.length}`);
-        
-        // Naviguer vers la page rubrique dédiée avec le nouveau contenu
-        navigateToRubrique(id, apiContent);
-        
-      } catch (error) {
-        console.error(`[ERREUR API RUBRIQUE ${id}]`, error);
-        
-        setRubriquesStatus(prev => ({ ...prev, [id]: "error" }));
-        setContent(`❌ Erreur lors de la génération de la rubrique ${id}: ${getRubTitle(id)}`);
-      }
-      
-      setIsLoading(false);
-      return;
-    }
-    
-    if (id === 0) {
-      // Rubrique 0 : Étude verset par verset - naviguer vers la page dédiée si du contenu existe
-      console.log(`[RUBRIQUE 0] Vérification contenu existant - clé: ${contentKey}`);
-      
-      if (generatedRubriques[contentKey] && (generatedRubriques[contentKey].includes('VERSET') || generatedRubriques[contentKey].includes('**TEXTE BIBLIQUE'))) {
-        console.log(`[RUBRIQUE 0] Contenu verset par verset trouvé, navigation vers page dédiée`);
-        const bookInfo = `${selectedBook || 'Genèse'} ${selectedChapter || '1'}${selectedVerse !== "--" ? ":" + selectedVerse : ""}`;
-        navigateToVersets(generatedRubriques[contentKey], bookInfo);
-      } else {
-        console.log(`[RUBRIQUE 0] Aucun contenu trouvé, affichage message d'instruction`);
-        setContent("Cliquez sur **Versets Prog** pour générer l'étude verset par verset de ce chapitre.");
-        setIsVersetsProgContent(false);
-      }
+      // Après génération, naviguer vers la page de rubrique avec le contenu généré
+      navigateToRubrique(id, generatedContent || '');
+    } else if (id === 0) {
+      // Rubrique 0 utilise VERSETS PROG - ne pas interférer
+      setContent("");
     } else {
       setContent("");
     }
@@ -1257,7 +1138,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       setContent(formatContent(contentEnCours));
       
       // Générer le contenu intelligent pour cette rubrique
-      const rubriqueContent = await generateRubriqueContentViaAPI(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
+      const rubriqueContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
       
       // Délai pour effet visuel
       await wait(1000);
@@ -1539,8 +1420,8 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
   };
 
   // Fonction pour enrichissement théologique contextuel et intelligent
-  const generateTheologicalEnrichment = async (rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength) => {
-    const baseContent = await generateRubriqueContentViaAPI(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
+  const generateTheologicalEnrichment = (rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength) => {
+    const baseContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, book, chapter, targetLength);
     
     // Enrichissement spécifique selon le livre biblique
     const bookEnrichment = getBookSpecificEnrichment(book, chapter);
@@ -1657,41 +1538,36 @@ ${contextualEnrichment}
       
       try {
         // Générer la Rubrique 1 avec un appel API direct plus rapide
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-rubrique-content`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-study`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            rubrique_number: 1,
-            rubrique_title: "Prière d'ouverture",
-            book: selectedBook || "Genèse",
-            chapter: selectedChapter || "1",
             passage: passage,
-            target_length: 500
+            version: selectedVersion || 'LSG',
+            tokens: 500, // Plus court pour plus de rapidité
+            selected_rubriques: [1], // Rubrique 1 uniquement
+            use_gemini: true
           })
         });
         
         if (response.ok) {
           const data = await response.json();
-          if (data.status === "success" || data.status === "fallback") {
-            const rubrique1Content = data.content || '';
-            
-            console.log(`[NAVIGATION IMMÉDIATE] Rubrique 1 générée: ${rubrique1Content.length} caractères - API: ${data.api_used}`);
-            console.log(`[CONTENU PREVIEW]`, rubrique1Content.slice(0, 100) + "...");
-            
-            // Sauvegarder le contenu dans l'état
-            const contentKey = `${selectedBook}_${selectedChapter}_1`;
-            setGeneratedRubriques(prev => ({ ...prev, [contentKey]: rubrique1Content }));
-            setRubriquesStatus(p => ({ ...p, 1: "completed" }));
-            
-            // Navigation immédiate avec le contenu frais
-            navigateToRubrique(1, rubrique1Content);
-            setProgressPercent(4); // 1/28 ≈ 4%
-          } else {
-            console.error("[API ERREUR] Impossible de générer la Rubrique 1");
-            throw new Error("API call failed");
-          }
+          const rubrique1Content = data.content || '';
+          
+          console.log(`[NAVIGATION IMMÉDIATE] Rubrique 1 générée: ${rubrique1Content.length} caractères`);
+          console.log(`[CONTENU PREVIEW]`, rubrique1Content.slice(0, 100) + "...");
+          
+          // Sauvegarder le contenu dans l'état
+          const contentKey = `${selectedBook}_${selectedChapter}_1`;
+          setGeneratedRubriques(prev => ({ ...prev, [contentKey]: rubrique1Content }));
+          setRubriquesStatus(p => ({ ...p, 1: "completed" }));
+          
+          // Navigation immédiate avec le contenu frais
+          navigateToRubrique(1, rubrique1Content);
+          setProgressPercent(4); // 1/28 ≈ 4%
+          
         } else {
-          console.error("[API ERREUR] Réponse non OK:", response.status);
+          console.error("[API ERREUR] Impossible de générer la Rubrique 1");
           throw new Error("API call failed");
         }
         
@@ -1775,8 +1651,8 @@ ${contextualEnrichment}
       const contentEnCours = `# Étude - ${passage}\n\n## ${rubriqueNum}. ${rubriqueTitle}\n\n🔄 Génération intelligente en cours...`;
       setContent(formatContent(contentEnCours));
       
-      // Appel API pour CETTE rubrique avec notre système Gemini intelligent
-      const apiUrl = `${API_BASE}/api/generate-rubrique-content`;
+      // Appel API LOCAL pour CETTE rubrique avec notre système Gemini intelligent
+      const apiUrl = `${API_BASE}/generate-study`;
       
       let rubriqueContent;
       
@@ -1789,12 +1665,11 @@ ${contextualEnrichment}
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            rubrique_number: rubriqueNum,
-            rubrique_title: rubriqueTitle,
-            book: selectedBook || "Genèse",
-            chapter: selectedChapter || "1",
             passage: passage,
-            target_length: parseInt(selectedLength) || 500
+            version: selectedVersion || 'LSG',
+            tokens: selectedLength || 1000,
+            selected_rubriques: [rubriqueNum], // Cette rubrique spécifiquement
+            use_gemini: true
           })
         });
         
@@ -1804,20 +1679,32 @@ ${contextualEnrichment}
         
         const data = await response.json();
         console.log(`[API SUCCESS RUBRIQUE ${rubriqueNum}]`, data.content ? data.content.length : 0, "caractères");
-        console.log(`[API DATA]`, data);
+        console.log(`[API DATA FULL CONTENT]`, data.content); // Debug pour voir le contenu complet
         
-        if (data.status === "success" || data.status === "fallback") {
+        // Parser pour extraire SEULEMENT cette rubrique
+        const rubriques = parseRubriquesContent(data.content || "");
+        console.log(`[PARSING] Rubriques extraites:`, Object.keys(rubriques).length, "rubriques trouvées");
+        console.log(`[PARSING] Clés disponibles:`, Object.keys(rubriques));
+        rubriqueContent = rubriques[rubriqueNum];
+        console.log(`[PARSING] Contenu rubrique ${rubriqueNum}:`, rubriqueContent ? rubriqueContent.slice(0, 100) + "..." : "VIDE");
+        
+        // Debug: Afficher TOUTES les rubriques disponibles
+        console.log(`[DEBUG TOUTES RUBRIQUES] Contenu disponible:`);
+        Object.keys(rubriques).forEach(key => {
+          console.log(`  Rubrique ${key}: ${rubriques[key] ? rubriques[key].slice(0, 50) + "..." : "VIDE"}`);
+        });
+        
+        // Si pas trouvé, utiliser le contenu complet pour cette rubrique
+        if (!rubriqueContent && data.content) {
+          console.log(`[FALLBACK PARSING] Utilisation du contenu complet pour rubrique ${rubriqueNum}`);
           rubriqueContent = data.content;
-          console.log(`[RUBRIQUE ${rubriqueNum}] Contenu généré avec succès:`, rubriqueContent.slice(0, 100) + "...");
-        } else {
-          throw new Error("Réponse API invalide");
         }
         
       } catch (apiError) {
         console.error(`[API ÉCHEC RUBRIQUE ${rubriqueNum}] ${apiError.message}`, apiError);
-        console.warn(`[FALLBACK] Génération de contenu de base pour rubrique ${rubriqueNum}`);
-        // Fallback avec contenu statique
-        rubriqueContent = generateRubriqueContentStatic(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
+        console.warn(`[FALLBACK] Utilisation generateRubriqueContent pour rubrique ${rubriqueNum}`);
+        // Fallback avec contenu intelligent spécifique
+        rubriqueContent = generateRubriqueContent(rubriqueNum, rubriqueTitle, passage, selectedBook, selectedChapter, parseInt(selectedLength));
       }
       
       setProgressPercent(80);
@@ -1994,8 +1881,7 @@ ${contextualEnrichment}
           </header>
 
           {/* Indicateur de progression centré */}
-          <div className="centered-progress-wrapper">
-            <div className="progress-container">
+          <div className="progress-container">
             <div className="progress-pill">
               {progressPercent}%
               {isProgressiveLoading && progressiveStats && (
@@ -2003,20 +1889,6 @@ ${contextualEnrichment}
                   ⚡ {progressiveStats.speed} - {progressiveStats.current_batch} ({progressiveStats.processed}/{progressiveStats.total})
                 </span>
               )}
-            </div>
-            
-            {/* API Control Panel - Controllé par REACT_APP_SHOW_API */}
-            {(process.env.REACT_APP_SHOW_API === 'true' || (process.env.REACT_APP_SHOW_API === undefined && process.env.REACT_APP_BACKEND_URL)) && (
-              <div className="api-below-progress">
-                <ApiControlPanel 
-                  backendUrl={
-                    process.env.REACT_APP_API_BASE_URL || 
-                    process.env.REACT_APP_BACKEND_URL || 
-                    window.location.origin
-                  } 
-                />
-              </div>
-            )}
             </div>
           </div>
 
@@ -2047,27 +1919,15 @@ ${contextualEnrichment}
               </div>
 
               {/* Boutons d'action - Design équilibré et soigné */}
-              <div className="balanced-controls-container" style={{
-                width: '100%',
-                maxWidth: '1600px',
-                margin: '0 auto',
-                padding: '0 25px',
-                boxSizing: 'border-box'
-              }}>
-                {/* Grille de boutons de contrôle - 7 boutons alignés incluant Bible Concordance */}
+              <div className="balanced-controls-container">
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(7, 1fr)',
-                  gap: '16px',
+                  gap: '12px',
                   marginBottom: '24px',
-                  padding: '20px 20px',
+                  padding: '0 10px',
                   width: '100%',
-                  boxSizing: 'border-box',
-                  alignItems: 'center',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(255, 255, 255, 0.12)'
+                  boxSizing: 'border-box'
                 }}>
                   <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
@@ -2105,6 +1965,11 @@ ${contextualEnrichment}
                     <span className="control-icon">📖</span>
                     <span className="control-label">Bible Concordance</span>
                   </button>
+                </div>
+                
+                {/* API Control Panel centré en bas */}
+                <div className="api-centered">
+                  <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://faithflow-app.preview.emergentagent.com"} />
                 </div>
               </div>
             </div>

@@ -1,0 +1,47 @@
+{
+  "name": "etude-bible",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "4.0.3"
+  },
+  "scripts": {
+    "start": "NODE_OPTIONS='--openssl-legacy-provider' SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "build": "CI=false NODE_OPTIONS=--openssl-legacy-provider SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prebuild": "node -e \"const major=+process.versions.node.split('.')[0];if(major<20){console.error('❌ Need Node >=20, got ' + process.version);process.exit(1)}\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "resolutions": {
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2"
+  },
+  "overrides": {
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": "20.x || 22.x"
+  }
+}
