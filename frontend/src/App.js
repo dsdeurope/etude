@@ -24,7 +24,7 @@ const getBackendUrl = () => {
   const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
   // fallback pour les environnements non configurés
-  return "https://sacred-text-explorer.preview.emergentagent.com";
+  return process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_BACKEND_URL || "https://sacred-text-explorer.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();
@@ -2005,10 +2005,18 @@ ${contextualEnrichment}
               )}
             </div>
             
-            {/* API Control Panel directement sous le pourcentage */}
-            <div className="api-below-progress">
-              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://sacred-text-explorer.preview.emergentagent.com"} />
-            </div>
+            {/* API Control Panel - Controllé par REACT_APP_SHOW_API */}
+            {(process.env.REACT_APP_SHOW_API === 'true' || (process.env.REACT_APP_SHOW_API === undefined && process.env.REACT_APP_BACKEND_URL)) && (
+              <div className="api-below-progress">
+                <ApiControlPanel 
+                  backendUrl={
+                    process.env.REACT_APP_API_BASE_URL || 
+                    process.env.REACT_APP_BACKEND_URL || 
+                    window.location.origin
+                  } 
+                />
+              </div>
+            )}
             </div>
           </div>
 

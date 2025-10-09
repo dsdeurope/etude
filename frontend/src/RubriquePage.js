@@ -482,7 +482,15 @@ const RubriquePage = ({
               </button>
 
               {/* Composant API complet avec LEDs */}
-              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || window.location.origin} />
+              {(process.env.REACT_APP_SHOW_API === 'true' || (process.env.REACT_APP_SHOW_API === undefined && process.env.REACT_APP_BACKEND_URL)) && (
+                <ApiControlPanel 
+                  backendUrl={
+                    process.env.REACT_APP_API_BASE_URL || 
+                    process.env.REACT_APP_BACKEND_URL || 
+                    window.location.origin
+                  } 
+                />
+              )}
             </div>
           </div>
 
