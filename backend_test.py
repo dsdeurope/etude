@@ -11,7 +11,7 @@ import sys
 from typing import Dict, Any
 
 # Get backend URL from environment
-BACKEND_URL = "https://scripture-ai-8.preview.emergentagent.com/api"
+BACKEND_URL = "https://rubrique-study.preview.emergentagent.com/api"
 
 def test_character_history_api():
     """Test the character history generation API comprehensively"""

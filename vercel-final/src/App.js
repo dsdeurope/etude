@@ -20,7 +20,7 @@ const getBackendUrl = () => {
   }
   const hostname = window.location.hostname;
   if (hostname === 'localhost' || hostname === '127.0.0.1') return 'http://localhost:8001';
-  return 'https://scripture-ai-8.preview.emergentagent.com';
+  return 'https://rubrique-study.preview.emergentagent.com';
 };
 
 const BACKEND_URL = getBackendUrl();
@@ -407,7 +407,7 @@ function App() {
             <ApiControlPanel
               backendUrl={
                 process.env.REACT_APP_BACKEND_URL ||
-                'https://scripture-ai-8.preview.emergentagent.com'
+                'https://rubrique-study.preview.emergentagent.com'
               }
             />
           </div>
