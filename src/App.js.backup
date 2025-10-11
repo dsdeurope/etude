@@ -1,0 +1,7 @@
+import React from "react";
+export default function App(){
+  return (<div style={{fontFamily:"system-ui",padding:24}}>
+    <h1>📖 Étude Bible</h1>
+    <p>CRA minimal prêt pour Vercel.</p>
+  </div>);
+}
