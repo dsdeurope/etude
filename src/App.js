@@ -1,5 +1,7 @@
 /* eslint-disable */
+const API_BASE = "https://rubrique-study.preview.emergentagent.com";
 import React, { useState, useEffect, useMemo } from "react";
+import CharacterHistoryPage from "./CharacterHistoryPage";
 import "./App.css";
 import "./rubriques.css";
 import RubriquesInline from "./RubriquesInline";
