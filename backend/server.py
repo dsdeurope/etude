@@ -554,11 +554,8 @@ async def generate_verse_by_verse(request: dict):
     """
     try:
         passage = request.get('passage', '')
-        version = request.get('version', 'LSG')
         start_verse = request.get('start_verse', 1)
         end_verse = request.get('end_verse', 5)
-        use_gemini = request.get('use_gemini', True)
-        enriched = request.get('enriched', True)
         
         if not passage:
             return {
