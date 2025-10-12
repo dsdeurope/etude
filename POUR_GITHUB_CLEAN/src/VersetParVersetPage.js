@@ -419,7 +419,6 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       const requestPassage = `${bookChapter}:${startVerse}-${endVerse}`;
       
       console.log(`[PAGINATION] Chargement batch ${nextBatch}: ${requestPassage}`);
-      console.log(`[TIMEOUT] Timeout configuré à 60 secondes pour la génération`);
       
       // Appeler l'API pour les versets suivants
       const apiUrl = `${API_BASE}/generate-verse-by-verse`;
