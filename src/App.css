@@ -3615,6 +3615,7 @@ strong {
   .balanced-buttons-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 10px !important;
+    padding: 15px 10px !important;
   }
 }
 
