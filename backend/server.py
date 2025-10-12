@@ -541,7 +541,107 @@ Vise 800-1200 mots. Commence directement par le titre: # 📖 {character_name.up
         logger.error(f"Erreur génération histoire personnage: {e}")
         return {
             "status": "error",
-            "message": str(e)
+            "message": str(e),
+            "character_name": character_name
+        }
+
+# Route pour générer l'étude verset par verset (5 versets par 5)
+@api_router.post("/generate-verse-by-verse")
+async def generate_verse_by_verse(request: dict):
+    """
+    Génère une étude verset par verset avec Gemini.
+    Génération par groupes de 5 versets pour tous les chapitres de chaque livre.
+    """
+    try:
+        passage = request.get('passage', '')
+        version = request.get('version', 'LSG')
+        start_verse = request.get('start_verse', 1)
+        end_verse = request.get('end_verse', 5)
+        use_gemini = request.get('use_gemini', True)
+        enriched = request.get('enriched', True)
+        
+        if not passage:
+            return {
+                "status": "error",
+                "message": "Passage manquant"
+            }
+        
+        # Parser le passage (ex: "Genèse 1" ou "Jean 3:16")
+        parts = passage.split()
+        if len(parts) < 2:
+            return {
+                "status": "error",
+                "message": "Format de passage invalide. Utilisez 'Livre Chapitre' (ex: Genèse 1)"
+            }
+        
+        book_name = ' '.join(parts[:-1])
+        chapter = parts[-1]
+        
+        logging.info(f"Génération verset par verset: {book_name} {chapter}, versets {start_verse}-{end_verse}")
+        
+        # Préparer le prompt pour Gemini
+        prompt = f"""Tu es un expert biblique et théologien spécialisé dans l'exégèse verset par verset.
+
+Génère une étude DÉTAILLÉE et APPROFONDIE pour les versets {start_verse} à {end_verse} de **{book_name} chapitre {chapter}** en français.
+
+Pour CHAQUE verset de {start_verse} à {end_verse}, structure ainsi :
+
+---
+
+**VERSET {start_verse}**
+
+**📜 TEXTE BIBLIQUE :**
+[Le texte biblique exact du verset en français Louis Segond]
+
+**🎓 EXPLICATION THÉOLOGIQUE :**
+[Explication détaillée en 2-3 paragraphes incluant :]
+- Contexte historique et culturel
+- Analyse des mots clés en grec/hébreu si pertinent
+- Signification théologique profonde
+- Application pratique pour aujourd'hui
+- Liens avec d'autres passages bibliques
+
+---
+
+**VERSET {start_verse + 1}**
+
+[Même structure pour chaque verset suivant jusqu'au verset {end_verse}]
+
+**RÈGLES IMPORTANTES :**
+1. Utilise EXACTEMENT le format ci-dessus pour chaque verset
+2. Sois TRÈS détaillé dans chaque explication (minimum 150 mots par verset)
+3. Inclus des références bibliques croisées
+4. Reste fidèle à l'exégèse biblique orthodoxe
+5. Termine chaque explication par une application pratique
+
+Commence directement avec le premier verset sans introduction générale."""
+
+        # Appeler Gemini avec rotation automatique
+        start_time = time.time()
+        
+        content = await call_gemini_with_rotation(prompt)
+        
+        generation_time = time.time() - start_time
+        word_count = len(content.split())
+        
+        return {
+            "status": "success",
+            "content": content,
+            "api_used": f"gemini_{current_gemini_key_index + 1}",
+            "word_count": word_count,
+            "passage": passage,
+            "verses_generated": f"{start_verse}-{end_verse}",
+            "generation_time_seconds": round(generation_time, 2),
+            "source": "gemini_ai",
+            "from_cache": False
+        }
+        
+    except Exception as e:
+        logging.error(f"Erreur génération verset par verset: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "passage": request.get('passage', '')
         }
 
 # Include the router in the main app
