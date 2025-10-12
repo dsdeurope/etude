@@ -269,23 +269,32 @@ def test_verse_by_verse_batches():
 
 def main():
     """Run all backend tests"""
-    print(f"🚀 Starting Backend API Tests")
+    print(f"🚀 Starting Backend API Tests for Scripture Explorer")
     print(f"Backend URL: {BACKEND_URL}")
     print(f"Test Time: {datetime.now().isoformat()}")
+    print(f"Testing improvements to /api/generate-verse-by-verse endpoint")
     
     # Run tests
     health_result = test_health_endpoint()
-    verse_result = test_verse_by_verse_endpoint()
+    batch_result = test_verse_by_verse_batches()
     
     # Summary
     print(f"\n{'='*60}")
-    print(f"📊 TEST SUMMARY")
+    print(f"📊 FINAL TEST SUMMARY")
     print(f"{'='*60}")
     print(f"Health Endpoint: {'✅ PASS' if health_result else '❌ FAIL'}")
-    print(f"Verse-by-Verse Endpoint: {'✅ PASS' if verse_result else '❌ FAIL'}")
+    print(f"Verse-by-Verse Batches: {'✅ PASS' if batch_result else '❌ FAIL'}")
     
-    overall_success = health_result and verse_result
+    overall_success = health_result and batch_result
     print(f"\nOverall Result: {'✅ ALL TESTS PASSED' if overall_success else '❌ SOME TESTS FAILED'}")
+    
+    if overall_success:
+        print(f"\n🎉 SUCCESS: All endpoint improvements are working correctly!")
+        print(f"✅ Passage parsing fixed")
+        print(f"✅ 4-section format implemented")
+        print(f"✅ Unique content generation confirmed")
+    else:
+        print(f"\n⚠️  ISSUES FOUND: Some tests failed - check details above")
     
     return overall_success
 
