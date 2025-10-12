@@ -865,8 +865,8 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                 📖 Lire la Bible
               </button>
 
-              {/* Bouton API avec LEDs physiques */}
-              <ApiStatusButton />
+              {/* Bouton API avec LEDs physiques - Composant centralisé */}
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "http://localhost:8001"} />
             </div>
           </div>
           
