@@ -12,13 +12,34 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Force CSS Grid Support - BOUTONS CONTRÔLE */
+/* Force CSS Grid Support - BOUTONS CONTRÔLE - 7 BOUTONS */
 .balanced-buttons-grid {
   display: grid !important;
   grid-template-columns: repeat(7, 1fr) !important;
   gap: 14px !important;
   width: 100% !important;
   box-sizing: border-box !important;
+}
+
+/* Media query pour s'assurer que desktop a 7 colonnes */
+@media (min-width: 1025px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(7, 1fr) !important;
+  }
+}
+
+/* Media query pour tablettes - 3 colonnes puis 4 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* Media query pour mobile - 3 colonnes */
+@media (max-width: 768px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
 }
 
 /* Force button styles */
