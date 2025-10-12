@@ -242,18 +242,39 @@ const ApiControlPanel = ({ backendUrl }) => {
               padding: '4px 8px',
               borderRadius: '8px'
             }}>
-              {/* LED Statut global - Style physique */}
+              {/* LED Statut global - Style physique avec gestion quotas */}
               <div style={{
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000',
-                boxShadow: `0 0 12px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}, 0 0 24px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
-                animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
+                backgroundColor: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) return '#ff0000';
+                  if (apis.some(api => api.color === 'yellow')) return '#ffff00';
+                  return '#00ff00';
+                })(),
+                boxShadow: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  const color = apis.some(api => api.color === 'red') ? '#ff0000' 
+                              : apis.some(api => api.color === 'yellow') ? '#ffff00'
+                              : '#00ff00';
+                  return `0 0 12px ${color}, 0 0 24px ${color}`;
+                })(),
+                animation: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) return 'pulse-red 1s infinite';
+                  if (apis.some(api => api.color === 'yellow')) return 'pulse-yellow 1.5s infinite';
+                  return 'pulse-green 2s infinite';
+                })(),
                 border: '2px solid rgba(255,255,255,0.5)',
-                background: Object.values(apiStatus.apis).every(api => api.color === 'green')
-                  ? 'radial-gradient(circle at 35% 35%, #00ff00, #00dd00, #00aa00)'
-                  : 'radial-gradient(circle at 35% 35%, #ff0000, #dd0000, #aa0000)'
+                background: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) 
+                    return 'radial-gradient(circle at 35% 35%, #ff0000, #dd0000, #aa0000)';
+                  if (apis.some(api => api.color === 'yellow')) 
+                    return 'radial-gradient(circle at 35% 35%, #ffff00, #dddd00, #aaaa00)';
+                  return 'radial-gradient(circle at 35% 35%, #00ff00, #00dd00, #00aa00)';
+                })()
               }} />
               
               {/* Ascenseur API avec rotation des noms */}
