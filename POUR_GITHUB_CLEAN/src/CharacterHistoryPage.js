@@ -467,32 +467,70 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
               gap: '12px',
               flexWrap: 'wrap'
             }}>
-              {/* Bouton Gemini */}
+              {/* Bouton Enrichir (Gemini) */}
               <button 
-                onClick={() => window.open('https://gemini.google.com/', '_blank')}
+                onClick={() => generateCharacterHistory('enrich')}
+                disabled={isLoading || !history}
                 style={{
-                  background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                  background: isLoading ? 'linear-gradient(135deg, #6b7280, #4b5563)' : 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
                   border: 'none',
                   borderRadius: '10px',
                   color: 'white',
                   padding: '8px 14px',
                   fontSize: '12px',
                   fontWeight: '600',
-                  cursor: 'pointer',
+                  cursor: isLoading || !history ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
                   boxShadow: '0 3px 10px rgba(139, 92, 246, 0.3)',
-                  fontFamily: 'Montserrat, sans-serif'
+                  fontFamily: 'Montserrat, sans-serif',
+                  opacity: isLoading || !history ? 0.6 : 1
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.transform = 'translateY(-1px)';
-                  e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                  if (!isLoading && history) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                  }
                 }}
                 onMouseOut={(e) => {
                   e.target.style.transform = 'translateY(0px)';
                   e.target.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
                 }}
+                title="Enrichir le contenu actuel avec plus de détails"
               >
-                🤖 Gemini
+                {isLoading && generationMode === 'enrich' ? '⏳ Enrichissement...' : '✨ Enrichir'}
+              </button>
+
+              {/* Bouton Régénérer (Gemini) */}
+              <button 
+                onClick={() => generateCharacterHistory('regenerate')}
+                disabled={isLoading}
+                style={{
+                  background: isLoading ? 'linear-gradient(135deg, #6b7280, #4b5563)' : 'linear-gradient(135deg, #f59e0b, #ea580c)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(245, 158, 11, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(245, 158, 11, 0.3)';
+                }}
+                title="Régénérer avec encore plus d'approfondissement"
+              >
+                {isLoading && generationMode === 'regenerate' ? '⏳ Génération...' : '🔄 Régénérer'}
               </button>
 
               {/* Bouton Prise de Note */}
