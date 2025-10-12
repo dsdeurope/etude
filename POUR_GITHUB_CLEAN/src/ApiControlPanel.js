@@ -2,7 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 const ApiControlPanel = ({ backendUrl }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [apiStatus, setApiStatus] = useState(null);
+  // État initial par défaut pour afficher les LED immédiatement
+  const [apiStatus, setApiStatus] = useState({
+    timestamp: new Date().toISOString(),
+    apis: {
+      gemini_1: { name: 'Gemini Key 1', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_2: { name: 'Gemini Key 2', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_3: { name: 'Gemini Key 3', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_4: { name: 'Gemini Key 4', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      bible_api: { name: 'Bible API', color: 'green', status: 'available', status_text: 'Disponible', quota_used: 0 }
+    },
+    call_history: [],
+    active_api: 'gemini_1'
+  });
   const [lastUpdate, setLastUpdate] = useState(null);
   const [apiHistory, setApiHistory] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
@@ -15,16 +27,10 @@ const ApiControlPanel = ({ backendUrl }) => {
       if (response.ok) {
         const healthData = await response.json();
         
-        // Adapter la réponse au format attendu par l'UI
+        // Utiliser directement les données du backend
         const adaptedStatus = {
-          timestamp: new Date().toISOString(),
-          apis: {
-            gemini_1: { color: 'green', name: 'Gemini Key 1', status: 'active' },
-            gemini_2: { color: 'green', name: 'Gemini Key 2', status: 'active' },
-            gemini_3: { color: 'green', name: 'Gemini Key 3', status: 'active' },
-            gemini_4: { color: 'green', name: 'Gemini Key 4', status: 'active' },
-            bible_api: { color: healthData.bible_api_configured ? 'green' : 'red', name: 'Bible API', status: healthData.bible_api_configured ? 'active' : 'inactive' }
-          },
+          timestamp: healthData.timestamp || new Date().toISOString(),
+          apis: healthData.apis || {},
           call_history: [],
           active_api: healthData.current_key || 'gemini_1'
         };
@@ -75,9 +81,22 @@ const ApiControlPanel = ({ backendUrl }) => {
     return () => clearInterval(interval);
   }, [backendUrl]);
 
-  // Fonction pour obtenir la couleur LED
+  // Fonction pour obtenir la couleur LED selon le quota
   const getLedColor = (apiInfo) => {
-    return apiInfo?.color === 'green' ? '#00ff00' : '#ff0000';
+    if (!apiInfo || !apiInfo.color) return '#ff0000';
+    
+    switch(apiInfo.color) {
+      case 'green':
+        return '#00ff00';  // Vert: bon état
+      case 'yellow':
+        return '#ffff00';  // Jaune: attention (70-90%)
+      case 'orange':
+        return '#ffa500';  // Orange: attention
+      case 'red':
+        return '#ff0000';  // Rouge: critique ou épuisé
+      default:
+        return '#00ff00';
+    }
   };
 
   // Fonction pour obtenir l'icône de statut
@@ -113,6 +132,18 @@ const ApiControlPanel = ({ backendUrl }) => {
               box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; 
               opacity: 0.8; 
               transform: scale(1.1);
+            }
+          }
+          @keyframes pulse-yellow {
+            0%, 100% { 
+              box-shadow: 0 0 12px #ffff00, 0 0 24px #ffaa00; 
+              opacity: 1; 
+              transform: scale(1);
+            }
+            50% { 
+              box-shadow: 0 0 20px #ffff00, 0 0 40px #ffaa00; 
+              opacity: 0.7; 
+              transform: scale(1.15);
             }
           }
           @keyframes pulse-red {
@@ -223,18 +254,39 @@ const ApiControlPanel = ({ backendUrl }) => {
               padding: '4px 8px',
               borderRadius: '8px'
             }}>
-              {/* LED Statut global - Style physique */}
+              {/* LED Statut global - Style physique avec gestion quotas */}
               <div style={{
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000',
-                boxShadow: `0 0 12px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}, 0 0 24px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
-                animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
+                backgroundColor: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) return '#ff0000';
+                  if (apis.some(api => api.color === 'yellow')) return '#ffff00';
+                  return '#00ff00';
+                })(),
+                boxShadow: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  const color = apis.some(api => api.color === 'red') ? '#ff0000' 
+                              : apis.some(api => api.color === 'yellow') ? '#ffff00'
+                              : '#00ff00';
+                  return `0 0 12px ${color}, 0 0 24px ${color}`;
+                })(),
+                animation: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) return 'pulse-red 1s infinite';
+                  if (apis.some(api => api.color === 'yellow')) return 'pulse-yellow 1.5s infinite';
+                  return 'pulse-green 2s infinite';
+                })(),
                 border: '2px solid rgba(255,255,255,0.5)',
-                background: Object.values(apiStatus.apis).every(api => api.color === 'green')
-                  ? 'radial-gradient(circle at 35% 35%, #00ff00, #00dd00, #00aa00)'
-                  : 'radial-gradient(circle at 35% 35%, #ff0000, #dd0000, #aa0000)'
+                background: (() => {
+                  const apis = Object.values(apiStatus.apis);
+                  if (apis.some(api => api.color === 'red')) 
+                    return 'radial-gradient(circle at 35% 35%, #ff0000, #dd0000, #aa0000)';
+                  if (apis.some(api => api.color === 'yellow')) 
+                    return 'radial-gradient(circle at 35% 35%, #ffff00, #dddd00, #aaaa00)';
+                  return 'radial-gradient(circle at 35% 35%, #00ff00, #00dd00, #00aa00)';
+                })()
               }} />
               
               {/* Ascenseur API avec rotation des noms */}
@@ -273,28 +325,42 @@ const ApiControlPanel = ({ backendUrl }) => {
                 </div>
               </div>
               
-              {/* LED individuelles PHYSIQUES plus visibles */}
+              {/* LED individuelles PHYSIQUES avec quotas (vert/jaune/rouge) */}
               <div style={{ display: 'flex', gap: '4px', padding: '4px 6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}>
-                {Object.entries(apiStatus.apis).map(([key, api]) => (
-                  <div 
-                    key={key}
-                    style={{
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                      backgroundColor: getLedColor(api),
-                      boxShadow: `0 0 10px ${getLedColor(api)}, 0 0 20px ${getLedColor(api)}, inset 0 0 5px ${getLedColor(api)}`,
-                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
-                      border: '2px solid rgba(255,255,255,0.4)',
-                      position: 'relative',
-                      // Effet 3D LED physique
-                      background: api.color === 'green' 
-                        ? 'radial-gradient(circle at 30% 30%, #00ff00, #00cc00, #009900)'
-                        : 'radial-gradient(circle at 30% 30%, #ff0000, #cc0000, #990000)'
-                    }}
-                    title={`${api.name}: ${api.status === 'available' ? 'Disponible' : 'Quota dépassé'}`}
-                  />
-                ))}
+                {Object.entries(apiStatus.apis).map(([key, api]) => {
+                  const ledColor = getLedColor(api);
+                  const animation = api.color === 'green' ? 'pulse-green 2s infinite' 
+                                  : api.color === 'yellow' ? 'pulse-yellow 1.5s infinite'
+                                  : 'pulse-red 1s infinite';
+                  
+                  // Gradient 3D selon la couleur
+                  let gradient;
+                  if (api.color === 'green') {
+                    gradient = 'radial-gradient(circle at 30% 30%, #00ff00, #00cc00, #009900)';
+                  } else if (api.color === 'yellow') {
+                    gradient = 'radial-gradient(circle at 30% 30%, #ffff00, #ffcc00, #ff9900)';
+                  } else {
+                    gradient = 'radial-gradient(circle at 30% 30%, #ff0000, #cc0000, #990000)';
+                  }
+                  
+                  return (
+                    <div 
+                      key={key}
+                      style={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        backgroundColor: ledColor,
+                        boxShadow: `0 0 10px ${ledColor}, 0 0 20px ${ledColor}, inset 0 0 5px ${ledColor}`,
+                        animation: animation,
+                        border: '2px solid rgba(255,255,255,0.4)',
+                        position: 'relative',
+                        background: gradient
+                      }}
+                      title={`${api.name}: ${api.status_text || api.status} ${api.quota_used ? `(${api.quota_used}% utilisé)` : ''}`}
+                    />
+                  );
+                })}
               </div>
             </div>
           )}

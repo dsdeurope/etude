@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ApiControlPanel from './ApiControlPanel';
 
-// Composant API avec LEDs physiques (copié de VersetParVersetPage.js)
-const ApiStatusButton = () => {
+// ANCIEN COMPOSANT SUPPRIMÉ - Maintenant on utilise ApiControlPanel centralisé
+const ApiStatusButton_OLD_REMOVED = () => {
   const [apiStatus, setApiStatus] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -577,8 +578,8 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
                 📖 Lire la Bible
               </button>
 
-              {/* Bouton API avec LEDs */}
-              <ApiStatusButton />
+              {/* Bouton API avec LEDs - Composant centralisé */}
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "http://localhost:8001"} />
             </div>
           </div>
         </div>
