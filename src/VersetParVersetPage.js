@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import ApiControlPanel from './ApiControlPanel';
 
-// Composant API avec LEDs physiques
-const ApiStatusButton = () => {
+// ANCIEN COMPOSANT SUPPRIMÉ - Utilise ApiControlPanel centralisé
+const ApiStatusButton_OLD_REMOVED = () => {
   const [apiStatus, setApiStatus] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
