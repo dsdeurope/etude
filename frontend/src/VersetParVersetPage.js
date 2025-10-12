@@ -520,23 +520,31 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       const versetNumber = parseInt(match[2]);
       const versetContent = match[1].trim();
       
-      // Séparer le contenu en parties
-      const parts = versetContent.split(/(\*\*TEXTE BIBLIQUE\s*:\*\*|\*\*EXPLICATION THÉOLOGIQUE\s*:\*\*)/i);
+      // Séparer le contenu en 4 parties : affichage du verset, chapitre, contexte historique, partie théologique
+      const parts = versetContent.split(/(\*\*📖 AFFICHAGE DU VERSET\s*:\*\*|\*\*📚 CHAPITRE\s*:\*\*|\*\*📜 CONTEXTE HISTORIQUE\s*:\*\*|\*\*✝️ PARTIE THÉOLOGIQUE\s*:\*\*|\*\*TEXTE BIBLIQUE\s*:\*\*|\*\*EXPLICATION THÉOLOGIQUE\s*:\*\*)/i);
       
       let versetTitle = '';
-      let texteContent = '';
-      let explicationContent = '';
+      let affichageVerset = '';
+      let chapitre = '';
+      let contexteHistorique = '';
+      let partieTheologique = '';
       
       for (let i = 0; i < parts.length; i++) {
         const part = parts[i].trim();
         
         if (part.includes('**VERSET')) {
           versetTitle = cleanMarkdownFormatting(part);
-        } else if (part.match(/TEXTE BIBLIQUE/i)) {
-          texteContent = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+        } else if (part.match(/📖 AFFICHAGE DU VERSET|TEXTE BIBLIQUE/i)) {
+          affichageVerset = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
           i++; // Skip next part as we've consumed it
-        } else if (part.match(/\*\*EXPLICATION THÉOLOGIQUE/i)) {
-          explicationContent = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+        } else if (part.match(/📚 CHAPITRE/i)) {
+          chapitre = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+          i++; // Skip next part as we've consumed it
+        } else if (part.match(/📜 CONTEXTE HISTORIQUE/i)) {
+          contexteHistorique = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+          i++; // Skip next part as we've consumed it
+        } else if (part.match(/✝️ PARTIE THÉOLOGIQUE|EXPLICATION THÉOLOGIQUE/i)) {
+          partieTheologique = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
           i++; // Skip next part as we've consumed it
         }
       }
@@ -544,8 +552,10 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       sections.push({
         number: versetNumber,
         title: versetTitle,
-        texte: texteContent,
-        explication: explicationContent
+        affichageVerset: affichageVerset,
+        chapitre: chapitre,
+        contexteHistorique: contexteHistorique,
+        partieTheologique: partieTheologique
       });
     }
     
@@ -904,7 +914,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
             fontSize: 'clamp(15px, 4vw, 16px)',
             marginBottom: '20px'
           }}>
-            {/* Nouveau rendu avec boutons intégrés */}
+            {/* Nouveau rendu avec les 4 sections */}
             {parseContentWithGeminiButtons(getCurrentBatchContent()).map((section, index) => (
               <div key={section.number} style={{ marginBottom: '40px' }}>
                 {/* Titre du verset */}
@@ -912,22 +922,70 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   {section.title}
                 </div>
                 
-                {/* Texte biblique */}
-                {section.texte && (
+                {/* 1. Affichage du verset */}
+                {section.affichageVerset && (
                   <>
-                    <div className="texte-biblique-label">TEXTE BIBLIQUE :</div>
+                    <div className="affichage-verset-label">📖 AFFICHAGE DU VERSET :</div>
                     <div style={{ 
                       marginBottom: '20px', 
-                      padding: '10px 0',
-                      color: '#374151'
+                      padding: '15px',
+                      backgroundColor: '#f0f9ff',
+                      borderLeft: '4px solid #3b82f6',
+                      borderRadius: '8px',
+                      color: '#1e40af',
+                      fontSize: '16px',
+                      fontStyle: 'italic',
+                      lineHeight: '1.8'
                     }}>
-                      {section.texte}
+                      {section.affichageVerset}
                     </div>
                   </>
                 )}
                 
-                {/* Explication théologique avec bouton Gemini intégré */}
-                {section.explication && (
+                {/* 2. Chapitre */}
+                {section.chapitre && (
+                  <>
+                    <div className="chapitre-label">📚 CHAPITRE :</div>
+                    <div style={{ 
+                      marginBottom: '20px', 
+                      padding: '12px',
+                      backgroundColor: '#fef3c7',
+                      borderLeft: '4px solid #f59e0b',
+                      borderRadius: '8px',
+                      color: '#92400e',
+                      fontSize: '15px',
+                      lineHeight: '1.7'
+                    }}>
+                      {section.chapitre}
+                    </div>
+                  </>
+                )}
+                
+                {/* 3. Contexte historique */}
+                {section.contexteHistorique && (
+                  <>
+                    <div className="contexte-historique-label">📜 CONTEXTE HISTORIQUE :</div>
+                    <div 
+                      style={{ 
+                        marginBottom: '20px',
+                        padding: '12px',
+                        backgroundColor: '#f3e8ff',
+                        borderLeft: '4px solid #a855f7',
+                        borderRadius: '8px',
+                        color: '#6b21a8',
+                        fontSize: '15px',
+                        lineHeight: '1.7',
+                        textAlign: 'justify'
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: formatExplicationTheologique(section.contexteHistorique)
+                      }}
+                    />
+                  </>
+                )}
+                
+                {/* 4. Partie théologique avec bouton Gemini intégré */}
+                {section.partieTheologique && (
                   <>
                     <div style={{
                       display: 'flex',
@@ -937,8 +995,8 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                       marginBottom: '16px',
                       flexWrap: 'wrap'
                     }}>
-                      <div className="explication-label" style={{ flex: '1', minWidth: '200px' }}>
-                        EXPLICATION THÉOLOGIQUE :
+                      <div className="partie-theologique-label" style={{ flex: '1', minWidth: '200px' }}>
+                        ✝️ PARTIE THÉOLOGIQUE :
                       </div>
                       
                       {/* Bouton Gemini à droite de l'explication */}
@@ -982,17 +1040,21 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                       </button>
                     </div>
                     
-                    {/* Contenu de l'explication avec formatage intelligent */}
+                    {/* Contenu de la partie théologique avec formatage intelligent */}
                     <div 
                       style={{ 
-                        color: '#374151',
+                        padding: '12px',
+                        backgroundColor: '#dcfce7',
+                        borderLeft: '4px solid #10b981',
+                        borderRadius: '8px',
+                        color: '#065f46',
                         lineHeight: '1.7',
                         marginBottom: '10px',
                         fontSize: '15px',
                         textAlign: 'justify'
                       }}
                       dangerouslySetInnerHTML={{
-                        __html: formatExplicationTheologique(section.explication)
+                        __html: formatExplicationTheologique(section.partieTheologique)
                       }}
                     />
                     
@@ -1128,6 +1190,59 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   letter-spacing: 1px;
                 }
                 
+                .affichage-verset-label {
+                  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .chapitre-label {
+                  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .contexte-historique-label {
+                  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .partie-theologique-label {
+                  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                /* Anciens labels pour rétrocompatibilité */
                 .texte-biblique-label {
                   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
                   color: white;
@@ -1142,7 +1257,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                 }
                 
                 .explication-label {
-                  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+                  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
                   color: white;
                   font-size: clamp(1rem, 3.5vw, 1.1rem);
                   font-weight: 700;
