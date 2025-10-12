@@ -3789,10 +3789,17 @@ strong {
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive équilibré */
-@media (max-width: 1200px) {
+/* Responsive équilibré - DESKTOP GARDE 7 COLONNES */
+@media (min-width: 1025px) {
   .balanced-buttons-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 14px !important;
   }
 }
