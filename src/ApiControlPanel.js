@@ -223,14 +223,18 @@ const ApiControlPanel = ({ backendUrl }) => {
               padding: '4px 8px',
               borderRadius: '8px'
             }}>
-              {/* Statut global */}
+              {/* LED Statut global - Style physique */}
               <div style={{
-                width: '8px',
-                height: '8px',
+                width: '12px',
+                height: '12px',
                 borderRadius: '50%',
                 backgroundColor: Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000',
-                boxShadow: `0 0 8px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
-                animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                boxShadow: `0 0 12px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}, 0 0 24px ${Object.values(apiStatus.apis).every(api => api.color === 'green') ? '#00ff00' : '#ff0000'}`,
+                animation: Object.values(apiStatus.apis).every(api => api.color === 'green') ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
+                border: '2px solid rgba(255,255,255,0.5)',
+                background: Object.values(apiStatus.apis).every(api => api.color === 'green')
+                  ? 'radial-gradient(circle at 35% 35%, #00ff00, #00dd00, #00aa00)'
+                  : 'radial-gradient(circle at 35% 35%, #ff0000, #dd0000, #aa0000)'
               }} />
               
               {/* Ascenseur API avec rotation des noms */}
