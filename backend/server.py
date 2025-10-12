@@ -720,35 +720,45 @@ async def generate_verse_by_verse(request: dict):
 
 Génère une étude DÉTAILLÉE et APPROFONDIE pour les versets {start_verse} à {end_verse} de **{book_name} chapitre {chapter}** en français.
 
-Pour CHAQUE verset de {start_verse} à {end_verse}, structure ainsi :
+Pour CHAQUE verset de {start_verse} à {end_verse}, structure RIGOUREUSEMENT ainsi :
 
 ---
 
 **VERSET {start_verse}**
 
-**📜 TEXTE BIBLIQUE :**
+**📖 AFFICHAGE DU VERSET :**
 [Le texte biblique exact du verset en français Louis Segond]
 
-**🎓 EXPLICATION THÉOLOGIQUE :**
-[Explication détaillée en 2-3 paragraphes incluant :]
-- Contexte historique et culturel
-- Analyse des mots clés en grec/hébreu si pertinent
+**📚 CHAPITRE :**
+[Contexte du chapitre dans lequel ce verset s'inscrit - 2-3 phrases expliquant le thème général du chapitre et la place de ce verset dans le déroulement du chapitre]
+
+**📜 CONTEXTE HISTORIQUE :**
+[Contexte historique et culturel détaillé :]
+- Période historique et situation du peuple de Dieu
+- Contexte géographique et social
+- Circonstances de rédaction
+- Analyse linguistique (mots clés en grec/hébreu si pertinent)
+
+**✝️ PARTIE THÉOLOGIQUE :**
+[Explication théologique approfondie en 2-3 paragraphes incluant :]
 - Signification théologique profonde
+- Enseignements doctrinaux
 - Application pratique pour aujourd'hui
 - Liens avec d'autres passages bibliques
+- Perspectives spirituelles pour la vie chrétienne
 
 ---
 
 **VERSET {start_verse + 1}**
 
-[Même structure pour chaque verset suivant jusqu'au verset {end_verse}]
+[Même structure EXACTE pour chaque verset suivant jusqu'au verset {end_verse}]
 
 **RÈGLES IMPORTANTES :**
-1. Utilise EXACTEMENT le format ci-dessus pour chaque verset
-2. Sois TRÈS détaillé dans chaque explication (minimum 150 mots par verset)
-3. Inclus des références bibliques croisées
+1. Utilise EXACTEMENT les 4 sections pour chaque verset : AFFICHAGE DU VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE
+2. Sois TRÈS détaillé (minimum 200 mots par verset au total)
+3. Inclus des références bibliques croisées dans la partie théologique
 4. Reste fidèle à l'exégèse biblique orthodoxe
-5. Termine chaque explication par une application pratique
+5. Chaque section doit être substantielle et informative
 
 Commence directement avec le premier verset sans introduction générale."""
 
