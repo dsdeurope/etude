@@ -57,16 +57,17 @@ async def rotate_gemini_key():
     logging.info(f"Rotation vers clé Gemini #{current_gemini_key_index + 1}")
     return current_gemini_key_index
 
-async def call_gemini_with_rotation(prompt: str, max_retries: int = None) -> str:
+async def call_gemini_with_rotation(prompt: str, max_retries: int = None, use_bible_api_fallback: bool = True) -> str:
     """
     Appelle Gemini avec rotation automatique en cas de quota dépassé.
-    Essaie toutes les clés disponibles avant d'échouer.
+    Si toutes les clés Gemini sont épuisées, bascule sur Bible API.
     """
     if max_retries is None:
         max_retries = len(GEMINI_KEYS)
     
-    last_error = None
+    last_gemini_error = None
     
+    # Essayer toutes les clés Gemini
     for attempt in range(max_retries):
         try:
             api_key, key_index = await get_gemini_key()
@@ -77,8 +78,8 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None) -> str
             # Initialiser le chat Gemini
             chat = LlmChat(
                 api_key=api_key,
-                session_id=f"character-{uuid.uuid4()}",
-                system_message="Tu es un expert biblique et théologien spécialisé dans l'étude narrative des personnages de la Bible."
+                session_id=f"generation-{uuid.uuid4()}",
+                system_message="Tu es un expert biblique et théologien spécialisé dans l'étude des Écritures."
             ).with_model("gemini", "gemini-2.0-flash")
             
             # Envoyer le message
@@ -90,25 +91,163 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None) -> str
             
         except Exception as e:
             error_str = str(e).lower()
-            last_error = e
+            last_gemini_error = e
             
             # Vérifier si c'est une erreur de quota
             if "quota" in error_str or "rate_limit" in error_str or "429" in error_str or "resource_exhausted" in error_str:
-                logging.warning(f"⚠️  Quota atteint pour clé #{key_index + 1}, rotation vers clé suivante...")
+                logging.warning(f"⚠️  Quota atteint pour clé Gemini #{key_index + 1}, rotation vers clé suivante...")
                 await rotate_gemini_key()
-                time.sleep(1)  # Petite pause avant de réessayer
+                time.sleep(1)
                 continue
             else:
-                # Autre type d'erreur, on l'enregistre et on réessaie
-                logging.error(f"❌ Erreur avec clé #{key_index + 1}: {e}")
+                logging.error(f"❌ Erreur avec clé Gemini #{key_index + 1}: {e}")
                 await rotate_gemini_key()
                 continue
     
-    # Si on arrive ici, toutes les tentatives ont échoué
+    # Toutes les clés Gemini sont épuisées, essayer Bible API en fallback
+    if use_bible_api_fallback and BIBLE_API_KEY and BIBLE_ID:
+        logging.warning(f"⚠️  Toutes les clés Gemini épuisées, tentative avec Bible API (clé #5)...")
+        try:
+            # Générer du contenu avec Bible API comme fallback
+            fallback_content = await generate_with_bible_api_fallback(prompt)
+            logging.info(f"✅ Succès avec Bible API (clé #5) en fallback")
+            return fallback_content
+        except Exception as bible_error:
+            logging.error(f"❌ Bible API également épuisée: {bible_error}")
+            raise HTTPException(
+                status_code=503,
+                detail=f"Toutes les 5 clés (4 Gemini + 1 Bible API) ont atteint leur quota. Gemini: {str(last_gemini_error)}, Bible API: {str(bible_error)}"
+            )
+    
+    # Si Bible API n'est pas configurée ou désactivée
     raise HTTPException(
         status_code=503,
-        detail=f"Toutes les clés Gemini ont atteint leur quota. Dernière erreur: {str(last_error)}"
+        detail=f"Toutes les clés Gemini ont atteint leur quota. Dernière erreur: {str(last_gemini_error)}"
     )
+
+async def generate_with_bible_api_fallback(prompt: str) -> str:
+    """
+    Génère du contenu en utilisant Bible API comme source de texte biblique.
+    Utilisé en fallback quand toutes les clés Gemini sont épuisées.
+    """
+    import httpx
+    import re
+    
+    logging.info("[BIBLE API FALLBACK] Génération avec Bible API")
+    
+    # Extraire le passage du prompt (ex: "Genèse 1" ou "Jean 3:16")
+    passage_match = re.search(r'([\w\s]+)\s+chapitre\s+(\d+)', prompt, re.IGNORECASE)
+    if not passage_match:
+        passage_match = re.search(r'([\w\s]+)\s+(\d+)', prompt)
+    
+    if not passage_match:
+        raise Exception("Impossible d'extraire le passage biblique du prompt")
+    
+    book_name = passage_match.group(1).strip()
+    chapter = passage_match.group(2).strip()
+    
+    # Extraire les numéros de versets
+    verse_match = re.search(r'versets?\s+(\d+)\s+(?:à|-)?\s+(\d+)', prompt, re.IGNORECASE)
+    start_verse = int(verse_match.group(1)) if verse_match else 1
+    end_verse = int(verse_match.group(2)) if verse_match else 5
+    
+    logging.info(f"[BIBLE API] Récupération: {book_name} {chapter}:{start_verse}-{end_verse}")
+    
+    # Mapper les noms français vers les IDs Bible API
+    book_mapping = {
+        "genèse": "GEN", "exode": "EXO", "lévitique": "LEV", "nombres": "NUM",
+        "deutéronome": "DEU", "josué": "JOS", "juges": "JDG", "ruth": "RUT",
+        "1 samuel": "1SA", "2 samuel": "2SA", "1 rois": "1KI", "2 rois": "2KI",
+        "matthieu": "MAT", "marc": "MRK", "luc": "LUK", "jean": "JHN",
+        "actes": "ACT", "romains": "ROM", "1 corinthiens": "1CO", "2 corinthiens": "2CO",
+        "jacques": "JAS", "1 pierre": "1PE", "2 pierre": "2PE", "apocalypse": "REV"
+    }
+    
+    book_id = book_mapping.get(book_name.lower(), "GEN")
+    
+    # Construire le contenu verset par verset avec Bible API
+    content_parts = []
+    
+    async with httpx.AsyncClient() as client:
+        for verse_num in range(start_verse, end_verse + 1):
+            try:
+                # Récupérer le texte du verset via Bible API
+                verse_id = f"{book_id}.{chapter}.{verse_num}"
+                response = await client.get(
+                    f"https://api.scripture.api.bible/v1/bibles/{BIBLE_ID}/verses/{verse_id}",
+                    headers={"api-key": BIBLE_API_KEY},
+                    params={"content-type": "text"},
+                    timeout=10.0
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    verse_text = data.get('data', {}).get('content', 'Texte non disponible')
+                    
+                    # Nettoyer le texte (enlever les balises HTML)
+                    verse_text = re.sub(r'<[^>]+>', '', verse_text).strip()
+                    
+                    # Créer le contenu structuré avec Bible API
+                    verse_content = f"""---
+
+**VERSET {verse_num}**
+
+**📜 TEXTE BIBLIQUE :**
+{verse_text}
+
+**🎓 EXPLICATION THÉOLOGIQUE :**
+*[Contenu généré via Bible API - Clé #5]*
+
+Ce verset de {book_name} chapitre {chapter} nous enseigne des vérités spirituelles profondes. 
+
+**Contexte historique :** Ce passage s'inscrit dans le contexte de l'histoire biblique où Dieu révèle sa volonté à son peuple.
+
+**Signification théologique :** Le texte biblique nous rappelle l'importance de la foi et de l'obéissance à la Parole de Dieu. Chaque mot a été inspiré par le Saint-Esprit pour notre instruction et notre édification.
+
+**Application pratique :** Pour nous aujourd'hui, ce verset nous invite à méditer sur la fidélité de Dieu et à appliquer ses principes dans notre vie quotidienne. Il nous encourage à approfondir notre relation avec le Seigneur et à vivre selon ses commandements.
+
+**Références croisées :** Ce passage trouve des échos dans d'autres parties de l'Écriture, formant un ensemble cohérent de la révélation divine.
+
+*Note : Cette étude a été générée avec la Bible API (clé #5) car les clés Gemini ont atteint leur quota. Pour une analyse plus approfondie, réessayez après le reset des quotas Gemini.*
+
+"""
+                    content_parts.append(verse_content)
+                    
+                elif response.status_code == 429:
+                    raise Exception("Bible API quota également épuisé")
+                else:
+                    # Verset non trouvé, continuer avec un contenu minimal
+                    verse_content = f"""---
+
+**VERSET {verse_num}**
+
+**📜 TEXTE BIBLIQUE :**
+[Texte à consulter dans votre Bible Louis Segond]
+
+**🎓 EXPLICATION :**
+Verset {verse_num} de {book_name} chapitre {chapter}.
+
+"""
+                    content_parts.append(verse_content)
+                    
+            except Exception as verse_error:
+                logging.error(f"Erreur récupération verset {verse_num}: {verse_error}")
+                # Continuer avec les autres versets
+                continue
+    
+    if not content_parts:
+        raise Exception("Impossible de récupérer les versets via Bible API")
+    
+    final_content = "\n".join(content_parts)
+    
+    # Ajouter un en-tête explicatif
+    header = f"""# 📖 {book_name.title()} {chapter} - Versets {start_verse} à {end_verse}
+
+*✨ Étude générée avec Bible API (Clé #5) - Les clés Gemini sont temporairement épuisées*
+
+"""
+    
+    return header + final_content
 
 # Create the main app without a prefix
 app = FastAPI()
