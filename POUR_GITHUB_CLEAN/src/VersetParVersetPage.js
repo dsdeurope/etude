@@ -1190,6 +1190,59 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   letter-spacing: 1px;
                 }
                 
+                .affichage-verset-label {
+                  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .chapitre-label {
+                  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .contexte-historique-label {
+                  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                .partie-theologique-label {
+                  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                  color: white;
+                  font-size: clamp(1rem, 3.5vw, 1.1rem);
+                  font-weight: 700;
+                  padding: clamp(10px, 3vw, 12px) clamp(16px, 4vw, 20px);
+                  border-radius: 10px;
+                  margin: clamp(20px, 5vw, 24px) 0 clamp(12px, 3vw, 16px) 0;
+                  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                }
+                
+                /* Anciens labels pour rétrocompatibilité */
                 .texte-biblique-label {
                   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
                   color: white;
@@ -1204,7 +1257,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                 }
                 
                 .explication-label {
-                  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+                  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
                   color: white;
                   font-size: clamp(1rem, 3.5vw, 1.1rem);
                   font-weight: 700;
