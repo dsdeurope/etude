@@ -3595,19 +3595,19 @@ strong {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) and (min-width: 769px) {
   .balanced-controls-container {
     padding: 0 10px !important;
   }
   
   .balanced-buttons-grid {
-    gap: 8px !important;
+    gap: 12px !important;
     padding: 12px 10px !important;
   }
   
   .btn-control {
     min-height: 70px !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
   }
 }
 
@@ -3615,6 +3615,7 @@ strong {
   .balanced-buttons-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 10px !important;
+    padding: 15px 10px !important;
   }
 }
 
@@ -3789,10 +3790,17 @@ strong {
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive équilibré */
-@media (max-width: 1200px) {
+/* Responsive équilibré - DESKTOP GARDE 7 COLONNES */
+@media (min-width: 1025px) {
   .balanced-buttons-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 14px !important;
   }
 }
