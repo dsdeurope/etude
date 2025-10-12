@@ -122,6 +122,18 @@ const ApiControlPanel = ({ backendUrl }) => {
               transform: scale(1.1);
             }
           }
+          @keyframes pulse-yellow {
+            0%, 100% { 
+              box-shadow: 0 0 12px #ffff00, 0 0 24px #ffaa00; 
+              opacity: 1; 
+              transform: scale(1);
+            }
+            50% { 
+              box-shadow: 0 0 20px #ffff00, 0 0 40px #ffaa00; 
+              opacity: 0.7; 
+              transform: scale(1.15);
+            }
+          }
           @keyframes pulse-red {
             0%, 100% { 
               box-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000; 
