@@ -101,3 +101,59 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test de l'endpoint `/api/generate-verse-by-verse` avec le nouveau format à 4 sections et vérification que la note API a été retirée"
+
+backend:
+  - task: "Health endpoint functionality"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Health endpoint working correctly - returns status of all 5 API keys (4 Gemini + 1 Bible API). All Gemini keys currently quota exceeded, Bible API available."
+
+  - task: "Generate verse-by-verse with new 4-section format"
+    implemented: true
+    working: false
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "CRITICAL ISSUE: All Gemini keys are quota exceeded, system falls back to Bible API which uses old format. The new 4-section format (📖 AFFICHAGE DU VERSET, 📚 CHAPITRE, 📜 CONTEXTE HISTORIQUE, ✝️ PARTIE THÉOLOGIQUE) is only implemented in Gemini prompt, not in Bible API fallback function. Bible API fallback still generates old format with 📜 TEXTE BIBLIQUE and 🎓 EXPLICATION THÉOLOGIQUE sections."
+
+  - task: "Remove old API note from generated content"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Old API note patterns successfully removed from main content. However, Bible API fallback still shows 'Étude générée avec Bible API (Clé #5)' header which may need attention."
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Generate verse-by-verse with new 4-section format"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Backend testing completed. Health endpoint working correctly. Main issue: All Gemini keys quota exceeded, so system uses Bible API fallback which has old format. The new 4-section format needs to be implemented in the Bible API fallback function generate_with_bible_api_fallback() to match the Gemini prompt format. API note removal working for main content but Bible API fallback header still shows API source."
