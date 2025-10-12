@@ -1411,6 +1411,26 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
         console.log("🤖 Contenu généré par Gemini avec votre clé personnelle");
       }
       
+      // Vérifier si l'API a retourné une erreur
+      if (data.status === "error") {
+        // Afficher un message d'erreur clair à l'utilisateur
+        const errorMessage = data.message || "Erreur inconnue";
+        
+        // Vérifier si c'est un problème de quota
+        if (errorMessage.includes("quota") || errorMessage.includes("503") || errorMessage.includes("429")) {
+          const quotaMessage = `# ⚠️ Quota API Épuisé\n\n**Toutes les clés Gemini ont atteint leur limite quotidienne.**\n\n## 🔄 Solutions :\n\n1. **Attendez le reset automatique** (vers 9h du matin heure française)\n2. **Ajoutez de nouvelles clés Gemini** sur votre backend\n3. **Passez à Gemini payant** pour des quotas illimités\n\n## 📊 État actuel :\n- 🔴 Gemini Key 1 : Quota épuisé\n- 🔴 Gemini Key 2 : Quota épuisé\n- 🔴 Gemini Key 3 : Quota épuisé\n- 🔴 Gemini Key 4 : Quota épuisé\n\n**Réessayez dans quelques heures après le reset automatique.**\n\n---\n\n*Détails techniques : ${errorMessage}*`;
+          
+          setContent(formatContent(quotaMessage, 'error'));
+          setRubriquesStatus(p => ({ ...p, 0: "error" }));
+          setIsLoading(false);
+          setIsProgressiveLoading(false);
+          return;
+        }
+        
+        // Autre type d'erreur
+        throw new Error(errorMessage);
+      }
+      
       // Utiliser le contenu de l'API (correction du bug d'affichage)
       if (!data.content) {
         throw new Error("Aucun contenu reçu de l'API");
@@ -1451,7 +1471,11 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       
     } catch (err) {
       console.error("Erreur génération VERSETS PROG:", err);
-      setContent(`Erreur lors de la génération progressive: ${err.message}`);
+      
+      // Créer un message d'erreur formaté en markdown
+      const errorMarkdown = `# ❌ Erreur de Génération\n\n**Une erreur est survenue lors de la génération de l'étude verset par verset.**\n\n## 🔍 Détails de l'erreur :\n\`\`\`\n${err.message}\n\`\`\`\n\n## 🔧 Solutions possibles :\n\n1. **Vérifiez votre connexion internet**\n2. **Réessayez dans quelques instants**\n3. **Si le problème persiste :**\n   - Les clés API Gemini ont peut-être atteint leur quota\n   - Attendez le reset automatique (vers 9h du matin)\n   - Ou ajoutez de nouvelles clés sur le backend\n\n## 📞 Besoin d'aide ?\n\nConsultez la documentation ou contactez le support technique.\n\n---\n\n*Erreur technique : ${err.message}*`;
+      
+      setContent(formatContent(errorMarkdown, 'error'));
       setRubriquesStatus(p => ({ ...p, 0: "error" }));
     } finally {
       setIsLoading(false); setIsProgressiveLoading(false);
