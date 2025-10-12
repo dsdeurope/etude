@@ -22,6 +22,24 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
+# Configuration des clés Gemini avec rotation automatique
+GEMINI_KEYS = [
+    os.environ.get('GEMINI_API_KEY_1'),
+    os.environ.get('GEMINI_API_KEY_2'),
+    os.environ.get('GEMINI_API_KEY_3'),
+    os.environ.get('GEMINI_API_KEY_4'),
+]
+# Filtrer les clés vides
+GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
+
+# Bible API configuration
+BIBLE_ID = os.environ.get('BIBLE_ID', '')
+BIBLE_API_KEY = os.environ.get('BIBLE_API_KEY', '')
+
+# Index de la clé actuellement utilisée
+current_gemini_key_index = 0
+gemini_key_usage_count = {i: 0 for i in range(len(GEMINI_KEYS))}
+
 # Create the main app without a prefix
 app = FastAPI()
 
