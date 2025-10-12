@@ -208,8 +208,6 @@ Ce verset de {book_name} chapitre {chapter} nous enseigne des vérités spiritue
 
 **Références croisées :** Ce passage trouve des échos dans d'autres parties de l'Écriture, formant un ensemble cohérent de la révélation divine.
 
-*Note : Cette étude a été générée avec la Bible API (clé #5) car les clés Gemini ont atteint leur quota. Pour une analyse plus approfondie, réessayez après le reset des quotas Gemini.*
-
 """
                     content_parts.append(verse_content)
                     
