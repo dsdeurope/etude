@@ -423,6 +423,10 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       // Appeler l'API pour les versets suivants
       const apiUrl = `${API_BASE}/generate-verse-by-verse`;
       
+      // Timeout de 60 secondes pour laisser le temps à la génération
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 secondes
+      
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -434,8 +438,9 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
           tokens: 500,
           use_gemini: true,
           enriched: true
-        })
-      });
+        }),
+        signal: controller.signal
+      }).finally(() => clearTimeout(timeoutId));
       
       if (!response.ok) {
         throw new Error(`Erreur API: ${response.status}`);
