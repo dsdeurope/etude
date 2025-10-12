@@ -14,7 +14,7 @@ const ApiStatusButton_OLD_REMOVED = () => {
     }
     const hostname = window.location.hostname;
     if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
-    return "https://rubrique-study.preview.emergentagent.com";
+    return "https://vercel-api-fix.preview.emergentagent.com";
   };
 
   const BACKEND_URL = getBackendUrl();
