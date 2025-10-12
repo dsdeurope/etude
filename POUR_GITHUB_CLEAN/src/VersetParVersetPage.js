@@ -520,23 +520,31 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       const versetNumber = parseInt(match[2]);
       const versetContent = match[1].trim();
       
-      // Séparer le contenu en parties
-      const parts = versetContent.split(/(\*\*TEXTE BIBLIQUE\s*:\*\*|\*\*EXPLICATION THÉOLOGIQUE\s*:\*\*)/i);
+      // Séparer le contenu en 4 parties : affichage du verset, chapitre, contexte historique, partie théologique
+      const parts = versetContent.split(/(\*\*📖 AFFICHAGE DU VERSET\s*:\*\*|\*\*📚 CHAPITRE\s*:\*\*|\*\*📜 CONTEXTE HISTORIQUE\s*:\*\*|\*\*✝️ PARTIE THÉOLOGIQUE\s*:\*\*|\*\*TEXTE BIBLIQUE\s*:\*\*|\*\*EXPLICATION THÉOLOGIQUE\s*:\*\*)/i);
       
       let versetTitle = '';
-      let texteContent = '';
-      let explicationContent = '';
+      let affichageVerset = '';
+      let chapitre = '';
+      let contexteHistorique = '';
+      let partieTheologique = '';
       
       for (let i = 0; i < parts.length; i++) {
         const part = parts[i].trim();
         
         if (part.includes('**VERSET')) {
           versetTitle = cleanMarkdownFormatting(part);
-        } else if (part.match(/TEXTE BIBLIQUE/i)) {
-          texteContent = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+        } else if (part.match(/📖 AFFICHAGE DU VERSET|TEXTE BIBLIQUE/i)) {
+          affichageVerset = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
           i++; // Skip next part as we've consumed it
-        } else if (part.match(/\*\*EXPLICATION THÉOLOGIQUE/i)) {
-          explicationContent = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+        } else if (part.match(/📚 CHAPITRE/i)) {
+          chapitre = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+          i++; // Skip next part as we've consumed it
+        } else if (part.match(/📜 CONTEXTE HISTORIQUE/i)) {
+          contexteHistorique = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
+          i++; // Skip next part as we've consumed it
+        } else if (part.match(/✝️ PARTIE THÉOLOGIQUE|EXPLICATION THÉOLOGIQUE/i)) {
+          partieTheologique = cleanMarkdownFormatting(parts[i + 1]?.trim() || '');
           i++; // Skip next part as we've consumed it
         }
       }
@@ -544,8 +552,10 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
       sections.push({
         number: versetNumber,
         title: versetTitle,
-        texte: texteContent,
-        explication: explicationContent
+        affichageVerset: affichageVerset,
+        chapitre: chapitre,
+        contexteHistorique: contexteHistorique,
+        partieTheologique: partieTheologique
       });
     }
     
