@@ -1,0 +1,92 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║              🖥️  COMMENT ACCÉDER AU PREVIEW DE L'APPLICATION              ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+✅ LE SERVEUR FONCTIONNE SUR: http://localhost:3000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 MÉTHODE 1: Bouton Preview dans Emergent
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Cherchez le bouton "PREVIEW" dans l'interface Emergent
+   (Généralement en haut à droite ou dans la barre d'outils)
+
+2. Cliquez dessus
+
+3. Si une page blanche s'affiche:
+   - Attendez 5-10 secondes
+   - OU appuyez sur F5 pour rafraîchir
+   - OU fermez et rouvrez le preview
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 MÉTHODE 2: Navigateur externe (SI LE PREVIEW NE FONCTIONNE PAS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Ouvrez votre navigateur (Chrome, Firefox, Edge, Safari...)
+
+2. Dans la barre d'adresse, tapez exactement:
+   http://localhost:3000
+
+3. Appuyez sur Entrée
+
+4. L'application devrait se charger immédiatement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 VÉRIFICATION RAPIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour vérifier que le serveur tourne, exécutez dans le terminal:
+
+    curl http://localhost:3000
+
+Vous devriez voir du code HTML.
+
+Ou vérifiez les processus:
+
+    ps aux | grep "react-scripts"
+
+Vous devriez voir des processus node en cours.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🐛 SI ÇA NE FONCTIONNE TOUJOURS PAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Relancez le serveur manuellement:
+
+    cd /app
+    ./start_preview.sh
+
+Puis attendez 15 secondes et essayez à nouveau d'accéder au preview.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✨ CE QUE VOUS DEVRIEZ VOIR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Une fois le preview chargé:
+
+1. ✨ Bande défilante bleue en haut: "MÉDITATION BIBLIQUE..."
+2. 📊 Barre de progression: 0%
+3. ⚙️ Bouton API avec LED en couleurs:
+   - LED rouge/jaune/verte selon les quotas
+   - Ascenseur montrant "G1 OK", "G2 OK", etc.
+   - 5 LED alignées (4 Gemini + 1 Bible)
+4. 🔍 Zone de recherche biblique
+5. 📚 Sélecteurs: Livre, Chapitre, Verset
+6. 🎨 Boutons colorés: VALIDER, LIRE LA BIBLE, CHATGPT...
+7. ⚡ Raccourcis: RESET, VIOLET MYSTIQUE, GENÈSE 1...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ STATUT ACTUEL:
+   - Frontend: ✅ ACTIF sur http://localhost:3000
+   - Backend: ✅ ACTIF sur http://localhost:8001
+   - MongoDB: ✅ ACTIF
+   - LED avec quotas: ✅ FONCTIONNELLES
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 CONSEIL:
+   Si le bouton "Preview" d'Emergent ne fonctionne pas, utilisez simplement
+   votre navigateur avec http://localhost:3000 - ça marche exactement pareil!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
