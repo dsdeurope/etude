@@ -3595,19 +3595,19 @@ strong {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) and (min-width: 769px) {
   .balanced-controls-container {
     padding: 0 10px !important;
   }
   
   .balanced-buttons-grid {
-    gap: 8px !important;
+    gap: 12px !important;
     padding: 12px 10px !important;
   }
   
   .btn-control {
     min-height: 70px !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
   }
 }
 
