@@ -914,7 +914,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
             fontSize: 'clamp(15px, 4vw, 16px)',
             marginBottom: '20px'
           }}>
-            {/* Nouveau rendu avec boutons intégrés */}
+            {/* Nouveau rendu avec les 4 sections */}
             {parseContentWithGeminiButtons(getCurrentBatchContent()).map((section, index) => (
               <div key={section.number} style={{ marginBottom: '40px' }}>
                 {/* Titre du verset */}
@@ -922,22 +922,70 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                   {section.title}
                 </div>
                 
-                {/* Texte biblique */}
-                {section.texte && (
+                {/* 1. Affichage du verset */}
+                {section.affichageVerset && (
                   <>
-                    <div className="texte-biblique-label">TEXTE BIBLIQUE :</div>
+                    <div className="affichage-verset-label">📖 AFFICHAGE DU VERSET :</div>
                     <div style={{ 
                       marginBottom: '20px', 
-                      padding: '10px 0',
-                      color: '#374151'
+                      padding: '15px',
+                      backgroundColor: '#f0f9ff',
+                      borderLeft: '4px solid #3b82f6',
+                      borderRadius: '8px',
+                      color: '#1e40af',
+                      fontSize: '16px',
+                      fontStyle: 'italic',
+                      lineHeight: '1.8'
                     }}>
-                      {section.texte}
+                      {section.affichageVerset}
                     </div>
                   </>
                 )}
                 
-                {/* Explication théologique avec bouton Gemini intégré */}
-                {section.explication && (
+                {/* 2. Chapitre */}
+                {section.chapitre && (
+                  <>
+                    <div className="chapitre-label">📚 CHAPITRE :</div>
+                    <div style={{ 
+                      marginBottom: '20px', 
+                      padding: '12px',
+                      backgroundColor: '#fef3c7',
+                      borderLeft: '4px solid #f59e0b',
+                      borderRadius: '8px',
+                      color: '#92400e',
+                      fontSize: '15px',
+                      lineHeight: '1.7'
+                    }}>
+                      {section.chapitre}
+                    </div>
+                  </>
+                )}
+                
+                {/* 3. Contexte historique */}
+                {section.contexteHistorique && (
+                  <>
+                    <div className="contexte-historique-label">📜 CONTEXTE HISTORIQUE :</div>
+                    <div 
+                      style={{ 
+                        marginBottom: '20px',
+                        padding: '12px',
+                        backgroundColor: '#f3e8ff',
+                        borderLeft: '4px solid #a855f7',
+                        borderRadius: '8px',
+                        color: '#6b21a8',
+                        fontSize: '15px',
+                        lineHeight: '1.7',
+                        textAlign: 'justify'
+                      }}
+                      dangerouslySetInnerHTML={{
+                        __html: formatExplicationTheologique(section.contexteHistorique)
+                      }}
+                    />
+                  </>
+                )}
+                
+                {/* 4. Partie théologique avec bouton Gemini intégré */}
+                {section.partieTheologique && (
                   <>
                     <div style={{
                       display: 'flex',
@@ -947,8 +995,8 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                       marginBottom: '16px',
                       flexWrap: 'wrap'
                     }}>
-                      <div className="explication-label" style={{ flex: '1', minWidth: '200px' }}>
-                        EXPLICATION THÉOLOGIQUE :
+                      <div className="partie-theologique-label" style={{ flex: '1', minWidth: '200px' }}>
+                        ✝️ PARTIE THÉOLOGIQUE :
                       </div>
                       
                       {/* Bouton Gemini à droite de l'explication */}
@@ -992,17 +1040,21 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
                       </button>
                     </div>
                     
-                    {/* Contenu de l'explication avec formatage intelligent */}
+                    {/* Contenu de la partie théologique avec formatage intelligent */}
                     <div 
                       style={{ 
-                        color: '#374151',
+                        padding: '12px',
+                        backgroundColor: '#dcfce7',
+                        borderLeft: '4px solid #10b981',
+                        borderRadius: '8px',
+                        color: '#065f46',
                         lineHeight: '1.7',
                         marginBottom: '10px',
                         fontSize: '15px',
                         textAlign: 'justify'
                       }}
                       dangerouslySetInnerHTML={{
-                        __html: formatExplicationTheologique(section.explication)
+                        __html: formatExplicationTheologique(section.partieTheologique)
                       }}
                     />
                     
