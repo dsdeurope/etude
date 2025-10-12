@@ -15,16 +15,10 @@ const ApiControlPanel = ({ backendUrl }) => {
       if (response.ok) {
         const healthData = await response.json();
         
-        // Adapter la réponse au format attendu par l'UI
+        // Utiliser directement les données du backend
         const adaptedStatus = {
-          timestamp: new Date().toISOString(),
-          apis: {
-            gemini_1: { color: 'green', name: 'Gemini Key 1', status: 'active' },
-            gemini_2: { color: 'green', name: 'Gemini Key 2', status: 'active' },
-            gemini_3: { color: 'green', name: 'Gemini Key 3', status: 'active' },
-            gemini_4: { color: 'green', name: 'Gemini Key 4', status: 'active' },
-            bible_api: { color: healthData.bible_api_configured ? 'green' : 'red', name: 'Bible API', status: healthData.bible_api_configured ? 'active' : 'inactive' }
-          },
+          timestamp: healthData.timestamp || new Date().toISOString(),
+          apis: healthData.apis || {},
           call_history: [],
           active_api: healthData.current_key || 'gemini_1'
         };
