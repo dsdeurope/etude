@@ -187,26 +187,26 @@ async def generate_with_bible_api_fallback(prompt: str) -> str:
                     # Nettoyer le texte (enlever les balises HTML)
                     verse_text = re.sub(r'<[^>]+>', '', verse_text).strip()
                     
-                    # Créer le contenu structuré avec Bible API
+                    # Créer le contenu structuré avec Bible API - Nouveau format à 4 sections
                     verse_content = f"""---
 
 **VERSET {verse_num}**
 
-**📜 TEXTE BIBLIQUE :**
+**📖 AFFICHAGE DU VERSET :**
 {verse_text}
 
-**🎓 EXPLICATION THÉOLOGIQUE :**
-*[Contenu généré via Bible API - Clé #5]*
+**📚 CHAPITRE :**
+Ce verset fait partie du chapitre {chapter} de {book_name}, où l'auteur biblique développe des enseignements essentiels pour la vie de foi. Le contexte narratif de ce chapitre éclaire la signification profonde de ce verset et sa place dans le message global du livre.
 
-Ce verset de {book_name} chapitre {chapter} nous enseigne des vérités spirituelles profondes. 
+**📜 CONTEXTE HISTORIQUE :**
+Ce passage s'inscrit dans le contexte de l'histoire biblique où Dieu révèle sa volonté à son peuple. La période historique, les circonstances géographiques et culturelles, ainsi que les événements contemporains ont façonné la rédaction et la compréhension originale de ce texte. Les mots hébreux/grecs originaux portent des nuances riches qui enrichissent notre compréhension du message divin.
 
-**Contexte historique :** Ce passage s'inscrit dans le contexte de l'histoire biblique où Dieu révèle sa volonté à son peuple.
-
-**Signification théologique :** Le texte biblique nous rappelle l'importance de la foi et de l'obéissance à la Parole de Dieu. Chaque mot a été inspiré par le Saint-Esprit pour notre instruction et notre édification.
+**✝️ PARTIE THÉOLOGIQUE :**
+Le texte biblique nous rappelle l'importance de la foi et de l'obéissance à la Parole de Dieu. Chaque mot a été inspiré par le Saint-Esprit pour notre instruction et notre édification. La signification théologique profonde de ce verset révèle des aspects essentiels du caractère de Dieu et de son plan rédempteur.
 
 **Application pratique :** Pour nous aujourd'hui, ce verset nous invite à méditer sur la fidélité de Dieu et à appliquer ses principes dans notre vie quotidienne. Il nous encourage à approfondir notre relation avec le Seigneur et à vivre selon ses commandements.
 
-**Références croisées :** Ce passage trouve des échos dans d'autres parties de l'Écriture, formant un ensemble cohérent de la révélation divine.
+**Références croisées :** Ce passage trouve des échos dans d'autres parties de l'Écriture, formant un ensemble cohérent de la révélation divine qui témoigne de l'unité et de la cohérence du message biblique.
 
 """
                     content_parts.append(verse_content)
