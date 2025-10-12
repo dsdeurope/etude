@@ -65,7 +65,7 @@ Les quotas Gemini **GRATUITS** se réinitialisent automatiquement à :
 
 #### Étape 2 : Mettre à jour le backend
 
-**Si vous avez accès au backend (`https://vercel-api-fix.preview.emergentagent.com`) :**
+**Si vous avez accès au backend (`https://scripture-explorer-6.preview.emergentagent.com`) :**
 
 Mettez à jour le fichier `.env` :
 ```env
@@ -182,7 +182,7 @@ cd /app/POUR_GITHUB_CLEAN
 ### Test 2 : Via Curl
 
 ```bash
-curl -X POST https://vercel-api-fix.preview.emergentagent.com/api/generate-verse-by-verse \
+curl -X POST https://scripture-explorer-6.preview.emergentagent.com/api/generate-verse-by-verse \
   -H "Content-Type: application/json" \
   -d '{"passage":"Genèse 1","start_verse":1,"end_verse":5}'
 ```

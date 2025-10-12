@@ -8,14 +8,14 @@ Guide complet des variables d'environnement à configurer pour le déploiement V
 
 ### 1. REACT_APP_BACKEND_URL
 **Description :** URL du backend API  
-**Valeur actuelle :** `https://vercel-api-fix.preview.emergentagent.com`  
+**Valeur actuelle :** `https://scripture-explorer-6.preview.emergentagent.com`  
 **Type :** URL complète avec protocole (https://)  
 **Importance :** 🔴 Critique - L'application ne fonctionnera pas sans cette variable
 
 **À configurer dans Vercel :**
 ```
 Nom: REACT_APP_BACKEND_URL
-Valeur: https://vercel-api-fix.preview.emergentagent.com
+Valeur: https://scripture-explorer-6.preview.emergentagent.com
 Environnement: Production, Preview, Development
 ```
 
@@ -126,7 +126,7 @@ Environnement: Production
 ### Étape 2 : Ajouter la Variable
 1. Cliquez sur **Add New**
 2. **Name** : `REACT_APP_BACKEND_URL`
-3. **Value** : `https://vercel-api-fix.preview.emergentagent.com`
+3. **Value** : `https://scripture-explorer-6.preview.emergentagent.com`
 4. **Environments** : Cochez `Production`, `Preview`, `Development`
 5. Cliquez sur **Save**
 
@@ -141,7 +141,7 @@ Environnement: Production
 
 Votre fichier `.env` actuel dans POUR_GITHUB_CLEAN :
 ```env
-REACT_APP_BACKEND_URL=https://vercel-api-fix.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://scripture-explorer-6.preview.emergentagent.com
 ```
 
 **✅ Cette variable est suffisante pour faire fonctionner l'application !**
