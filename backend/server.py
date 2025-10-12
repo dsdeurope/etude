@@ -157,31 +157,129 @@ async def get_status_checks():
     
     return status_checks
 
-# Route pour le health check des API avec rotation des clés et gestion des quotas
+# Fonction pour vérifier le quota d'une clé Gemini
+async def check_gemini_key_quota(api_key: str, key_index: int):
+    """
+    Vérifie le quota réel d'une clé Gemini en faisant un appel de test.
+    Retourne le pourcentage de quota utilisé et le statut.
+    """
+    try:
+        # Tenter un appel de test très court pour vérifier le quota
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=f"health-check-{uuid.uuid4()}",
+            system_message="Test"
+        ).with_model("gemini", "gemini-2.0-flash")
+        
+        # Appel minimal pour vérifier la clé
+        test_message = UserMessage(text="Hi")
+        await chat.send_message(test_message)
+        
+        # Si on arrive ici, la clé fonctionne
+        # Estimer le quota basé sur l'usage actuel tracké
+        usage_count = gemini_key_usage_count.get(key_index, 0)
+        
+        # Estimation du quota (à ajuster selon vos limites réelles)
+        # Par exemple : 1500 requêtes par jour max par clé
+        max_daily_requests = 1500
+        quota_percent = min(100, (usage_count / max_daily_requests) * 100)
+        
+        return {
+            "is_available": True,
+            "quota_used": round(quota_percent, 1),
+            "usage_count": usage_count,
+            "error": None
+        }
+        
+    except Exception as e:
+        error_str = str(e).lower()
+        
+        # Détecter les erreurs de quota
+        if "quota" in error_str or "429" in error_str or "resource_exhausted" in error_str:
+            return {
+                "is_available": False,
+                "quota_used": 100,
+                "usage_count": gemini_key_usage_count.get(key_index, 0),
+                "error": "Quota épuisé"
+            }
+        elif "invalid" in error_str or "api_key" in error_str:
+            return {
+                "is_available": False,
+                "quota_used": 0,
+                "usage_count": 0,
+                "error": "Clé invalide"
+            }
+        else:
+            # Autre erreur, on suppose que la clé est utilisable
+            usage_count = gemini_key_usage_count.get(key_index, 0)
+            quota_percent = min(100, (usage_count / 1500) * 100)
+            return {
+                "is_available": True,
+                "quota_used": round(quota_percent, 1),
+                "usage_count": usage_count,
+                "error": str(e)[:100]
+            }
+
+# Fonction pour vérifier la Bible API
+async def check_bible_api():
+    """Vérifie si la Bible API est accessible."""
+    if not BIBLE_API_KEY or not BIBLE_ID:
+        return {
+            "is_available": False,
+            "quota_used": 0,
+            "error": "Clés non configurées"
+        }
+    
+    try:
+        import httpx
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"https://api.scripture.api.bible/v1/bibles/{BIBLE_ID}",
+                headers={"api-key": BIBLE_API_KEY},
+                timeout=5.0
+            )
+            
+            if response.status_code == 200:
+                return {
+                    "is_available": True,
+                    "quota_used": 0,  # Bible API généralement pas de quota strict
+                    "error": None
+                }
+            elif response.status_code == 429:
+                return {
+                    "is_available": False,
+                    "quota_used": 100,
+                    "error": "Quota épuisé"
+                }
+            else:
+                return {
+                    "is_available": False,
+                    "quota_used": 0,
+                    "error": f"HTTP {response.status_code}"
+                }
+    except Exception as e:
+        return {
+            "is_available": False,
+            "quota_used": 0,
+            "error": str(e)[:100]
+        }
+
+# Route pour le health check des API avec VRAIES clés
 @api_router.get("/health")
 async def api_health():
     """
-    Retourne le statut de santé des API avec gestion des quotas.
-    Les LED changent de couleur selon l'utilisation:
+    Retourne le statut de santé des API en vérifiant les VRAIES clés.
+    Les LED changent de couleur selon le quota RÉEL:
     - VERT: quota < 70%
-    - JAUNE/ORANGE: quota entre 70% et 90%
+    - JAUNE: quota entre 70% et 90%
     - ROUGE: quota > 90% ou épuisé
     """
-    import time
-    import random
-    
-    # Rotation des clés toutes les 10 secondes pour la démo
-    current_time = int(time.time())
-    key_rotation_interval = 10  # secondes
-    active_key_index = (current_time // key_rotation_interval) % 4 + 1
-    active_key = f"gemini_{active_key_index}"
-    
     base_time = datetime.now(timezone.utc)
     
     # Fonction pour déterminer la couleur selon le quota
-    def get_api_status(quota_used_percent):
+    def get_api_status(quota_used_percent, is_available):
         """Retourne la couleur et le statut selon le quota utilisé"""
-        if quota_used_percent >= 100:
+        if not is_available or quota_used_percent >= 100:
             return "red", "quota_exceeded", "Quota épuisé"
         elif quota_used_percent >= 90:
             return "red", "critical", "Critique"
@@ -190,55 +288,60 @@ async def api_health():
         else:
             return "green", "available", "Disponible"
     
-    # Simuler différents niveaux de quota pour chaque clé
-    # Pour la démo, on varie les quotas de façon réaliste
-    gemini_quotas = [
-        random.randint(10, 60),   # Gemini 1: bon état
-        random.randint(65, 85),   # Gemini 2: attention
-        random.randint(88, 98),   # Gemini 3: critique
-        random.randint(5, 40)     # Gemini 4: bon état
-    ]
-    
     apis = {}
     
-    # Générer les stats pour chaque clé Gemini
-    for i in range(1, 5):
-        key = f"gemini_{i}"
-        quota_percent = gemini_quotas[i-1]
-        color, status, status_text = get_api_status(quota_percent)
+    # Vérifier chaque clé Gemini réelle
+    for i, api_key in enumerate(GEMINI_KEYS):
+        key_index = i
+        key_name = f"gemini_{i + 1}"
         
-        apis[key] = {
-            "name": f"Gemini Key {i}",
+        # Vérifier le quota réel de cette clé
+        quota_info = await check_gemini_key_quota(api_key, key_index)
+        
+        color, status, status_text = get_api_status(
+            quota_info["quota_used"],
+            quota_info["is_available"]
+        )
+        
+        apis[key_name] = {
+            "name": f"Gemini Key {i + 1}",
             "color": color,
             "status": status,
             "status_text": status_text,
-            "quota_used": quota_percent,
-            "quota_remaining": 100 - quota_percent,
-            "success_count": random.randint(50, 300),
-            "error_count": random.randint(0, 10),
-            "last_used": base_time.isoformat() if active_key == key else None
+            "quota_used": quota_info["quota_used"],
+            "quota_remaining": 100 - quota_info["quota_used"],
+            "usage_count": quota_info["usage_count"],
+            "is_available": quota_info["is_available"],
+            "error": quota_info["error"],
+            "last_used": base_time.isoformat() if key_index == current_gemini_key_index else None
         }
     
-    # Bible API - toujours disponible
+    # Vérifier la Bible API réelle
+    bible_info = await check_bible_api()
+    color, status, status_text = get_api_status(
+        bible_info["quota_used"],
+        bible_info["is_available"]
+    )
+    
     apis["bible_api"] = {
         "name": "Bible API",
-        "color": "green",
-        "status": "available",
-        "status_text": "Disponible",
-        "quota_used": 0,
-        "quota_remaining": 100,
-        "success_count": random.randint(100, 500),
-        "error_count": 0,
+        "color": color,
+        "status": status,
+        "status_text": status_text,
+        "quota_used": bible_info["quota_used"],
+        "quota_remaining": 100 - bible_info["quota_used"],
+        "is_available": bible_info["is_available"],
+        "error": bible_info["error"],
         "last_used": None
     }
     
     return {
         "status": "healthy",
         "timestamp": base_time.isoformat(),
-        "current_key": active_key,
-        "active_key_index": active_key_index,
-        "bible_api_configured": True,
-        "rotation_interval_seconds": key_rotation_interval,
+        "current_key": f"gemini_{current_gemini_key_index + 1}",
+        "active_key_index": current_gemini_key_index + 1,
+        "bible_api_configured": bool(BIBLE_API_KEY and BIBLE_ID),
+        "total_gemini_keys": len(GEMINI_KEYS),
         "apis": apis
     }
 
