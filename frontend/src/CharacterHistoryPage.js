@@ -286,27 +286,37 @@ const CharacterHistoryPage = ({ character, onGoBack }) => {
   const [history, setHistory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [apiUsed, setApiUsed] = useState("");
+  const [wordCount, setWordCount] = useState(0);
+  const [generationMode, setGenerationMode] = useState("standard"); // 'standard', 'enrich', 'regenerate'
 
   useEffect(() => {
     if (character) {
-      generateCharacterHistory();
+      generateCharacterHistory('standard');
     }
   }, [character]);
 
-  const generateCharacterHistory = async () => {
+  const generateCharacterHistory = async (mode = 'standard') => {
     setIsLoading(true);
+    setGenerationMode(mode);
     
     try {
+      const requestBody = {
+        character_name: character,
+        mode: mode
+      };
+      
+      // Si mode enrichissement, envoyer le contenu actuel
+      if (mode === 'enrich' && history) {
+        requestBody.previous_content = history;
+      }
+      
       // Appel API pour générer l'histoire narrative du personnage
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-character-history`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          character_name: character,
-          enrich: true
-        })
+        body: JSON.stringify(requestBody)
       });
 
       if (!response.ok) {
@@ -318,9 +328,10 @@ const CharacterHistoryPage = ({ character, onGoBack }) => {
       if (result.status === 'success') {
         setHistory(result.content);
         setApiUsed(result.api_used);
-        console.log(`[CHARACTER HISTORY] Génération réussie pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
+        setWordCount(result.word_count || 0);
+        console.log(`[CHARACTER HISTORY] Génération ${mode} réussie pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
       } else {
-        throw new Error('Erreur lors de la génération du contenu');
+        throw new Error(result.message || 'Erreur lors de la génération du contenu');
       }
 
     } catch (error) {
@@ -456,32 +467,70 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
               gap: '12px',
               flexWrap: 'wrap'
             }}>
-              {/* Bouton Gemini */}
+              {/* Bouton Enrichir (Gemini) */}
               <button 
-                onClick={() => window.open('https://gemini.google.com/', '_blank')}
+                onClick={() => generateCharacterHistory('enrich')}
+                disabled={isLoading || !history}
                 style={{
-                  background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                  background: isLoading ? 'linear-gradient(135deg, #6b7280, #4b5563)' : 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
                   border: 'none',
                   borderRadius: '10px',
                   color: 'white',
                   padding: '8px 14px',
                   fontSize: '12px',
                   fontWeight: '600',
-                  cursor: 'pointer',
+                  cursor: isLoading || !history ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
                   boxShadow: '0 3px 10px rgba(139, 92, 246, 0.3)',
-                  fontFamily: 'Montserrat, sans-serif'
+                  fontFamily: 'Montserrat, sans-serif',
+                  opacity: isLoading || !history ? 0.6 : 1
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.transform = 'translateY(-1px)';
-                  e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                  if (!isLoading && history) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(139, 92, 246, 0.4)';
+                  }
                 }}
                 onMouseOut={(e) => {
                   e.target.style.transform = 'translateY(0px)';
                   e.target.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
                 }}
+                title="Enrichir le contenu actuel avec plus de détails"
               >
-                🤖 Gemini
+                {isLoading && generationMode === 'enrich' ? '⏳ Enrichissement...' : '✨ Enrichir'}
+              </button>
+
+              {/* Bouton Régénérer (Gemini) */}
+              <button 
+                onClick={() => generateCharacterHistory('regenerate')}
+                disabled={isLoading}
+                style={{
+                  background: isLoading ? 'linear-gradient(135deg, #6b7280, #4b5563)' : 'linear-gradient(135deg, #f59e0b, #ea580c)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  color: 'white',
+                  padding: '8px 14px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 3px 10px rgba(245, 158, 11, 0.3)',
+                  fontFamily: 'Montserrat, sans-serif',
+                  opacity: isLoading ? 0.6 : 1
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0px)';
+                  e.target.style.boxShadow = '0 3px 10px rgba(245, 158, 11, 0.3)';
+                }}
+                title="Régénérer avec encore plus d'approfondissement"
+              >
+                {isLoading && generationMode === 'regenerate' ? '⏳ Génération...' : '🔄 Régénérer'}
               </button>
 
               {/* Bouton Prise de Note */}
@@ -577,6 +626,27 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
               >
                 📖 Lire la Bible
               </button>
+
+              {/* Indicateur de statistiques */}
+              {wordCount > 0 && (
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  borderRadius: '10px',
+                  padding: '8px 14px',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  color: 'white',
+                  fontFamily: 'Montserrat, sans-serif',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <span>📊 {wordCount} mots</span>
+                  {apiUsed && <span>• 🤖 {apiUsed}</span>}
+                </div>
+              )}
 
               {/* Bouton API avec LEDs - Composant centralisé */}
               <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "http://localhost:8001"} />
