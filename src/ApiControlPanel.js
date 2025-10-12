@@ -2,7 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 const ApiControlPanel = ({ backendUrl }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [apiStatus, setApiStatus] = useState(null);
+  // État initial par défaut pour afficher les LED immédiatement
+  const [apiStatus, setApiStatus] = useState({
+    timestamp: new Date().toISOString(),
+    apis: {
+      gemini_1: { name: 'Gemini Key 1', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_2: { name: 'Gemini Key 2', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_3: { name: 'Gemini Key 3', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      gemini_4: { name: 'Gemini Key 4', color: 'green', status: 'available', status_text: 'Chargement...', quota_used: 0 },
+      bible_api: { name: 'Bible API', color: 'green', status: 'available', status_text: 'Disponible', quota_used: 0 }
+    },
+    call_history: [],
+    active_api: 'gemini_1'
+  });
   const [lastUpdate, setLastUpdate] = useState(null);
   const [apiHistory, setApiHistory] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
