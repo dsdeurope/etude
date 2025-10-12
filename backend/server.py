@@ -734,10 +734,12 @@ async def generate_verse_by_verse(request: dict):
         
         logging.info(f"Génération verset par verset: {book_name} {chapter}, versets {start_verse}-{end_verse}")
         
-        # Préparer le prompt pour Gemini
+        # Préparer le prompt pour Gemini avec instructions détaillées pour unicité et qualité
         prompt = f"""Tu es un expert biblique et théologien spécialisé dans l'exégèse verset par verset.
 
-Génère une étude DÉTAILLÉE et APPROFONDIE pour les versets {start_verse} à {end_verse} de **{book_name} chapitre {chapter}** en français.
+MISSION CRITIQUE : Génère une étude UNIQUE, DÉTAILLÉE et APPROFONDIE EXCLUSIVEMENT pour les versets {start_verse} à {end_verse} de **{book_name} chapitre {chapter}** en français.
+
+⚠️ IMPÉRATIF D'UNICITÉ : Chaque verset DOIT avoir une analyse SPÉCIFIQUE et UNIQUE. Ne JAMAIS répéter les mêmes phrases ou explications génériques. Chaque verset a sa propre richesse théologique - explore-la en profondeur.
 
 Pour CHAQUE verset de {start_verse} à {end_verse}, structure RIGOUREUSEMENT ainsi :
 
@@ -746,40 +748,59 @@ Pour CHAQUE verset de {start_verse} à {end_verse}, structure RIGOUREUSEMENT ain
 **VERSET {start_verse}**
 
 **📖 AFFICHAGE DU VERSET :**
-[Le texte biblique exact du verset en français Louis Segond]
+[Le texte biblique EXACT et COMPLET du verset {start_verse} en français Louis Segond - vérifie le numéro de verset]
 
 **📚 CHAPITRE :**
-[Contexte du chapitre dans lequel ce verset s'inscrit - 2-3 phrases expliquant le thème général du chapitre et la place de ce verset dans le déroulement du chapitre]
+[Contexte SPÉCIFIQUE du verset {start_verse} dans le chapitre {chapter} :]
+- Quelle est la PLACE EXACTE de ce verset dans la progression narrative/thématique du chapitre ?
+- Comment ce verset {start_verse} se relie-t-il aux versets précédents et suivants ?
+- Quel est le THÈME PRINCIPAL que ce verset {start_verse} développe dans le chapitre ?
+(3-4 phrases détaillées et SPÉCIFIQUES au verset {start_verse})
 
 **📜 CONTEXTE HISTORIQUE :**
-[Contexte historique et culturel détaillé :]
-- Période historique et situation du peuple de Dieu
-- Contexte géographique et social
-- Circonstances de rédaction
-- Analyse linguistique (mots clés en grec/hébreu si pertinent)
+[Contexte historique et culturel SPÉCIFIQUE au verset {start_verse} :]
+- Période historique PRÉCISE et situation du peuple à ce moment
+- Contexte géographique et social PARTICULIER mentionné ou sous-entendu dans CE verset
+- Circonstances de rédaction SPÉCIFIQUES
+- Analyse linguistique des MOTS-CLÉS du verset {start_verse} (grec/hébreu avec translittération et signification originale)
+- Références historiques ou archéologiques pertinentes
+(Minimum 100 mots - sois exhaustif et précis)
 
 **✝️ PARTIE THÉOLOGIQUE :**
-[Explication théologique approfondie en 2-3 paragraphes incluant :]
-- Signification théologique profonde
-- Enseignements doctrinaux
-- Application pratique pour aujourd'hui
-- Liens avec d'autres passages bibliques
-- Perspectives spirituelles pour la vie chrétienne
+[Explication théologique APPROFONDIE et UNIQUE du verset {start_verse} :]
+
+**Signification théologique centrale :** Quelle vérité divine révèle SPÉCIFIQUEMENT ce verset {start_verse} ? En quoi est-il unique dans la révélation biblique ?
+
+**Enseignements doctrinaux :** Quelles doctrines bibliques ce verset {start_verse} illustre-t-il ou enseigne-t-il ?
+
+**Application pratique :** Comment ce verset {start_verse} s'applique-t-il CONCRÈTEMENT à la vie chrétienne moderne ? Donne des exemples PRATIQUES et ACTUELS.
+
+**Références bibliques croisées :** Liste 3-5 passages bibliques qui ÉCLAIRENT ou COMPLÈTENT ce verset {start_verse}, en expliquant brièvement le lien.
+
+**Perspective spirituelle :** Quelle transformation spirituelle ce verset {start_verse} appelle-t-il dans la vie du croyant ?
+
+(Minimum 150 mots - développe chaque point avec profondeur)
 
 ---
 
 **VERSET {start_verse + 1}**
 
-[Même structure EXACTE pour chaque verset suivant jusqu'au verset {end_verse}]
+[Répète la MÊME STRUCTURE EXACTE pour le verset {start_verse + 1}, mais avec un contenu COMPLÈTEMENT DIFFÉRENT ET SPÉCIFIQUE à ce nouveau verset]
 
-**RÈGLES IMPORTANTES :**
-1. Utilise EXACTEMENT les 4 sections pour chaque verset : AFFICHAGE DU VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE
-2. Sois TRÈS détaillé (minimum 200 mots par verset au total)
-3. Inclus des références bibliques croisées dans la partie théologique
-4. Reste fidèle à l'exégèse biblique orthodoxe
-5. Chaque section doit être substantielle et informative
+---
 
-Commence directement avec le premier verset sans introduction générale."""
+[Continue ainsi pour CHAQUE verset jusqu'au verset {end_verse}]
+
+**RÈGLES ABSOLUES :**
+1. ✅ Chaque verset doit avoir un contenu UNIQUE - AUCUNE répétition entre les versets
+2. ✅ Utilise EXACTEMENT les numéros de versets demandés ({start_verse} à {end_verse})
+3. ✅ Minimum 250 mots DIFFÉRENTS par verset
+4. ✅ Cite des références bibliques PRÉCISES avec livre, chapitre et verset
+5. ✅ Analyse linguistique avec mots hébreux/grecs RÉELS du texte
+6. ✅ Applications pratiques CONCRÈTES et MODERNES
+7. ✅ Reste fidèle à l'exégèse biblique orthodoxe
+
+Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune introduction générale."""
 
         # Appeler Gemini avec rotation automatique
         start_time = time.time()
