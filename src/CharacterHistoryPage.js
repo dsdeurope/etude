@@ -578,8 +578,8 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
                 📖 Lire la Bible
               </button>
 
-              {/* Bouton API avec LEDs */}
-              <ApiStatusButton />
+              {/* Bouton API avec LEDs - Composant centralisé */}
+              <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "http://localhost:8001"} />
             </div>
           </div>
         </div>
