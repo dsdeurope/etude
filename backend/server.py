@@ -247,11 +247,12 @@ async def api_health():
 async def generate_character_history(request: dict):
     """
     Génère une histoire narrative détaillée d'un personnage biblique.
-    Utilise l'API Gemini via la clé universelle Emergent.
+    Utilise l'API Gemini avec rotation automatique des clés.
     """
     try:
         character_name = request.get('character_name', '')
-        enrich = request.get('enrich', True)
+        mode = request.get('mode', 'standard')  # 'standard', 'enrich', 'regenerate'
+        previous_content = request.get('previous_content', '')
         
         if not character_name:
             return {
@@ -259,61 +260,178 @@ async def generate_character_history(request: dict):
                 "message": "Nom du personnage manquant"
             }
         
-        # Préparer le prompt pour Gemini
-        prompt = f"""Tu es un expert biblique et théologien. Écris une histoire narrative détaillée et captivante du personnage biblique **{character_name}** en français.
+        # Préparer le prompt selon le mode
+        if mode == 'enrich' and previous_content:
+            # Mode enrichissement : ajouter plus de détails au contenu existant
+            prompt = f"""Tu es un expert biblique et théologien. Le récit suivant a déjà été généré pour le personnage biblique **{character_name}** :
 
-Structure l'histoire en plusieurs sections avec des titres markdown (## pour les sections principales, ### pour les sous-sections).
+{previous_content}
 
-Inclus les éléments suivants:
-1. **Introduction**: Présentation du personnage et son importance
-2. **Contexte historique**: L'époque et le lieu où il a vécu
-3. **Récit de vie**: Les événements majeurs de sa vie, chronologiquement
-4. **Leçons spirituelles**: Les enseignements qu'on peut tirer de sa vie
-5. **Versets clés**: Quelques références bibliques importantes le concernant
-6. **Héritage**: Son impact sur l'histoire biblique et la foi
+Ta mission : ENRICHIR ce récit en ajoutant beaucoup plus de détails, de profondeur et d'informations. Ajoute :
 
-Utilise un style narratif engageant, accessible mais respectueux. Environ 800-1200 mots.
+1. **Plus de contexte historique** : Détails sur l'époque, la géographie, la culture
+2. **Détails narratifs supplémentaires** : Éléments qu'on aurait pu manquer dans le récit initial
+3. **Analyse théologique approfondie** : Interprétations, significations symboliques
+4. **Liens avec d'autres passages bibliques** : Connexions avec d'autres personnages ou événements
+5. **Perspectives diverses** : Différentes traditions d'interprétation
+6. **Applications pratiques** : Comment ces enseignements s'appliquent aujourd'hui
 
-Commence directement par le titre: # 📖 {character_name.upper()} - Histoire Biblique"""
+Garde la même structure mais développe chaque section avec au moins 50% de contenu supplémentaire. Vise 1200-1500 mots au total.
+
+Commence directement par le titre enrichi: # 📖 {character_name.upper()} - Histoire Biblique Enrichie"""
         
-        # Utiliser l'API Gemini (tu peux implémenter l'appel ici)
-        # Pour l'instant, retournons un contenu simulé
-        content = f"""# 📖 {character_name.upper()} - Histoire Biblique
+        elif mode == 'regenerate':
+            # Mode régénération : créer une version complètement nouvelle et plus détaillée
+            prompt = f"""Tu es un expert biblique et théologien renommé. Crée un récit narratif EXTRÊMEMENT DÉTAILLÉ et APPROFONDI du personnage biblique **{character_name}** en français.
 
-## Introduction
-{character_name} est l'un des personnages bibliques qui nous enseigne des leçons profondes sur la foi, l'obéissance et la relation avec Dieu.
+Cette version doit être la plus complète possible. Structure ton récit en sections markdown détaillées :
 
-## Contexte Historique
-Le personnage de {character_name} apparaît dans les Écritures dans un contexte riche en enseignements spirituels.
+## 🎯 INTRODUCTION (150-200 mots)
+- Présentation captivante du personnage
+- Son importance dans l'histoire biblique
+- Vue d'ensemble de sa vie
 
-## Récit de Vie
-L'histoire de {character_name} commence par...
+## 📜 ORIGINES ET PASSÉ (200-250 mots)
+### Généalogie
+- Lignée familiale complète (parents, grands-parents si connus)
+- Tribu ou peuple d'origine
+- Signification de son nom
 
-[Le contenu complet serait généré par l'API Gemini ici]
+### Contexte familial
+- Famille immédiate (frères, sœurs, conjoints, enfants)
+- Relations familiales importantes
+- Héritage familial
 
-## Leçons Spirituelles
-À travers la vie de {character_name}, nous apprenons:
-- La fidélité à Dieu dans toutes circonstances
-- L'importance de l'obéissance
-- La grâce et la miséricorde divines
+## 🌍 CONTEXTE HISTORIQUE (200-250 mots)
+- Époque précise (dates, périodes historiques)
+- Géographie (lieux de vie, déplacements)
+- Contexte politique et social
+- Culture et coutumes de l'époque
 
-## Versets Clés
-Plusieurs passages bibliques mentionnent {character_name}...
+## 📖 RÉCIT DE VIE DÉTAILLÉ (400-500 mots)
+### Jeunesse et formation
+- Enfance et éducation
+- Premières expériences marquantes
+- Formation spirituelle
 
-## Héritage
-L'impact de {character_name} continue d'inspirer les croyants aujourd'hui.
+### Événements majeurs (chronologique)
+- Chaque événement clé de sa vie
+- Actions, décisions, épreuves
+- Interactions avec Dieu et autres personnages
 
----
-*Histoire générée automatiquement - Pour une étude plus approfondie, consultez votre Bible.*"""
+### Accomplissements et défis
+- Réussites principales
+- Échecs et apprentissages
+- Moments de transformation
+
+## 🔮 PRÉSENT ET FUTUR SELON L'ÉCRITURE (150-200 mots)
+- Rôle actuel dans le récit biblique
+- Prophéties le concernant
+- Impact eschatologique si applicable
+- Héritage spirituel continu
+
+## 🌳 GÉNÉALOGIE COMPLÈTE (100-150 mots)
+- Arbre généalogique ascendant
+- Descendants directs
+- Lignée messianique si applicable
+
+## 📚 VERSETS CLÉS ET RÉFÉRENCES (150-200 mots)
+- Citations bibliques principales (avec références précises)
+- Passages où il est mentionné
+- Textes prophétiques le concernant
+
+## ✨ LEÇONS SPIRITUELLES APPROFONDIES (200-250 mots)
+- Enseignements théologiques
+- Vertus et exemples à suivre
+- Mises en garde
+- Applications contemporaines
+
+## 🎓 PERSPECTIVES THÉOLOGIQUES (150-200 mots)
+- Interprétations diverses
+- Symbolisme et typologie
+- Signification dans la tradition chrétienne
+- Impact sur la doctrine
+
+## 🌟 HÉRITAGE ET IMPACT (150-200 mots)
+- Influence sur l'histoire biblique
+- Impact sur la foi chrétienne
+- Références dans le Nouveau Testament
+- Pertinence aujourd'hui
+
+Utilise un style MÉLANGE d'académique et narratif accessible. Le récit doit être:
+- Précis et factuel (avec références bibliques)
+- Engageant et vivant (ton narratif captivant)
+- Complet et exhaustif (ne rien omettre d'important)
+
+Vise 1200-1500 mots minimum. Commence directement par le titre: # 📖 {character_name.upper()} - Histoire Biblique Complète"""
         
+        else:
+            # Mode standard : récit narratif complet mais modéré
+            prompt = f"""Tu es un expert biblique et théologien. Crée un récit narratif détaillé du personnage biblique **{character_name}** en français.
+
+Structure ton récit en sections markdown claires :
+
+## 🎯 INTRODUCTION
+- Présentation du personnage et son importance
+
+## 📜 ORIGINES ET GÉNÉALOGIE
+- Famille, tribu, lignée
+- Signification du nom
+- Contexte familial
+
+## 🌍 CONTEXTE HISTORIQUE
+- Époque, lieu, culture
+- Contexte politique et social
+
+## 📖 RÉCIT DE VIE (chronologique détaillé)
+### Passé
+- Jeunesse, origines, formation
+- Premières expériences
+
+### Présent (dans le récit biblique)
+- Événements majeurs de sa vie
+- Actions, décisions, épreuves
+- Relations avec Dieu et autres personnages
+
+### Futur (selon l'Écriture)
+- Prophéties le concernant
+- Impact et héritage
+
+## 🌳 GÉNÉALOGIE DÉTAILLÉE
+- Ascendants et descendants
+- Lignée importante
+
+## 📚 VERSETS CLÉS
+- Citations bibliques avec références précises
+
+## ✨ LEÇONS SPIRITUELLES
+- Enseignements à tirer
+- Applications aujourd'hui
+
+## 🌟 HÉRITAGE
+- Impact sur l'histoire biblique
+- Pertinence contemporaine
+
+Utilise un style MÉLANGE d'académique (précis, avec références) et narratif accessible (engageant, vivant).
+Vise 800-1200 mots. Commence directement par le titre: # 📖 {character_name.upper()} - Histoire Biblique"""
+        
+        # Appeler Gemini avec rotation automatique
+        api_key_index = current_gemini_key_index
+        start_time = time.time()
+        
+        content = await call_gemini_with_rotation(prompt)
+        
+        generation_time = time.time() - start_time
         word_count = len(content.split())
         
         return {
             "status": "success",
             "content": content,
-            "api_used": "gemini_1",
+            "api_used": f"gemini_{api_key_index + 1}",
             "word_count": word_count,
-            "character_name": character_name
+            "character_name": character_name,
+            "mode": mode,
+            "generation_time_seconds": round(generation_time, 2)
         }
         
     except Exception as e:
