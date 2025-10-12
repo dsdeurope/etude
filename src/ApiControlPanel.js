@@ -69,9 +69,22 @@ const ApiControlPanel = ({ backendUrl }) => {
     return () => clearInterval(interval);
   }, [backendUrl]);
 
-  // Fonction pour obtenir la couleur LED
+  // Fonction pour obtenir la couleur LED selon le quota
   const getLedColor = (apiInfo) => {
-    return apiInfo?.color === 'green' ? '#00ff00' : '#ff0000';
+    if (!apiInfo || !apiInfo.color) return '#ff0000';
+    
+    switch(apiInfo.color) {
+      case 'green':
+        return '#00ff00';  // Vert: bon état
+      case 'yellow':
+        return '#ffff00';  // Jaune: attention (70-90%)
+      case 'orange':
+        return '#ffa500';  // Orange: attention
+      case 'red':
+        return '#ff0000';  // Rouge: critique ou épuisé
+      default:
+        return '#00ff00';
+    }
   };
 
   // Fonction pour obtenir l'icône de statut
