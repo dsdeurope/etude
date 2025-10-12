@@ -221,10 +221,19 @@ async def generate_with_bible_api_fallback(prompt: str) -> str:
                         f"Le verset {verse_num} présente l'eschatologie biblique - l'espérance du royaume à venir. Il oriente notre regard vers l'accomplissement final des promesses divines, où justice et paix régneront éternellement. Cette perspective d'éternité doit transformer notre manière de vivre le temps présent, relativisant nos épreuves temporaires face à la gloire future.\n\n**Application pratique :** Vivre avec une mentalité d'éternité selon ce verset {verse_num} signifie investir dans ce qui subsistera : les âmes humaines et la Parole de Dieu. Cela modifie nos priorités financières (donner généreusement), nos choix de carrière (servir vs accumuler), notre gestion du temps (l'évangélisation devient centrale), et notre réponse à la souffrance (joie malgré les épreuves car elles sont temporaires).\n\n**Références croisées :** Apocalypse 21:1-5 (nouveaux cieux, nouvelle terre), 1 Corinthiens 15:50-58 (victoire sur la mort), 2 Pierre 3:10-13 (attente active), Romains 8:18-25 (souffrances vs gloire), Matthieu 6:19-21 (trésors au ciel).",
                     ]
                     
-                    # Sélectionner des variations basées sur le numéro de verset (modulo pour éviter les index hors limite)
-                    chapitre_text = chapitre_variations[verse_num % len(chapitre_variations)]
-                    contexte_text = contexte_variations[verse_num % len(contexte_variations)]
-                    theologie_text = theologie_variations[verse_num % len(theologie_variations)]
+                    # Sélectionner des variations basées sur un hash unique (verset + livre + chapitre)
+                    # Cela garantit que chaque verset a du contenu unique même entre différents batches
+                    import hashlib
+                    unique_seed = f"{book_name}_{chapter}_{verse_num}".encode('utf-8')
+                    hash_value = int(hashlib.md5(unique_seed).hexdigest(), 16)
+                    
+                    chapitre_index = hash_value % len(chapitre_variations)
+                    contexte_index = (hash_value // 7) % len(contexte_variations)
+                    theologie_index = (hash_value // 13) % len(theologie_variations)
+                    
+                    chapitre_text = chapitre_variations[chapitre_index]
+                    contexte_text = contexte_variations[contexte_index]
+                    theologie_text = theologie_variations[theologie_index]
                     
                     verse_content = f"""---
 
