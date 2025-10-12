@@ -627,6 +627,27 @@ Une erreur temporaire empêche la génération de l'histoire complète de **${ch
                 📖 Lire la Bible
               </button>
 
+              {/* Indicateur de statistiques */}
+              {wordCount > 0 && (
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  borderRadius: '10px',
+                  padding: '8px 14px',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  color: 'white',
+                  fontFamily: 'Montserrat, sans-serif',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <span>📊 {wordCount} mots</span>
+                  {apiUsed && <span>• 🤖 {apiUsed}</span>}
+                </div>
+              )}
+
               {/* Bouton API avec LEDs - Composant centralisé */}
               <ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "http://localhost:8001"} />
             </div>
