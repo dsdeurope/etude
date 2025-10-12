@@ -1411,26 +1411,6 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
         console.log("🤖 Contenu généré par Gemini avec votre clé personnelle");
       }
       
-      // Vérifier si l'API a retourné une erreur
-      if (data.status === "error") {
-        // Afficher un message d'erreur clair à l'utilisateur
-        const errorMessage = data.message || "Erreur inconnue";
-        
-        // Vérifier si c'est un problème de quota
-        if (errorMessage.includes("quota") || errorMessage.includes("503") || errorMessage.includes("429")) {
-          const quotaMessage = `# ⚠️ Toutes les API Épuisées\n\n**Les 5 clés API (4 Gemini + 1 Bible API) ont atteint leur limite quotidienne.**\n\n## 🔄 Solutions :\n\n1. **Attendez le reset automatique** (vers 9h du matin heure française)\n2. **Ajoutez de nouvelles clés API** sur votre backend\n3. **Passez à Gemini payant** pour des quotas illimités\n\n## 📊 État des 5 clés :\n- 🔴 Gemini Key 1 : Quota épuisé\n- 🔴 Gemini Key 2 : Quota épuisé\n- 🔴 Gemini Key 3 : Quota épuisé\n- 🔴 Gemini Key 4 : Quota épuisé\n- 🔴 Bible API Key 5 : Quota épuisé\n\n**Le système utilise les 5 clés en rotation automatique. Réessayez après le reset.**\n\n---\n\n*Détails techniques : ${errorMessage}*`;
-          
-          setContent(formatContent(quotaMessage, 'error'));
-          setRubriquesStatus(p => ({ ...p, 0: "error" }));
-          setIsLoading(false);
-          setIsProgressiveLoading(false);
-          return;
-        }
-        
-        // Autre type d'erreur
-        throw new Error(errorMessage);
-      }
-      
       // Utiliser le contenu de l'API (correction du bug d'affichage)
       if (!data.content) {
         throw new Error("Aucun contenu reçu de l'API");
@@ -1471,11 +1451,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       
     } catch (err) {
       console.error("Erreur génération VERSETS PROG:", err);
-      
-      // Créer un message d'erreur formaté en markdown
-      const errorMarkdown = `# ❌ Erreur de Génération\n\n**Une erreur est survenue lors de la génération de l'étude verset par verset.**\n\n## 🔍 Détails de l'erreur :\n\`\`\`\n${err.message}\n\`\`\`\n\n## 🔧 Solutions possibles :\n\n1. **Vérifiez votre connexion internet**\n2. **Réessayez dans quelques instants**\n3. **Si le problème persiste :**\n   - Les clés API Gemini ont peut-être atteint leur quota\n   - Attendez le reset automatique (vers 9h du matin)\n   - Ou ajoutez de nouvelles clés sur le backend\n\n## 📞 Besoin d'aide ?\n\nConsultez la documentation ou contactez le support technique.\n\n---\n\n*Erreur technique : ${err.message}*`;
-      
-      setContent(formatContent(errorMarkdown, 'error'));
+      setContent(`Erreur lors de la génération progressive: ${err.message}`);
       setRubriquesStatus(p => ({ ...p, 0: "error" }));
     } finally {
       setIsLoading(false); setIsProgressiveLoading(false);
@@ -1502,6 +1478,10 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
         console.log(`[ENRICHISSEMENT GEMINI GRATUIT] Rubrique ${activeRubrique} - Longueur enrichie: ${enrichedLength} caractères`);
         
         // Appeler votre backend avec votre clé Gemini gratuite
+        // Timeout de 60 secondes pour laisser le temps à la Bible API de générer
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 secondes
+        
         const response = await fetch(`${API_BASE}/generate-verse-by-verse`, {
           method: 'POST',
           headers: { 
@@ -1514,8 +1494,9 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
             use_gemini: true,
             enriched: true,
             rubric_type: rubriqueTitle
-          })
-        });
+          }),
+          signal: controller.signal
+        }).finally(() => clearTimeout(timeoutId));
 
         if (!response.ok) {
           throw new Error(`Erreur API: ${response.status}`);
@@ -2072,7 +2053,6 @@ ${contextualEnrichment}
               }}>
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(7, 1fr)',
                   gap: '16px',
                   marginBottom: '24px',
                   padding: '20px 20px',
