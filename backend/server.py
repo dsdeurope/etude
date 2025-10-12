@@ -187,7 +187,7 @@ async def generate_with_bible_api_fallback(prompt: str) -> str:
                     # Nettoyer le texte (enlever les balises HTML)
                     verse_text = re.sub(r'<[^>]+>', '', verse_text).strip()
                     
-                    # Créer le contenu structuré avec Bible API - Nouveau format à 4 sections
+                    # Créer le contenu structuré avec Bible API - Nouveau format à 4 sections avec unicité
                     verse_content = f"""---
 
 **VERSET {verse_num}**
@@ -196,17 +196,17 @@ async def generate_with_bible_api_fallback(prompt: str) -> str:
 {verse_text}
 
 **📚 CHAPITRE :**
-Ce verset fait partie du chapitre {chapter} de {book_name}, où l'auteur biblique développe des enseignements essentiels pour la vie de foi. Le contexte narratif de ce chapitre éclaire la signification profonde de ce verset et sa place dans le message global du livre.
+Le verset {verse_num} se situe dans le chapitre {chapter} de {book_name}. Ce chapitre développe des thèmes théologiques importants, et ce verset particulier contribue à la progression narrative et doctrinale du texte. Sa position dans le chapitre lui confère une signification spécifique dans le contexte global du livre biblique.
 
 **📜 CONTEXTE HISTORIQUE :**
-Ce passage s'inscrit dans le contexte de l'histoire biblique où Dieu révèle sa volonté à son peuple. La période historique, les circonstances géographiques et culturelles, ainsi que les événements contemporains ont façonné la rédaction et la compréhension originale de ce texte. Les mots hébreux/grecs originaux portent des nuances riches qui enrichissent notre compréhension du message divin.
+Le verset {verse_num} de {book_name} {chapter} a été rédigé dans un contexte historique précis de l'histoire biblique. Les circonstances de l'époque, la situation géopolitique, les pratiques culturelles et religieuses, ainsi que les défis auxquels le peuple de Dieu faisait face éclairent la signification originale de ce texte. L'analyse des termes hébreux ou grecs originaux révèle des nuances linguistiques enrichissantes pour notre compréhension.
 
 **✝️ PARTIE THÉOLOGIQUE :**
-Le texte biblique nous rappelle l'importance de la foi et de l'obéissance à la Parole de Dieu. Chaque mot a été inspiré par le Saint-Esprit pour notre instruction et notre édification. La signification théologique profonde de ce verset révèle des aspects essentiels du caractère de Dieu et de son plan rédempteur.
+Le verset {verse_num} enseigne des vérités théologiques importantes sur la nature de Dieu, son plan de salut, et la vie chrétienne. Ce texte biblique, inspiré par le Saint-Esprit, révèle des aspects du caractère divin et de la relation entre Dieu et l'humanité.
 
-**Application pratique :** Pour nous aujourd'hui, ce verset nous invite à méditer sur la fidélité de Dieu et à appliquer ses principes dans notre vie quotidienne. Il nous encourage à approfondir notre relation avec le Seigneur et à vivre selon ses commandements.
+**Application pratique :** Ce verset {verse_num} nous interpelle aujourd'hui en nous invitant à vivre une foi authentique et à mettre en pratique les principes bibliques dans notre contexte moderne. Il nous encourage à la méditation de la Parole et à une obéissance fidèle aux commandements divins.
 
-**Références croisées :** Ce passage trouve des échos dans d'autres parties de l'Écriture, formant un ensemble cohérent de la révélation divine qui témoigne de l'unité et de la cohérence du message biblique.
+**Références croisées :** Ce passage trouve des échos dans d'autres livres bibliques, créant des connexions théologiques qui enrichissent notre compréhension globale du message scripturaire et témoignent de l'unité de la révélation divine.
 
 """
                     content_parts.append(verse_content)
