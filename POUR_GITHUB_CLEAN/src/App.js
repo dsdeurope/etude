@@ -2048,6 +2048,7 @@ ${contextualEnrichment}
               }}>
                 <div className="balanced-buttons-grid" style={{
                   display: 'grid',
+                  gridTemplateColumns: 'repeat(7, 1fr)',
                   gap: '16px',
                   marginBottom: '24px',
                   padding: '20px 20px',
