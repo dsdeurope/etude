@@ -1418,7 +1418,7 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
         
         // Vérifier si c'est un problème de quota
         if (errorMessage.includes("quota") || errorMessage.includes("503") || errorMessage.includes("429")) {
-          const quotaMessage = `# ⚠️ Quota API Épuisé\n\n**Toutes les clés Gemini ont atteint leur limite quotidienne.**\n\n## 🔄 Solutions :\n\n1. **Attendez le reset automatique** (vers 9h du matin heure française)\n2. **Ajoutez de nouvelles clés Gemini** sur votre backend\n3. **Passez à Gemini payant** pour des quotas illimités\n\n## 📊 État actuel :\n- 🔴 Gemini Key 1 : Quota épuisé\n- 🔴 Gemini Key 2 : Quota épuisé\n- 🔴 Gemini Key 3 : Quota épuisé\n- 🔴 Gemini Key 4 : Quota épuisé\n\n**Réessayez dans quelques heures après le reset automatique.**\n\n---\n\n*Détails techniques : ${errorMessage}*`;
+          const quotaMessage = `# ⚠️ Toutes les API Épuisées\n\n**Les 5 clés API (4 Gemini + 1 Bible API) ont atteint leur limite quotidienne.**\n\n## 🔄 Solutions :\n\n1. **Attendez le reset automatique** (vers 9h du matin heure française)\n2. **Ajoutez de nouvelles clés API** sur votre backend\n3. **Passez à Gemini payant** pour des quotas illimités\n\n## 📊 État des 5 clés :\n- 🔴 Gemini Key 1 : Quota épuisé\n- 🔴 Gemini Key 2 : Quota épuisé\n- 🔴 Gemini Key 3 : Quota épuisé\n- 🔴 Gemini Key 4 : Quota épuisé\n- 🔴 Bible API Key 5 : Quota épuisé\n\n**Le système utilise les 5 clés en rotation automatique. Réessayez après le reset.**\n\n---\n\n*Détails techniques : ${errorMessage}*`;
           
           setContent(formatContent(quotaMessage, 'error'));
           setRubriquesStatus(p => ({ ...p, 0: "error" }));
