@@ -292,28 +292,42 @@ const ApiControlPanel = ({ backendUrl }) => {
                 </div>
               </div>
               
-              {/* LED individuelles PHYSIQUES plus visibles */}
+              {/* LED individuelles PHYSIQUES avec quotas (vert/jaune/rouge) */}
               <div style={{ display: 'flex', gap: '4px', padding: '4px 6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}>
-                {Object.entries(apiStatus.apis).map(([key, api]) => (
-                  <div 
-                    key={key}
-                    style={{
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                      backgroundColor: getLedColor(api),
-                      boxShadow: `0 0 10px ${getLedColor(api)}, 0 0 20px ${getLedColor(api)}, inset 0 0 5px ${getLedColor(api)}`,
-                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
-                      border: '2px solid rgba(255,255,255,0.4)',
-                      position: 'relative',
-                      // Effet 3D LED physique
-                      background: api.color === 'green' 
-                        ? 'radial-gradient(circle at 30% 30%, #00ff00, #00cc00, #009900)'
-                        : 'radial-gradient(circle at 30% 30%, #ff0000, #cc0000, #990000)'
-                    }}
-                    title={`${api.name}: ${api.status === 'available' ? 'Disponible' : 'Quota dépassé'}`}
-                  />
-                ))}
+                {Object.entries(apiStatus.apis).map(([key, api]) => {
+                  const ledColor = getLedColor(api);
+                  const animation = api.color === 'green' ? 'pulse-green 2s infinite' 
+                                  : api.color === 'yellow' ? 'pulse-yellow 1.5s infinite'
+                                  : 'pulse-red 1s infinite';
+                  
+                  // Gradient 3D selon la couleur
+                  let gradient;
+                  if (api.color === 'green') {
+                    gradient = 'radial-gradient(circle at 30% 30%, #00ff00, #00cc00, #009900)';
+                  } else if (api.color === 'yellow') {
+                    gradient = 'radial-gradient(circle at 30% 30%, #ffff00, #ffcc00, #ff9900)';
+                  } else {
+                    gradient = 'radial-gradient(circle at 30% 30%, #ff0000, #cc0000, #990000)';
+                  }
+                  
+                  return (
+                    <div 
+                      key={key}
+                      style={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        backgroundColor: ledColor,
+                        boxShadow: `0 0 10px ${ledColor}, 0 0 20px ${ledColor}, inset 0 0 5px ${ledColor}`,
+                        animation: animation,
+                        border: '2px solid rgba(255,255,255,0.4)',
+                        position: 'relative',
+                        background: gradient
+                      }}
+                      title={`${api.name}: ${api.status_text || api.status} ${api.quota_used ? `(${api.quota_used}% utilisé)` : ''}`}
+                    />
+                  );
+                })}
               </div>
             </div>
           )}
