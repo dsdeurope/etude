@@ -75,18 +75,18 @@ def test_health_endpoint():
         print_test_result(False, f"Exception: {str(e)}")
         return False
 
-def test_verse_by_verse_endpoint():
-    """Test the /api/generate-verse-by-verse endpoint with new 4-section format"""
-    print_test_header("Verse-by-Verse Endpoint Test")
+def test_single_batch(batch_name, passage, expected_verses):
+    """Test a single batch of verses"""
+    print_test_header(f"{batch_name}: {passage}")
     
-    # Test data as specified in the review request
+    # Test payload as specified in review request
     test_payload = {
-        "passage": "Genèse 1",
-        "start_verse": 1,
-        "end_verse": 2
+        "passage": passage,
+        "version": "LSG"
     }
     
     print(f"Test Payload: {json.dumps(test_payload, indent=2)}")
+    print(f"Expected verses: {expected_verses}")
     
     try:
         start_time = time.time()
@@ -107,12 +107,12 @@ def test_verse_by_verse_endpoint():
             # Check for success status
             if data.get('status') != 'success':
                 print_test_result(False, f"Status not success: {data.get('status')}")
-                return False
+                return False, None
             
             content = data.get('content', '')
             if not content:
                 print_test_result(False, "No content generated")
-                return False
+                return False, None
             
             print(f"Content Length: {len(content)} characters")
             print(f"Word Count: {data.get('word_count', 'N/A')}")
@@ -134,50 +134,138 @@ def test_verse_by_verse_endpoint():
                 else:
                     print(f"  ❌ Missing: {section}")
             
-            # Check that the old API note is NOT present
-            old_note_patterns = [
-                "Note : Cette étude a été générée avec la Bible API (clé #5)",
-                "clés Gemini ont atteint leur quota",
-                "Bible API (clé #5)"
-            ]
-            
-            print(f"\n🔍 Checking that old API note is removed:")
-            old_note_found = False
-            for pattern in old_note_patterns:
-                if pattern in content:
-                    print(f"  ❌ Found old note pattern: {pattern}")
-                    old_note_found = True
-                else:
-                    print(f"  ✅ Old note pattern not found: {pattern}")
+            # Check for expected verse numbers in content
+            print(f"\n🔍 Checking for expected verse numbers:")
+            verses_found = []
+            for verse_num in expected_verses:
+                verse_patterns = [
+                    f"**VERSET {verse_num}**",
+                    f"VERSET {verse_num}",
+                    f"verset {verse_num}"
+                ]
+                found = False
+                for pattern in verse_patterns:
+                    if pattern in content:
+                        verses_found.append(verse_num)
+                        print(f"  ✅ Found verse {verse_num}")
+                        found = True
+                        break
+                if not found:
+                    print(f"  ❌ Missing verse {verse_num}")
             
             # Print a sample of the content
-            print(f"\n📄 Content Sample (first 500 chars):")
-            print(content[:500] + "..." if len(content) > 500 else content)
+            print(f"\n📄 Content Sample (first 800 chars):")
+            print(content[:800] + "..." if len(content) > 800 else content)
             
-            # Determine overall success
+            # Determine success
             all_sections_found = len(sections_found) == len(required_sections)
-            no_old_notes = not old_note_found
+            all_verses_found = len(verses_found) == len(expected_verses)
             
-            if all_sections_found and no_old_notes:
-                print_test_result(True, f"All 4 sections found and old API note removed")
-                return True
-            elif all_sections_found and old_note_found:
-                print_test_result(False, f"All sections found but old API note still present")
-                return False
-            elif not all_sections_found and no_old_notes:
-                print_test_result(False, f"Only {len(sections_found)}/4 sections found")
-                return False
+            if all_sections_found and all_verses_found:
+                print_test_result(True, f"All 4 sections and all {len(expected_verses)} verses found")
+                return True, content
+            elif all_sections_found and not all_verses_found:
+                print_test_result(False, f"All sections found but only {len(verses_found)}/{len(expected_verses)} verses found")
+                return False, content
+            elif not all_sections_found and all_verses_found:
+                print_test_result(False, f"All verses found but only {len(sections_found)}/4 sections found")
+                return False, content
             else:
-                print_test_result(False, f"Missing sections and old API note still present")
-                return False
+                print_test_result(False, f"Missing sections ({len(sections_found)}/4) and verses ({len(verses_found)}/{len(expected_verses)})")
+                return False, content
                 
         else:
             print_test_result(False, f"HTTP {response.status_code}: {response.text}")
-            return False
+            return False, None
             
     except Exception as e:
         print_test_result(False, f"Exception: {str(e)}")
+        return False, None
+
+def check_content_uniqueness(batch_contents):
+    """Check that batch contents are unique"""
+    print_test_header("Content Uniqueness Check")
+    
+    if len(batch_contents) < 2:
+        print_test_result(False, "Need at least 2 batches to check uniqueness")
         return False
+    
+    # Compare each pair of batches
+    unique = True
+    for i in range(len(batch_contents)):
+        for j in range(i + 1, len(batch_contents)):
+            batch1_name = f"Batch {i + 1}"
+            batch2_name = f"Batch {j + 1}"
+            
+            # Simple similarity check - if content is too similar, flag it
+            content1 = batch_contents[i]
+            content2 = batch_contents[j]
+            
+            # Remove verse numbers and common formatting for comparison
+            import re
+            clean_content1 = re.sub(r'\*\*VERSET \d+\*\*', '', content1)
+            clean_content2 = re.sub(r'\*\*VERSET \d+\*\*', '', content2)
+            
+            # Check for substantial overlap (more than 30% similar)
+            common_words = set(clean_content1.split()) & set(clean_content2.split())
+            total_words = len(set(clean_content1.split()) | set(clean_content2.split()))
+            
+            if total_words > 0:
+                similarity = len(common_words) / total_words
+                print(f"Similarity between {batch1_name} and {batch2_name}: {similarity:.2%}")
+                
+                if similarity > 0.7:  # More than 70% similar
+                    print_test_result(False, f"{batch1_name} and {batch2_name} are too similar ({similarity:.2%})")
+                    unique = False
+                else:
+                    print_test_result(True, f"{batch1_name} and {batch2_name} are sufficiently different ({similarity:.2%})")
+    
+    if unique:
+        print_test_result(True, "All batches have unique content")
+    
+    return unique
+
+def test_verse_by_verse_batches():
+    """Test the three specific batches as requested in review"""
+    print_test_header("Verse-by-Verse Batch Testing")
+    
+    # Test cases as specified in review request
+    test_cases = [
+        ("Test 1: Batch 1 (versets 1-5)", "Genèse 1:1-5", [1, 2, 3, 4, 5]),
+        ("Test 2: Batch 2 (versets 6-10)", "Genèse 1:6-10", [6, 7, 8, 9, 10]),
+        ("Test 3: Batch 3 (versets 11-15)", "Genèse 1:11-15", [11, 12, 13, 14, 15])
+    ]
+    
+    batch_results = []
+    batch_contents = []
+    
+    # Run each test
+    for batch_name, passage, expected_verses in test_cases:
+        success, content = test_single_batch(batch_name, passage, expected_verses)
+        batch_results.append(success)
+        if content:
+            batch_contents.append(content)
+    
+    # Check uniqueness if we have content from multiple batches
+    uniqueness_result = True
+    if len(batch_contents) >= 2:
+        uniqueness_result = check_content_uniqueness(batch_contents)
+    
+    # Overall result
+    all_batches_passed = all(batch_results)
+    overall_success = all_batches_passed and uniqueness_result
+    
+    print(f"\n{'='*60}")
+    print(f"📊 BATCH TEST SUMMARY")
+    print(f"{'='*60}")
+    for i, (batch_name, _, _) in enumerate(test_cases):
+        result = "✅ PASS" if batch_results[i] else "❌ FAIL"
+        print(f"{batch_name}: {result}")
+    
+    print(f"Content Uniqueness: {'✅ PASS' if uniqueness_result else '❌ FAIL'}")
+    print(f"Overall Batch Testing: {'✅ PASS' if overall_success else '❌ FAIL'}")
+    
+    return overall_success
 
 def main():
     """Run all backend tests"""
