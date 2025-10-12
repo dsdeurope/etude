@@ -481,6 +481,8 @@ async def api_health():
         "active_key_index": current_gemini_key_index + 1,
         "bible_api_configured": bool(BIBLE_API_KEY and BIBLE_ID),
         "total_gemini_keys": len(GEMINI_KEYS),
+        "total_keys": len(GEMINI_KEYS) + (1 if BIBLE_API_KEY and BIBLE_ID else 0),
+        "rotation_info": "Système à 5 clés : 4 Gemini + 1 Bible API en rotation automatique",
         "apis": apis
     }
 
