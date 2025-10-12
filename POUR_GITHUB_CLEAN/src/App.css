@@ -3957,3 +3957,9 @@ strong {
 .btn-concordance {
   background: linear-gradient(135deg, #f97316, #ea580c) !important;
 }
+/* FORCE 7 COLONNES EN DESKTOP - TOUJOURS EN DERNIER */
+@media (min-width: 1025px) {
+  .balanced-buttons-grid {
+    grid-template-columns: repeat(7, 1fr) !important;
+  }
+}
