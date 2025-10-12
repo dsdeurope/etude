@@ -40,6 +40,76 @@ BIBLE_API_KEY = os.environ.get('BIBLE_API_KEY', '')
 current_gemini_key_index = 0
 gemini_key_usage_count = {i: 0 for i in range(len(GEMINI_KEYS))}
 
+# Fonction pour obtenir la clé Gemini active avec rotation automatique
+async def get_gemini_key():
+    """Retourne la clé Gemini active et gère la rotation."""
+    global current_gemini_key_index
+    
+    if not GEMINI_KEYS:
+        raise HTTPException(status_code=500, detail="Aucune clé Gemini configurée")
+    
+    return GEMINI_KEYS[current_gemini_key_index], current_gemini_key_index
+
+async def rotate_gemini_key():
+    """Passe à la clé Gemini suivante."""
+    global current_gemini_key_index
+    current_gemini_key_index = (current_gemini_key_index + 1) % len(GEMINI_KEYS)
+    logging.info(f"Rotation vers clé Gemini #{current_gemini_key_index + 1}")
+    return current_gemini_key_index
+
+async def call_gemini_with_rotation(prompt: str, max_retries: int = None) -> str:
+    """
+    Appelle Gemini avec rotation automatique en cas de quota dépassé.
+    Essaie toutes les clés disponibles avant d'échouer.
+    """
+    if max_retries is None:
+        max_retries = len(GEMINI_KEYS)
+    
+    last_error = None
+    
+    for attempt in range(max_retries):
+        try:
+            api_key, key_index = await get_gemini_key()
+            gemini_key_usage_count[key_index] += 1
+            
+            logging.info(f"Tentative {attempt + 1}/{max_retries} avec clé Gemini #{key_index + 1}")
+            
+            # Initialiser le chat Gemini
+            chat = LlmChat(
+                api_key=api_key,
+                session_id=f"character-{uuid.uuid4()}",
+                system_message="Tu es un expert biblique et théologien spécialisé dans l'étude narrative des personnages de la Bible."
+            ).with_model("gemini", "gemini-2.0-flash")
+            
+            # Envoyer le message
+            user_message = UserMessage(text=prompt)
+            response = await chat.send_message(user_message)
+            
+            logging.info(f"✅ Succès avec clé Gemini #{key_index + 1}")
+            return response
+            
+        except Exception as e:
+            error_str = str(e).lower()
+            last_error = e
+            
+            # Vérifier si c'est une erreur de quota
+            if "quota" in error_str or "rate_limit" in error_str or "429" in error_str or "resource_exhausted" in error_str:
+                logging.warning(f"⚠️  Quota atteint pour clé #{key_index + 1}, rotation vers clé suivante...")
+                await rotate_gemini_key()
+                time.sleep(1)  # Petite pause avant de réessayer
+                continue
+            else:
+                # Autre type d'erreur, on l'enregistre et on réessaie
+                logging.error(f"❌ Erreur avec clé #{key_index + 1}: {e}")
+                await rotate_gemini_key()
+                continue
+    
+    # Si on arrive ici, toutes les tentatives ont échoué
+    raise HTTPException(
+        status_code=503,
+        detail=f"Toutes les clés Gemini ont atteint leur quota. Dernière erreur: {str(last_error)}"
+    )
+
 # Create the main app without a prefix
 app = FastAPI()
 
