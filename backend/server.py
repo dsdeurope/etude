@@ -214,16 +214,22 @@ Le texte biblique nous rappelle l'importance de la foi et de l'obéissance à la
                 elif response.status_code == 429:
                     raise Exception("Bible API quota également épuisé")
                 else:
-                    # Verset non trouvé, continuer avec un contenu minimal
+                    # Verset non trouvé, continuer avec un contenu minimal au nouveau format
                     verse_content = f"""---
 
 **VERSET {verse_num}**
 
-**📜 TEXTE BIBLIQUE :**
+**📖 AFFICHAGE DU VERSET :**
 [Texte à consulter dans votre Bible Louis Segond]
 
-**🎓 EXPLICATION :**
-Verset {verse_num} de {book_name} chapitre {chapter}.
+**📚 CHAPITRE :**
+Verset {verse_num} du chapitre {chapter} de {book_name}.
+
+**📜 CONTEXTE HISTORIQUE :**
+[Contexte à consulter dans des commentaires bibliques]
+
+**✝️ PARTIE THÉOLOGIQUE :**
+[Explication théologique à consulter dans des ressources d'étude biblique]
 
 """
                     content_parts.append(verse_content)
