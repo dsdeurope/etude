@@ -170,17 +170,20 @@ backend:
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "1.1"
+  test_sequence: 2
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Generate verse-by-verse with new 4-section format"
-  stuck_tasks: []
+    - "Content uniqueness per verse batch"
+  stuck_tasks:
+    - "Content uniqueness per verse batch"
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "testing"
       message: "Backend testing completed. Health endpoint working correctly. Main issue: All Gemini keys quota exceeded, so system uses Bible API fallback which has old format. The new 4-section format needs to be implemented in the Bible API fallback function generate_with_bible_api_fallback() to match the Gemini prompt format. API note removal working for main content but Bible API fallback header still shows API source."
+    - agent: "testing"
+      message: "UPDATED TESTING RESULTS: Tested specific improvements to /api/generate-verse-by-verse endpoint. ✅ FIXED: Passage parsing now works correctly - extracts verse ranges from 'Genèse 1:1-5' format. ✅ FIXED: 4-section format implemented in Bible API fallback. ❌ CRITICAL ISSUE: Content uniqueness FAILED - all batches 70-73% similar due to generic templated content in Bible API fallback. The Bible API fallback function needs to generate unique, verse-specific content instead of using the same generic template phrases for every verse. This is the main blocker for the endpoint improvements."
