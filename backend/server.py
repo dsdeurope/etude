@@ -71,9 +71,10 @@ async def get_status_checks():
 async def api_health():
     """
     Retourne le statut de santé des API et la clé actuellement active.
-    Cette route simule une rotation de clés Gemini.
+    Cette route simule une rotation de clés Gemini avec statistiques.
     """
     import time
+    import random
     
     # Rotation des clés toutes les 10 secondes pour la démo
     current_time = int(time.time())
@@ -81,18 +82,57 @@ async def api_health():
     active_key_index = (current_time // key_rotation_interval) % 4 + 1
     active_key = f"gemini_{active_key_index}"
     
+    # Générer des stats simulées pour chaque clé
+    base_time = datetime.now(timezone.utc)
+    
     return {
         "status": "healthy",
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": base_time.isoformat(),
         "current_key": active_key,
         "active_key_index": active_key_index,
         "bible_api_configured": True,
         "rotation_interval_seconds": key_rotation_interval,
-        "gemini_keys": {
-            "gemini_1": {"status": "active", "color": "green"},
-            "gemini_2": {"status": "active", "color": "green"},
-            "gemini_3": {"status": "active", "color": "green"},
-            "gemini_4": {"status": "active", "color": "green"}
+        "apis": {
+            "gemini_1": {
+                "name": "Gemini Key 1",
+                "color": "green",
+                "status": "available",
+                "success_count": random.randint(50, 200),
+                "error_count": random.randint(0, 5),
+                "last_used": (base_time).isoformat() if active_key == "gemini_1" else None
+            },
+            "gemini_2": {
+                "name": "Gemini Key 2", 
+                "color": "green",
+                "status": "available",
+                "success_count": random.randint(50, 200),
+                "error_count": random.randint(0, 5),
+                "last_used": (base_time).isoformat() if active_key == "gemini_2" else None
+            },
+            "gemini_3": {
+                "name": "Gemini Key 3",
+                "color": "green", 
+                "status": "available",
+                "success_count": random.randint(50, 200),
+                "error_count": random.randint(0, 5),
+                "last_used": (base_time).isoformat() if active_key == "gemini_3" else None
+            },
+            "gemini_4": {
+                "name": "Gemini Key 4",
+                "color": "green",
+                "status": "available", 
+                "success_count": random.randint(50, 200),
+                "error_count": random.randint(0, 5),
+                "last_used": (base_time).isoformat() if active_key == "gemini_4" else None
+            },
+            "bible_api": {
+                "name": "Bible API",
+                "color": "green",
+                "status": "available",
+                "success_count": random.randint(100, 500),
+                "error_count": 0,
+                "last_used": None
+            }
         }
     }
 
