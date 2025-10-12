@@ -710,20 +710,125 @@ Vise 800-1200 mots. Commence directement par le titre: # 📖 {character_name.up
         api_key_index = current_gemini_key_index
         start_time = time.time()
         
-        content = await call_gemini_with_rotation(prompt)
+        try:
+            content = await call_gemini_with_rotation(prompt)
+            generation_time = time.time() - start_time
+            word_count = len(content.split())
+            
+            return {
+                "status": "success",
+                "content": content,
+                "api_used": f"gemini_{api_key_index + 1}",
+                "word_count": word_count,
+                "character_name": character_name,
+                "mode": mode,
+                "generation_time_seconds": round(generation_time, 2)
+            }
         
-        generation_time = time.time() - start_time
-        word_count = len(content.split())
-        
-        return {
-            "status": "success",
-            "content": content,
-            "api_used": f"gemini_{api_key_index + 1}",
-            "word_count": word_count,
-            "character_name": character_name,
-            "mode": mode,
-            "generation_time_seconds": round(generation_time, 2)
-        }
+        except Exception as gemini_error:
+            # Fallback : Générer un contenu structuré avec la Bible API
+            logger.warning(f"Gemini indisponible pour {character_name}, utilisation Bible API fallback: {gemini_error}")
+            
+            try:
+                # Récupérer les versets mentionnant le personnage depuis la Bible API
+                bible_api_key = os.environ.get('BIBLE_API_KEY')
+                bible_id = os.environ.get('BIBLE_ID', 'de4e12af7f28f599-02')
+                
+                if not bible_api_key:
+                    raise Exception("Bible API key non configurée")
+                
+                # Rechercher le personnage dans la Bible
+                search_url = f"https://api.scripture.api.bible/v1/bibles/{bible_id}/search"
+                headers = {"api-key": bible_api_key}
+                params = {"query": character_name, "limit": 10}
+                
+                async with httpx.AsyncClient() as client:
+                    response = await client.get(search_url, headers=headers, params=params, timeout=10.0)
+                    response.raise_for_status()
+                    search_data = response.json()
+                
+                # Extraire les versets trouvés
+                verses = search_data.get('data', {}).get('verses', [])
+                
+                # Générer un contenu structuré basé sur les versets trouvés
+                content = f"""# 📖 {character_name.upper()} - Histoire Biblique
+
+## 🎯 INTRODUCTION
+
+{character_name} est un personnage biblique dont le nom apparaît dans les Saintes Écritures. Cette étude présente les principales références bibliques et informations disponibles concernant ce personnage.
+
+## 📜 RÉFÉRENCES BIBLIQUES
+
+"""
+                
+                if verses:
+                    content += f"Le nom de **{character_name}** apparaît dans {len(verses)} passage(s) biblique(s) :\n\n"
+                    for i, verse in enumerate(verses[:5], 1):  # Limiter à 5 versets
+                        verse_text = verse.get('text', '').strip()
+                        verse_ref = verse.get('reference', 'Référence inconnue')
+                        content += f"### {i}. {verse_ref}\n\n"
+                        content += f"> {verse_text}\n\n"
+                else:
+                    content += f"*Aucune référence directe trouvée dans la version Louis Segond pour ce nom exact. Le personnage peut être mentionné sous une forme différente ou dans d'autres traductions.*\n\n"
+                
+                content += f"""## 🌍 CONTEXTE BIBLIQUE
+
+{character_name} fait partie de l'histoire biblique qui se déroule dans le contexte du Proche-Orient ancien, période où Dieu établit son Alliance avec son peuple. Chaque personnage biblique a un rôle spécifique dans le plan rédempteur de Dieu.
+
+## 📖 SIGNIFICATION ET IMPORTANCE
+
+Les personnages bibliques nous enseignent des leçons spirituelles importantes sur :
+- La fidélité à Dieu
+- L'obéissance aux commandements divins
+- La foi face aux épreuves
+- Le rôle de chacun dans l'histoire du salut
+
+## ✨ LEÇONS SPIRITUELLES
+
+L'étude des personnages bibliques nous permet de :
+1. **Comprendre le plan de Dieu** : Chaque vie reflète un aspect de la volonté divine
+2. **Apprendre de leurs exemples** : Leurs succès et échecs nous instruisent
+3. **Appliquer à notre vie** : Les principes bibliques restent pertinents aujourd'hui
+
+## 🌟 POUR ALLER PLUS LOIN
+
+Pour une étude approfondie de {character_name}, nous vous recommandons de :
+- Consulter plusieurs traductions bibliques
+- Lire les commentaires bibliques spécialisés
+- Étudier le contexte historique et culturel
+- Méditer sur les passages mentionnant ce personnage
+
+---
+
+*Note : Cette étude a été générée avec la Bible API. Pour une analyse plus complète et approfondie, veuillez réessayer ultérieurement lorsque les quotas Gemini seront réinitialisés (généralement vers 9h du matin).*
+
+📖 **Contenu généré automatiquement basé sur les Saintes Écritures (Version Louis Segond)**
+"""
+                
+                generation_time = time.time() - start_time
+                word_count = len(content.split())
+                
+                logger.info(f"[BIBLE API FALLBACK] Histoire de {character_name} générée avec Bible API")
+                
+                return {
+                    "status": "success",
+                    "content": content,
+                    "api_used": "bible_api_fallback",
+                    "word_count": word_count,
+                    "character_name": character_name,
+                    "mode": mode,
+                    "generation_time_seconds": round(generation_time, 2),
+                    "note": "Généré avec Bible API (Gemini indisponible)"
+                }
+                
+            except Exception as bible_error:
+                logger.error(f"Bible API fallback également échoué pour {character_name}: {bible_error}")
+                return {
+                    "status": "error",
+                    "message": f"Services de génération temporairement indisponibles. Veuillez réessayer dans quelques minutes.",
+                    "character_name": character_name,
+                    "details": str(bible_error)
+                }
         
     except Exception as e:
         logger.error(f"Erreur génération histoire personnage: {e}")
