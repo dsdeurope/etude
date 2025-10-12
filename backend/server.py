@@ -708,16 +708,29 @@ async def generate_verse_by_verse(request: dict):
                 "message": "Passage manquant"
             }
         
-        # Parser le passage (ex: "Genèse 1" ou "Jean 3:16")
-        parts = passage.split()
-        if len(parts) < 2:
+        # Parser le passage (ex: "Genèse 1" ou "Genèse 1:6-10")
+        import re
+        
+        # Extraire le livre, chapitre et versets si présents
+        # Format possible: "Genèse 1:6-10" ou "Genèse 1"
+        verse_pattern = re.match(r'^(.+?)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$', passage.strip())
+        
+        if not verse_pattern:
             return {
                 "status": "error",
-                "message": "Format de passage invalide. Utilisez 'Livre Chapitre' (ex: Genèse 1)"
+                "message": f"Format de passage invalide: {passage}. Utilisez 'Livre Chapitre' ou 'Livre Chapitre:Verset-Verset'"
             }
         
-        book_name = ' '.join(parts[:-1])
-        chapter = parts[-1]
+        book_name = verse_pattern.group(1).strip()
+        chapter = verse_pattern.group(2)
+        
+        # Si des versets sont spécifiés dans le passage, les utiliser
+        if verse_pattern.group(3):
+            start_verse = int(verse_pattern.group(3))
+            if verse_pattern.group(4):
+                end_verse = int(verse_pattern.group(4))
+            else:
+                end_verse = start_verse  # Un seul verset
         
         logging.info(f"Génération verset par verset: {book_name} {chapter}, versets {start_verse}-{end_verse}")
         
