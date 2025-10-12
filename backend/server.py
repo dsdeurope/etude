@@ -66,6 +66,36 @@ async def get_status_checks():
     
     return status_checks
 
+# Route pour le health check des API avec rotation des clés
+@api_router.get("/health")
+async def api_health():
+    """
+    Retourne le statut de santé des API et la clé actuellement active.
+    Cette route simule une rotation de clés Gemini.
+    """
+    import time
+    
+    # Rotation des clés toutes les 10 secondes pour la démo
+    current_time = int(time.time())
+    key_rotation_interval = 10  # secondes
+    active_key_index = (current_time // key_rotation_interval) % 4 + 1
+    active_key = f"gemini_{active_key_index}"
+    
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "current_key": active_key,
+        "active_key_index": active_key_index,
+        "bible_api_configured": True,
+        "rotation_interval_seconds": key_rotation_interval,
+        "gemini_keys": {
+            "gemini_1": {"status": "active", "color": "green"},
+            "gemini_2": {"status": "active", "color": "green"},
+            "gemini_3": {"status": "active", "color": "green"},
+            "gemini_4": {"status": "active", "color": "green"}
+        }
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
