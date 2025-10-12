@@ -148,13 +148,16 @@ backend:
     implemented: true
     working: false
     file: "/app/backend/server.py"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
         - working: false
           agent: "testing"
           comment: "❌ CRITICAL ISSUE: Content uniqueness FAILED. All 3 batches (versets 1-5, 6-10, 11-15) are 70-73% similar. Bible API fallback generates very generic templated content instead of unique verse-specific analysis. Each verse gets the same generic phrases like 'Ce chapitre développe des thèmes théologiques importants' and 'a été rédigé dans un contexte historique précis'. The Bible API fallback needs verse-specific content generation, not generic templates."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE CONFIRMED: Content uniqueness still FAILED after improvements. Detailed analysis shows 99.3-99.9% similarity between corresponding verses across batches. Root cause: Bible API fallback uses simple modulo operation (verse_num % 5) which creates predictable patterns. Verses 1,6,11 get identical content (variation 1), verses 2,7,12 get identical content (variation 2), etc. All Gemini keys are quota exceeded, system falls back to Bible API. The modulo logic in lines 225-227 needs to be replaced with a more sophisticated uniqueness algorithm that considers both verse number AND batch context to ensure true uniqueness."
 
   - task: "Remove old API note from generated content"
     implemented: true
