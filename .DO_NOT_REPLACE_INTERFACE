@@ -1,0 +1,82 @@
+# ⚠️ PROTECTION DE L'INTERFACE - NE PAS REMPLACER
+
+## 🔒 FICHIERS PROTÉGÉS
+
+Les fichiers suivants contiennent l'application de méditation biblique complète et fonctionnelle.
+**NE PAS les remplacer par un template vide !**
+
+### 📁 Répertoires Protégés :
+
+1. **`/app/frontend/src/`** - Interface locale (aperçu)
+2. **`/app/POUR_GITHUB_CLEAN/src/`** - Interface Vercel (production)
+
+### 📄 Fichiers Critiques à NE PAS MODIFIER :
+
+```
+/app/frontend/src/
+├── App.js                    ⚠️ Application complète de méditation biblique
+├── App.css                   ⚠️ Styles complets
+├── index.css                 ⚠️ Grid CSS pour 7 boutons horizontaux
+├── ApiControlPanel.js        ⚠️ Panneau de contrôle API
+├── BibleConcordancePage.js   ⚠️ Page concordance
+├── CharacterHistoryPage.js   ⚠️ Page histoire des personnages
+├── NotesPage.js              ⚠️ Page de notes
+├── RubriquePage.js           ⚠️ Page des rubriques
+├── RubriquesInline.js        ⚠️ Composant rubriques
+├── ThemeVersesPage.js        ⚠️ Page thèmes et versets
+├── VersetParVersetPage.js    ⚠️ Page verset par verset
+├── rubrique_functions.js     ⚠️ Fonctions utilitaires
+└── rubriques.css             ⚠️ Styles rubriques
+
+/app/POUR_GITHUB_CLEAN/src/
+└── [Mêmes fichiers - VERSION VERCEL]
+```
+
+### ✅ État Actuel de l'Interface :
+
+- **7 boutons d'action alignés horizontalement** sur desktop
+- **Panneau API avec LEDs** de statut
+- **29 rubriques** d'étude biblique
+- **Pages complètes** : Concordance, Histoire personnages, Notes, etc.
+- **Responsive design** : Desktop / Tablette / Mobile
+
+### 🚫 À NE PAS FAIRE :
+
+❌ Remplacer `App.js` par un template "Building something incredible"
+❌ Supprimer les fichiers de pages (BibleConcordancePage, etc.)
+❌ Écraser `index.css` sans préserver `gridTemplateColumns: repeat(7, 1fr)`
+❌ Modifier les fichiers dans POUR_GITHUB_CLEAN sans synchroniser avec frontend
+
+### ✅ À FAIRE en cas de modification :
+
+1. **Modifier d'abord** dans `/app/POUR_GITHUB_CLEAN/src/`
+2. **Copier ensuite** vers `/app/frontend/src/` :
+   ```bash
+   cp /app/POUR_GITHUB_CLEAN/src/* /app/frontend/src/
+   ```
+3. **Tester localement** sur http://localhost:3000
+4. **Pousser vers GitHub** pour déploiement Vercel
+
+### 📅 Dernière Sauvegarde :
+
+- **Date :** 12 octobre 2024
+- **Commit :** "Sauvegarde complète: Fix alignement horizontal 7 boutons"
+- **Status :** Interface complète et fonctionnelle ✅
+- **Fix appliqué :** 7 boutons horizontaux (repeat(7, 1fr))
+
+---
+
+**⚠️ EN CAS D'ÉCRASEMENT ACCIDENTEL :**
+
+Restaurer depuis Git :
+```bash
+cd /app
+git checkout HEAD -- frontend/src/
+# ou
+git checkout HEAD -- POUR_GITHUB_CLEAN/src/
+```
+
+---
+
+**🔐 CE FICHIER SERT DE PROTECTION ET D'AVERTISSEMENT**
+**NE PAS SUPPRIMER**
