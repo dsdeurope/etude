@@ -2047,18 +2047,8 @@ ${contextualEnrichment}
                 boxSizing: 'border-box'
               }}>
                 <div className="balanced-buttons-grid" style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(7, 1fr)',
-                  gap: '16px',
-                  marginBottom: '24px',
-                  padding: '20px 20px',
                   width: '100%',
-                  boxSizing: 'border-box',
-                  alignItems: 'center',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '20px',
-                  border: '1px solid rgba(255, 255, 255, 0.12)'
+                  boxSizing: 'border-box'
                 }}>
                   <button className="btn-control" style={getButtonStyle(currentButtonColors.reset, currentButtonColors.reset.shadow)} onClick={handleReset}>
                     <span className="control-icon">🔄</span>
