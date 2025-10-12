@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test de l'endpoint `/api/generate-verse-by-verse` avec le nouveau format à 4 sections et vérification que la note API a été retirée"
+user_problem_statement: "Test des améliorations apportées à l'endpoint `/api/generate-verse-by-verse` - Parsing du passage et prompt amélioré pour l'unicité"
 
 backend:
   - task: "Health endpoint functionality"
@@ -117,9 +117,21 @@ backend:
           agent: "testing"
           comment: "Health endpoint working correctly - returns status of all 5 API keys (4 Gemini + 1 Bible API). All Gemini keys currently quota exceeded, Bible API available."
 
+  - task: "Passage parsing for verse ranges"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ FIXED: Passage parsing now correctly extracts verse numbers from formats like 'Genèse 1:1-5', 'Genèse 1:6-10', 'Genèse 1:11-15'. All 3 test batches successfully generated content for the correct verse ranges (1-5, 6-10, 11-15)."
+
   - task: "Generate verse-by-verse with new 4-section format"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
@@ -128,6 +140,21 @@ backend:
         - working: false
           agent: "testing"
           comment: "CRITICAL ISSUE: All Gemini keys are quota exceeded, system falls back to Bible API which uses old format. The new 4-section format (📖 AFFICHAGE DU VERSET, 📚 CHAPITRE, 📜 CONTEXTE HISTORIQUE, ✝️ PARTIE THÉOLOGIQUE) is only implemented in Gemini prompt, not in Bible API fallback function. Bible API fallback still generates old format with 📜 TEXTE BIBLIQUE and 🎓 EXPLICATION THÉOLOGIQUE sections."
+        - working: true
+          agent: "testing"
+          comment: "✅ FIXED: 4-section format now correctly implemented in Bible API fallback. All 3 batches show proper sections: 📖 AFFICHAGE DU VERSET, 📚 CHAPITRE, 📜 CONTEXTE HISTORIQUE, ✝️ PARTIE THÉOLOGIQUE."
+
+  - task: "Content uniqueness per verse batch"
+    implemented: true
+    working: false
+    file: "/app/backend/server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE: Content uniqueness FAILED. All 3 batches (versets 1-5, 6-10, 11-15) are 70-73% similar. Bible API fallback generates very generic templated content instead of unique verse-specific analysis. Each verse gets the same generic phrases like 'Ce chapitre développe des thèmes théologiques importants' and 'a été rédigé dans un contexte historique précis'. The Bible API fallback needs verse-specific content generation, not generic templates."
 
   - task: "Remove old API note from generated content"
     implemented: true
