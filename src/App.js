@@ -1478,6 +1478,10 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
         console.log(`[ENRICHISSEMENT GEMINI GRATUIT] Rubrique ${activeRubrique} - Longueur enrichie: ${enrichedLength} caractères`);
         
         // Appeler votre backend avec votre clé Gemini gratuite
+        // Timeout de 60 secondes pour laisser le temps à la Bible API de générer
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 secondes
+        
         const response = await fetch(`${API_BASE}/generate-verse-by-verse`, {
           method: 'POST',
           headers: { 
@@ -1490,8 +1494,9 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
             use_gemini: true,
             enriched: true,
             rubric_type: rubriqueTitle
-          })
-        });
+          }),
+          signal: controller.signal
+        }).finally(() => clearTimeout(timeoutId));
 
         if (!response.ok) {
           throw new Error(`Erreur API: ${response.status}`);
