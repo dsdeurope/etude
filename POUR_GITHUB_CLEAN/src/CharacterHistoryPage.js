@@ -286,27 +286,37 @@ const CharacterHistoryPage = ({ character, onGoBack }) => {
   const [history, setHistory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [apiUsed, setApiUsed] = useState("");
+  const [wordCount, setWordCount] = useState(0);
+  const [generationMode, setGenerationMode] = useState("standard"); // 'standard', 'enrich', 'regenerate'
 
   useEffect(() => {
     if (character) {
-      generateCharacterHistory();
+      generateCharacterHistory('standard');
     }
   }, [character]);
 
-  const generateCharacterHistory = async () => {
+  const generateCharacterHistory = async (mode = 'standard') => {
     setIsLoading(true);
+    setGenerationMode(mode);
     
     try {
+      const requestBody = {
+        character_name: character,
+        mode: mode
+      };
+      
+      // Si mode enrichissement, envoyer le contenu actuel
+      if (mode === 'enrich' && history) {
+        requestBody.previous_content = history;
+      }
+      
       // Appel API pour générer l'histoire narrative du personnage
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-character-history`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          character_name: character,
-          enrich: true
-        })
+        body: JSON.stringify(requestBody)
       });
 
       if (!response.ok) {
