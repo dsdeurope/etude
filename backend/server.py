@@ -66,12 +66,15 @@ async def get_status_checks():
     
     return status_checks
 
-# Route pour le health check des API avec rotation des clés
+# Route pour le health check des API avec rotation des clés et gestion des quotas
 @api_router.get("/health")
 async def api_health():
     """
-    Retourne le statut de santé des API et la clé actuellement active.
-    Cette route simule une rotation de clés Gemini avec statistiques.
+    Retourne le statut de santé des API avec gestion des quotas.
+    Les LED changent de couleur selon l'utilisation:
+    - VERT: quota < 70%
+    - JAUNE/ORANGE: quota entre 70% et 90%
+    - ROUGE: quota > 90% ou épuisé
     """
     import time
     import random
@@ -82,8 +85,61 @@ async def api_health():
     active_key_index = (current_time // key_rotation_interval) % 4 + 1
     active_key = f"gemini_{active_key_index}"
     
-    # Générer des stats simulées pour chaque clé
     base_time = datetime.now(timezone.utc)
+    
+    # Fonction pour déterminer la couleur selon le quota
+    def get_api_status(quota_used_percent):
+        """Retourne la couleur et le statut selon le quota utilisé"""
+        if quota_used_percent >= 100:
+            return "red", "quota_exceeded", "Quota épuisé"
+        elif quota_used_percent >= 90:
+            return "red", "critical", "Critique"
+        elif quota_used_percent >= 70:
+            return "yellow", "warning", "Attention"
+        else:
+            return "green", "available", "Disponible"
+    
+    # Simuler différents niveaux de quota pour chaque clé
+    # Pour la démo, on varie les quotas de façon réaliste
+    gemini_quotas = [
+        random.randint(10, 60),   # Gemini 1: bon état
+        random.randint(65, 85),   # Gemini 2: attention
+        random.randint(88, 98),   # Gemini 3: critique
+        random.randint(5, 40)     # Gemini 4: bon état
+    ]
+    
+    apis = {}
+    
+    # Générer les stats pour chaque clé Gemini
+    for i in range(1, 5):
+        key = f"gemini_{i}"
+        quota_percent = gemini_quotas[i-1]
+        color, status, status_text = get_api_status(quota_percent)
+        
+        apis[key] = {
+            "name": f"Gemini Key {i}",
+            "color": color,
+            "status": status,
+            "status_text": status_text,
+            "quota_used": quota_percent,
+            "quota_remaining": 100 - quota_percent,
+            "success_count": random.randint(50, 300),
+            "error_count": random.randint(0, 10),
+            "last_used": base_time.isoformat() if active_key == key else None
+        }
+    
+    # Bible API - toujours disponible
+    apis["bible_api"] = {
+        "name": "Bible API",
+        "color": "green",
+        "status": "available",
+        "status_text": "Disponible",
+        "quota_used": 0,
+        "quota_remaining": 100,
+        "success_count": random.randint(100, 500),
+        "error_count": 0,
+        "last_used": None
+    }
     
     return {
         "status": "healthy",
@@ -92,48 +148,7 @@ async def api_health():
         "active_key_index": active_key_index,
         "bible_api_configured": True,
         "rotation_interval_seconds": key_rotation_interval,
-        "apis": {
-            "gemini_1": {
-                "name": "Gemini Key 1",
-                "color": "green",
-                "status": "available",
-                "success_count": random.randint(50, 200),
-                "error_count": random.randint(0, 5),
-                "last_used": (base_time).isoformat() if active_key == "gemini_1" else None
-            },
-            "gemini_2": {
-                "name": "Gemini Key 2", 
-                "color": "green",
-                "status": "available",
-                "success_count": random.randint(50, 200),
-                "error_count": random.randint(0, 5),
-                "last_used": (base_time).isoformat() if active_key == "gemini_2" else None
-            },
-            "gemini_3": {
-                "name": "Gemini Key 3",
-                "color": "green", 
-                "status": "available",
-                "success_count": random.randint(50, 200),
-                "error_count": random.randint(0, 5),
-                "last_used": (base_time).isoformat() if active_key == "gemini_3" else None
-            },
-            "gemini_4": {
-                "name": "Gemini Key 4",
-                "color": "green",
-                "status": "available", 
-                "success_count": random.randint(50, 200),
-                "error_count": random.randint(0, 5),
-                "last_used": (base_time).isoformat() if active_key == "gemini_4" else None
-            },
-            "bible_api": {
-                "name": "Bible API",
-                "color": "green",
-                "status": "available",
-                "success_count": random.randint(100, 500),
-                "error_count": 0,
-                "last_used": None
-            }
-        }
+        "apis": apis
     }
 
 # Route pour générer l'histoire d'un personnage biblique
