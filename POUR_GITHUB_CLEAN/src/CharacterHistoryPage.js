@@ -328,9 +328,10 @@ const CharacterHistoryPage = ({ character, onGoBack }) => {
       if (result.status === 'success') {
         setHistory(result.content);
         setApiUsed(result.api_used);
-        console.log(`[CHARACTER HISTORY] Génération réussie pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
+        setWordCount(result.word_count || 0);
+        console.log(`[CHARACTER HISTORY] Génération ${mode} réussie pour ${character} - ${result.word_count} mots - API: ${result.api_used}`);
       } else {
-        throw new Error('Erreur lors de la génération du contenu');
+        throw new Error(result.message || 'Erreur lors de la génération du contenu');
       }
 
     } catch (error) {
