@@ -1471,7 +1471,11 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
       
     } catch (err) {
       console.error("Erreur génération VERSETS PROG:", err);
-      setContent(`Erreur lors de la génération progressive: ${err.message}`);
+      
+      // Créer un message d'erreur formaté en markdown
+      const errorMarkdown = `# ❌ Erreur de Génération\n\n**Une erreur est survenue lors de la génération de l'étude verset par verset.**\n\n## 🔍 Détails de l'erreur :\n\`\`\`\n${err.message}\n\`\`\`\n\n## 🔧 Solutions possibles :\n\n1. **Vérifiez votre connexion internet**\n2. **Réessayez dans quelques instants**\n3. **Si le problème persiste :**\n   - Les clés API Gemini ont peut-être atteint leur quota\n   - Attendez le reset automatique (vers 9h du matin)\n   - Ou ajoutez de nouvelles clés sur le backend\n\n## 📞 Besoin d'aide ?\n\nConsultez la documentation ou contactez le support technique.\n\n---\n\n*Erreur technique : ${err.message}*`;
+      
+      setContent(formatContent(errorMarkdown, 'error'));
       setRubriquesStatus(p => ({ ...p, 0: "error" }));
     } finally {
       setIsLoading(false); setIsProgressiveLoading(false);
