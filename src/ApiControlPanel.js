@@ -269,18 +269,24 @@ const ApiControlPanel = ({ backendUrl }) => {
                 </div>
               </div>
               
-              {/* LED individuelles plus grandes */}
-              <div style={{ display: 'flex', gap: '2px' }}>
+              {/* LED individuelles PHYSIQUES plus visibles */}
+              <div style={{ display: 'flex', gap: '4px', padding: '4px 6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}>
                 {Object.entries(apiStatus.apis).map(([key, api]) => (
                   <div 
                     key={key}
                     style={{
-                      width: '6px',
-                      height: '6px',
+                      width: '10px',
+                      height: '10px',
                       borderRadius: '50%',
                       backgroundColor: getLedColor(api),
-                      boxShadow: `0 0 6px ${getLedColor(api)}`,
-                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite'
+                      boxShadow: `0 0 10px ${getLedColor(api)}, 0 0 20px ${getLedColor(api)}, inset 0 0 5px ${getLedColor(api)}`,
+                      animation: api.color === 'green' ? 'pulse-green 2s infinite' : 'pulse-red 1s infinite',
+                      border: '2px solid rgba(255,255,255,0.4)',
+                      position: 'relative',
+                      // Effet 3D LED physique
+                      background: api.color === 'green' 
+                        ? 'radial-gradient(circle at 30% 30%, #00ff00, #00cc00, #009900)'
+                        : 'radial-gradient(circle at 30% 30%, #ff0000, #cc0000, #990000)'
                     }}
                     title={`${api.name}: ${api.status === 'available' ? 'Disponible' : 'Quota dépassé'}`}
                   />
