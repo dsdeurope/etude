@@ -395,7 +395,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     }
   };
 
-  // Fonction pour charger le batch suivant (versets 6-10, 11-15, etc.)
+  // Fonction pour charger le batch suivant (versets 4-6, 7-9, etc.)
   const loadNextBatch = async () => {
     if (isLoadingMore) return;
     
@@ -410,9 +410,10 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
     setIsLoadingMore(true);
     
     try {
-      // Calculer le range de versets à demander
-      const startVerse = (nextBatch - 1) * 5 + 1; // Batch 2 = versets 6-10, etc.
-      const endVerse = startVerse + 4;
+      // Calculer le range de versets à demander (3 versets par batch pour Vercel)
+      const VERSES_PER_BATCH = 3;
+      const startVerse = (nextBatch - 1) * VERSES_PER_BATCH + 1; // Batch 2 = versets 4-6, etc.
+      const endVerse = startVerse + (VERSES_PER_BATCH - 1);
       
       // Extraire le livre et chapitre du bookInfo
       const bookChapter = bookInfo?.split(':')[0] || 'Genèse 1';
@@ -892,7 +893,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
               opacity: 0.9,
               fontWeight: '500'
             }}>
-              {bookInfo} • Batch {currentBatch} (versets {(currentBatch - 1) * 5 + 1}-{currentBatch * 5})
+              {bookInfo} • Batch {currentBatch} (versets {(currentBatch - 1) * 3 + 1}-{currentBatch * 3})
             </div>
           )}
         </div>
@@ -1175,7 +1176,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
               fontSize: 'clamp(12px, 3vw, 14px)',
               color: '#6b7280'
             }}>
-              📖 Batch {currentBatch} • Versets {(currentBatch - 1) * 5 + 1} à {currentBatch * 5}
+              📖 Batch {currentBatch} • Versets {(currentBatch - 1) * 3 + 1} à {currentBatch * 3}
             </div>
             
             {/* Styles CSS intégrés pour les couleurs */}
