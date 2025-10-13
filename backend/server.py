@@ -848,7 +848,7 @@ async def generate_verse_by_verse(request: dict):
     try:
         passage = request.get('passage', '')
         start_verse = request.get('start_verse', 1)
-        end_verse = request.get('end_verse', 5)
+        end_verse = request.get('end_verse', 3)  # Réduit à 3 pour Vercel timeout 10s
         
         if not passage:
             return {
