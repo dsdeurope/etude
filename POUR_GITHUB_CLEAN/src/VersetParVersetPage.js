@@ -893,7 +893,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
               opacity: 0.9,
               fontWeight: '500'
             }}>
-              {bookInfo} • Batch {currentBatch} (versets {(currentBatch - 1) * 5 + 1}-{currentBatch * 5})
+              {bookInfo} • Batch {currentBatch} (versets {(currentBatch - 1) * 3 + 1}-{currentBatch * 3})
             </div>
           )}
         </div>
