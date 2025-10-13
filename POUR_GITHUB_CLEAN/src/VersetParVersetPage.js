@@ -1176,7 +1176,7 @@ GÉNÈRE DIRECTEMENT l'explication enrichie complète :`;
               fontSize: 'clamp(12px, 3vw, 14px)',
               color: '#6b7280'
             }}>
-              📖 Batch {currentBatch} • Versets {(currentBatch - 1) * 5 + 1} à {currentBatch * 5}
+              📖 Batch {currentBatch} • Versets {(currentBatch - 1) * 3 + 1} à {currentBatch * 3}
             </div>
             
             {/* Styles CSS intégrés pour les couleurs */}
