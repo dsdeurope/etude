@@ -356,11 +356,24 @@ async def get_status_checks():
     return status_checks
 
 # Fonction pour vérifier le quota d'une clé Gemini
+# Cache pour /api/health (éviter de tester les clés trop souvent)
+health_check_cache = {}
+HEALTH_CHECK_CACHE_DURATION = 300  # 5 minutes
+
 async def check_gemini_key_quota(api_key: str, key_index: int):
     """
     Vérifie le quota réel d'une clé Gemini en faisant un appel de test.
+    Utilise un cache de 5 minutes pour éviter de tester trop souvent.
     Retourne le pourcentage de quota utilisé et le statut.
     """
+    # Vérifier le cache d'abord
+    cache_key = f"gemini_{key_index}"
+    if cache_key in health_check_cache:
+        cached_data, timestamp = health_check_cache[cache_key]
+        if time.time() - timestamp < HEALTH_CHECK_CACHE_DURATION:
+            # Retourner les données en cache
+            return cached_data
+    
     try:
         # Tenter un appel de test très court pour vérifier le quota
         chat = LlmChat(
@@ -377,31 +390,34 @@ async def check_gemini_key_quota(api_key: str, key_index: int):
         # Estimer le quota basé sur l'usage actuel tracké
         usage_count = gemini_key_usage_count.get(key_index, 0)
         
-        # Estimation du quota (à ajuster selon vos limites réelles)
-        # Par exemple : 1500 requêtes par jour max par clé
-        max_daily_requests = 1500
+        # Quota réel: 50 requêtes par jour par clé gratuite
+        max_daily_requests = 50
         quota_percent = min(100, (usage_count / max_daily_requests) * 100)
         
-        return {
+        result = {
             "is_available": True,
             "quota_used": round(quota_percent, 1),
             "usage_count": usage_count,
             "error": None
         }
         
+        # Mettre en cache
+        health_check_cache[cache_key] = (result, time.time())
+        return result
+        
     except Exception as e:
         error_str = str(e).lower()
         
         # Détecter les erreurs de quota
         if "quota" in error_str or "429" in error_str or "resource_exhausted" in error_str:
-            return {
+            result = {
                 "is_available": False,
                 "quota_used": 100,
                 "usage_count": gemini_key_usage_count.get(key_index, 0),
                 "error": "Quota épuisé"
             }
         elif "invalid" in error_str or "api_key" in error_str:
-            return {
+            result = {
                 "is_available": False,
                 "quota_used": 0,
                 "usage_count": 0,
@@ -410,13 +426,17 @@ async def check_gemini_key_quota(api_key: str, key_index: int):
         else:
             # Autre erreur, on suppose que la clé est utilisable
             usage_count = gemini_key_usage_count.get(key_index, 0)
-            quota_percent = min(100, (usage_count / 1500) * 100)
-            return {
+            quota_percent = min(100, (usage_count / 50) * 100)
+            result = {
                 "is_available": True,
                 "quota_used": round(quota_percent, 1),
                 "usage_count": usage_count,
                 "error": str(e)[:100]
             }
+        
+        # Mettre en cache même les erreurs
+        health_check_cache[cache_key] = (result, time.time())
+        return result
 
 # Fonction pour vérifier la Bible API
 async def check_bible_api():
@@ -1946,16 +1966,59 @@ Pour CHAQUE verset sélectionné:
 
 @api_router.post("/generate-rubrique")
 async def generate_rubrique(request: dict):
+    """
+    Génère une rubrique avec cache MongoDB pour éviter de régénérer.
+    Cache basé sur: passage + rubrique_number
+    """
     try:
         passage = request.get('passage', '')
         rubrique_number = request.get('rubrique_number', 1)
         rubrique_title = request.get('rubrique_title', '')
+        force_regenerate = request.get('force_regenerate', False)  # Nouveau paramètre
         
         if rubrique_number not in RUBRIQUE_PROMPTS:
             return {"status": "success", "content": f"# {rubrique_title}\n\n**{passage}**\n\nRubrique en développement.", "api_used": "placeholder"}
         
+        # Créer une clé de cache unique
+        cache_key = f"{passage}_{rubrique_number}"
+        
+        # Vérifier si existe en cache (sauf si force_regenerate)
+        if not force_regenerate:
+            cached_rubrique = await db.rubriques_cache.find_one({"cache_key": cache_key})
+            if cached_rubrique:
+                logging.info(f"✅ Cache hit pour {passage} - Rubrique {rubrique_number}")
+                return {
+                    "status": "success",
+                    "content": cached_rubrique["content"],
+                    "rubrique_number": rubrique_number,
+                    "rubrique_title": rubrique_title,
+                    "passage": passage,
+                    "api_used": "cache",
+                    "cached": True,
+                    "generated_at": cached_rubrique.get("created_at")
+                }
+        
+        # Générer nouveau contenu
+        logging.info(f"🔄 Génération pour {passage} - Rubrique {rubrique_number}")
         prompt = RUBRIQUE_PROMPTS[rubrique_number].format(passage=passage)
         content = await call_gemini_with_rotation(prompt)
+        
+        # Sauvegarder en cache MongoDB
+        cache_doc = {
+            "cache_key": cache_key,
+            "passage": passage,
+            "rubrique_number": rubrique_number,
+            "rubrique_title": rubrique_title,
+            "content": content,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Upsert (update ou insert)
+        await db.rubriques_cache.update_one(
+            {"cache_key": cache_key},
+            {"$set": cache_doc},
+            upsert=True
+        )
         
         return {
             "status": "success",
@@ -1963,7 +2026,8 @@ async def generate_rubrique(request: dict):
             "rubrique_number": rubrique_number,
             "rubrique_title": rubrique_title,
             "passage": passage,
-            "api_used": "gemini"
+            "api_used": "gemini",
+            "cached": False
         }
     except Exception as e:
         return {"status": "error", "message": str(e)}
