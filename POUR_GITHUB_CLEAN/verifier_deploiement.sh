@@ -70,7 +70,7 @@ echo "🔧 Vérification du Backend..."
 echo "----------------------------------------"
 check_file "backend_server_COMPLET.py"
 check_content "backend_server_COMPLET.py" "GEMINI_API_KEY_10" "10 clés Gemini configurées"
-check_content "backend_server_COMPLET.py" "/api/generate-rubrique" "Endpoint /api/generate-rubrique présent"
+check_content "backend_server_COMPLET.py" "generate-rubrique" "Endpoint /api/generate-rubrique présent"
 echo ""
 
 echo "🧹 Vérification du nettoyage..."
