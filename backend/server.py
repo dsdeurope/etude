@@ -1966,16 +1966,59 @@ Pour CHAQUE verset sélectionné:
 
 @api_router.post("/generate-rubrique")
 async def generate_rubrique(request: dict):
+    """
+    Génère une rubrique avec cache MongoDB pour éviter de régénérer.
+    Cache basé sur: passage + rubrique_number
+    """
     try:
         passage = request.get('passage', '')
         rubrique_number = request.get('rubrique_number', 1)
         rubrique_title = request.get('rubrique_title', '')
+        force_regenerate = request.get('force_regenerate', False)  # Nouveau paramètre
         
         if rubrique_number not in RUBRIQUE_PROMPTS:
             return {"status": "success", "content": f"# {rubrique_title}\n\n**{passage}**\n\nRubrique en développement.", "api_used": "placeholder"}
         
+        # Créer une clé de cache unique
+        cache_key = f"{passage}_{rubrique_number}"
+        
+        # Vérifier si existe en cache (sauf si force_regenerate)
+        if not force_regenerate:
+            cached_rubrique = await db.rubriques_cache.find_one({"cache_key": cache_key})
+            if cached_rubrique:
+                logging.info(f"✅ Cache hit pour {passage} - Rubrique {rubrique_number}")
+                return {
+                    "status": "success",
+                    "content": cached_rubrique["content"],
+                    "rubrique_number": rubrique_number,
+                    "rubrique_title": rubrique_title,
+                    "passage": passage,
+                    "api_used": "cache",
+                    "cached": True,
+                    "generated_at": cached_rubrique.get("created_at")
+                }
+        
+        # Générer nouveau contenu
+        logging.info(f"🔄 Génération pour {passage} - Rubrique {rubrique_number}")
         prompt = RUBRIQUE_PROMPTS[rubrique_number].format(passage=passage)
         content = await call_gemini_with_rotation(prompt)
+        
+        # Sauvegarder en cache MongoDB
+        cache_doc = {
+            "cache_key": cache_key,
+            "passage": passage,
+            "rubrique_number": rubrique_number,
+            "rubrique_title": rubrique_title,
+            "content": content,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Upsert (update ou insert)
+        await db.rubriques_cache.update_one(
+            {"cache_key": cache_key},
+            {"$set": cache_doc},
+            upsert=True
+        )
         
         return {
             "status": "success",
@@ -1983,7 +2026,8 @@ async def generate_rubrique(request: dict):
             "rubrique_number": rubrique_number,
             "rubrique_title": rubrique_title,
             "passage": passage,
-            "api_used": "gemini"
+            "api_used": "gemini",
+            "cached": False
         }
     except Exception as e:
         return {"status": "error", "message": str(e)}
