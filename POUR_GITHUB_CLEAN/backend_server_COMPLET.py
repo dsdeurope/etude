@@ -71,7 +71,6 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None, use_bi
     for attempt in range(max_retries):
         try:
             api_key, key_index = await get_gemini_key()
-            gemini_key_usage_count[key_index] += 1
             
             logging.info(f"Tentative {attempt + 1}/{max_retries} avec clé Gemini #{key_index + 1}")
             
@@ -86,7 +85,10 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None, use_bi
             user_message = UserMessage(text=prompt)
             response = await chat.send_message(user_message)
             
-            logging.info(f"✅ Succès avec clé Gemini #{key_index + 1}")
+            # NE COMPTER QUE LES SUCCÈS (pas les échecs)
+            gemini_key_usage_count[key_index] += 1
+            
+            logging.info(f"✅ Succès avec clé Gemini #{key_index + 1} (usage: {gemini_key_usage_count[key_index]})")
             return response
             
         except Exception as e:
