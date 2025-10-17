@@ -998,6 +998,379 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
+# ============================================================================
+# ENDPOINT GÉNÉRATION RUBRIQUES (28 TYPES) AVEC GEMINI
+# ============================================================================
+
+# Prompts professionnels pour les 28 rubriques
+RUBRIQUE_PROMPTS = {
+    1: """Tu es un guide spirituel et théologien. Génère une VRAIE prière d'ouverture profonde pour l'étude de {passage}.
+
+**STRUCTURE** :
+**ADORATION** (3-4 phrases) : Adore Dieu pour SES attributs révélés dans ce passage PRÉCIS. Cite des éléments CONCRETS du texte (ex: "la séparation des eaux", "l'image divine"). Ne répète PAS le titre "{passage}".
+
+**CONFESSION** (3-4 phrases) : Confesse les péchés que CE passage met en lumière. Sois personnel et collectif (nous).
+
+**DEMANDE** (3-4 phrases) : Demande illumination pour comprendre CE passage SPÉCIFIQUE. 
+
+**MÉDITATION** (2 paragraphes) : Développe comment cette prière prépare le cœur à l'étude.
+
+300-400 mots. Style révérencieux ET intime. Commence directement par "**ADORATION**".""",
+
+    2: """Analyse la structure littéraire de {passage} avec précision académique.
+
+**ARCHITECTURE GLOBALE** : Structure d'ensemble (chiasme, parallélisme, etc.)
+**SECTIONS DÉTAILLÉES** : Décompose en unités littéraires
+**PROCÉDÉS LITTÉRAIRES** : Répétitions, mots-clés hébreux, formules
+**SIGNIFICATION THÉOLOGIQUE** : Pourquoi cette structure ?
+
+400-500 mots. Technique + théologique. Commence par "**ARCHITECTURE GLOBALE**".""",
+
+    3: """Analyse la transition du chapitre précédent vers {passage}.
+
+Si chapitre 1 : Explique l'OUVERTURE du livre.
+
+**RÉCAPITULATIF** : Résumé précédent
+**QUESTIONS DE TRANSITION** : 5-7 questions créant le lien
+**CONTINUITÉ THÉOLOGIQUE** : Thèmes qui se poursuivent
+**CONTEXTE NARRATIF** : Place dans le livre entier
+
+350-450 mots. Commence directement.""",
+
+    4: """Identifie et développe le thème doctrinal central de {passage}.
+
+**THÈME PRINCIPAL** : Énonce en 1-2 phrases
+**DÉVELOPPEMENT THÉOLOGIQUE** :
+- Théologie propre (Dieu)
+- Anthropologie (homme)
+- Sotériologie (salut)
+- Eschatologie (fin)
+
+**APPLICATIONS DOCTRINALES** : Comment façonner la foi
+**LIENS DOCTRINAUX** : Autres doctrines liées
+
+500-600 mots. Rigueur théologique. Cite 3-5 autres passages.""",
+
+    5: """Expose les fondements théologiques profonds de {passage}.
+
+**PROLÉGOMÈNES** : Importance théologique
+**ANALYSE MULTI-DIMENSIONNELLE** (3+ dimensions) :
+- Théologie révélation
+- Doctrine création
+- Théologie alliance
+- Christologie implicite
+- Pneumatologie
+- Ecclésiologie
+
+**TENSIONS THÉOLOGIQUES** : Questions difficiles
+**HÉRITAGE THÉOLOGIQUE** : Pères/Réformateurs
+
+700-900 mots. Niveau académique.""",
+
+    6: """Développe le contexte historique de {passage}.
+
+Univers Proche-Orient ancien, cosmogonies babyloniennes/égyptiennes, révélation biblique unique.
+
+**CONTEXTE CULTUREL** : Mythologies contemporaines
+**SINGULARITÉ BIBLIQUE** : En quoi la révélation diffère
+**HISTORICITÉ** : Questions académiques
+**PERTINENCE** : Application aujourd'hui
+
+500-700 mots. Historique + théologique.""",
+
+    7: """Analyse les mots-clés hébreux/grecs de {passage}.
+
+Pour chaque mot-clé (3-5 mots) :
+**MOT** : Translittération + traduction
+**ANALYSE** : Champ sémantique, racine, occurrences bibliques
+**SIGNIFICATION THÉOLOGIQUE** : Portée doctrinale
+
+400-600 mots. Académique.""",
+
+    8: """Explore les types et symboles dans {passage}.
+
+**TYPOLOGIE** : Préfigurations christologiques
+**SYMBOLISME** : Signification spirituelle
+**ACCOMPLISSEMENT** : Lien avec NT
+
+300-500 mots.""",
+
+    9: """Explique les difficultés d'interprétation de {passage}.
+
+**QUESTIONS EXÉGÉTIQUES** : 3-5 difficultés
+**POSITIONS THÉOLOGIQUES** : Différentes interprétations
+**RÉSOLUTION** : Position défendue avec arguments
+
+400-600 mots.""",
+
+    10: """Compare {passage} avec passages parallèles.
+
+**PASSAGES PARALLÈLES** : 3-5 textes similaires
+**COMPARAISON** : Similitudes et différences
+**ENRICHISSEMENT MUTUEL** : Ce que chaque texte apporte
+
+400-500 mots.""",
+
+    11: """Analyse les personnages de {passage}.
+
+Pour chaque personnage :
+**IDENTITÉ** : Qui est-il ?
+**RÔLE** : Fonction narrative
+**SIGNIFICATION** : Portée théologique
+**APPLICATION** : Leçons pour nous
+
+300-500 mots.""",
+
+    12: """Explore les lieux géographiques de {passage}.
+
+**LIEUX MENTIONNÉS** : Identifiaction
+**CONTEXTE GÉOGRAPHIQUE** : Topographie
+**SIGNIFICATION THÉOLOGIQUE** : Pourquoi ces lieux ?
+
+250-400 mots.""",
+
+    13: """Analyse les événements de {passage}.
+
+**CHRONOLOGIE** : Ordre des événements
+**CAUSALITÉ** : Liens de cause à effet
+**SIGNIFICATION** : Portée théologique
+**LEÇONS** : Applications pratiques
+
+400-600 mots.""",
+
+    14: """Développe les promesses divines dans {passage}.
+
+**PROMESSES** : Identification
+**NATURE** : Conditionnelles ou inconditionnelles ?
+**ACCOMPLISSEMENT** : Comment s'accomplissent-elles ?
+**APPLICATION** : Pour nous aujourd'hui
+
+400-500 mots.""",
+
+    15: """Explore les commandements dans {passage}.
+
+**COMMANDEMENTS** : Identification
+**CONTEXTE** : Pourquoi donnés ?
+**APPLICATION** : Comment obéir aujourd'hui ?
+
+300-500 mots.""",
+
+    16: """Identifie les leçons pratiques de {passage}.
+
+**LEÇONS** : 5-7 leçons concrètes
+Pour chaque leçon :
+- Principe biblique
+- Application moderne
+- Exemple concret
+
+400-600 mots.""",
+
+    17: """Explore les contrastes dans {passage}.
+
+**OPPOSITIONS** : Lumière/ténèbres, bien/mal, etc.
+**FONCTION** : Pourquoi ces contrastes ?
+**SIGNIFICATION** : Enseignement théologique
+
+300-500 mots.""",
+
+    18: """Développe les répétitions dans {passage}.
+
+**FORMULES RÉCURRENTES** : Identification
+**FONCTION** : Rôle littéraire
+**EMPHASE THÉOLOGIQUE** : Ce qui est souligné
+
+300-400 mots.""",
+
+    19: """Analyse la progression narrative de {passage}.
+
+**STRUCTURE NARRATIVE** : Début, développement, climax, résolution
+**TENSION DRAMATIQUE** : Comment créée ?
+**MESSAGE** : Ce que la narration enseigne
+
+400-500 mots.""",
+
+    20: """Explore les émotions dans {passage}.
+
+**ÉMOTIONS EXPRIMÉES** : Par Dieu, par les personnages
+**FONCTION** : Pourquoi ces émotions ?
+**APPLICATION** : Nos émotions devant Dieu
+
+300-500 mots.""",
+
+    21: """Développe les questions posées dans {passage}.
+
+**QUESTIONS** : Listées
+**FONCTION** : Rhétoriques, pédagogiques ?
+**RÉPONSES** : Explicites ou implicites
+**PORTÉE** : Signification théologique
+
+300-500 mots.""",
+
+    22: """Analyse les images et métaphores de {passage}.
+
+**IMAGES** : Identification
+**SIGNIFICATION** : Sens littéral vs figuré
+**RICHESSE THÉOLOGIQUE** : Enseignement
+
+300-500 mots.""",
+
+    23: """Explore la souveraineté divine dans {passage}.
+
+**MANIFESTATIONS** : Comment Dieu agit souverainement
+**IMPLICATIONS** : Pour notre vie
+**ADORATION** : Réponse appropriée
+
+400-500 mots.""",
+
+    24: """Développe la gloire de Dieu dans {passage}.
+
+**RÉVÉLATION** : Comment la gloire divine est manifestée
+**ATTRIBUTS** : Perfections divines révélées
+**RÉPONSE** : Notre adoration
+
+400-600 mots.""",
+
+    25: """Explore la grâce divine dans {passage}.
+
+**MANIFESTATIONS** : Actes de grâce
+**NATURE** : Gratuite, imméritée
+**APPLICATION** : Recevoir et vivre la grâce
+
+400-500 mots.""",
+
+    26: """Développe la sainteté de Dieu dans {passage}.
+
+**RÉVÉLATION** : Comment la sainteté est manifestée
+**IMPLICATIONS** : Pour notre vie
+**SANCTIFICATION** : Appel à la sainteté
+
+400-500 mots.""",
+
+    27: """Explore la fidélité divine dans {passage}.
+
+**MANIFESTATIONS** : Preuves de fidélité
+**PROMESSES** : Comment Dieu les tient
+**CONFIANCE** : Bases de notre foi
+
+400-500 mots.""",
+
+    28: """Génère une prière de clôture pour {passage}.
+
+**RECONNAISSANCE** : Remercie pour vérités apprises
+**ENGAGEMENT** : Comment vivre ces vérités
+**INTERCESSION** : Pour l'Église et le monde
+**BÉNÉDICTION** : Conclusion
+
+250-400 mots. Style révérencieux."""
+}
+
+class RubriqueRequest(BaseModel):
+    passage: str = Field(..., description="Ex: Genèse 1")
+    book: str = Field(..., description="Ex: Genèse")
+    chapter: str = Field(..., description="Ex: 1")
+    rubrique_number: int = Field(..., ge=1, le=28, description="1-28")
+    rubrique_title: str = Field(..., description="Ex: Prière d'ouverture")
+
+@api_router.post("/generate-rubrique")
+async def generate_rubrique(request: dict):
+    """
+    Génère le contenu d'une rubrique spécifique avec Gemini
+    """
+    try:
+        passage = request.get('passage', '')
+        book = request.get('book', '')
+        chapter = request.get('chapter', '')
+        rubrique_number = request.get('rubrique_number', 1)
+        rubrique_title = request.get('rubrique_title', '')
+        
+        if not passage or not book or not chapter:
+            return {
+                "status": "error",
+                "message": "Paramètres manquants (passage, book, chapter)"
+            }
+        
+        # Récupérer le prompt correspondant
+        if rubrique_number not in RUBRIQUE_PROMPTS:
+            return {
+                "status": "error",
+                "message": f"Rubrique {rubrique_number} non supportée (1-28)"
+            }
+        
+        prompt_template = RUBRIQUE_PROMPTS[rubrique_number]
+        prompt = prompt_template.format(passage=passage)
+        
+        logger.info(f"[RUBRIQUE {rubrique_number}] Génération pour {passage} - {rubrique_title}")
+        
+        start_time = time.time()
+        
+        # Appeler Gemini avec rotation
+        try:
+            content = await call_gemini_with_rotation(prompt)
+            generation_time = time.time() - start_time
+            word_count = len(content.split())
+            
+            logger.info(f"[RUBRIQUE {rubrique_number}] Succès - {word_count} mots en {generation_time:.2f}s")
+            
+            return {
+                "status": "success",
+                "content": content,
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "passage": passage,
+                "word_count": word_count,
+                "generation_time_seconds": round(generation_time, 2),
+                "api_used": "gemini"
+            }
+            
+        except Exception as gemini_error:
+            logger.error(f"[RUBRIQUE {rubrique_number}] Échec Gemini: {gemini_error}")
+            
+            # Fallback : contenu minimal structuré
+            fallback_content = f"""# {rubrique_title}
+
+Cette section nécessite l'analyse approfondie de **{passage}** par l'intelligence artificielle.
+
+**Thème** : {rubrique_title}
+
+**Passage étudié** : {passage} ({book} chapitre {chapter})
+
+## 📖 Contenu Temporaire
+
+Le système de génération automatique est temporairement indisponible. Pour une étude complète de cette rubrique :
+
+1. Consultez des commentaires bibliques spécialisés
+2. Relisez attentivement {passage}
+3. Méditez sur les thèmes liés à "{rubrique_title}"
+4. Réessayez dans quelques minutes
+
+Le service sera rétabli après la réinitialisation des quotas API.
+
+---
+
+*Note : Contenu temporaire - Réessayez après le reset des quotas (vers 9h du matin)*
+"""
+            
+            return {
+                "status": "success",
+                "content": fallback_content,
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "passage": passage,
+                "word_count": len(fallback_content.split()),
+                "generation_time_seconds": 0,
+                "api_used": "fallback",
+                "note": "Fallback temporaire - Gemini indisponible"
+            }
+    
+    except Exception as e:
+        logger.error(f"[RUBRIQUE] Erreur: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
