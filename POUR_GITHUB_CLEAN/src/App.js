@@ -581,20 +581,18 @@ function App() {
     try {
       console.log(`[API RUBRIQUE ${rubriqueNum}] Génération via API: ${rubriqueTitle} pour ${book} ${chapter}`);
       
-      const response = await fetch(`${getBackendUrl()}/api/generate-rubrique-content`, {
+      // Appel du NOUVEL endpoint avec Gemini
+      const response = await fetch(`${getBackendUrl()}/api/generate-rubrique`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          rubrique_number: rubriqueNum,
-          rubrique_title: rubriqueTitle,
-          book: book,
-          chapter: parseInt(chapter),
           passage: passage,
-          target_length: targetLength,
-          use_gemini: true,
-          enriched: true
+          book: book,
+          chapter: chapter.toString(),
+          rubrique_number: rubriqueNum,
+          rubrique_title: rubriqueTitle
         })
       });
 
