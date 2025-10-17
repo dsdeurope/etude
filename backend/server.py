@@ -980,6 +980,173 @@ Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune intr
             "passage": request.get('passage', '')
         }
 
+# ============================================================================
+# ENDPOINT GÉNÉRATION RUBRIQUES (28 TYPES) AVEC GEMINI  
+# ============================================================================
+
+# Prompts professionnels pour les 28 rubriques
+RUBRIQUE_PROMPTS = {
+    1: """Tu es un guide spirituel et théologien. Génère une VRAIE prière d'ouverture profonde pour l'étude de {passage}.
+
+**STRUCTURE** :
+**ADORATION** (3-4 phrases) : Adore Dieu pour SES attributs révélés dans ce passage PRÉCIS. Cite des éléments CONCRETS du texte (ex: "la séparation des eaux", "l'image divine"). Ne répète PAS le titre "{passage}".
+
+**CONFESSION** (3-4 phrases) : Confesse les péchés que CE passage met en lumière. Sois personnel et collectif (nous).
+
+**DEMANDE** (3-4 phrases) : Demande illumination pour comprendre CE passage SPÉCIFIQUE. 
+
+**MÉDITATION** (2 paragraphes) : Développe comment cette prière prépare le cœur à l'étude.
+
+300-400 mots. Style révérencieux ET intime. Commence directement par "**ADORATION**".""",
+
+    2: """Analyse la structure littéraire de {passage} avec précision académique.
+
+**ARCHITECTURE GLOBALE** : Structure d'ensemble (chiasme, parallélisme, etc.)
+**SECTIONS DÉTAILLÉES** : Décompose en unités littéraires
+**PROCÉDÉS LITTÉRAIRES** : Répétitions, mots-clés hébreux, formules
+**SIGNIFICATION THÉOLOGIQUE** : Pourquoi cette structure ?
+
+400-500 mots. Technique + théologique. Commence par "**ARCHITECTURE GLOBALE**".""",
+
+    3: """Analyse la transition du chapitre précédent vers {passage}.
+
+Si chapitre 1 : Explique l'OUVERTURE du livre.
+
+**RÉCAPITULATIF** : Résumé précédent
+**QUESTIONS DE TRANSITION** : 5-7 questions créant le lien
+**CONTINUITÉ THÉOLOGIQUE** : Thèmes qui se poursuivent
+**CONTEXTE NARRATIF** : Place dans le livre entier
+
+350-450 mots. Commence directement.""",
+
+    4: """Identifie et développe le thème doctrinal central de {passage}.
+
+**THÈME PRINCIPAL** : Énonce en 1-2 phrases
+**DÉVELOPPEMENT THÉOLOGIQUE** :
+- Théologie propre (Dieu)
+- Anthropologie (homme)
+- Sotériologie (salut)  
+- Eschatologie (fin)
+
+**APPLICATIONS DOCTRINALES** : Comment façonner la foi
+**LIENS DOCTRINAUX** : Autres doctrines liées
+
+500-600 mots. Rigueur théologique. Cite 3-5 autres passages.""",
+
+    5: """Expose les fondements théologiques profonds de {passage}.
+
+**PROLÉGOMÈNES** : Importance théologique
+**ANALYSE MULTI-DIMENSIONNELLE** (3+ dimensions) :
+- Théologie révélation
+- Doctrine création
+- Théologie alliance
+- Christologie implicite
+- Pneumatologie
+- Ecclésiologie
+
+**TENSIONS THÉOLOGIQUES** : Questions difficiles
+**HÉRITAGE THÉOLOGIQUE** : Pères/Réformateurs
+
+700-900 mots. Niveau académique.""",
+}
+
+@api_router.post("/generate-rubrique")
+async def generate_rubrique(request: dict):
+    """
+    Génère le contenu d'une rubrique spécifique avec Gemini (1-5 pour l'instant)
+    """
+    try:
+        passage = request.get('passage', '')
+        book = request.get('book', '')
+        chapter = request.get('chapter', '')
+        rubrique_number = request.get('rubrique_number', 1)
+        rubrique_title = request.get('rubrique_title', '')
+        
+        if not passage or not book or not chapter:
+            return {
+                "status": "error",
+                "message": "Paramètres manquants (passage, book, chapter)"
+            }
+        
+        # Récupérer le prompt correspondant
+        if rubrique_number not in RUBRIQUE_PROMPTS:
+            # Fallback pour rubriques 6-28 pas encore implémentées
+            fallback_content = f"""# {rubrique_title}
+
+**Passage** : {passage}
+
+Cette rubrique est en cours d'implémentation. Les 5 premières rubriques utilisent Gemini.
+
+Pour une étude complète, consultez des commentaires bibliques spécialisés."""
+            
+            return {
+                "status": "success",
+                "content": fallback_content,
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "passage": passage,
+                "api_used": "placeholder"
+            }
+        
+        prompt_template = RUBRIQUE_PROMPTS[rubrique_number]
+        prompt = prompt_template.format(passage=passage)
+        
+        logger.info(f"[RUBRIQUE {rubrique_number}] Génération pour {passage} - {rubrique_title}")
+        
+        start_time = time.time()
+        
+        # Appeler Gemini avec rotation
+        try:
+            content = await call_gemini_with_rotation(prompt)
+            generation_time = time.time() - start_time
+            word_count = len(content.split())
+            
+            logger.info(f"[RUBRIQUE {rubrique_number}] Succès - {word_count} mots en {generation_time:.2f}s")
+            
+            return {
+                "status": "success",
+                "content": content,
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "passage": passage,
+                "word_count": word_count,
+                "generation_time_seconds": round(generation_time, 2),
+                "api_used": "gemini"
+            }
+            
+        except Exception as gemini_error:
+            logger.error(f"[RUBRIQUE {rubrique_number}] Échec Gemini: {gemini_error}")
+            
+            # Fallback : contenu minimal
+            fallback_content = f"""# {rubrique_title}
+
+**Passage** : {passage}
+
+Le système de génération automatique est temporairement indisponible.
+
+Réessayez dans quelques minutes après le reset des quotas API (vers 9h du matin).
+
+---
+
+*Contenu temporaire - Gemini indisponible*"""
+            
+            return {
+                "status": "success",
+                "content": fallback_content,
+                "rubrique_number": rubrique_number,
+                "rubrique_title": rubrique_title,
+                "passage": passage,
+                "api_used": "fallback",
+                "note": "Gemini indisponible"
+            }
+    
+    except Exception as e:
+        logger.error(f"[RUBRIQUE] Erreur: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
 # Include the router in the main app
 app.include_router(api_router)
 
