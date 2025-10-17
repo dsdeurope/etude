@@ -989,52 +989,955 @@ Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune intr
 # Include the router in the main app
 
 # ===== ENDPOINT RUBRIQUES AVEC GEMINI =====
+# Prompts détaillés et spécifiques pour chacune des 28 rubriques
+# Chaque prompt est conçu pour générer du contenu UNIQUE, SPÉCIFIQUE au passage, et CONFORME à la description de la rubrique
+
 RUBRIQUE_PROMPTS = {
-    1: """Génère une VRAIE prière d'ouverture pour {passage}.
+    # ========== RUBRIQUE 1: Prière d'ouverture ==========
+    1: """Génère une VRAIE prière d'ouverture personnalisée pour {passage}.
 
-**ADORATION** (3-4 phrases) : Adore Dieu pour ses attributs révélés DANS CE PASSAGE. Cite des DÉTAILS PRÉCIS (ex: "séparation des eaux", "image divine"). NE répète PAS "{passage}".
+**CONSIGNE CRITIQUE**: Ne JAMAIS répéter "{passage}" dans le texte. Utilise les DÉTAILS SPÉCIFIQUES du passage.
 
-**CONFESSION** (3-4 phrases) : Confesse les péchés que CE passage révèle.
+**STRUCTURE EXIGÉE**:
 
-**DEMANDE** (3-4 phrases) : Demande l'Esprit pour comprendre CE passage.
+**ADORATION** (3-4 phrases):
+- Adore Dieu pour SES ATTRIBUTS RÉVÉLÉS dans ce passage spécifique
+- Cite des DÉTAILS PRÉCIS du texte (noms, actions, paroles divines)
+- Exemple: Si Genèse 1:3 → "Toi qui as dit 'Que la lumière soit', manifestant ta parole créatrice"
+- Exemple: Si Jean 3:16 → "Toi qui as tant aimé le monde que tu as donné ton Fils unique"
 
-**MÉDITATION** (2 paragraphes) : Comment cette prière prépare le cœur.
+**CONFESSION** (3-4 phrases):
+- Confesse les péchés que CE PASSAGE SPÉCIFIQUE révèle
+- Lie directement la confession au contenu du passage
+- Sois concret et personnel
 
-300-400 mots. Commence par "**ADORATION**".""",
-    2: """Analyse structure littéraire de {passage}.
+**DEMANDE** (3-4 phrases):
+- Demande l'illumination de l'Esprit pour comprendre CE PASSAGE
+- Mentionne des éléments spécifiques du texte que tu veux comprendre
+- Demande des grâces pratiques liées au passage
 
-**ARCHITECTURE** : Structure globale
-**SECTIONS** : Décomposition
-**PROCÉDÉS** : Répétitions, mots-clés hébreux
-**SIGNIFICATION** : Pourquoi cette structure
+**MÉDITATION** (2 paragraphes de 3-4 phrases chacun):
+- Paragraphe 1: Comment cette prière prépare le cœur pour l'étude
+- Paragraphe 2: L'importance de l'Esprit Saint dans la compréhension de ce passage
 
-400-500 mots.""",
-    3: """Transition du chapitre précédent vers {passage}.
+**LONGUEUR**: 300-400 mots.
+**FORMAT**: Commence DIRECTEMENT par "**ADORATION**" sans titre ni introduction.""",
 
-Si chapitre 1 : OUVERTURE du livre.
+    # ========== RUBRIQUE 2: Structure littéraire ==========
+    2: """Analyse la structure littéraire CONCRÈTE de {passage}.
 
-**RÉCAPITULATIF** 
-**QUESTIONS** : 5-7 questions
-**CONTINUITÉ THÉOLOGIQUE**
-**CONTEXTE NARRATIF**
+**ARCHITECTURE GLOBALE** (1 paragraphe):
+- Décris la structure d'ensemble du passage (chiasme, parallélisme, progression narrative...)
+- Identifie les grandes divisions
 
-350-450 mots.""",
-    4: """Thème doctrinal de {passage}.
+**SECTIONS** (2-3 paragraphes):
+- Décompose le passage en sections logiques
+- Pour CHAQUE section, donne le verset de début et fin
+- Explique le rôle de chaque section
 
-**THÈME PRINCIPAL**
-**DÉVELOPPEMENT** : Dieu, homme, salut, fin
-**APPLICATIONS**
-**LIENS**
+**PROCÉDÉS LITTÉRAIRES** (1-2 paragraphes):
+- Identifie les répétitions de mots ou phrases SPÉCIFIQUES au passage
+- Note les mots-clés hébreux/grecs avec leur sens
+- Relève les figures de style utilisées
 
-500-600 mots. Cite 3-5 passages.""",
-    5: """Fondements théologiques de {passage}.
+**SIGNIFICATION** (1 paragraphe):
+- Explique POURQUOI l'auteur a choisi cette structure
+- Quel message théologique la structure communique-t-elle?
 
-**PROLÉGOMÈNES**
-**ANALYSE** : révélation, création, alliance, Christ, Esprit, Église
-**TENSIONS**
-**HÉRITAGE**
+**LONGUEUR**: 400-500 mots.
+**RÈGLE CRITIQUE**: Sois SPÉCIFIQUE au passage. Ne parle pas de structures générales.""",
 
-700-900 mots."""
+    # ========== RUBRIQUE 3: Questions du chapitre précédent ==========
+    3: """Analyse la transition entre le chapitre précédent et {passage}.
+
+**CAS PARTICULIER**: Si {passage} est le chapitre 1 d'un livre:
+- Explique que c'est l'OUVERTURE du livre
+- Décris le contexte d'écriture
+- Explique pourquoi le livre commence ainsi
+
+**POUR LES AUTRES CHAPITRES**:
+
+**RÉCAPITULATIF** (1 paragraphe):
+- Résume les ÉVÉNEMENTS CLÉS du chapitre précédent
+- Cite 2-3 versets spécifiques
+
+**QUESTIONS DE TRANSITION** (5-7 questions):
+- Formule des questions PRÉCISES qui lient le chapitre précédent à celui-ci
+- Exemple: "Comment la promesse de Dieu au v. X du ch. précédent se réalise-t-elle ici?"
+- Questions sur les personnages, thèmes, ou actions
+
+**CONTINUITÉ THÉOLOGIQUE** (1 paragraphe):
+- Comment le passage actuel développe les thèmes théologiques du chapitre précédent?
+
+**CONTEXTE NARRATIF** (1 paragraphe):
+- Où sommes-nous dans l'histoire globale du livre?
+
+**LONGUEUR**: 350-450 mots.""",
+
+    # ========== RUBRIQUE 4: Thème doctrinal ==========
+    4: """Identifie et développe le thème doctrinal PRINCIPAL de {passage}.
+
+**THÈME PRINCIPAL** (1 paragraphe):
+- Énonce LE thème doctrinal central en 1 phrase claire
+- Explique pourquoi ce thème domine le passage
+
+**DÉVELOPPEMENT THÉOLOGIQUE** (3 paragraphes):
+1. **Nature de Dieu**: Que révèle le passage sur Dieu?
+2. **Condition humaine**: Que dit-il sur l'homme (péché, besoin, destinée)?
+3. **Salut et rédemption**: Comment le thème s'inscrit dans l'histoire du salut?
+
+**APPLICATIONS PRATIQUES** (1 paragraphe):
+- 3-4 applications concrètes du thème doctrinal pour aujourd'hui
+
+**LIENS BIBLIQUES** (1 paragraphe):
+- Cite 3-5 AUTRES passages bibliques qui développent ce même thème
+- Montre la cohérence de l'Écriture
+
+**LONGUEUR**: 500-600 mots.
+**RÈGLE**: Reste focalisé sur UN seul thème doctrinal, pas plusieurs.""",
+
+    # ========== RUBRIQUE 5: Fondements théologiques ==========
+    5: """Développe les fondements théologiques PROFONDS de {passage}.
+
+**PROLÉGOMÈNES** (1 paragraphe):
+- Contexte théologique: où se situe ce passage dans la révélation progressive?
+- Pourquoi est-il fondamental?
+
+**ANALYSE THÉOLOGIQUE SYSTÉMATIQUE** (6 sous-sections de 1-2 paragraphes chacune):
+1. **Révélation**: Comment Dieu se révèle dans ce passage?
+2. **Création**: Implications sur la création, l'ordre créé, l'anthropologie?
+3. **Alliance**: Quelle(s) alliance(s)? Promesses? Obligations?
+4. **Christ**: Comment ce passage pointe vers le Messie? (christologie)
+5. **Saint-Esprit**: Rôle de l'Esprit visible ou implicite? (pneumatologie)
+6. **Église**: Implications pour le peuple de Dieu? (ecclésiologie)
+
+**TENSIONS ET PARADOXES** (1 paragraphe):
+- Quelles tensions théologiques le passage soulève-t-il?
+- Exemple: souveraineté divine vs responsabilité humaine
+
+**HÉRITAGE THÉOLOGIQUE** (1 paragraphe):
+- Comment les Pères de l'Église, Réformateurs, ou théologiens ont-ils compris ce passage?
+- Cite 1-2 théologiens spécifiques
+
+**LONGUEUR**: 700-900 mots.
+**STYLE**: Théologique, profond, mais accessible.""",
+
+    # ========== RUBRIQUE 6: Contexte historique ==========
+    6: """Développe le contexte historique CONCRET de {passage}.
+
+**ÉPOQUE** (1-2 paragraphes):
+- Quelle période historique? (datation approximative)
+- Qui était au pouvoir? Quel était le contexte politique?
+
+**SITUATION DU PEUPLE DE DIEU** (2 paragraphes):
+- Où était Israël/l'Église à ce moment?
+- Exil? Royaume uni? Diaspora? Église primitive?
+- Quels défis spirituels et sociaux?
+
+**ÉVÉNEMENTS CONTEMPORAINS** (1-2 paragraphes):
+- Quels événements historiques se déroulaient?
+- Guerres, alliances, crises?
+
+**CULTURE ENVIRONNANTE** (1-2 paragraphes):
+- Quelles influences culturelles (égyptiennes, babyloniennes, grecques, romaines)?
+- Quelles pratiques religieuses païennes existaient?
+
+**PERTINENCE DU TEXTE DANS SON CONTEXTE** (1 paragraphe):
+- Pourquoi ce passage était crucial POUR LES PREMIERS LECTEURS?
+- Quel message répondait à LEUR situation?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Sois HISTORIQUEMENT PRÉCIS. Ne fais pas d'anachronismes.""",
+
+    # ========== RUBRIQUE 7: Contexte culturel ==========
+    7: """Analyse le contexte culturel SPÉCIFIQUE de {passage}.
+
+**COUTUMES ET PRATIQUES** (2-3 paragraphes):
+- Quelles coutumes sociales apparaissent dans le passage?
+- Mariage, hospitalité, commerce, rituels?
+- Explique chaque coutume mentionnée
+
+**STRUCTURES SOCIALES** (2 paragraphes):
+- Organisation familiale (patriarcat, clan, tribu)
+- Rôles sociaux (homme, femme, enfant, esclave, étranger)
+- Comment ces structures influencent la compréhension du texte?
+
+**PRATIQUES RELIGIEUSES** (2 paragraphes):
+- Culte, sacrifices, fêtes mentionnés?
+- Pratiques juives vs païennes?
+- Symbolisme religieux culturel?
+
+**CONTEXTE LINGUISTIQUE** (1-2 paragraphes):
+- Expressions idiomatiques hébraïques/grecques?
+- Jeux de mots perdus en traduction?
+- Termes culturels spécifiques?
+
+**IMPLICATIONS POUR LA COMPRÉHENSION** (1 paragraphe):
+- Qu'est-ce que comprendre la culture change dans l'interprétation?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Explique POURQUOI chaque élément culturel est important.""",
+
+    # ========== RUBRIQUE 8: Contexte géographique ==========
+    8: """Développe le contexte géographique PRÉCIS de {passage}.
+
+**LIEUX MENTIONNÉS** (2 paragraphes):
+- Liste TOUS les lieux géographiques du passage
+- Pour chaque lieu: localisation, importance, signification du nom
+
+**GÉOGRAPHIE PHYSIQUE** (2 paragraphes):
+- Relief: montagnes, vallées, déserts mentionnés?
+- Cours d'eau, mers, routes?
+- Climat et végétation pertinents?
+
+**DISTANCES ET DÉPLACEMENTS** (1-2 paragraphes):
+- Si des voyages sont mentionnés: quelle distance? Combien de temps?
+- Difficultés du terrain?
+
+**IMPORTANCE STRATÉGIQUE** (1-2 paragraphes):
+- Pourquoi ces lieux sont-ils significatifs?
+- Position militaire, commerciale, religieuse?
+
+**SYMBOLISME GÉOGRAPHIQUE** (1-2 paragraphes):
+- Y a-t-il un symbolisme théologique lié aux lieux?
+- Exemple: Jérusalem = présence divine, Babylone = idolâtrie
+
+**IMPLICATIONS POUR L'INTERPRÉTATION** (1 paragraphe):
+- Comment la géographie éclaire le message du texte?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Utilise des DÉTAILS GÉOGRAPHIQUES PRÉCIS, pas des généralités.""",
+
+    # ========== RUBRIQUE 9: Analyse lexicale ==========
+    9: """Analyse lexicale APPROFONDIE de {passage}.
+
+**MOTS-CLÉS HÉBREUX/GRECS** (3-4 paragraphes):
+- Identifie 5-7 mots-clés dans la langue originale
+- Pour CHAQUE mot:
+  * Transcription (ex: bara, logos, agape)
+  * Sens étymologique
+  * Occurrences dans l'AT/NT
+  * Nuances perdues en traduction
+
+**CHAMPS SÉMANTIQUES** (2 paragraphes):
+- Quels sont les familles de mots dominantes? (création, alliance, salut...)
+- Comment ces champs se relient-ils?
+
+**TERMES THÉOLOGIQUES** (2 paragraphes):
+- Mots techniques: grâce, justification, sanctification, gloire, etc.
+- Définition biblique PRÉCISE de ces termes
+
+**COMPARAISON DES TRADUCTIONS** (1-2 paragraphes):
+- Compare 2-3 traductions françaises pour 2-3 versets clés
+- Explique pourquoi les différences sont significatives
+
+**IMPLICATIONS THÉOLOGIQUES** (1 paragraphe):
+- Comment l'analyse des mots enrichit la compréhension doctrinale?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Sois TECHNIQUE mais ACCESSIBLE. Explique chaque terme.""",
+
+    # ========== RUBRIQUE 10: Parallèles bibliques ==========
+    10: """Identifie les parallèles bibliques PRÉCIS de {passage}.
+
+**PARALLÈLES DIRECTS** (2-3 paragraphes):
+- Cite 5-7 passages qui racontent la MÊME histoire ou utilisent les MÊMES mots
+- Pour chaque: référence + explication de la relation
+
+**PARALLÈLES THÉMATIQUES** (2 paragraphes):
+- Cite 4-6 passages développant les MÊMES THÈMES
+- Montre la cohérence théologique
+
+**PARALLÈLES TYPOLOGIQUES** (2 paragraphes):
+- Quels passages de l'AT sont des TYPES de celui-ci?
+- Ou inversement: si AT, quel accomplissement en Christ?
+
+**CITATIONS ET ALLUSIONS** (1-2 paragraphes):
+- Le passage cite-t-il d'autres Écritures?
+- D'autres passages citent-ils celui-ci?
+
+**INTERTEXTUALITÉ** (1-2 paragraphes):
+- Comment le passage s'inscrit dans le grand récit biblique?
+- Liens avec la création, l'alliance, l'exode, la croix?
+
+**SYNTHÈSE THÉOLOGIQUE** (1 paragraphe):
+- Que révèle l'ensemble de ces parallèles sur le message de Dieu?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: CITE PRÉCISÉMENT les versets (livre chapitre:verset).""",
+
+    # ========== RUBRIQUE 11: Prophétie et accomplissement ==========
+    11: """Analyse prophétie et accomplissement dans {passage}.
+
+**NATURE PROPHÉTIQUE** (1-2 paragraphes):
+- Le passage contient-il des PROPHÉTIES explicites?
+- Promesses, oracles, visions?
+- Formules prophétiques ("Ainsi parle l'Éternel", "le jour vient où...")?
+
+**TYPOLOGIE** (2-3 paragraphes):
+- Quels éléments du passage sont des TYPES?
+  * Personnes (Adam, Moïse, David...)
+  * Événements (Exode, sacrifice, retour d'exil...)
+  * Institutions (sacrifices, sacerdoce, royauté...)
+- Comment sont-ils accomplis en Christ?
+
+**ACCOMPLISSEMENT HISTORIQUE** (2 paragraphes):
+- Si prophétie AT: comment s'est-elle accomplie?
+- Cite les passages NT montrant l'accomplissement
+
+**ACCOMPLISSEMENT CHRISTOLOGIQUE** (2 paragraphes):
+- Comment Christ EST l'accomplissement de ce passage?
+- Liens avec son ministère, mort, résurrection, retour?
+
+**ACCOMPLISSEMENT ESCHATOLOGIQUE** (1-2 paragraphes):
+- Y a-t-il un accomplissement FUTUR?
+- Déjà/pas encore?
+
+**HERMÉNEUTIQUE PROPHÉTIQUE** (1 paragraphe):
+- Principes pour interpréter correctement la prophétie ici?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Distingue clairement TYPE et ANTITYPE.""",
+
+    # ========== RUBRIQUE 12: Personnages ==========
+    12: """Analyse les personnages de {passage}.
+
+**INVENTAIRE DES PERSONNAGES** (1 paragraphe):
+- Liste TOUS les personnages (nommés ou non)
+- Rôle de chacun dans le passage
+
+**ANALYSE APPROFONDIE** (3-5 sections selon les personnages):
+Pour CHAQUE personnage majeur:
+- **Identité**: Qui est-il? Contexte biographique?
+- **Actions**: Que fait-il dans ce passage? Motivations?
+- **Paroles**: Que dit-il? Analyse de ses discours?
+- **Caractère**: Qualités, défauts révélés?
+- **Fonction théologique**: Que représente-t-il?
+
+**RELATIONS ENTRE PERSONNAGES** (1-2 paragraphes):
+- Dynamiques: conflits, alliances, dialogues?
+- Hiérarchies: autorité, soumission, égalité?
+
+**DÉVELOPPEMENT DES PERSONNAGES** (1-2 paragraphes):
+- Comment évoluent-ils dans le passage?
+- Transformation spirituelle?
+
+**DIMENSION EXEMPLAIRE** (1-2 paragraphes):
+- Quels personnages sont des exemples à suivre?
+- Quels exemples à éviter?
+
+**TYPOLOGIE CHRISTOLOGIQUE** (1 paragraphe):
+- Quels personnages préfigurent Christ?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Analyse PSYCHOLOGIQUE et THÉOLOGIQUE.""",
+
+    # ========== RUBRIQUE 13: Structure rhétorique ==========
+    13: """Analyse la structure rhétorique de {passage}.
+
+**GENRE LITTÉRAIRE** (1 paragraphe):
+- Quel genre? Récit, poésie, prophétie, épître, apocalypse?
+- Conventions du genre?
+
+**STRUCTURE ARGUMENTATIVE** (2-3 paragraphes):
+- Comment l'auteur construit-il son argument?
+- Introduction, développement, conclusion?
+- Thèse principale et thèses secondaires?
+
+**PROCÉDÉS RHÉTORIQUES** (2-3 paragraphes):
+- Répétitions (anaphore, épiphore)
+- Parallélismes (synonymique, antithétique)
+- Chiasmes, inclusio
+- Questions rhétoriques
+- Hyperboles, métaphores
+- Cite des EXEMPLES PRÉCIS du texte
+
+**STRATÉGIE PERSUASIVE** (1-2 paragraphes):
+- Comment l'auteur cherche-t-il à convaincre?
+- Logos (logique), pathos (émotions), ethos (autorité)?
+
+**DESTINATAIRES ET CONTEXTE** (1 paragraphe):
+- Pourquoi cette rhétorique pour CES lecteurs?
+
+**EFFICACITÉ** (1 paragraphe):
+- Comment la rhétorique renforce le message théologique?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Cite des EXEMPLES TEXTUELS pour chaque procédé.""",
+
+    # ========== RUBRIQUE 14: Théologie trinitaire ==========
+    14: """Développe la théologie trinitaire dans {passage}.
+
+**DIEU LE PÈRE** (2-3 paragraphes):
+- Comment le Père est-il révélé?
+- Attributs: souveraineté, sainteté, amour, justice?
+- Actions spécifiques du Père?
+- Relation avec le Fils et l'Esprit?
+
+**DIEU LE FILS** (2-3 paragraphes):
+- Présence explicite ou implicite de Christ?
+- Si AT: préfigurations christologiques?
+- Si NT: quelle dimension de Christ (Prophète, Prêtre, Roi)?
+- Relation avec le Père et l'Esprit?
+
+**DIEU LE SAINT-ESPRIT** (2-3 paragraphes):
+- Comment l'Esprit agit-il?
+- Œuvre de création, inspiration, sanctification?
+- Relation avec le Père et le Fils?
+
+**UNITÉ ET DISTINCTION** (1-2 paragraphes):
+- Comment le passage montre l'UNITÉ de l'essence divine?
+- Comment montre-t-il la DISTINCTION des personnes?
+- Périchorèse (communion mutuelle)?
+
+**IMPLICATIONS PRATIQUES** (1 paragraphe):
+- Comment cette révélation trinitaire transforme notre vie?
+- Adoration, prière, obéissance?
+
+**LONGUEUR**: 700-900 mots.
+**RÈGLE**: Équilibre les TROIS personnes. Ne néglige aucune.""",
+
+    # ========== RUBRIQUE 15: Christ au centre ==========
+    15: """Montre comment Christ est au centre de {passage}.
+
+**LECTURE CHRISTOCENTRIQUE** (1 paragraphe):
+- Pourquoi et comment lire l'Écriture avec Christ au centre?
+- Luc 24:27 - Christ dans toutes les Écritures
+
+**PRÉSENCE DIRECTE OU TYPOLOGIE** (2 paragraphes):
+- Si NT: comment Christ apparaît directement?
+- Si AT: quelles TYPOLOGIES préfigurent Christ?
+  * Personnes (Adam, Melchisédek, David...)
+  * Événements (Exode, sacrifice, temple...)
+  * Institutions (loi, sacerdoce, royauté...)
+
+**ŒUVRE DE CHRIST** (3 paragraphes selon triple office):
+1. **Prophète**: Comment Christ révèle/accomplit la Parole?
+2. **Prêtre**: Comment Christ expie/intercède?
+3. **Roi**: Comment Christ règne/sauve?
+
+**ACCOMPLISSEMENT DES PROMESSES** (1-2 paragraphes):
+- Quelles promesses de ce passage Christ accomplit-il?
+- Comment? Quand? (1ère venue, entre-deux, retour?)
+
+**VIE CHRÉTIENNE EN CHRIST** (1-2 paragraphes):
+- Comment ce passage nous unit à Christ?
+- Implications pour notre identité en lui?
+
+**ADORATION CHRISTOLOGIQUE** (1 paragraphe):
+- Comment ce passage nous conduit à adorer Christ?
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: TOUT converge vers Christ. Montre-le clairement.""",
+
+    # ========== RUBRIQUE 16: Évangile et grâce ==========
+    16: """Développe l'Évangile et la grâce dans {passage}.
+
+**MAUVAISE NOUVELLE D'ABORD** (2 paragraphes):
+- Quel est le PROBLÈME révélé? (Péché, rébellion, misère)
+- Diagnostic de la condition humaine DANS CE PASSAGE?
+- Loi qui condamne?
+
+**BONNE NOUVELLE** (3 paragraphes):
+- Quelle est la SOLUTION de Dieu? (Grâce, salut, rédemption)
+- Comment l'Évangile apparaît-il dans le passage?
+- Promesse, type, accomplissement?
+- Lien avec la croix et la résurrection?
+
+**GRÂCE SOUVERAINE** (2 paragraphes):
+- Comment le passage révèle que le salut est PAR GRÂCE SEULE?
+- Initiative divine vs mérite humain?
+- Élection, appel efficace, persévérance?
+
+**FOI SEULE** (1-2 paragraphes):
+- Comment la foi est-elle le MOYEN du salut ici?
+- Exemples de foi ou d'incrédulité?
+
+**CHRIST SEUL** (1-2 paragraphes):
+- Comment Christ est le SEUL médiateur?
+- Insuffisance de tout autre moyen de salut?
+
+**TRANSFORMATION PAR L'ÉVANGILE** (1-2 paragraphes):
+- Comment cet Évangile transforme?
+- Justification, sanctification, glorification?
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Proclame l'ÉVANGILE clairement. Loi ET grâce.""",
+
+    # ========== RUBRIQUE 17: Application personnelle ==========
+    17: """Développe des applications personnelles CONCRÈTES de {passage}.
+
+**PRINCIPE HERMÉNEUTIQUE** (1 paragraphe):
+- Comment passer du texte ancien à l'application aujourd'hui?
+- Distinguer contexte culturel et vérité universelle
+
+**CONNAISSANCE DE DIEU** (2 paragraphes):
+- Que dois-je CROIRE sur Dieu à partir de ce passage?
+- Comment cela change ma vision de lui?
+- Implications pour ma foi?
+
+**EXAMEN DE CONSCIENCE** (2 paragraphes):
+- Quels PÉCHÉS ce passage révèle-t-il en moi?
+- Où ai-je besoin de repentance?
+- Auto-diagnostic spirituel précis
+
+**TRANSFORMATION DU CŒUR** (2-3 paragraphes):
+- Quelles ATTITUDES dois-je développer?
+- Quels désirs dois-je cultiver?
+- Quelles peurs ou idoles abandonner?
+
+**ACTIONS CONCRÈTES** (2-3 paragraphes):
+- Quelles DÉCISIONS prendre cette semaine?
+- Quelles HABITUDES changer?
+- Quelles RELATIONS restaurer?
+- Sois TRÈS SPÉCIFIQUE et PRATIQUE
+
+**PRIÈRE D'ENGAGEMENT** (1 paragraphe):
+- Courte prière de consécration basée sur le passage
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Applications CONCRÈTES, PERSONNELLES, RÉALISABLES.""",
+
+    # ========== RUBRIQUE 18: Application communautaire ==========
+    18: """Développe des applications communautaires de {passage}.
+
+**ECCLÉSIOLOGIE** (1 paragraphe):
+- Que révèle ce passage sur la nature de l'Église?
+
+**VIE DE L'ÉGLISE LOCALE** (3 paragraphes):
+1. **Culte**: Implications pour l'adoration collective?
+2. **Enseignement**: Que prêcher à partir de ce texte?
+3. **Communion fraternelle**: Comment vivre ensemble ce passage?
+
+**MINISTÈRES ET DONS** (2 paragraphes):
+- Quels ministères ce passage encourage?
+- Comment exercer les dons spirituels selon ce texte?
+
+**UNITÉ ET DIVERSITÉ** (2 paragraphes):
+- Comment le passage promeut l'unité?
+- Comment respecter la diversité?
+- Résoudre les conflits à la lumière de ce texte?
+
+**MISSION ET TÉMOIGNAGE** (2 paragraphes):
+- Comment l'Église doit-elle TÉMOIGNER selon ce passage?
+- Annonce de l'Évangile?
+- Service du prochain?
+
+**DISCIPLINE ET DISCIPULAT** (2 paragraphes):
+- Implications pour la discipline ecclésiastique?
+- Formation de disciples?
+
+**APPLICATIONS PRATIQUES** (2-3 paragraphes):
+- 5-7 actions concrètes pour l'Église locale
+- Programmes, initiatives, changements?
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Focus sur l'ÉGLISE comme COMMUNAUTÉ, pas l'individu.""",
+
+    # ========== RUBRIQUE 19: Prière de réponse ==========
+    19: """Compose une prière de réponse PROFONDE après l'étude de {passage}.
+
+**STRUCTURE EXIGÉE**:
+
+**ADORATION ET LOUANGE** (2-3 paragraphes):
+- Loue Dieu pour ce qu'IL EST (attributs révélés dans le passage)
+- Loue Dieu pour ce qu'IL A FAIT (actions dans le passage)
+- Utilise des DÉTAILS PRÉCIS du texte
+- Expressions d'émerveillement et de gratitude
+
+**CONFESSION ET REPENTANCE** (2 paragraphes):
+- Confesse les péchés SPÉCIFIQUES que le passage révèle
+- Repentance concrète avec engagement de changement
+- Demande de pardon basée sur l'Évangile
+
+**INTERCESSION** (2-3 paragraphes):
+- Prie pour l'ÉGLISE (universelle et locale)
+- Prie pour les AUTORITÉS
+- Prie pour les PERDUS (mission)
+- Lie chaque intercession au contenu du passage
+
+**SUPPLICATION** (2 paragraphes):
+- Demandes PERSONNELLES basées sur le passage
+- Besoins spirituels prioritaires
+- Grâces spécifiques liées au texte
+
+**ENGAGEMENT ET CONSÉCRATION** (1-2 paragraphes):
+- Engagement à vivre selon ce passage
+- Offrande de soi à Dieu
+- Dépendance de l'Esprit
+
+**CONCLUSION DOXOLOGIQUE** (1 paragraphe):
+- Clôture par la gloire de Dieu
+- Affirmation de la foi
+- Espérance eschatologique
+
+**LONGUEUR**: 800-1000 mots.
+**STYLE**: Prière RÉELLE, pas essai sur la prière. Parle À Dieu.""",
+
+    # ========== RUBRIQUE 20: Questions d'étude ==========
+    20: """Formule des questions d'étude APPROFONDIES sur {passage}.
+
+**QUESTIONS D'OBSERVATION** (5-7 questions):
+- Que dit EXACTEMENT le texte?
+- Qui? Quoi? Où? Quand? Comment?
+- Questions factuelles précises avec références de versets
+- Exemple: "Que dit Dieu au v. 3? Quelle est sa première parole?"
+
+**QUESTIONS D'INTERPRÉTATION** (7-10 questions):
+- Que SIGNIFIE le texte?
+- Pourquoi l'auteur dit-il cela?
+- Que signifie ce mot/phrase dans le contexte?
+- Questions théologiques et exégétiques
+- Exemple: "Pourquoi l'auteur utilise-t-il le mot 'bara' (créer) ici?"
+
+**QUESTIONS DE COMPARAISON** (5-7 questions):
+- Comment ce passage se relie à d'autres?
+- Parallèles, contrastes, développements?
+- Cite les passages à comparer
+- Exemple: "Comparez ce passage avec Jean 1:1-3. Quels parallèles?"
+
+**QUESTIONS DE RÉFLEXION** (5-7 questions):
+- Quelle est la PERTINENCE aujourd'hui?
+- Comment m'interpelle-t-il personnellement?
+- Questions existentielles et pratiques
+- Exemple: "En quoi ma vision de Dieu change-t-elle après ce texte?"
+
+**QUESTIONS D'APPLICATION** (5-7 questions):
+- Que dois-je FAIRE?
+- Changements concrets à opérer?
+- Exemple: "Quelle décision prendre cette semaine à la lumière de ce passage?"
+
+**LONGUEUR**: 900-1100 mots (35-45 questions total).
+**RÈGLE**: Questions PRÉCISES, PROFONDES, VARIÉES.""",
+
+    # ========== RUBRIQUE 21: Points de vigilance ==========
+    21: """Identifie les points de vigilance pour interpréter {passage}.
+
+**ERREURS EXÉGÉTIQUES COURANTES** (3-4 paragraphes):
+- Quelles MAUVAISES interprétations existent?
+- Pour chaque erreur:
+  * Exposé de l'erreur
+  * Pourquoi c'est faux
+  * Bonne interprétation
+  * Conséquences de l'erreur
+
+**DANGERS D'APPLICATION** (2-3 paragraphes):
+- Quelles applications ABUSIVES sont possibles?
+- Légalisme, licence, mysticisme?
+- Comment éviter ces dérives?
+- Applications ÉQUILIBRÉES
+
+**QUESTIONS CONTROVERSÉES** (2-3 paragraphes):
+- Quelles CONTROVERSES théologiques sur ce passage?
+- Différentes positions (exposées équitablement)
+- Position défendue et pourquoi
+- Humilité face aux questions difficiles
+
+**PIÈGES CONTEXTUELS** (1-2 paragraphes):
+- Erreurs liées au contexte historique/culturel?
+- Anachronismes à éviter?
+
+**EXCÈS TYPOLOGIQUES** (1-2 paragraphes):
+- Risques d'allégorisation excessive?
+- Comment lire les types correctement?
+
+**ÉQUILIBRE THÉOLOGIQUE** (1-2 paragraphes):
+- Quelles vérités bibliques ÉQUILIBRER?
+- Exemple: grâce ET sainteté, foi ET œuvres
+
+**CONSEILS HERMÉNEUTIQUES** (1 paragraphe):
+- Principes pour éviter ces pièges?
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Sois HONNÊTE sur les difficultés. Pas dogmatique.""",
+
+    # ========== RUBRIQUE 22: Objections et réponses ==========
+    22: """Traite les objections à {passage}.
+
+**OBJECTIONS HISTORIQUES** (2-3 objections):
+Pour chaque:
+- **Objection**: Formulation claire (historicité, contradictions...)
+- **Réponse**: Défense argumentée
+- **Références**: Sources bibliques et extra-bibliques
+
+**OBJECTIONS SCIENTIFIQUES** (2-3 objections):
+- Conflits apparents avec science (création, miracles...)
+- Réponses apologétiques solides
+- Distinction science/scientisme
+
+**OBJECTIONS PHILOSOPHIQUES** (2-3 objections):
+- Problème du mal, libre arbitre, etc.
+- Réponses cohérentes
+- Limites de la raison humaine
+
+**OBJECTIONS MORALES** (2-3 objections):
+- Passages "difficiles" moralement
+- Défense de la bonté et justice de Dieu
+- Contexte rédemptif-historique
+
+**OBJECTIONS THÉOLOGIQUES** (2-3 objections):
+- Tensions doctrinales apparentes
+- Harmonisation biblique
+- Mystère vs contradiction
+
+**POSTURE APOLOGÉTIQUE** (1 paragraphe):
+- Équilibre: humilité ET confiance
+- Limites de nos réponses
+- Appel à la foi
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Présente les objections HONNÊTEMENT. Réponds SOLIDEMENT.""",
+
+    # ========== RUBRIQUE 23: Perspective missionnelle ==========
+    23: """Développe la perspective missionnelle de {passage}.
+
+**MANDAT MISSIONNAIRE** (2 paragraphes):
+- Comment ce passage fonde la mission?
+- Lien avec la Grande Mission (Mt 28:18-20)?
+- Motivation pour l'évangélisation?
+
+**MESSAGE À PROCLAMER** (2-3 paragraphes):
+- Quel ÉVANGILE prêcher à partir de ce passage?
+- Comment l'annoncer aux non-croyants?
+- Adaptation culturelle du message?
+
+**MÉTHODES MISSIONNAIRES** (2 paragraphes):
+- Quelles STRATÉGIES le passage suggère?
+- Témoignage personnel, prédication publique, œuvres sociales?
+- Contextualisation vs syncrétisme?
+
+**OBSTACLES À LA MISSION** (2 paragraphes):
+- Quels obstacles ce passage révèle?
+- Opposition, incompréhension, indifférence?
+- Comment les surmonter?
+
+**VISION GLOBALE** (2 paragraphes):
+- Perspective pour TOUTES les nations?
+- Universalité du salut?
+- Diversité culturelle dans l'Église?
+
+**COÛT DU DISCIPLE** (2 paragraphes):
+- Sacrifice, persécution?
+- Promesses pour les missionnaires?
+
+**APPEL À L'ACTION** (1-2 paragraphes):
+- Engagements concrets dans la mission
+- Localement et globalement?
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Inspire à la MISSION. Vision du monde perdu.""",
+
+    # ========== RUBRIQUE 24: Éthique chrétienne ==========
+    24: """Développe l'éthique chrétienne basée sur {passage}.
+
+**FONDEMENTS ÉTHIQUES** (2 paragraphes):
+- Quels PRINCIPES moraux le passage établit?
+- Caractère de Dieu comme norme éthique?
+- Loi morale vs loi cérémonielle/civile?
+
+**VERTUS À CULTIVER** (3-4 paragraphes):
+- Quelles VERTUS le passage promeut?
+- Pour chaque vertu:
+  * Définition biblique
+  * Comment la développer?
+  * Exemples concrets
+- Fruit de l'Esprit pertinent?
+
+**VICES À FUIR** (2-3 paragraphes):
+- Quels PÉCHÉS le passage condamne?
+- Pourquoi ces péchés offensent Dieu?
+- Comment les combattre?
+
+**DILEMMES ÉTHIQUES** (2-3 paragraphes):
+- Quelles situations morales complexes?
+- Comment appliquer le passage à ces dilemmes?
+- Sagesse et discernement?
+
+**ÉTHIQUE SOCIALE** (2 paragraphes):
+- Implications pour la SOCIÉTÉ?
+- Justice, paix, droits humains?
+- Engagement chrétien dans la cité?
+
+**SANCTIFICATION PROGRESSIVE** (1-2 paragraphes):
+- Comment grandir en sainteté?
+- Rôle de l'Esprit, des moyens de grâce?
+
+**MOTIVATION ÉVANGÉLIQUE** (1 paragraphe):
+- Obéissance non légaliste
+- Motivation: amour pour Dieu et gratitude
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Éthique BIBLIQUE, pas philosophique. Christ-centré.""",
+
+    # ========== RUBRIQUE 25: Louange / liturgie ==========
+    25: """Propose des éléments de louange et liturgie basés sur {passage}.
+
+**CHANTS ET CANTIQUES** (2-3 paragraphes):
+- Propose 3-5 CANTIQUES/HYMNES en lien avec le passage
+- Pour chaque: titre, auteur, pourquoi il convient
+- Extraits de paroles pertinents
+
+**LECTURES RESPONSIVES** (2 paragraphes):
+- Crée 1-2 lectures antiphonées du passage
+- Format: Leader / Assemblée
+- 6-8 échanges par lecture
+
+**CONFESSION DE FOI** (1 paragraphe):
+- Rédige une confession de foi basée sur le passage
+- Style: Credo (Je crois... Nous croyons...)
+- 5-7 affirmations
+
+**PRIÈRE LITURGIQUE** (1-2 paragraphes):
+- Collecte ou oraison inspirée du passage
+- Style liturgique formel
+
+**BÉNÉDICTION** (1 paragraphe):
+- Formule une bénédiction finale basée sur le passage
+- Style: "Que le Dieu de... vous bénisse et..."
+
+**SUGGESTIONS CULTUELLES** (2 paragraphes):
+- Comment intégrer ce passage dans le culte?
+- Thème de culte suggéré
+- Ordonnancement liturgique
+
+**SYMBOLISME ET VISUELS** (1-2 paragraphes):
+- Éléments visuels pour accompagner (couleurs, objets...)
+- Gestes liturgiques appropriés?
+
+**LONGUEUR**: 800-1000 mots.
+**RÈGLE**: Propose des ÉLÉMENTS UTILISABLES en culte.""",
+
+    # ========== RUBRIQUE 26: Méditation guidée ==========
+    26: """Guide une méditation spirituelle sur {passage}.
+
+**PRÉPARATION** (1 paragraphe):
+- Instructions pour se préparer (lieu calme, posture, respiration)
+- Invocation de l'Esprit
+
+**LECTURE LENTE** (1 paragraphe):
+- Instructions: lire 3 fois lentement
+- Pause entre lectures
+- Attention aux détails
+
+**VISUALISATION** (3-4 paragraphes):
+- Guide l'imaginaire spirituel:
+  * Si récit: visualise la scène, les personnages
+  * Si enseignement: imagine les vérités
+  * Si poésie: ressens les émotions
+- Utilise des DÉTAILS SENSORIELS du texte
+- Technique d'Ignace de Loyola adaptée
+
+**IDENTIFICATION** (2 paragraphes):
+- Avec quel personnage/élément t'identifies-tu?
+- Que ressens-tu?
+- Où te situes-tu dans la scène?
+
+**RENCONTRE AVEC DIEU** (2-3 paragraphes):
+- Dieu te parle à travers ce passage
+- Qu'entends-tu?
+- Que réponds-tu?
+- Dialogue intérieur
+
+**SILENCE** (1 paragraphe):
+- Instructions: 3-5 minutes de silence
+- Rester en présence
+- Écoute active
+
+**RÉSOLUTION** (1-2 paragraphes):
+- Quelle RÉPONSE concrète?
+- Engagement précis
+- Prière de consécration
+
+**CLÔTURE** (1 paragraphe):
+- Retour progressif
+- Action de grâces
+- Comment garder ce fruit?
+
+**LONGUEUR**: 800-1000 mots.
+**STYLE**: MÉDITATIF, CONTEMPLATIF. Tutoyé et intimiste.""",
+
+    # ========== RUBRIQUE 27: Mémoire / versets clés ==========
+    27: """Identifie et développe les versets clés à mémoriser dans {passage}.
+
+**SÉLECTION DES VERSETS** (1 paragraphe):
+- Choisis 5-7 VERSETS CLÉS du passage
+- Critères: théologie, application, beauté littéraire
+
+**ANALYSE VERSET PAR VERSET** (5-7 sections):
+Pour CHAQUE verset sélectionné:
+
+**VERSET [X]** : [Citation complète]
+- **Pourquoi mémoriser**: Importance théologique
+- **Contexte**: Place dans le passage
+- **Mot-clé**: Identifie LE mot central
+- **Application**: Comment ce verset transforme
+- **Associations**: Autres versets similaires à lier
+- **Mnémotechnique**: Astuce pour retenir (acronyme, rime, image...)
+
+**PLAN DE MÉMORISATION** (2 paragraphes):
+- Méthode suggérée (cartes, répétition espacée, chant...)
+- Calendrier: 1 verset par semaine ou rythme adapté
+- Comment réviser régulièrement?
+
+**MÉDITATION DES VERSETS** (1-2 paragraphes):
+- Comment méditer ces versets au quotidien?
+- Moments opportuns (matin, soir, transports...)
+
+**UTILISATION PRATIQUE** (1-2 paragraphes):
+- Dans quelles situations citer ces versets?
+- Pour l'évangélisation, l'encouragement, la tentation?
+
+**PARTAGE** (1 paragraphe):
+- Comment aider d'autres à mémoriser?
+- Mémorisation en groupe?
+
+**LONGUEUR**: 800-1000 mots.
+**RÈGLE**: Fournis les VERSETS COMPLETS avec références.""",
+
+    # ========== RUBRIQUE 28: Plan d'action ==========
+    28: """Établis un plan d'action CONCRET basé sur {passage}.
+
+**BILAN SPIRITUEL** (1-2 paragraphes):
+- Où en suis-je spirituellement face à ce passage?
+- Auto-évaluation honnête
+- Forces et faiblesses révélées
+
+**OBJECTIFS SPIRITUELS** (2 paragraphes):
+- 3-5 OBJECTIFS SMART (Spécifiques, Mesurables, Atteignables, Réalistes, Temporels)
+- Liés directement au passage
+- Exemple: "Prier 15 min/jour en utilisant le modèle de prière du passage pendant 1 mois"
+
+**ACTIONS QUOTIDIENNES** (2-3 paragraphes):
+- 5-7 actions à intégrer CHAQUE JOUR
+- Très concrètes et détaillées
+- Exemple: "Chaque matin, méditer le verset X pendant 5 minutes avant le petit-déjeuner"
+
+**ACTIONS HEBDOMADAIRES** (2 paragraphes):
+- 3-5 actions CHAQUE SEMAINE
+- Exemple: "Jeudi soir, partager l'enseignement du passage avec un ami"
+
+**DÉCISIONS MAJEURES** (1-2 paragraphes):
+- Y a-t-il des DÉCISIONS importantes à prendre?
+- Changements de vie, engagements, renoncements?
+
+**MOYENS DE GRÂCE** (1-2 paragraphes):
+- Quels moyens utiliser pour progresser?
+- Prière, jeûne, groupe biblique, mentorat?
+
+**RESPONSABILISATION** (1 paragraphe):
+- Qui t'aidera à tenir ce plan?
+- Partager avec un frère/sœur?
+- Rendre compte régulièrement?
+
+**ÉVALUATION** (1 paragraphe):
+- Dates de bilan: 1 semaine, 1 mois, 3 mois
+- Critères de réussite?
+
+**PRIÈRE D'ENGAGEMENT** (1 paragraphe):
+- Courte prière scellant ces résolutions
+
+**LONGUEUR**: 900-1100 mots.
+**RÈGLE**: Plan ULTRA-CONCRET, RÉALISABLE, MESURABLE. Pas de vagues résolutions."""
 }
 
 @api_router.post("/generate-rubrique")
