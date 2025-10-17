@@ -981,6 +981,81 @@ Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune intr
         }
 
 # Include the router in the main app
+
+# ===== ENDPOINT RUBRIQUES AVEC GEMINI =====
+RUBRIQUE_PROMPTS = {
+    1: """Génère une VRAIE prière d'ouverture pour {passage}.
+
+**ADORATION** (3-4 phrases) : Adore Dieu pour ses attributs révélés DANS CE PASSAGE. Cite des DÉTAILS PRÉCIS (ex: "séparation des eaux", "image divine"). NE répète PAS "{passage}".
+
+**CONFESSION** (3-4 phrases) : Confesse les péchés que CE passage révèle.
+
+**DEMANDE** (3-4 phrases) : Demande l'Esprit pour comprendre CE passage.
+
+**MÉDITATION** (2 paragraphes) : Comment cette prière prépare le cœur.
+
+300-400 mots. Commence par "**ADORATION**".""",
+    2: """Analyse structure littéraire de {passage}.
+
+**ARCHITECTURE** : Structure globale
+**SECTIONS** : Décomposition
+**PROCÉDÉS** : Répétitions, mots-clés hébreux
+**SIGNIFICATION** : Pourquoi cette structure
+
+400-500 mots.""",
+    3: """Transition du chapitre précédent vers {passage}.
+
+Si chapitre 1 : OUVERTURE du livre.
+
+**RÉCAPITULATIF** 
+**QUESTIONS** : 5-7 questions
+**CONTINUITÉ THÉOLOGIQUE**
+**CONTEXTE NARRATIF**
+
+350-450 mots.""",
+    4: """Thème doctrinal de {passage}.
+
+**THÈME PRINCIPAL**
+**DÉVELOPPEMENT** : Dieu, homme, salut, fin
+**APPLICATIONS**
+**LIENS**
+
+500-600 mots. Cite 3-5 passages.""",
+    5: """Fondements théologiques de {passage}.
+
+**PROLÉGOMÈNES**
+**ANALYSE** : révélation, création, alliance, Christ, Esprit, Église
+**TENSIONS**
+**HÉRITAGE**
+
+700-900 mots."""
+}
+
+@api_router.post("/generate-rubrique")
+async def generate_rubrique(request: dict):
+    try:
+        passage = request.get('passage', '')
+        rubrique_number = request.get('rubrique_number', 1)
+        rubrique_title = request.get('rubrique_title', '')
+        
+        if rubrique_number not in RUBRIQUE_PROMPTS:
+            return {"status": "success", "content": f"# {rubrique_title}\n\n**{passage}**\n\nRubrique en développement.", "api_used": "placeholder"}
+        
+        prompt = RUBRIQUE_PROMPTS[rubrique_number].format(passage=passage)
+        content = await call_gemini_with_rotation(prompt)
+        
+        return {
+            "status": "success",
+            "content": content,
+            "rubrique_number": rubrique_number,
+            "rubrique_title": rubrique_title,
+            "passage": passage,
+            "api_used": "gemini"
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
 app.include_router(api_router)
 
 app.add_middleware(
