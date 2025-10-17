@@ -34,6 +34,10 @@ GEMINI_KEYS = [
     os.environ.get('GEMINI_API_KEY_8'),
     os.environ.get('GEMINI_API_KEY_9'),
     os.environ.get('GEMINI_API_KEY_10'),
+    os.environ.get('GEMINI_API_KEY_11'),
+    os.environ.get('GEMINI_API_KEY_12'),
+    os.environ.get('GEMINI_API_KEY_13'),
+    os.environ.get('GEMINI_API_KEY_14'),
 ]
 # Filtrer les clés vides
 GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
@@ -85,7 +89,7 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None, use_bi
                 api_key=api_key,
                 session_id=f"generation-{uuid.uuid4()}",
                 system_message="Tu es un expert biblique et théologien spécialisé dans l'étude des Écritures."
-            ).with_model("gemini", "gemini-2.0-flash")
+            ).with_model("gemini", "gemini-2.0-flash-exp")
             
             # Envoyer le message
             user_message = UserMessage(text=prompt)
