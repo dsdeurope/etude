@@ -22,12 +22,18 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Configuration des clés Gemini avec rotation automatique
+# Configuration des clés Gemini avec rotation automatique (10 clés = 150 req/min)
 GEMINI_KEYS = [
     os.environ.get('GEMINI_API_KEY_1'),
     os.environ.get('GEMINI_API_KEY_2'),
     os.environ.get('GEMINI_API_KEY_3'),
     os.environ.get('GEMINI_API_KEY_4'),
+    os.environ.get('GEMINI_API_KEY_5'),
+    os.environ.get('GEMINI_API_KEY_6'),
+    os.environ.get('GEMINI_API_KEY_7'),
+    os.environ.get('GEMINI_API_KEY_8'),
+    os.environ.get('GEMINI_API_KEY_9'),
+    os.environ.get('GEMINI_API_KEY_10'),
 ]
 # Filtrer les clés vides
 GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
