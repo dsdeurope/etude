@@ -33,9 +33,14 @@ const ApiControlPanel = ({ backendUrl }) => {
   // Fonction pour récupérer le statut des API
   const fetchApiStatus = async () => {
     try {
+      console.log('[API STATUS] Appel à:', `${backendUrl}/api/health`);
       const response = await fetch(`${backendUrl}/api/health`);
+      
+      console.log('[API STATUS] Réponse status:', response.status);
+      
       if (response.ok) {
         const healthData = await response.json();
+        console.log('[API STATUS] Données reçues:', healthData);
         
         // Utiliser directement les données du backend
         const adaptedStatus = {
@@ -47,10 +52,32 @@ const ApiControlPanel = ({ backendUrl }) => {
         
         setApiStatus(adaptedStatus);
         setLastUpdate(new Date().toLocaleTimeString());
-        console.log('[API STATUS] Mise à jour:', adaptedStatus);
+        console.log('[API STATUS] Mise à jour réussie');
+      } else {
+        console.error('[API STATUS] Réponse non-OK:', response.status);
+        // Afficher un état d'erreur
+        setApiStatus(prev => ({
+          ...prev,
+          apis: Object.fromEntries(
+            Object.entries(prev.apis).map(([key, value]) => [
+              key,
+              { ...value, color: 'yellow', status_text: 'Connexion backend échouée' }
+            ])
+          )
+        }));
       }
     } catch (error) {
-      console.error('[API STATUS] Erreur:', error);
+      console.error('[API STATUS] Erreur catch:', error);
+      // Afficher un état d'erreur
+      setApiStatus(prev => ({
+        ...prev,
+        apis: Object.fromEntries(
+          Object.entries(prev.apis).map(([key, value]) => [
+            key,
+            { ...value, color: 'yellow', status_text: `Erreur: ${error.message}` }
+          ])
+        )
+      }));
     }
   };
 
