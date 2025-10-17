@@ -85,7 +85,7 @@ async def call_gemini_with_rotation(prompt: str, max_retries: int = None, use_bi
                 api_key=api_key,
                 session_id=f"generation-{uuid.uuid4()}",
                 system_message="Tu es un expert biblique et théologien spécialisé dans l'étude des Écritures."
-            ).with_model("gemini", "gemini-2.0-flash")
+            ).with_model("gemini", "gemini-2.0-flash-exp")
             
             # Envoyer le message
             user_message = UserMessage(text=prompt)
