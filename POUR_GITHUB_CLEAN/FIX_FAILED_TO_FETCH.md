@@ -88,7 +88,7 @@ curl -X POST http://localhost:8001/api/generate-verse-by-verse \
 
 ### Test 2 : Frontend
 
-1. Allez sur https://scripture-explorer-6.preview.emergentagent.com/
+1. Allez sur https://bible-study-hub-8.preview.emergentagent.com/
 2. Sélectionnez "Genèse" chapitre "1"
 3. Cliquez sur "VERSETS PROG"
 4. **Attendez 10-15 secondes** (soyez patient !)
@@ -121,7 +121,7 @@ curl -X POST http://localhost:8001/api/generate-verse-by-verse \
 ### 2. Vérifiez la Connexion
 ```bash
 # Testez que le backend est accessible
-curl https://scripture-explorer-6.preview.emergentagent.com/api/health
+curl https://bible-study-hub-8.preview.emergentagent.com/api/health
 ```
 
 **Résultat attendu** : JSON avec 5 clés API

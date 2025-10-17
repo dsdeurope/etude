@@ -6,7 +6,7 @@ echo "TEST DU BACKEND VERCEL"
 echo "=========================================="
 echo ""
 
-BACKEND_URL="https://scripture-explorer-6.preview.emergentagent.com"
+BACKEND_URL="https://bible-study-hub-8.preview.emergentagent.com"
 
 echo "🔍 Test 1 : Vérification de la disponibilité du backend..."
 curl -s -o /dev/null -w "%{http_code}" $BACKEND_URL/api/health

@@ -14,7 +14,7 @@ const ApiStatusButton_OLD_REMOVED = () => {
     }
     const hostname = window.location.hostname;
     if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
-    return "https://scripture-explorer-6.preview.emergentagent.com";
+    return "https://bible-study-hub-8.preview.emergentagent.com";
   };
 
   const BACKEND_URL = getBackendUrl();
@@ -299,7 +299,7 @@ const getBackendUrl = () => {
   }
   const hostname = window.location.hostname;
   if (hostname === "localhost" || hostname === "127.0.0.1") return "http://localhost:8001";
-  return "https://scripture-explorer-6.preview.emergentagent.com";
+  return "https://bible-study-hub-8.preview.emergentagent.com";
 };
 
 const BACKEND_URL = getBackendUrl();

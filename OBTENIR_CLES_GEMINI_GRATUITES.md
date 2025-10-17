@@ -99,7 +99,7 @@ sudo supervisorctl restart backend
 ### Étape 4 : Vérifier que les Clés Fonctionnent
 ```bash
 # Vérifier le statut des API
-curl https://scripture-explorer-6.preview.emergentagent.com/api/health
+curl https://bible-study-hub-8.preview.emergentagent.com/api/health
 ```
 
 Vous devriez voir les 5 clés avec des LED vertes 🟢

@@ -9,7 +9,7 @@ import json
 import re
 from difflib import SequenceMatcher
 
-BACKEND_URL = "https://scripture-explorer-6.preview.emergentagent.com/api"
+BACKEND_URL = "https://bible-study-hub-8.preview.emergentagent.com/api"
 
 def get_batch_content(passage):
     """Get content for a specific batch"""

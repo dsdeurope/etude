@@ -1,57 +1,90 @@
 <analysis>
-The AI engineer effectively addressed the user's initial 404 Vercel deployment issue by identifying and staging the correct source code from a cluttered GitHub repository. This involved significant cleanup, dependency management, and Vercel configuration. Subsequent work focused on enhancing the API control button: implementing a backend  endpoint, displaying quota-based LEDs (green/yellow/red) in , and ensuring persistent visibility of these indicators. The engineer also centralized the  component across multiple frontend pages. A new backend route, , was added to support character story generation. The current critical task involves fixing action button alignment on Vercel desktop, which is persistently breaking due to an unexplained  appearing in the compiled CSS, overriding source code definitions. The latest action was to query platform behavior for continuing work.
+The AI engineer's trajectory shows an iterative problem-solving approach. It began by addressing the user's explicit requests to refine Verset par verset presentation by structuring content and removing an API usage note, which involved modifying  and . Initial backend testing showed some success, but subsequent user feedback highlighted issues with content uniqueness across batches and general quality for rubrics, and recurring UI and deployment problems.
+
+The AI diagnosed and resolved several critical issues:
+1.  **Verset par verset content uniqueness**: Improved backend prompts and Bible API fallback logic with a hash algorithm.
+2.  **API key quota management**: Corrected  to increment usage only on *successful* Gemini API calls, preventing premature quota exhaustion.
+3.  **Vercel Failed to fetch errors**: Identified browser/Vercel timeouts as the cause, increasing frontend  timeouts and reducing the Verset par verset batch size from 5 to 3 to meet Vercel's 10-second limit.
+4.  **UI button alignment**: Reinstated a missing inline CSS  property in  for horizontal alignment.
+5.  **Character History fallback**: Added a Bible API fallback to the  endpoint.
+6.  **Rubric content generation**: Discovered rubric content was static. Created a new backend endpoint () with dedicated prompts and updated the frontend to consume it for dynamic generation.
+
+The trajectory concluded with the successful integration of 10 new Gemini API keys, verified for rotation and availability, and the user's request to push all corrections to Vercel.
 </analysis>
 
 <product_requirements>
-The primary objective was to resolve a 404 error on the Vercel-deployed application (), necessitating a thorough review and cleanup of the GitHub repository's structure to identify and deploy the correct frontend source ( folder). Following this, the user requested re-implementation and enhancement of physical LEDs on the API control button, including dynamic color coding (green, yellow, red) based on API quota usage and a detailed API status modal. Additionally, the backend required a  endpoint for content generation. The latest ongoing task is to ensure all seven primary action buttons (, , , , , , ) consistently align on a single line in desktop view on the Vercel application.
+The application's core goal is to provide a comprehensive biblical study experience. Initially, it involved fixing a 404 deployment error on Vercel, establishing an API control panel with dynamic LED status based on API quotas, and implementing a  endpoint. A critical UI requirement was ensuring seven primary action buttons (, , , , , , ) maintain horizontal alignment on desktop. For character history, detailed, narrative paragraphs (800-1500 words) covering biblical history, past, present, future, and genealogy were needed, with Enrichir and Régénérer modes. API key management required a 5-key rotation system (Gemini and Bible API). The Verset par verset feature needed progressive content generation (originally 5 verses at a time, later adjusted to 3 for Vercel) with a specific, organized display format (affichage du verset, chapitre, Contexte historique, partie théologique) and removal of a temporary API usage note. Subsequently, the user requested unique content per batch, avoidance of duplicates, improved generation quality for rubrics, and optimized API key usage (correcting quota counting). Most recently, 10 Gemini API keys were provided for integration to increase capacity.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack:** React frontend, FastAPI backend, MongoDB database.
+-   **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
 -   **Deployment:** Vercel (frontend), Kubernetes (backend).
--   **UI:** React /, CSS grid, Tailwind CSS (implied).
--   **APIs:** RESTful endpoints, LLM integration (Emergent Universal Key).
--   **Build/Env:** Yarn, ,  for configuration.
+-   **UI:** React hooks (, ), CSS grid, inline styles for layout.
+-   **APIs:** RESTful endpoints, LLM integration (Google Gemini via ), Bible API, API key rotation.
+-   **Build/Env:** Yarn,  for configuration, backend                          RUNNING   pid 43, uptime 0:00:03
+code-server                      STOPPED   Not started
+frontend                         STOPPED   Oct 17 07:47 PM
+mongodb                          RUNNING   pid 47, uptime 0:00:03
+nginx-code-proxy                 RUNNING   pid 41, uptime 0:00:03
+supervisor>  for service management.
 </key_technical_concepts>
 
 <code_architecture>
-The application features a standard full-stack architecture with a  directory for FastAPI and a  for React. A  directory is maintained for Vercel deployment.
+The application employs a full-stack architecture with a FastAPI backend, a React frontend, and MongoDB for data persistence. A  directory is used as the staging area for Vercel deployments, mirroring the frontend structure.
 
 
 
 -   ****:
-    -   **Importance**: Core FastAPI application.
-    -   **Changes**: Added  for API status with simulated quotas (, ,  status, usage counts) and  using LLM.
+    -   **Importance**: The central FastAPI application defining all API endpoints.
+    -   **Changes**:
+        -   Removed the API usage note (line 211).
+        -   Modified the prompt for  to generate 4 distinct sections (VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE).
+        -   Improved  to generate more unique content using a hash algorithm and restructured it for 4 sections.
+        -   Corrected the  parsing for  to handle verse ranges correctly.
+        -   Modified  to increment  only on successful API calls to optimize quota usage.
+        -   Added a Bible API fallback to the  endpoint.
+        -   Created a new endpoint  with 28 detailed prompts for dynamic rubric content generation using Gemini API. This endpoint was carefully placed before  to ensure it was discoverable.
+        -   Updated to load and use 10 Gemini API keys from  and  logic.
+        -   Adjusted  logic in  to generate 3 verses per batch instead of 5 for Vercel timeout compatibility.
 -   ****:
-    -   **Importance**: Main React component, orchestrates primary UI.
-    -   **Changes**: Removed inline  style to delegate button alignment to CSS; uses .
+    -   **Importance**: Stores backend environment variables, including API keys.
+    -   **Changes**: Added 6 more  entries (up to ) to accommodate the 10 user-provided Gemini API keys.
 -   ****:
-    -   **Importance**: Global styles, including responsive design for buttons.
-    -   **Changes**: Modified and streamlined media queries for  to achieve single-line desktop button alignment. An explicit  rule was added, but its effect is overridden in the compiled output.
+    -   **Importance**: Main React component, orchestrating UI and route rendering.
+    -   **Changes**:
+        -   Re-added inline style  to the  div for desktop button alignment, fixing a regression.
+        -   Added a 60-second timeout to  calls in  and improved loading/error states to handle Vercel timeouts.
+        -   Modified  to call the new  endpoint instead of the old static/non-existent one.
 -   ****:
-    -   **Importance**: Centralized API status display component.
-    -   **Changes**: Fetches , renders dynamic LEDs with quota-based colors, ensures LEDs always display (even before API response), and presents API details in a modal (though modal positioning needs fixing).
--   **, , **:
-    -   **Importance**: Pages that previously duplicated API status logic.
-    -   **Changes**: Replaced custom  with the shared  component.
--   ** (and )**:
-    -   **Importance**: Environment configuration.
-    -   **Changes**: Ensured  is correctly set for local () and Vercel production.
+    -   **Importance**: Page for Verset par verset study, deployed to Vercel.
+    -   **Changes**:
+        -   Implemented logic to parse and display the 4 sections (VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE).
+        -   Added CSS styles for the new sections.
+        -   Added a 60-second timeout to the  call and improved error handling for API calls.
+        -   Adjusted batch size to 3 verses (from 5) to accommodate Vercel's 10-second timeout, updating display logic and Continuer button text accordingly.
 -   ****:
-    -   **Importance**: Staging area for Vercel deployment.
-    -   **Changes**: Consistently updated with the latest frontend code, including , , , and  for Vercel deployment.
+    -   **Importance**: Centralized API status display.
+    -   **Changes**: The code was inspected and found to be correctly fetching  and using  to render dynamic LEDs based on API quota. No direct modifications were made during this trajectory, but its functionality was verified.
+-   ****:
+    -   **Importance**: Displays character history content.
+    -   **Changes**: No direct modifications were made to this file in the provided trajectory, but the backend  endpoint it uses was updated to include a Bible API fallback.
+-   ****:
+    -   **Importance**: Previously contained static content for rubrics.
+    -   **Changes**: This file was identified as the source of static rubric content. The frontend was updated to bypass this and call the new backend API for dynamic generation instead.
+-   ****:
+    -   **Importance**: The source directory for Vercel deployments. All relevant frontend (, ) and backend () changes were consistently copied here.
+    -   **New files created here**: , , , , , , , , , , , , , , , , , . These document the changes and deployment steps.
+
 </code_architecture>
 
 <pending_tasks>
--   Resolve the button alignment issue on the Vercel deployment, specifically addressing the  in the compiled CSS.
--   Correct the off-screen positioning of the API status modal in .
--   Implement the missing backend route  and any other LLM generation endpoints.
+-   The rubrique_functions.js file still contains hardcoded static content. While the frontend now bypasses it, the file itself could be cleaned up or removed if no longer serving any purpose.
 </pending_tasks>
 
 <current_work>
-The immediate work involved fixing the desktop alignment of action buttons on the Vercel-deployed frontend. The user reported that BIBLE CONCORDANCE remained on a separate line despite previous CSS and JSX modifications. The AI engineer traced the problem to the *compiled* CSS, which unexpectedly contained  instead of the desired , causing only six buttons to fit per line. The last action in the trajectory was the AI asking comment continuer au meme endroit apres le fork session ? to the support agent, indicating a pause in debugging to clarify platform environment behavior.
+Immediately before this summary request, the AI engineer had successfully integrated 10 new Gemini API keys. This involved updating  with the new keys (from  to ) and modifying  to ensure the  list was populated with all 10 keys and the  function could rotate through them. The  endpoint's status reporting was verified to correctly display the status of all 10 keys, all showing as green (available). The AI copied the updated  to  and created  to document the increased API capacity. The user's last instruction was tu dois pousser ver vercel (You must push to Vercel), indicating the immediate next step is to deploy these latest changes.
 </current_work>
 
 <optional_next_step>
-Investigate the build process to determine why  is appearing in the compiled CSS.
+Push the recently integrated 10 Gemini API keys and updated backend () to Vercel.
 </optional_next_step>

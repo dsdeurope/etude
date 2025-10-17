@@ -8,7 +8,7 @@
 
 ```
 Nom: REACT_APP_BACKEND_URL
-Valeur: https://scripture-explorer-6.preview.emergentagent.com
+Valeur: https://bible-study-hub-8.preview.emergentagent.com
 ```
 
 ---
@@ -31,7 +31,7 @@ Les clés API Gemini et Bible **ne sont PAS nécessaires** car :
 3. **Cliquez sur :** Settings → Environment Variables
 4. **Ajoutez :**
    - Name: `REACT_APP_BACKEND_URL`
-   - Value: `https://scripture-explorer-6.preview.emergentagent.com`
+   - Value: `https://bible-study-hub-8.preview.emergentagent.com`
    - Environments: ✅ Production ✅ Preview ✅ Development
 5. **Cliquez sur :** Save
 6. **Redéployez :** Deployments → Redeploy
@@ -40,7 +40,7 @@ Les clés API Gemini et Bible **ne sont PAS nécessaires** car :
 
 ```bash
 vercel env add REACT_APP_BACKEND_URL
-# Entrez: https://scripture-explorer-6.preview.emergentagent.com
+# Entrez: https://bible-study-hub-8.preview.emergentagent.com
 # Sélectionnez: Production, Preview, Development
 ```
 
