@@ -363,7 +363,7 @@ async def check_gemini_key_quota(api_key: str, key_index: int):
             api_key=api_key,
             session_id=f"health-check-{uuid.uuid4()}",
             system_message="Test"
-        ).with_model("gemini", "gemini-2.0-flash")
+        ).with_model("gemini", "gemini-2.0-flash-exp")
         
         # Appel minimal pour vérifier la clé
         test_message = UserMessage(text="Hi")
