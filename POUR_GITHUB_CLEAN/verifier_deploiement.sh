@@ -87,7 +87,7 @@ echo "📋 Vérification des corrections précédentes..."
 echo "----------------------------------------"
 check_content "src/VersetParVersetPage.js" "VERSES_PER_BATCH = 3" "Batches de 3 versets (Vercel timeout fix)"
 check_content "src/App.js" "gridTemplateColumns" "Boutons alignés (CSS grid fix)"
-check_content "src/RubriquePage.js" "/api/generate-rubrique" "Rubriques dynamiques via API"
+check_content "src/App.js" "api/generate-rubrique" "Rubriques dynamiques via API"
 echo ""
 
 echo "=========================================="
