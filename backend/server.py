@@ -769,6 +769,25 @@ Vise 800-1200 mots. Commence directement par le titre: # 📖 {character_name.up
             generation_time = time.time() - start_time
             word_count = len(content.split())
             
+            # Sauvegarder en cache MongoDB
+            cache_doc = {
+                "cache_key": cache_key,
+                "character_name": character_name,
+                "mode": mode,
+                "content": content,
+                "word_count": word_count,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Upsert (update ou insert)
+            await db.character_history_cache.update_one(
+                {"cache_key": cache_key},
+                {"$set": cache_doc},
+                upsert=True
+            )
+            
+            logging.info(f"✅ Cache sauvegardé pour personnage: {character_name} (mode: {mode})")
+            
             return {
                 "status": "success",
                 "content": content,
@@ -776,7 +795,8 @@ Vise 800-1200 mots. Commence directement par le titre: # 📖 {character_name.up
                 "word_count": word_count,
                 "character_name": character_name,
                 "mode": mode,
-                "generation_time_seconds": round(generation_time, 2)
+                "generation_time_seconds": round(generation_time, 2),
+                "cached": False
             }
         
         except Exception as gemini_error:
