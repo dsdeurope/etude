@@ -2280,6 +2280,34 @@ Pour CHAQUE verset sélectionné:
 **RÈGLE**: Plan ULTRA-CONCRET, RÉALISABLE, MESURABLE. Pas de vagues résolutions."""
 }
 
+@api_router.delete("/clear-rubriques-cache")
+async def clear_rubriques_cache(request: dict):
+    """
+    Vide le cache des rubriques. 
+    Utiliser avec précaution - cela forcera la régénération de toutes les rubriques.
+    """
+    try:
+        passage = request.get('passage', None)
+        
+        if passage:
+            # Vider uniquement pour un passage spécifique
+            result = await db.rubriques_cache.delete_many({"passage": passage})
+            return {
+                "status": "success",
+                "message": f"Cache vidé pour {passage}",
+                "deleted_count": result.deleted_count
+            }
+        else:
+            # Vider TOUT le cache
+            result = await db.rubriques_cache.delete_many({})
+            return {
+                "status": "success",
+                "message": "Tout le cache des rubriques a été vidé",
+                "deleted_count": result.deleted_count
+            }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 @api_router.post("/generate-rubrique")
 async def generate_rubrique(request: dict):
     """
