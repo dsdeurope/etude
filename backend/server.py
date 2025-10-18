@@ -2309,6 +2309,7 @@ async def clear_rubriques_cache(request: dict):
         return {"status": "error", "message": str(e)}
 
 @api_router.post("/generate-rubrique")
+@api_router.post("/generate-rubrique-content")  # Alias pour compatibilité frontend
 async def generate_rubrique(request: dict):
     """
     Génère une rubrique avec cache MongoDB pour éviter de régénérer.
