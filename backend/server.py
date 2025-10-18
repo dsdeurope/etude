@@ -571,17 +571,39 @@ async def generate_character_history(request: dict):
     """
     Génère une histoire narrative détaillée d'un personnage biblique.
     Utilise l'API Gemini avec rotation automatique des clés.
+    Cache MongoDB pour économiser les quotas.
     """
     try:
         character_name = request.get('character_name', '')
         mode = request.get('mode', 'standard')  # 'standard', 'enrich', 'regenerate'
         previous_content = request.get('previous_content', '')
+        force_regenerate = request.get('force_regenerate', False)
         
         if not character_name:
             return {
                 "status": "error",
                 "message": "Nom du personnage manquant"
             }
+        
+        # Créer une clé de cache unique (character + mode)
+        cache_key = f"{character_name.lower().strip()}_{mode}"
+        
+        # Vérifier le cache MongoDB (sauf si force_regenerate)
+        if not force_regenerate:
+            cached_history = await db.character_history_cache.find_one({"cache_key": cache_key})
+            if cached_history:
+                logging.info(f"✅ Cache hit pour personnage: {character_name} (mode: {mode})")
+                return {
+                    "status": "success",
+                    "content": cached_history["content"],
+                    "api_used": "cache",
+                    "word_count": cached_history.get("word_count", 0),
+                    "character_name": character_name,
+                    "mode": mode,
+                    "generation_time_seconds": 0,
+                    "cached": True,
+                    "generated_at": cached_history.get("created_at")
+                }
         
         # Préparer le prompt selon le mode
         if mode == 'enrich' and previous_content:
