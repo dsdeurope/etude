@@ -1042,6 +1042,17 @@ Mémorisons ce verset pour porter sa vérité dans notre quotidien.
     // Note: Les notes personnelles ne sont jamais effacées lors du reset
   };
 
+  const handleClearCache = () => {
+    if (window.confirm("⚠️ Vider le cache localStorage ?\n\nCela supprimera toutes les études sauvegardées localement. Vous devrez régénérer les rubriques.\n\nContinuer ?")) {
+      localStorage.clear();
+      setGeneratedRubriques({});
+      setContent("");
+      setRubriquesStatus({});
+      alert("✅ Cache vidé ! Les prochaines générations utiliseront les nouveaux prompts de qualité.");
+      window.location.reload(); // Recharger la page pour appliquer
+    }
+  };
+
   // Fonctions pour les notes persistantes
   const handleNotesClick = () => {
     navigateToNotes();
