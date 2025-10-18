@@ -958,6 +958,27 @@ async def generate_verse_by_verse(request: dict):
         
         logging.info(f"Génération verset par verset: {book_name} {chapter}, versets {start_verse}-{end_verse}")
         
+        # Créer une clé de cache unique
+        cache_key = f"{passage}_{start_verse}_{end_verse}"
+        
+        # Vérifier le cache MongoDB (sauf si force_regenerate)
+        if not force_regenerate:
+            cached_verses = await db.verses_cache.find_one({"cache_key": cache_key})
+            if cached_verses:
+                logging.info(f"✅ Cache hit pour {passage} versets {start_verse}-{end_verse}")
+                return {
+                    "status": "success",
+                    "content": cached_verses["content"],
+                    "api_used": "cache",
+                    "word_count": cached_verses.get("word_count", 0),
+                    "passage": passage,
+                    "verses_generated": f"{start_verse}-{end_verse}",
+                    "generation_time_seconds": 0,
+                    "source": "cache",
+                    "from_cache": True,
+                    "generated_at": cached_verses.get("created_at")
+                }
+        
         # Préparer le prompt pour Gemini avec instructions détaillées pour unicité et qualité
         prompt = f"""Tu es un expert biblique et théologien spécialisé dans l'exégèse verset par verset.
 
