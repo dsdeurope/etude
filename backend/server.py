@@ -918,11 +918,13 @@ async def generate_verse_by_verse(request: dict):
     """
     Génère une étude verset par verset avec Gemini.
     Génération par groupes de 5 versets pour tous les chapitres de chaque livre.
+    Cache MongoDB pour économiser les quotas.
     """
     try:
         passage = request.get('passage', '')
         start_verse = request.get('start_verse', 1)
         end_verse = request.get('end_verse', 3)  # Réduit à 3 pour Vercel timeout 10s
+        force_regenerate = request.get('force_regenerate', False)
         
         if not passage:
             return {
