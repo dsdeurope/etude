@@ -358,7 +358,7 @@ async def get_status_checks():
 # Fonction pour vérifier le quota d'une clé Gemini
 # Cache pour /api/health (éviter de tester les clés trop souvent)
 health_check_cache = {}
-HEALTH_CHECK_CACHE_DURATION = 300  # 5 minutes
+HEALTH_CHECK_CACHE_DURATION = 900  # 15 minutes (optimisé pour économiser les quotas pendant les tests)
 
 async def check_gemini_key_quota(api_key: str, key_index: int):
     """
