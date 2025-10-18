@@ -1,7 +1,7 @@
 # 📡 DOCUMENTATION DES ENDPOINTS API
 
 **Date**: 17 Octobre 2025  
-**Backend URL**: `https://bible-study-hub-8.preview.emergentagent.com`
+**Backend URL**: `https://bible-study-app-6.preview.emergentagent.com`
 
 ---
 
@@ -428,5 +428,5 @@ if (data.cached) {
 ---
 
 **Documentation complète**: Ce fichier + autres MD dans POUR_GITHUB_CLEAN  
-**Backend**: https://bible-study-hub-8.preview.emergentagent.com  
+**Backend**: https://bible-study-app-6.preview.emergentagent.com  
 **Frontend**: https://etude-khaki.vercel.app/

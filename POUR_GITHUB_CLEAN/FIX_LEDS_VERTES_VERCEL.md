@@ -43,7 +43,7 @@ Le frontend sur Vercel affiche l'**état initial par défaut** (toutes vertes) c
 #### Étape 2: Ajouter la Variable
 
 **Nom**: `REACT_APP_BACKEND_URL`  
-**Valeur**: `https://bible-study-hub-8.preview.emergentagent.com`  
+**Valeur**: `https://bible-study-app-6.preview.emergentagent.com`  
 **Environment**: Cochez **Production**, **Preview**, **Development**
 
 Cliquez sur **"Save"**
@@ -201,7 +201,7 @@ Réalité: "Toutes les clés épuisées (rouges)"
 
 **Utilisez le backend local/Kubernetes directement**:
 ```
-https://bible-study-hub-8.preview.emergentagent.com
+https://bible-study-app-6.preview.emergentagent.com
 ```
 
 **Ou attendez minuit UTC**:
@@ -216,7 +216,7 @@ https://bible-study-hub-8.preview.emergentagent.com
 - [ ] Accéder Dashboard Vercel
 - [ ] Aller dans Settings → Environment Variables
 - [ ] Ajouter `REACT_APP_BACKEND_URL`
-- [ ] Valeur: `https://bible-study-hub-8.preview.emergentagent.com`
+- [ ] Valeur: `https://bible-study-app-6.preview.emergentagent.com`
 - [ ] Sélectionner Production, Preview, Development
 - [ ] Save
 - [ ] Redéployer depuis Deployments
@@ -248,7 +248,7 @@ CMD + SHIFT + R (Mac)
 
 **3. Tester l'URL manuellement**:
 ```bash
-curl https://bible-study-hub-8.preview.emergentagent.com/api/health
+curl https://bible-study-app-6.preview.emergentagent.com/api/health
 ```
 
 Devrait retourner JSON avec 14 clés rouges.
@@ -264,7 +264,7 @@ Devrait retourner JSON avec 14 clés rouges.
 
 ### Solution
 - ✅ Ajouter `REACT_APP_BACKEND_URL` dans Vercel
-- ✅ Valeur: `https://bible-study-hub-8.preview.emergentagent.com`
+- ✅ Valeur: `https://bible-study-app-6.preview.emergentagent.com`
 - ✅ Redéployer
 
 ### Résultat Attendu

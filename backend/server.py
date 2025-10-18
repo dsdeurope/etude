@@ -2041,7 +2041,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://etude-khaki.vercel.app",  # Vercel frontend
-        "https://vercel-api-fix.preview.emergentagent.com",
+        "https://bible-study-app-6.preview.emergentagent.com",
         "*"  # Fallback pour développement
     ],
     allow_methods=["*"],

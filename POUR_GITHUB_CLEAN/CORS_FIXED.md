@@ -8,7 +8,7 @@
 ## 🔍 Problème Identifié (Logs Console)
 
 ```
-Access to fetch at 'https://vercel-api-fix.preview.emergentagent.com/api/health' 
+Access to fetch at 'https://bible-study-app-6.preview.emergentagent.com/api/health' 
 from origin 'https://etude-khaki.vercel.app' 
 has been blocked by CORS policy: 
 No 'Access-Control-Allow-Origin' header is present
@@ -38,7 +38,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "https://etude-khaki.vercel.app",  # ✅ Vercel autorisé
-        "https://vercel-api-fix.preview.emergentagent.com",
+        "https://bible-study-app-6.preview.emergentagent.com",
         "*"  # Fallback développement
     ],
     ...
@@ -196,7 +196,7 @@ Tests: Possibles avec nouveau quota
 ```
 1. Frontend Vercel charge
 2. ApiControlPanel.js exécute useEffect()
-3. Appel: https://vercel-api-fix.preview.emergentagent.com/api/health
+3. Appel: https://bible-study-app-6.preview.emergentagent.com/api/health
 4. Backend vérifie Origin: https://etude-khaki.vercel.app
 5. Backend autorise (allow_origins)
 6. Réponse JSON envoyée avec header CORS ✅

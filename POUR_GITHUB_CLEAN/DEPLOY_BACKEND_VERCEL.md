@@ -9,7 +9,7 @@
 
 Votre site Vercel (https://etude-khaki.vercel.app/) appelle :
 ```
-REACT_APP_BACKEND_URL=https://bible-study-hub-8.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://bible-study-app-6.preview.emergentagent.com
 ```
 
 **Ce backend de production doit être mis à jour avec le nouvel endpoint !**
@@ -27,7 +27,7 @@ Le fichier `/app/backend/server.py` a été modifié avec :
 
 ## 🔑 VARIABLES D'ENVIRONNEMENT REQUISES
 
-Sur votre serveur backend `https://bible-study-hub-8.preview.emergentagent.com`, vous devez configurer :
+Sur votre serveur backend `https://bible-study-app-6.preview.emergentagent.com`, vous devez configurer :
 
 ```env
 # MongoDB
@@ -205,7 +205,7 @@ app.include_router(api_router)
 Une fois déployé, testez avec :
 
 ```bash
-curl -X POST https://bible-study-hub-8.preview.emergentagent.com/api/generate-verse-by-verse \
+curl -X POST https://bible-study-app-6.preview.emergentagent.com/api/generate-verse-by-verse \
   -H "Content-Type: application/json" \
   -d '{
     "passage": "Genèse 1",
@@ -286,7 +286,7 @@ Contactez le support Emergent pour mettre à jour le backend de production avec 
 ### Test 1 : Endpoint disponible
 
 ```bash
-curl https://bible-study-hub-8.preview.emergentagent.com/api/generate-verse-by-verse
+curl https://bible-study-app-6.preview.emergentagent.com/api/generate-verse-by-verse
 ```
 
 Si vous obtenez une réponse (même une erreur), l'endpoint existe.
@@ -294,7 +294,7 @@ Si vous obtenez une réponse (même une erreur), l'endpoint existe.
 ### Test 2 : Génération réussie
 
 ```bash
-curl -X POST https://bible-study-hub-8.preview.emergentagent.com/api/generate-verse-by-verse \
+curl -X POST https://bible-study-app-6.preview.emergentagent.com/api/generate-verse-by-verse \
   -H "Content-Type: application/json" \
   -d '{"passage":"Genèse 1","start_verse":1,"end_verse":5}'
 ```

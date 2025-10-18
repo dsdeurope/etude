@@ -19,7 +19,7 @@
 
 **Messages attendus**:
 ```
-[API STATUS] Appel à: https://bible-study-hub-8.preview.emergentagent.com/api/health
+[API STATUS] Appel à: https://bible-study-app-6.preview.emergentagent.com/api/health
 [API STATUS] Réponse status: 200
 [API STATUS] Données reçues: { ... }
 [API STATUS] Mise à jour réussie
@@ -43,7 +43,7 @@ Access to fetch at '...' from origin '...' has been blocked by CORS policy
 3. Regarder la requête vers `/api/health`
 
 **Vérifier**:
-- ✅ URL correcte: `https://bible-study-hub-8.preview.emergentagent.com/api/health`
+- ✅ URL correcte: `https://bible-study-app-6.preview.emergentagent.com/api/health`
 - ✅ Status: 200 OK
 - ✅ Response contient JSON avec les 14 clés
 
@@ -65,7 +65,7 @@ Access to fetch at '...' from origin '...' has been blocked by CORS policy
 # Vérifier dans Vercel Dashboard
 Settings → Environment Variables
 → REACT_APP_BACKEND_URL existe ?
-→ Value = https://bible-study-hub-8.preview.emergentagent.com ?
+→ Value = https://bible-study-app-6.preview.emergentagent.com ?
 → Environment = Production ✓ ?
 
 # Si non configurée correctement
@@ -105,7 +105,7 @@ app.add_middleware(
 **Vérifier**:
 ```bash
 # Tester le backend directement
-curl https://bible-study-hub-8.preview.emergentagent.com/api/health
+curl https://bible-study-app-6.preview.emergentagent.com/api/health
 
 # Devrait retourner JSON
 ```
@@ -149,7 +149,7 @@ curl https://bible-study-hub-8.preview.emergentagent.com/api/health
 console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
 
 // Test 2: Appeler le backend manuellement
-fetch('https://bible-study-hub-8.preview.emergentagent.com/api/health')
+fetch('https://bible-study-app-6.preview.emergentagent.com/api/health')
   .then(r => r.json())
   .then(data => {
     console.log('✅ Backend accessible');
@@ -175,10 +175,10 @@ Si la variable d'environnement ne fonctionne pas, hardcoder temporairement:
 **Dans `/app/POUR_GITHUB_CLEAN/src/App.js`** (ligne 2013):
 ```javascript
 // AVANT
-<ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://bible-study-hub-8.preview.emergentagent.com"} />
+<ApiControlPanel backendUrl={process.env.REACT_APP_BACKEND_URL || "https://bible-study-app-6.preview.emergentagent.com"} />
 
 // APRÈS (forcer l'URL)
-<ApiControlPanel backendUrl="https://bible-study-hub-8.preview.emergentagent.com" />
+<ApiControlPanel backendUrl="https://bible-study-app-6.preview.emergentagent.com" />
 ```
 
 **Puis**:
@@ -224,7 +224,7 @@ Si la variable d'environnement ne fonctionne pas, hardcoder temporairement:
 - [ ] Environment = Production ✓
 
 ### Étape 4: Test Backend Direct
-- [ ] Terminal: `curl https://bible-study-hub-8.preview.emergentagent.com/api/health`
+- [ ] Terminal: `curl https://bible-study-app-6.preview.emergentagent.com/api/health`
 - [ ] Vérifie que backend répond
 - [ ] JSON contient 14 clés
 
@@ -263,7 +263,7 @@ Dans **2h 20min**, les quotas se réinitialiseront.
 
 Pointer directement vers:
 ```
-https://bible-study-hub-8.preview.emergentagent.com
+https://bible-study-app-6.preview.emergentagent.com
 ```
 
 Au lieu de passer par Vercel pour le frontend.

@@ -1,90 +1,74 @@
 <analysis>
-The AI engineer's trajectory shows an iterative problem-solving approach. It began by addressing the user's explicit requests to refine Verset par verset presentation by structuring content and removing an API usage note, which involved modifying  and . Initial backend testing showed some success, but subsequent user feedback highlighted issues with content uniqueness across batches and general quality for rubrics, and recurring UI and deployment problems.
-
-The AI diagnosed and resolved several critical issues:
-1.  **Verset par verset content uniqueness**: Improved backend prompts and Bible API fallback logic with a hash algorithm.
-2.  **API key quota management**: Corrected  to increment usage only on *successful* Gemini API calls, preventing premature quota exhaustion.
-3.  **Vercel Failed to fetch errors**: Identified browser/Vercel timeouts as the cause, increasing frontend  timeouts and reducing the Verset par verset batch size from 5 to 3 to meet Vercel's 10-second limit.
-4.  **UI button alignment**: Reinstated a missing inline CSS  property in  for horizontal alignment.
-5.  **Character History fallback**: Added a Bible API fallback to the  endpoint.
-6.  **Rubric content generation**: Discovered rubric content was static. Created a new backend endpoint () with dedicated prompts and updated the frontend to consume it for dynamic generation.
-
-The trajectory concluded with the successful integration of 10 new Gemini API keys, verified for rotation and availability, and the user's request to push all corrections to Vercel.
+The AI engineer's trajectory showcases an iterative, diagnostic, and problem-solving approach to enhancing a biblical study application. Initially, it involved cleaning unused code and preparing for Vercel deployment of an existing 10-key Gemini setup. User feedback then shifted focus to improving the quality of 28-rubric content generation, which led to the implementation of detailed prompts in . Subsequent issues with API key quotas revealed both an incorrect Gemini model ( vs. ) used in health checks and a critical discovery of invalid/exhausted keys. The AI integrated 14 new user-provided keys, verified them, and successfully generated high-quality rubric content. To manage quota usage, health check and rubric content caching were implemented. The final phase involved troubleshooting Vercel deployment, addressing hardcoded frontend LED counts, and crucially, identifying and fixing a CORS policy issue preventing the Vercel frontend from communicating correctly with the remote Kubernetes backend. The current state is that the CORS fix has been applied locally, but the remote backend still needs to reflect this change, leading to incorrect LED statuses on Vercel.
 </analysis>
 
 <product_requirements>
-The application's core goal is to provide a comprehensive biblical study experience. Initially, it involved fixing a 404 deployment error on Vercel, establishing an API control panel with dynamic LED status based on API quotas, and implementing a  endpoint. A critical UI requirement was ensuring seven primary action buttons (, , , , , , ) maintain horizontal alignment on desktop. For character history, detailed, narrative paragraphs (800-1500 words) covering biblical history, past, present, future, and genealogy were needed, with Enrichir and Régénérer modes. API key management required a 5-key rotation system (Gemini and Bible API). The Verset par verset feature needed progressive content generation (originally 5 verses at a time, later adjusted to 3 for Vercel) with a specific, organized display format (affichage du verset, chapitre, Contexte historique, partie théologique) and removal of a temporary API usage note. Subsequently, the user requested unique content per batch, avoidance of duplicates, improved generation quality for rubrics, and optimized API key usage (correcting quota counting). Most recently, 10 Gemini API keys were provided for integration to increase capacity.
+The application aims to provide a comprehensive biblical study experience. Core features include a Verset par verset study with progressive generation (3 verses/batch, previously 5) structured into VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE, and a dynamic 28 Rubriques study. Key requirements involve: API key rotation (initially 5, then 10, now 14 Gemini keys + Bible API), an API control panel with dynamic LED status, and generating detailed Character History (800-1500 words). UI demands horizontal alignment for seven primary action buttons. The Verset par verset feature needed unique content per batch and removal of API usage notes. Recent explicit requests centered on improving the quality of the 28-rubric content generation to be specific and differentiated according to each rubric's description, integrating 14 new Gemini keys, optimizing quota usage (caching), and resolving Vercel deployment inconsistencies, particularly the display of API key statuses (LEDs) and frontend-backend communication (CORS).
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
--   **Deployment:** Vercel (frontend), Kubernetes (backend).
--   **UI:** React hooks (, ), CSS grid, inline styles for layout.
--   **APIs:** RESTful endpoints, LLM integration (Google Gemini via ), Bible API, API key rotation.
--   **Build/Env:** Yarn,  for configuration, backend                          RUNNING   pid 43, uptime 0:00:03
+- **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
+- **Deployment:** Vercel (frontend), Kubernetes (backend).
+- **APIs:** RESTful endpoints, LLM integration (Google Gemini via ), Bible API, API key rotation, caching mechanisms.
+- **UI:** React hooks, CSS grid.
+- **Environment Management:**  files for configuration, backend                          RUNNING   pid 43, uptime 0:00:02
 code-server                      STOPPED   Not started
-frontend                         STOPPED   Oct 17 07:47 PM
-mongodb                          RUNNING   pid 47, uptime 0:00:03
-nginx-code-proxy                 RUNNING   pid 41, uptime 0:00:03
+frontend                         STOPPING  
+mongodb                          RUNNING   pid 45, uptime 0:00:02
+nginx-code-proxy                 RUNNING   pid 41, uptime 0:00:02
 supervisor>  for service management.
+- **Error Handling:** CORS policy, network errors, API quota management.
 </key_technical_concepts>
 
 <code_architecture>
-The application employs a full-stack architecture with a FastAPI backend, a React frontend, and MongoDB for data persistence. A  directory is used as the staging area for Vercel deployments, mirroring the frontend structure.
+The application uses a full-stack architecture with a FastAPI backend, a React frontend, and MongoDB. The  directory serves as the staging area for Vercel deployments.
 
 
 
 -   ****:
-    -   **Importance**: The central FastAPI application defining all API endpoints.
+    -   **Importance**: The core FastAPI application handling all API logic, LLM calls, and database interactions.
     -   **Changes**:
-        -   Removed the API usage note (line 211).
-        -   Modified the prompt for  to generate 4 distinct sections (VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE).
-        -   Improved  to generate more unique content using a hash algorithm and restructured it for 4 sections.
-        -   Corrected the  parsing for  to handle verse ranges correctly.
-        -   Modified  to increment  only on successful API calls to optimize quota usage.
-        -   Added a Bible API fallback to the  endpoint.
-        -   Created a new endpoint  with 28 detailed prompts for dynamic rubric content generation using Gemini API. This endpoint was carefully placed before  to ensure it was discoverable.
-        -   Updated to load and use 10 Gemini API keys from  and  logic.
-        -   Adjusted  logic in  to generate 3 verses per batch instead of 5 for Vercel timeout compatibility.
+        -   Defined 28 detailed  for dynamic content generation, replacing static/generic prompts.
+        -   Corrected the Gemini model in  from  to  to accurately check API key health.
+        -   Corrected the Gemini model in  from  to  to ensure successful LLM calls and prevent unintended Bible API fallbacks.
+        -   Implemented a caching mechanism for  status checks to reduce quota consumption.
+        -   Implemented a MongoDB caching system for generated rubric content to store and retrieve previously generated studies.
+        -   Updated  to dynamically include the Vercel frontend URL () to resolve cross-origin request issues.
+        -   Updated to load 14 Gemini API keys from  and modified  logic for rotation.
 -   ****:
     -   **Importance**: Stores backend environment variables, including API keys.
-    -   **Changes**: Added 6 more  entries (up to ) to accommodate the 10 user-provided Gemini API keys.
+    -   **Changes**: Extended  entries (up to ) to accommodate the 14 user-provided Gemini API keys.
 -   ****:
-    -   **Importance**: Main React component, orchestrating UI and route rendering.
+    -   **Importance**: Displays the status (LEDs) of API keys.
     -   **Changes**:
-        -   Re-added inline style  to the  div for desktop button alignment, fixing a regression.
-        -   Added a 60-second timeout to  calls in  and improved loading/error states to handle Vercel timeouts.
-        -   Modified  to call the new  endpoint instead of the old static/non-existent one.
+        -   Updated the initial  state to dynamically represent 14 Gemini keys and 1 Bible API key, correcting the hardcoded 4-key display issue.
+        -   Enhanced error handling and added debug logging for  calls to provide better insights into API communication issues and reflect accurate statuses (e.g., yellow for fetch errors in case of failure).
+-   ** (and , )**:
+    -   **Importance**: Previously contained static rubric content.
+    -   **Changes**: Cleared the file content and added a comment indicating it is **obsolete** and no longer used (replaced by dynamic generation via ).
 -   ****:
-    -   **Importance**: Page for Verset par verset study, deployed to Vercel.
-    -   **Changes**:
-        -   Implemented logic to parse and display the 4 sections (VERSET, CHAPITRE, CONTEXTE HISTORIQUE, PARTIE THÉOLOGIQUE).
-        -   Added CSS styles for the new sections.
-        -   Added a 60-second timeout to the  call and improved error handling for API calls.
-        -   Adjusted batch size to 3 verses (from 5) to accommodate Vercel's 10-second timeout, updating display logic and Continuer button text accordingly.
--   ****:
-    -   **Importance**: Centralized API status display.
-    -   **Changes**: The code was inspected and found to be correctly fetching  and using  to render dynamic LEDs based on API quota. No direct modifications were made during this trajectory, but its functionality was verified.
--   ****:
-    -   **Importance**: Displays character history content.
-    -   **Changes**: No direct modifications were made to this file in the provided trajectory, but the backend  endpoint it uses was updated to include a Bible API fallback.
--   ****:
-    -   **Importance**: Previously contained static content for rubrics.
-    -   **Changes**: This file was identified as the source of static rubric content. The frontend was updated to bypass this and call the new backend API for dynamic generation instead.
--   ****:
-    -   **Importance**: The source directory for Vercel deployments. All relevant frontend (, ) and backend () changes were consistently copied here.
-    -   **New files created here**: , , , , , , , , , , , , , , , , , . These document the changes and deployment steps.
-
+    -   **Importance**: Staging directory for Vercel deployments. All relevant backend and frontend changes are consistently copied here.
+    -   **New Documentation Files**: Several  files were created to document changes, diagnostics, and deployment steps.
+    -   **New Script Files**: , .
 </code_architecture>
 
 <pending_tasks>
--   The rubrique_functions.js file still contains hardcoded static content. While the frontend now bypasses it, the file itself could be cleaned up or removed if no longer serving any purpose.
+-   The CORS fix for the remote Kubernetes/Emergent backend needs to be applied and verified to ensure the Vercel frontend correctly displays the real-time API key statuses (red for exhausted, green for available).
+-   The user still needs to perform full quality testing of the 28-rubric generation once API quotas reset.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer had successfully integrated 10 new Gemini API keys. This involved updating  with the new keys (from  to ) and modifying  to ensure the  list was populated with all 10 keys and the  function could rotate through them. The  endpoint's status reporting was verified to correctly display the status of all 10 keys, all showing as green (available). The AI copied the updated  to  and created  to document the increased API capacity. The user's last instruction was tu dois pousser ver vercel (You must push to Vercel), indicating the immediate next step is to deploy these latest changes.
+Immediately before this summary request, the AI engineer was actively troubleshooting a discrepancy between the API key LED statuses displayed on the Vercel frontend and the actual statuses reported by the Kubernetes backend. The Vercel frontend was showing all LEDs as yellow, whereas the Kubernetes backend correctly indicated 14 keys were exhausted (red).
+
+The diagnostic process led to the discovery of a **CORS policy error** in the Vercel frontend's browser console, indicating that the remote Kubernetes backend (at ) was blocking requests from the Vercel origin ().
+
+The AI successfully applied a fix locally by modifying  to dynamically include  in the  allowed list. This local fix was verified using , showing that  was now correctly set, implying the CORS issue was resolved for the local backend.
+
+However, the user reported that the Vercel frontend still showed yellow LEDs. This indicated that the CORS fix had not yet been deployed or reflected on the **remote Kubernetes backend** that the Vercel frontend is configured to communicate with. The yellow status on Vercel likely reflects the frontend's updated error handling in , which now catches the  error (due to CORS) and sets the LEDs to an error state (yellow), instead of the previous default green.
+
+The immediate next step the AI was about to take was to verify the remote backend's configuration to ensure the CORS changes were active there.
 </current_work>
 
 <optional_next_step>
-Push the recently integrated 10 Gemini API keys and updated backend () to Vercel.
+Verify the CORS configuration on the remote Kubernetes backend at .
 </optional_next_step>

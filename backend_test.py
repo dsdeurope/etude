@@ -11,7 +11,7 @@ import sys
 from datetime import datetime
 
 # Backend URL from environment
-BACKEND_URL = "https://bible-study-hub-8.preview.emergentagent.com/api"
+BACKEND_URL = "https://bible-study-app-6.preview.emergentagent.com/api"
 
 def print_test_header(test_name):
     """Print a formatted test header"""

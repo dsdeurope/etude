@@ -179,7 +179,7 @@ Si votre backend tourne sur **Kubernetes** (pas Vercel), alors:
 **Solution**:
 ```
 # Dans Vercel Environment Variables
-REACT_APP_BACKEND_URL = https://bible-study-hub-8.preview.emergentagent.com
+REACT_APP_BACKEND_URL = https://bible-study-app-6.preview.emergentagent.com
 ```
 
 ### B. Routes API pas configurées
@@ -216,7 +216,7 @@ MongoDB + Gemini API
 
 **Variables Vercel nécessaires**:
 ```
-REACT_APP_BACKEND_URL = https://bible-study-hub-8.preview.emergentagent.com
+REACT_APP_BACKEND_URL = https://bible-study-app-6.preview.emergentagent.com
 ```
 
 **PAS besoin de**:
