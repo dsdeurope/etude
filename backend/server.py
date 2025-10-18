@@ -1055,6 +1055,26 @@ Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune intr
         generation_time = time.time() - start_time
         word_count = len(content.split())
         
+        # Sauvegarder en cache MongoDB
+        cache_doc = {
+            "cache_key": cache_key,
+            "passage": passage,
+            "start_verse": start_verse,
+            "end_verse": end_verse,
+            "content": content,
+            "word_count": word_count,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Upsert (update ou insert)
+        await db.verses_cache.update_one(
+            {"cache_key": cache_key},
+            {"$set": cache_doc},
+            upsert=True
+        )
+        
+        logging.info(f"✅ Cache sauvegardé pour {passage} versets {start_verse}-{end_verse}")
+        
         return {
             "status": "success",
             "content": content,
