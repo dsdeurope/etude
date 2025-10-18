@@ -1103,34 +1103,90 @@ Commence DIRECTEMENT avec "---" puis "**VERSET {start_verse}**" sans aucune intr
 
 RUBRIQUE_PROMPTS = {
     # ========== RUBRIQUE 1: Prière d'ouverture ==========
-    1: """Génère une VRAIE prière d'ouverture personnalisée pour {passage}.
+    1: """Tu es un pasteur-théologien qui rédige une prière d'ouverture AUTHENTIQUE pour l'étude de {passage}.
 
-**CONSIGNE CRITIQUE**: Ne JAMAIS répéter "{passage}" dans le texte. Utilise les DÉTAILS SPÉCIFIQUES du passage.
+**RÈGLE ABSOLUE #1**: NE JAMAIS écrire le mot "{passage}" dans ta prière. À la place, utilise les ÉLÉMENTS CONCRETS du texte.
 
-**STRUCTURE EXIGÉE**:
+**RÈGLE ABSOLUE #2**: Chaque phrase doit mentionner un DÉTAIL PRÉCIS, un VERSET SPÉCIFIQUE, une ACTION DIVINE CONCRÈTE du passage.
 
-**ADORATION** (3-4 phrases):
-- Adore Dieu pour SES ATTRIBUTS RÉVÉLÉS dans ce passage spécifique
-- Cite des DÉTAILS PRÉCIS du texte (noms, actions, paroles divines)
-- Exemple: Si Genèse 1:3 → "Toi qui as dit 'Que la lumière soit', manifestant ta parole créatrice"
-- Exemple: Si Jean 3:16 → "Toi qui as tant aimé le monde que tu as donné ton Fils unique"
+**RÈGLE ABSOLUE #3**: INTERDICTION FORMELLE des formules génériques comme "révélée dans ce passage", "manifestée ici", "que tu nous montres".
 
-**CONFESSION** (3-4 phrases):
-- Confesse les péchés que CE PASSAGE SPÉCIFIQUE révèle
-- Lie directement la confession au contenu du passage
-- Sois concret et personnel
+---
 
-**DEMANDE** (3-4 phrases):
-- Demande l'illumination de l'Esprit pour comprendre CE PASSAGE
-- Mentionne des éléments spécifiques du texte que tu veux comprendre
-- Demande des grâces pratiques liées au passage
+**ADORATION** (4-5 phrases riches en détails):
 
-**MÉDITATION** (2 paragraphes de 3-4 phrases chacun):
-- Paragraphe 1: Comment cette prière prépare le cœur pour l'étude
-- Paragraphe 2: L'importance de l'Esprit Saint dans la compréhension de ce passage
+Commence par "Seigneur Dieu" ou "Père céleste", puis cite PRÉCISÉMENT ce que Dieu fait dans le passage:
 
-**LONGUEUR**: 300-400 mots.
-**FORMAT**: Commence DIRECTEMENT par "**ADORATION**" sans titre ni introduction.""",
+EXEMPLES CORRECTS (pour Genèse 1):
+- "Toi qui, au commencement, créas les cieux et la terre par ta parole toute-puissante"
+- "Toi qui séparas la lumière des ténèbres et nommas le jour et la nuit"
+- "Toi qui rassemblas les eaux en un seul lieu pour faire apparaître la terre sèche"
+
+EXEMPLES INCORRECTS (à NE JAMAIS faire):
+- ❌ "Toi qui es révélé dans Genèse 1"
+- ❌ "Nous reconnaissons ta grandeur manifestée dans ce passage"
+- ❌ "Tu es celui qui nous parle à travers ce texte"
+
+CITE : versets précis, paroles de Dieu ("Que la lumière soit"), actions divines, noms donnés par Dieu.
+
+---
+
+**CONFESSION** (3-4 phrases SPÉCIFIQUES):
+
+Lie la confession aux THÈMES PRÉCIS du passage. Exemples:
+
+Pour Genèse 1 (création):
+- "Pardonne-nous d'avoir oublié que nous sommes ton image et ressemblance"
+- "Confesse notre négligence à dominer sur la création avec sagesse"
+
+Pour Jean 3 (salut):
+- "Pardonne notre incrédulité face à ton amour manifesté en Jésus-Christ"
+- "Confesse notre résistance à naître de nouveau par l'Esprit"
+
+NE DIS JAMAIS juste "Pardonne nos péchés révélés dans ce passage"
+
+---
+
+**DEMANDE** (3-4 phrases CIBLÉES):
+
+Demande la compréhension d'ÉLÉMENTS PRÉCIS du texte:
+
+EXEMPLES CORRECTS:
+- "Éclaire-nous sur le sens profond de 'ton image et ressemblance'"
+- "Aide-nous à saisir pourquoi tu bénis et sanctifies le septième jour"
+- "Révèle-nous comment être naître de nouveau signifie naître d'eau et d'Esprit"
+
+EXEMPLES INCORRECTS:
+- ❌ "Éclaire notre compréhension de ce passage"
+- ❌ "Aide-nous à comprendre ce texte"
+
+---
+
+**MÉDITATION** (2 paragraphes denses):
+
+**Paragraphe 1** (100-120 mots): Comment cette prière prépare le cœur POUR CE PASSAGE SPÉCIFIQUE
+- Mentionne les thèmes clés du passage
+- Explique pourquoi l'attitude de cœur est cruciale pour ces vérités précises
+- Lie la posture spirituelle au contenu théologique
+
+**Paragraphe 2** (100-120 mots): L'Esprit Saint et CE PASSAGE
+- Pourquoi l'Esprit est nécessaire pour comprendre CES vérités spécifiques
+- Quel travail particulier l'Esprit doit faire pour ce texte
+- Comment l'Esprit applique CE passage à notre vie
+
+---
+
+**LONGUEUR TOTALE**: 400-500 mots (PAS MOINS)
+
+**FORMAT**: Commence IMMÉDIATEMENT par "**ADORATION**" (sans introduction, sans titre)
+
+**VÉRIFICATION FINALE AVANT D'ENVOYER**:
+1. ✅ Ai-je cité au moins 5 détails concrets du passage ?
+2. ✅ Ai-je évité toute mention de "{passage}" ?
+3. ✅ Ai-je évité les formules génériques ?
+4. ✅ Chaque phrase est-elle SPÉCIFIQUE au contenu du texte ?
+
+Si NON à l'une de ces questions, RECOMMENCE.""",
 
     # ========== RUBRIQUE 2: Structure littéraire ==========
     2: """Analyse la structure littéraire CONCRÈTE de {passage}.
