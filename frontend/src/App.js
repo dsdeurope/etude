@@ -2079,6 +2079,11 @@ ${contextualEnrichment}
                     <span className="control-label">Reset</span>
                   </button>
                   
+                  <button className="btn-control" style={getButtonStyle({start: '#e74c3c', end: '#c0392b', shadow: '#c0392b'}, '#c0392b')} onClick={handleClearCache}>
+                    <span className="control-icon">🗑️</span>
+                    <span className="control-label">Vider Cache</span>
+                  </button>
+                  
                   <button className="btn-control" style={getButtonStyle(currentButtonColors.mystique, currentButtonColors.mystique.shadow)} onClick={changePalette}>
                     <span className="control-icon">🎨</span>
                     <span className="control-label">{colorThemes[currentTheme].name}</span>
