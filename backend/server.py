@@ -1268,31 +1268,85 @@ EXEMPLE: "La symétrie des 6 jours + 1 jour de repos en Genèse 1 révèle l'ord
 ✅ Ai-je analysé CE passage spécifiquement ?""",
 
     # ========== RUBRIQUE 3: Questions du chapitre précédent ==========
-    3: """Analyse la transition entre le chapitre précédent et {passage}.
+    3: """Tu es un théologien biblique expert en narratologie. Analyse la transition vers {passage}.
 
-**CAS PARTICULIER**: Si {passage} est le chapitre 1 d'un livre:
-- Explique que c'est l'OUVERTURE du livre
-- Décris le contexte d'écriture
-- Explique pourquoi le livre commence ainsi
+**RÈGLE ABSOLUE**: Cite PRÉCISÉMENT les versets du chapitre précédent. Jamais de vagues "le chapitre précédent dit que..."
 
-**POUR LES AUTRES CHAPITRES**:
+---
 
-**RÉCAPITULATIF** (1 paragraphe):
-- Résume les ÉVÉNEMENTS CLÉS du chapitre précédent
-- Cite 2-3 versets spécifiques
+**ÉTAPE 1: DÉTERMINER LE CONTEXTE**
 
-**QUESTIONS DE TRANSITION** (5-7 questions):
-- Formule des questions PRÉCISES qui lient le chapitre précédent à celui-ci
-- Exemple: "Comment la promesse de Dieu au v. X du ch. précédent se réalise-t-elle ici?"
-- Questions sur les personnages, thèmes, ou actions
+Si {passage} est le **CHAPITRE 1** d'un livre (Genèse 1, Jean 1, Matthieu 1, etc.):
 
-**CONTINUITÉ THÉOLOGIQUE** (1 paragraphe):
-- Comment le passage actuel développe les thèmes théologiques du chapitre précédent?
+**OUVERTURE DU LIVRE** (400-500 mots):
 
-**CONTEXTE NARRATIF** (1 paragraphe):
-- Où sommes-nous dans l'histoire globale du livre?
+1. **Contexte de rédaction** (120-150 mots):
+   - Qui est l'auteur ? À qui écrit-il ? Quand ? Pourquoi ?
+   - Situation historique précise du peuple de Dieu
+   - But théologique de l'auteur en écrivant ce livre
+   
+   EXEMPLE pour Genèse 1:
+   "Moïse rédige Genèse 1 pour Israël libéré d'Égypte, peuple entouré de cosmogonies polythéistes (Babylone, Égypte). Face aux mythes de création violente (Enuma Elish où Marduk tue Tiamat), Moïse révèle un Dieu unique créant par sa seule parole, sans combat contre des dieux rivaux."
 
-**LONGUEUR**: 350-450 mots.""",
+2. **Pourquoi commencer ainsi ?** (120-150 mots):
+   - Quelle vérité théologique l'ouverture établit-elle ?
+   - Comment ce début pose-t-il les fondements du reste ?
+   - Quelle question centrale le livre répond-il dès le début ?
+
+3. **Thème inaugural** (120-150 mots):
+   - Quel thème majeur le chapitre 1 introduit-il ?
+   - Comment ce thème se développera-t-il dans le livre ?
+   - Pourquoi crucial de commencer par là ?
+
+---
+
+Si {passage} est un **CHAPITRE ULTÉRIEUR** (Jean 3, Genèse 12, Romains 8, etc.):
+
+**RÉCAPITULATIF DU CHAPITRE PRÉCÉDENT** (120-150 mots):
+
+Résume les 3-5 événements/enseignements MAJEURS avec versets précis:
+
+EXEMPLE pour Jean 3 (précédé de Jean 2):
+"Dans Jean 2, Jésus accomplit son premier signe aux noces de Cana (2:1-11), transformant l'eau en vin et manifestant sa gloire. Il purifie ensuite le Temple de Jérusalem (2:13-17), chassant les vendeurs et déclarant : 'Détruisez ce temple, et en trois jours je le relèverai' (2:19), prophétie sur sa résurrection. Plusieurs crurent en voyant ses signes, mais Jésus 'ne se fiait point à eux, parce qu'il les connaissait tous' (2:24)."
+
+---
+
+**QUESTIONS DE TRANSITION PRÉCISES** (7-10 questions, 180-220 mots):
+
+Formule des questions qui RELIENT explicitement les deux chapitres avec références:
+
+STRUCTURE OBLIGATOIRE: "Dans [chapitre précédent, verset X], [événement]. Comment cela explique/prépare [élément du chapitre actuel, verset Y] ?"
+
+EXEMPLES pour Jean 3:
+1. "Jésus ne se fiait pas à ceux qui croyaient à cause des signes (2:24-25). Pourquoi alors reçoit-il Nicodème, un chef des Juifs impressionné par ses miracles (3:2) ?"
+2. "Jésus annonce la destruction et relèvement du Temple en trois jours (2:19). Comment cela éclaire-t-il son enseignement sur la nouvelle naissance (3:3-7) ?"
+3. "Le vin nouveau de Cana (2:10) préfigure-t-il la vie nouvelle dont Jésus parle à Nicodème (3:3-5) ?"
+
+NE DIS JAMAIS: ❌ "Comment le chapitre précédent prépare-t-il celui-ci ?"
+
+---
+
+**CONTINUITÉ THÉOLOGIQUE** (100-120 mots):
+
+Identifie 2-3 THÈMES du chapitre précédent qui continuent/s'approfondissent:
+
+EXEMPLE: "Le thème de la révélation progressive (Jean 2:11 - 'manifesta sa gloire') se poursuit en Jean 3 où Jésus révèle à Nicodème le mystère de la nouvelle naissance. Le thème du Temple (2:19-21) trouve un écho dans le langage de la renaissance spirituelle qui permet d'entrer dans le royaume de Dieu (3:5)."
+
+---
+
+**POSITIONNEMENT NARRATIF** (80-100 mots):
+
+Où sommes-nous dans l'arc narratif global du livre ? Utilise des numéros de chapitres:
+
+EXEMPLE: "Jean 3 se situe au début du ministère public de Jésus (chapitres 2-12). Après les premiers signes (ch.2), Jésus commence son enseignement sur les réalités spirituelles. Cette rencontre nocturne avec Nicodème prépare les controverses futures avec les chefs religieux (ch.5, 7-8) et anticipe le discours d'adieu aux disciples (ch.13-17)."
+
+---
+
+**LONGUEUR TOTALE**: 450-550 mots
+
+**VÉRIFICATION**:
+✅ Ai-je cité au moins 5 versets du chapitre précédent ?
+✅ Mes questions sont-elles PRÉCISES avec références ?""",
 
     # ========== RUBRIQUE 4: Thème doctrinal ==========
     4: """Identifie et développe le thème doctrinal PRINCIPAL de {passage}.
