@@ -1189,28 +1189,83 @@ EXEMPLES INCORRECTS:
 Si NON à l'une de ces questions, RECOMMENCE.""",
 
     # ========== RUBRIQUE 2: Structure littéraire ==========
-    2: """Analyse la structure littéraire CONCRÈTE de {passage}.
+    2: """Tu es un exégète biblique spécialisé en analyse littéraire. Analyse la structure CONCRÈTE de {passage}.
 
-**ARCHITECTURE GLOBALE** (1 paragraphe):
-- Décris la structure d'ensemble du passage (chiasme, parallélisme, progression narrative...)
-- Identifie les grandes divisions
+**RÈGLE ABSOLUE**: Chaque affirmation doit citer des NUMÉROS DE VERSETS PRÉCIS. Interdiction de généralités.
 
-**SECTIONS** (2-3 paragraphes):
-- Décompose le passage en sections logiques
-- Pour CHAQUE section, donne le verset de début et fin
-- Explique le rôle de chaque section
+---
 
-**PROCÉDÉS LITTÉRAIRES** (1-2 paragraphes):
-- Identifie les répétitions de mots ou phrases SPÉCIFIQUES au passage
-- Note les mots-clés hébreux/grecs avec leur sens
-- Relève les figures de style utilisées
+**ARCHITECTURE GLOBALE** (150-180 mots):
 
-**SIGNIFICATION** (1 paragraphe):
-- Explique POURQUOI l'auteur a choisi cette structure
-- Quel message théologique la structure communique-t-elle?
+Identifie LA structure dominante de CE passage spécifique:
+- Chiasme (A-B-C-B'-A') ? Cite les versets pour chaque élément
+- Parallélisme (synonyme/antithétique) ? Liste les paires de versets
+- Progression narrative ? Décris les étapes avec numéros de versets
+- Inclusion (même mot/phrase début et fin) ? Cite les versets exacts
+- Structure concentrique ? Schématise avec les versets
 
-**LONGUEUR**: 400-500 mots.
-**RÈGLE CRITIQUE**: Sois SPÉCIFIQUE au passage. Ne parle pas de structures générales.""",
+EXEMPLE CORRECT (pour Genèse 1):
+"Genèse 1 présente une structure en 7 jours (v.1-2 introduction, v.3-5 jour 1, v.6-8 jour 2...). Les jours 1-3 (création des espaces) correspondent aux jours 4-6 (remplissage de ces espaces) : lumière (v.3) / luminaires (v.14), eaux/ciel (v.6) / oiseaux et poissons (v.20), terre sèche (v.9) / animaux terrestres et homme (v.24). Le jour 7 (v.2:1-3) forme l'apogée."
+
+EXEMPLE INCORRECT:
+❌ "Le passage suit une structure logique bien organisée"
+
+---
+
+**SECTIONS DÉTAILLÉES** (200-250 mots):
+
+Découpe le passage en 3-5 sections. Pour CHAQUE section:
+
+**Section 1 : Versets X-Y** 
+- Contenu : Que se passe-t-il dans ces versets précis ?
+- Fonction : Quel rôle joue cette section dans l'ensemble ?
+- Transition : Comment se relie-t-elle à la section suivante ?
+
+**Section 2 : Versets Z-W**
+[même structure]
+
+NE DIS JAMAIS juste "Introduction" ou "Développement" sans citer les versets.
+
+EXEMPLE CORRECT:
+"**Section 1 : Versets 1-8** - Nicodème vient de nuit questionner Jésus sur ses signes. Jésus répond par la nécessité de naître de nouveau, utilisant le vocabulaire de la naissance physique pour introduire la renaissance spirituelle."
+
+---
+
+**PROCÉDÉS LITTÉRAIRES OBSERVÉS** (150-180 mots):
+
+Liste 5-7 procédés AVEC citations de versets:
+
+1. **Répétitions** : Quel mot/phrase revient ? Combien de fois ? Quels versets ?
+   Ex: "Et Dieu vit que cela était bon" (v.4, 10, 12, 18, 21, 25, 31)
+
+2. **Mots-clés hébreux/grecs** : 2-3 mots importants avec translittération
+   Ex: "bara'" (créer, v.1) - utilisé 3 fois uniquement pour Dieu
+
+3. **Figures de style** : Métaphores, hyperboles, paradoxes avec versets précis
+
+4. **Jeux de mots** : Si présents dans l'original (avec explication)
+
+5. **Formules récurrentes** : Phrases qui structurent le texte
+
+---
+
+**SIGNIFICATION THÉOLOGIQUE DE LA STRUCTURE** (100-120 mots):
+
+Explique POURQUOI l'auteur inspiré a choisi CETTE structure pour CE message:
+- Quel effet produit cette organisation sur le lecteur ?
+- Quel aspect de Dieu la structure révèle-t-elle ?
+- Comment la forme renforce-t-elle le fond ?
+
+EXEMPLE: "La symétrie des 6 jours + 1 jour de repos en Genèse 1 révèle l'ordre divin et la finalité sabbatique de la création. L'auteur montre que Dieu crée avec méthode (jours 1-3 = espaces, jours 4-6 = habitants) et que le repos divin établit un modèle pour l'humanité."
+
+---
+
+**LONGUEUR TOTALE**: 500-600 mots
+
+**VÉRIFICATION**:
+✅ Ai-je cité au moins 10 numéros de versets ?
+✅ Ai-je évité les généralités sans références ?
+✅ Ai-je analysé CE passage spécifiquement ?""",
 
     # ========== RUBRIQUE 3: Questions du chapitre précédent ==========
     3: """Analyse la transition entre le chapitre précédent et {passage}.
