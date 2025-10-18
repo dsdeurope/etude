@@ -1349,26 +1349,92 @@ EXEMPLE: "Jean 3 se situe au début du ministère public de Jésus (chapitres 2-
 ✅ Mes questions sont-elles PRÉCISES avec références ?""",
 
     # ========== RUBRIQUE 4: Thème doctrinal ==========
-    4: """Identifie et développe le thème doctrinal PRINCIPAL de {passage}.
+    4: """Tu es un théologien systématique. Identifie LE thème doctrinal CENTRAL de {passage}.
 
-**THÈME PRINCIPAL** (1 paragraphe):
-- Énonce LE thème doctrinal central en 1 phrase claire
-- Explique pourquoi ce thème domine le passage
+**RÈGLE ABSOLUE**: Un SEUL thème doctrinal majeur. Pas une liste de 5 thèmes. Cite constamment les versets de {passage}.
 
-**DÉVELOPPEMENT THÉOLOGIQUE** (3 paragraphes):
-1. **Nature de Dieu**: Que révèle le passage sur Dieu?
-2. **Condition humaine**: Que dit-il sur l'homme (péché, besoin, destinée)?
-3. **Salut et rédemption**: Comment le thème s'inscrit dans l'histoire du salut?
+---
 
-**APPLICATIONS PRATIQUES** (1 paragraphe):
-- 3-4 applications concrètes du thème doctrinal pour aujourd'hui
+**ÉNONCÉ DU THÈME PRINCIPAL** (100-120 mots):
 
-**LIENS BIBLIQUES** (1 paragraphe):
-- Cite 3-5 AUTRES passages bibliques qui développent ce même thème
-- Montre la cohérence de l'Écriture
+En 2-3 phrases, formule LE thème doctrinal central avec versets à l'appui:
 
-**LONGUEUR**: 500-600 mots.
-**RÈGLE**: Reste focalisé sur UN seul thème doctrinal, pas plusieurs.""",
+STRUCTURE: "[Passage] enseigne principalement que [doctrine] comme le montre [verset X où...], [verset Y où...], et [verset Z où...]."
+
+EXEMPLES CORRECTS:
+- Pour Genèse 1: "Genèse 1 enseigne la doctrine de la création ex nihilo par la parole divine souveraine, comme le montre v.1 'Au commencement, Dieu créa', v.3 'Dieu dit, et... fut', et v.31 où Dieu évalue sa création comme 'très bonne', révélant sa transcendance absolue."
+
+- Pour Jean 3: "Jean 3 enseigne la doctrine de la régénération par l'Esprit Saint comme nécessité absolue du salut, établie en v.3 'Si un homme ne naît de nouveau, il ne peut voir le royaume de Dieu', v.5 'naître d'eau et d'Esprit', et v.16 qui fonde cette nouvelle naissance dans l'amour divin manifesté en Christ."
+
+EXEMPLES INCORRECTS:
+❌ "Ce passage parle de plusieurs doctrines importantes"
+❌ "Le thème principal est la volonté de Dieu"
+
+Explique en 3-4 phrases POURQUOI ce thème domine (pas un autre).
+
+---
+
+**DÉVELOPPEMENT THÉOLOGIQUE EN 3 AXES** (350-400 mots total):
+
+**1. Ce que le passage révèle sur LA NATURE DE DIEU** (120-140 mots):
+
+Analyse 3-4 attributs divins révélés dans CE passage avec versets précis:
+
+EXEMPLE pour Genèse 1:
+"Genèse 1 révèle Dieu comme Créateur souverain (v.1 'Elohim bara'), distinct de sa création (transcendance). Sa parole est performative: il dit et la chose existe (v.3, 6, 9, 14, 20, 24), manifestant sa toute-puissance. Il est un Dieu d'ordre qui structure le chaos initial (v.2) en six jours organisés. Il est aussi personnel, évaluant sa création (v.4, 10, 12, 18, 21, 25, 31) et créant l'homme à son image pour une relation (v.26-28)."
+
+**2. Ce que le passage révèle sur LA CONDITION HUMAINE** (120-140 mots):
+
+Analyse ce que le texte dit de l'homme (création, chute, besoin, destinée) avec versets:
+
+EXEMPLE pour Jean 3:
+"Jean 3 révèle la condition spirituellement morte de l'humanité naturelle. Nicodème, malgré sa position religieuse et sa connaissance, ne peut 'voir' ni 'entrer' dans le royaume (v.3, 5), montrant que la naissance physique ne suffit pas. La chair ne produit que chair (v.6), l'homme naturel est aveugle aux réalités spirituelles. Pire encore, celui qui ne croit pas 'est déjà jugé' (v.18) et 'demeure sous la colère de Dieu' (v.36), révélant notre état de culpabilité devant Dieu sans la nouvelle naissance."
+
+**3. Comment ce thème s'inscrit dans L'HISTOIRE DU SALUT** (110-120 mots):
+
+Relie le thème doctrinal au plan rédempteur global (création → chute → rédemption → consommation):
+
+EXEMPLE pour Jean 3:
+"La nouvelle naissance de Jean 3 accomplit les prophéties de régénération (Ézéchiel 36:25-27 'Je vous donnerai un cœur nouveau, je mettrai en vous un esprit nouveau'). Elle répond à la mort spirituelle introduite en Genèse 3 par la chute. Le serpent élevé au désert (v.14, référence à Nombres 21) préfigure la croix où Christ est élevé pour donner la vie. Cette régénération anticipe la résurrection finale et la nouvelle création (Apocalypse 21:5)."
+
+---
+
+**APPLICATIONS PRATIQUES CONCRÈTES** (120-150 mots):
+
+Donne 4-5 applications SPÉCIFIQUES pour les chrétiens d'aujourd'hui:
+
+STRUCTURE: "Parce que [verset révèle X], alors nous devons [action concrète Y]."
+
+EXEMPLES:
+1. "Parce que Jean 3:3 enseigne qu'on ne peut voir le royaume sans naître de nouveau, l'évangélisation doit appeler à une conversion radicale, pas simplement à une amélioration morale."
+
+2. "Parce que v.6 dit que 'ce qui est né de la chair est chair', nous devons abandonner toute confiance en nos efforts religieux pour notre salut."
+
+NE DIS PAS juste: ❌ "Nous devons appliquer ce thème dans nos vies"
+
+---
+
+**PASSAGES BIBLIQUES PARALLÈLES** (100-120 mots):
+
+Cite 4-6 autres textes qui enseignent le MÊME thème doctrinal:
+
+FORMAT OBLIGATOIRE: [Référence complète] - [Bref résumé du lien avec le thème]
+
+EXEMPLE pour Jean 3 (régénération):
+1. **Ézéchiel 36:25-27** - Dieu promet un cœur nouveau et son Esprit, fondement AT de la nouvelle naissance
+2. **Tite 3:5** - "Il nous a sauvés... par le bain de la régénération et le renouvellement du Saint-Esprit"
+3. **1 Pierre 1:3** - "Régénérés par la résurrection de Jésus-Christ"
+4. **2 Corinthiens 5:17** - "Si quelqu'un est en Christ, il est une nouvelle créature"
+5. **Éphésiens 2:1-5** - Morts par nos offenses, mais rendus vivants avec Christ
+
+---
+
+**LONGUEUR TOTALE**: 600-700 mots
+
+**VÉRIFICATION**:
+✅ Ai-je maintenu UN seul thème doctrinal ?
+✅ Ai-je cité au moins 8 versets de {passage} ?
+✅ Ai-je listé 4-6 passages parallèles avec références complètes ?""",
 
     # ========== RUBRIQUE 5: Fondements théologiques ==========
     5: """Développe les fondements théologiques PROFONDS de {passage}.
